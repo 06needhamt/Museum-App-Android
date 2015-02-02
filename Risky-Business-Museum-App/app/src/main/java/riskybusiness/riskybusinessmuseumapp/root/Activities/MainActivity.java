@@ -1,9 +1,13 @@
-package riskybusiness.riskybusinessmuseumapp;
+package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import riskybusiness.riskybusinessmuseumapp.R;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,5 +39,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void LoadMainPage(View v)
+    {
+        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        startActivity(i);
+        finish();
     }
 }
