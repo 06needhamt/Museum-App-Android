@@ -35,6 +35,7 @@ public class AncientWorldFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_ancient_world, container, false);
+        view.setPadding(0,0,0,0);
         /*Button btnEnter = (Button) view.findViewById(R.id.btnEnter);
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,8 +70,14 @@ public class AncientWorldFragment extends Fragment {
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
 
         ImageView Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.floorplan_placeholder);
+        Map.setImageResource(R.drawable._m3_third_view_2);
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
+        Map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getBaseContext(),"Map Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         TextView Description = (TextView) view.findViewById(R.id.description);
         Description.setGravity(Gravity.CENTER);
@@ -86,10 +93,10 @@ public class AncientWorldFragment extends Fragment {
      */
     private FrameLayout.LayoutParams subTitleLayoutParams(int screenHeight, int screenWidth) {
         int subTitleWidth, subTitleHeight;
-        subTitleWidth = screenWidth - 10;
+        subTitleWidth = screenWidth - 20;
         subTitleHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subTitleWidth, subTitleHeight); //setting gravity to center horizontal
-        params.topMargin = (int) (screenHeight * 0.18); //!!!!
+        params.topMargin = (int) (screenHeight * 0.13); //!!!!
         params.gravity = Gravity.CENTER_HORIZONTAL;
         return params;
     }
@@ -100,7 +107,7 @@ public class AncientWorldFragment extends Fragment {
         mapHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mapWidth, mapHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.20);
+        params.topMargin = (int) (screenHeight * 0.13);
         return params;
     }
 

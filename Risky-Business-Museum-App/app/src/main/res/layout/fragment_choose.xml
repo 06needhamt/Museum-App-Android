@@ -12,7 +12,7 @@
     android:layout_above="@+id/bottomTableForButtons"
     tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment"
     android:focusable="false"
-    android:background="@color/backgroundcol">
+    android:background="@drawable/royal_blue_ipad_wallpaper">
 
     <!-- TODO: Update blank fragment layout -->
 

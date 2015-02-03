@@ -12,11 +12,11 @@
     android:layout_above="@+id/bottomTableForButtons"
     tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment"
     android:focusable="false"
-    android:background="@color/backgroundcol">
+    android:background="@drawable/royal_blue_ipad_wallpaper">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView android:layout_width="match_parent" android:layout_height="122dp"
+    <TextView android:layout_width="match_parent" android:layout_height="60dp"
         android:text="Welcome to The Ancient World Trail!"
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore ancient Egypt, Greece, Rome and England!"
+        android:text="Explore ancient Egypt, Greece, Rome and England On the Third Floor!"
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
-        android:text="description"
+        android:text="Click Map To Enter"
         android:textSize="14dp"
         android:id="@+id/description"
         android:layout_gravity="center_horizontal|top" />

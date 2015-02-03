@@ -20,6 +20,10 @@
             android:name=".root.Activities.HomePageActivity"
             android:label="@string/title_activity_home_page" >
         </activity>
+        <activity
+            android:name=".root.Activities.QRScannerActivity"
+            android:label="QRScannerActivity">
+        </activity>
     </application>
 
 </manifest>
