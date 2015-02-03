@@ -1,6 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 //import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v4.app.FragmentActivity;
         import android.os.Bundle;
 import android.view.Menu;
@@ -10,26 +11,42 @@ import android.view.MenuItem;
         import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 
 public class HomePageActivity extends FragmentActivity {
 
     int toptable;
     int bottomtable;
+    Fragment[] fragments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         toptable = R.id.topTableForButtons;
         bottomtable = R.id.bottomTableForButtons;
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),new AncientWorldFragment());
+        fragments = CreateFragments();
+        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //setContentView(R.layout.fragment_bugs);
-        AddInfoFragment();
+        AddFragment();
 
     }
 
+    private Fragment[] CreateFragments() {
+        Fragment[] fragments = new Fragment[5];
+        fragments[0] = new AncientWorldFragment();
+        fragments[1] = new BugsFragment();
+        fragments[2] = new WorldCulturesFragment();
+        fragments[3] = new DinosaursFragment();
+        fragments[4] = new SpaceAndTimeFragment();
+        return fragments;
+    }
 
 
     @Override
@@ -54,15 +71,10 @@ public class HomePageActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void AddInfoFragment() {
-        BugsFragment fragment = new BugsFragment();
+    public void AddFragment() {
+        ChooseATrailFragment fragment = new ChooseATrailFragment();
     getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
 
-    public void ReplaceFragment()
-    {
-        AncientWorldFragment fragment = new AncientWorldFragment();
-        getFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
-    }
 
 }

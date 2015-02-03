@@ -2,6 +2,7 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 
 //import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -27,7 +28,7 @@ public class ButtonCreator {
     int toptableid;
     int bottomtableid;
     Field[] fields;
-    AncientWorldFragment f;
+    Fragment[] fragments;
 
     Button[] Topbuttons = new Button[NUM_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -42,13 +43,13 @@ public class ButtonCreator {
     final String[] iconOverNamesBottom = {"green__icon_question", "green__icon_trail", "green__icon_qr", "green__icon_map", "green__icon_information"};
 
 
-    public ButtonCreator(Activity A, int toptable, int bottomtable, Field[] fields, AncientWorldFragment f)
+    public ButtonCreator(Activity A, int toptable, int bottomtable, Field[] fields, Fragment[] fragments)
     {
         this.act = A;
         this.toptableid = toptable;
         this.bottomtableid = bottomtable;
         this.fields = fields;
-        this.f = f;
+        this.fragments = fragments;
     }
 
     //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -198,7 +199,7 @@ public class ButtonCreator {
 
         Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
-        act.getFragmentManager().beginTransaction().replace(R.id.frame, f).commit();
+        act.getFragmentManager().beginTransaction().replace(R.id.frame, fragments[btn]).commit();
 
     }
 

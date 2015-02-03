@@ -24,4 +24,9 @@ public class AncientWorldFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_ancient_world, container, false);
     }
+
+    public void EnterButtonClicked(View v)
+    {
+        System.out.println("Ancient World Button Clicked");
+    }
 }
