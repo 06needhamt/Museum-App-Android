@@ -100,7 +100,7 @@ public class AncientWorldFragment extends Fragment {
         mapHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mapWidth, mapHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.26);
+        params.topMargin = (int) (screenHeight * 0.20);
         return params;
     }
 
@@ -110,7 +110,7 @@ public class AncientWorldFragment extends Fragment {
         descHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(descWidth, descHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.75);
+        params.topMargin = (int) (screenHeight * 0.70);
         return params;
     }
 
