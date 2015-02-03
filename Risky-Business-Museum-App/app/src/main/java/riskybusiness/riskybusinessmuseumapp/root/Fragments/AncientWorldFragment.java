@@ -60,12 +60,21 @@ public class AncientWorldFragment extends Fragment {
      * @param view View Object
      */
     private void createLayoutParams(int screenHeight, int screenWidth, View view){
-        TextView Title = (TextView) view.findViewById(R.id.title);
-        TextView SubTitle = (TextView) view.findViewById(R.id.subTitle);
-        TextView Description = (TextView) view.findViewById(R.id.description);
 
+        TextView Title = (TextView) view.findViewById(R.id.title);
+
+
+        TextView SubTitle = (TextView) view.findViewById(R.id.subTitle);
         SubTitle.setGravity(Gravity.CENTER);
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
+
+        ImageView Map = (ImageView) view.findViewById(R.id.Map);
+        Map.setImageResource(R.drawable.floorplan_placeholder);
+        Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
+
+        TextView Description = (TextView) view.findViewById(R.id.description);
+        Description.setGravity(Gravity.CENTER);
+        Description.setLayoutParams(descriptionLayoutParams(screenHeight,screenWidth));
     }
 
     /**
@@ -85,10 +94,24 @@ public class AncientWorldFragment extends Fragment {
         return params;
     }
 
-    //private FrameLayout.LayoutParams
+    private FrameLayout.LayoutParams mapLayoutParams(int screenHeight, int screenWidth){
+        int mapWidth, mapHeight;
+        mapWidth = FrameLayout.LayoutParams.WRAP_CONTENT;
+        mapHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mapWidth, mapHeight);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.26);
+        return params;
+    }
 
-    /*private FrameLayout.LayoutParams descrptionLayoutParams(int screenHeight) {
-
-    }*/
+    private FrameLayout.LayoutParams descriptionLayoutParams(int screenHeight, int screenWidth) {
+        int descWidth, descHeight;
+        descWidth = screenWidth - 10;
+        descHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(descWidth, descHeight);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.75);
+        return params;
+    }
 
 }
