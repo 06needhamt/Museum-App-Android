@@ -198,7 +198,7 @@ public class ButtonCreator {
 
     public void TopgridButtonClicked(int btn) { // Show Toast message
 
-        Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
         act.getFragmentManager().beginTransaction().replace(R.id.frame, fragments[btn]).commit();
 
@@ -206,7 +206,7 @@ public class ButtonCreator {
 
     public void BottomgridButtonClicked(int btn) { // Show Toast message
 
-        Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundBottom(btn);
     }
 

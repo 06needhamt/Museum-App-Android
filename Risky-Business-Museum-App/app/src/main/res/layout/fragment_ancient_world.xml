@@ -17,31 +17,33 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent" android:layout_height="122dp"
-        android:text="Welcome To The Ancient World Trail"
+        android:text="Welcome to The Ancient World Trail!"
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
-        android:textSize="30dp"
+        android:textSize="24dp"
         android:id="@+id/Title"
         android:gravity="center" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Explore ancient Egypt, Greece, Rome and England!"
+        android:textColor="@color/White"
+        android:textSize="16dp"
         android:id="@+id/subTitle"
-        android:layout_gravity="center_horizontal|top" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/description"
         android:layout_gravity="center_horizontal|top" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Map"
+        android:layout_gravity="center_horizontal|top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:id="@+id/description"
         android:layout_gravity="center_horizontal|top" />
 
 </FrameLayout>
