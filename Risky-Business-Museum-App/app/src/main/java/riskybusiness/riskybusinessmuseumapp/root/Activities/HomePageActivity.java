@@ -1,14 +1,18 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.annotation.TargetApi;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.InfoFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 
 public class HomePageActivity extends ActionBarActivity {
@@ -24,6 +28,8 @@ public class HomePageActivity extends ActionBarActivity {
         ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields());
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
+        //setContentView(R.layout.fragment_info);
+        AddFragment();
 
     }
 
@@ -49,5 +55,13 @@ public class HomePageActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void AddFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        InfoFragment fragment = new InfoFragment();
+        fragmentTransaction.add(R.layout.fragment_info, fragment);
+        fragmentTransaction.commit();
     }
 }
