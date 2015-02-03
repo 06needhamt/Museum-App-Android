@@ -1,11 +1,16 @@
 package riskybusiness.riskybusinessmuseumapp.root.Fragments;
 
 import android.app.Fragment;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 
@@ -31,6 +36,12 @@ public class AncientWorldFragment extends Fragment {
                 System.out.println("Ancient World Button Clicked");
             }
         });
+        DisplayMetrics size = new DisplayMetrics() ;
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(size);
+        int height = size.heightPixels;
+        Toast.makeText(getActivity().getBaseContext(), (CharSequence) String.valueOf(height),Toast.LENGTH_SHORT);
+        TextView Title = (TextView) view.findViewById(R.id.title);
+
         return view;
     }
 

@@ -21,14 +21,27 @@
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
         android:textSize="30dp"
-        android:id="@+id/BugsFragmentText"
+        android:id="@+id/Title"
         android:gravity="center" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter"
-        android:id="@+id/btnEnter"
-        android:layout_gravity="center"
-        android:onClick="EnterButtonClicked" />
-    </FrameLayout>
+        android:text="New Text"
+        android:id="@+id/subTitle"
+        android:layout_gravity="center_horizontal|top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/description"
+        android:layout_gravity="center_horizontal|top" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Map"
+        android:layout_gravity="center_horizontal|top" />
+
+</FrameLayout>
