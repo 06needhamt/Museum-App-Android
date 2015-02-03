@@ -1,21 +1,18 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
-import android.annotation.TargetApi;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+//import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+        import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
-import riskybusiness.riskybusinessmuseumapp.R;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.InfoFragment;
+        import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 
-public class HomePageActivity extends ActionBarActivity {
+public class HomePageActivity extends FragmentActivity {
 
     int toptable;
     int bottomtable;
@@ -25,11 +22,11 @@ public class HomePageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_home_page);
         toptable = R.id.topTableForButtons;
         bottomtable = R.id.bottomTableForButtons;
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields());
+        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),new AncientWorldFragment());
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
-        //setContentView(R.layout.fragment_info);
-        AddFragment();
+        //setContentView(R.layout.fragment_bugs);
+        AddInfoFragment();
 
     }
 
@@ -57,11 +54,15 @@ public class HomePageActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void AddFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        InfoFragment fragment = new InfoFragment();
-        fragmentTransaction.add(R.layout.fragment_info, fragment);
-        fragmentTransaction.commit();
+    public void AddInfoFragment() {
+        BugsFragment fragment = new BugsFragment();
+    getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
+
+    public void ReplaceFragment()
+    {
+        AncientWorldFragment fragment = new AncientWorldFragment();
+        getFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+    }
+
 }

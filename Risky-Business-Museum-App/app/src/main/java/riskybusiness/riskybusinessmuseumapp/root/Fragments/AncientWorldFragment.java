@@ -1,8 +1,6 @@
 package riskybusiness.riskybusinessmuseumapp.root.Fragments;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +8,11 @@ import android.view.ViewGroup;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 
-public class InfoFragment extends Fragment {
+/**
+ * Created by Tom on 03/02/2015.
+ */
+public class AncientWorldFragment extends Fragment {
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);}
 
@@ -20,9 +22,6 @@ public class InfoFragment extends Fragment {
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        return inflater.inflate(R.layout.fragment_ancient_world, container, false);
     }
-
-
-
 }
