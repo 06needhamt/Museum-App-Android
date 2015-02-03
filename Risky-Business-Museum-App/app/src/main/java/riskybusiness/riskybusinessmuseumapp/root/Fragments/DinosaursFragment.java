@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 
@@ -23,12 +24,16 @@ public class DinosaursFragment extends Fragment{
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_dinosaurs, container, false);
+        View view = inflater.inflate(R.layout.fragment_dinosaurs, container, false);
+        Button btnEnter = (Button) view.findViewById(R.id.btnEnter);
+        btnEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Dinosaurs Button Clicked");
+            }
+        });
+        return view;
     }
 
-    public void EnterButtonClicked(View v)
-    {
-        System.out.println("Dinosaurs Button Clicked");
-    }
 }
 

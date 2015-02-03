@@ -182,6 +182,7 @@ public class ButtonCreator {
             catch(Exception ex)
             {
                 System.out.println("Could not load icon ");
+                ex.printStackTrace();
 
             }
         }
