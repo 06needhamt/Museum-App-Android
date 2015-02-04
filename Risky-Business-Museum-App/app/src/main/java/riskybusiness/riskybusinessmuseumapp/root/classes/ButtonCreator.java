@@ -3,6 +3,7 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 //import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import java.lang.reflect.Field;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 
 
@@ -206,8 +208,41 @@ public class ButtonCreator {
 
     public void BottomgridButtonClicked(int btn) { // Show Toast message
 
-        //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-        resetButtonBackgroundBottom(btn);
+        switch(btn)
+        {
+            case 0:
+            {
+                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                resetButtonBackgroundBottom(btn);
+                break;
+            }
+            case 1:
+            {
+                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                resetButtonBackgroundBottom(btn);
+                break;
+            }
+            case 2:
+            {
+                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                resetButtonBackgroundBottom(btn);
+                Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
+                startActivity(act,I);
+                break;
+            }
+            case 3:
+            {
+                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                resetButtonBackgroundBottom(btn);
+                break;
+            }
+            case 4:
+            {
+                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                resetButtonBackgroundBottom(btn);
+                break;
+            }
+        }
     }
 
 
@@ -252,5 +287,10 @@ public class ButtonCreator {
                 //index++;
             }
         }
+    }
+
+    private void startActivity(Activity A, Intent I)
+    {
+        A.startActivity(I);
     }
 }
