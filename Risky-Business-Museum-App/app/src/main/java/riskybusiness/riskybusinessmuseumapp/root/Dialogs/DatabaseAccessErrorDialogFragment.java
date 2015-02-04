@@ -1,12 +1,10 @@
-package riskybusiness.riskybusinessmuseumapp.root.Ddalogs;
+package riskybusiness.riskybusinessmuseumapp.root.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import riskybusiness.riskybusinessmuseumapp.R;
 
 
 public class DatabaseAccessErrorDialogFragment extends DialogFragment {

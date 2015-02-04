@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.Ddalogs;
+package riskybusiness.riskybusinessmuseumapp.root.Dialogs;
 
 public interface IConfirmDialogCompliant {
 

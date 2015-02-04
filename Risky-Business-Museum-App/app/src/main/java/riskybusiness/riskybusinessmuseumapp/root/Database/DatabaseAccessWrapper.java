@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.*;
 import android.provider.BaseColumns;
 
-import riskybusiness.riskybusinessmuseumapp.root.Ddalogs.DatabaseAccessErrorDialogFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.DatabaseAccessErrorDialogFragment;
 
 
 public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
