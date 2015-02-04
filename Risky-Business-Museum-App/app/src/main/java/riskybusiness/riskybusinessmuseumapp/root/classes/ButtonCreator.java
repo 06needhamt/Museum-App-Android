@@ -118,13 +118,14 @@ public class ButtonCreator {
     {
        for(int i = 0; i < Topbuttons.length; i++)
        {
+           final int btn = i;
            //Topbuttons[i] = new Button(act);
            //Topbuttons[i].setBackgroundColor(act.getResources().getColor(R.color.White));
            Topbuttons[i].setBackground(act.getResources().getDrawable(drawableList.getId(iconUnderNamesMap[i])));
            Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+                   MapgridButtonClicked(btn);
                }
            });
        }
@@ -225,6 +226,13 @@ public class ButtonCreator {
 
     }
 
+    public void MapgridButtonClicked(int btn)
+    {
+        resetButtonBackgroundMap(btn);
+        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+
+    }
+
     public void BottomgridButtonClicked(int btn) { // Show Toast message
 
         switch(btn)
@@ -256,6 +264,7 @@ public class ButtonCreator {
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 populateMapButtons();
+                resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(-1);
                 //resetButtonBackgroundTop(-1);
                 break;
@@ -283,24 +292,12 @@ public class ButtonCreator {
             {
                 int id = drawableList.getId(iconUnderNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
-                Bottombuttons[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TopgridButtonClicked(col);
-                    }
-                });
                 // index++;
             }
             else
             {
                 int id = drawableList.getId(iconOverNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
-                Bottombuttons[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TopgridButtonClicked(col);
-                    }
-                });
                 //index++;
             }
         }
@@ -321,7 +318,9 @@ public class ButtonCreator {
                 Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+
+                        MapgridButtonClicked(col);
+
                     }
                 });
                 // index++;
@@ -333,7 +332,7 @@ public class ButtonCreator {
                 Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+                        MapgridButtonClicked(col);
                     }
                 });
                 //index++;
@@ -347,16 +346,29 @@ public class ButtonCreator {
 
         for(int i = 0; i < 5; i++)
         {
+            final int col = i;
             if(i != btn)
             {
                 int id = drawableList.getId(iconUnderNamesTop[i]);
                 Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TopgridButtonClicked(col);
+                    }
+                });
                 // index++;
             }
             else
             {
                 int id = drawableList.getId(iconOverNamesTop[i]);
                 Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TopgridButtonClicked(col);
+                    }
+                });
                 //index++;
             }
         }
