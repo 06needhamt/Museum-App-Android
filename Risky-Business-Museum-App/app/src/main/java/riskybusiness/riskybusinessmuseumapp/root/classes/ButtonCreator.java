@@ -266,7 +266,7 @@ public class ButtonCreator {
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(-1);
                 //resetButtonBackgroundTop(-1);
-                StartQRActivity();
+                //StartQRActivity();
                 break;
             }
             case 4:
