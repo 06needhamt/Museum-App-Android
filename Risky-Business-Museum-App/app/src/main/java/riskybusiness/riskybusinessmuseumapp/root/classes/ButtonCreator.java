@@ -4,6 +4,7 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.lang.reflect.Field;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 
@@ -25,7 +27,7 @@ public class ButtonCreator {
 
 
     public static final int NUM_BUTTONS = 5; // Number of BUTTONS (Columns in table)
-    Activity act;
+    HomePageActivity act;
     TableLayout Toptable;
     TableLayout Bottomtable;
     int toptableid;
@@ -49,7 +51,7 @@ public class ButtonCreator {
     final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
-    public ButtonCreator(Activity A, int toptable, int bottomtable, Field[] fields, Fragment[] fragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] fragments)
     {
         this.act = A;
         this.toptableid = toptable;
@@ -255,9 +257,7 @@ public class ButtonCreator {
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
-                Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
-                startActivity(act,I);
-                resetButtonBackgroundTop(-1);
+                StartQRActivity();
                 break;
             }
             case 3:
@@ -267,6 +267,7 @@ public class ButtonCreator {
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(-1);
                 //resetButtonBackgroundTop(-1);
+                StartQRActivity();
                 break;
             }
             case 4:
@@ -277,6 +278,13 @@ public class ButtonCreator {
                 break;
             }
         }
+    }
+
+    private void StartQRActivity() {
+
+        Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
+        act.Callbridge();
+        resetButtonBackgroundTop(-1);
     }
 
 

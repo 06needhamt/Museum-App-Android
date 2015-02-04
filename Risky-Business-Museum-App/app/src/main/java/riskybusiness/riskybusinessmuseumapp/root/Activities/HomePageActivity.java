@@ -2,13 +2,15 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-        import android.os.Bundle;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
-        import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment;
@@ -22,6 +24,8 @@ public class HomePageActivity extends FragmentActivity {
     int toptable;
     int bottomtable;
     Fragment[] fragments;
+    String Content;
+    String Format;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,32 @@ public class HomePageActivity extends FragmentActivity {
         ChooseATrailFragment fragment = new ChooseATrailFragment();
     getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+ //       Toast.makeText(getBaseContext(),resultCode,Toast.LENGTH_SHORT).show();
 
+        if(resultCode == RESULT_OK)
+        {
+            Bundle b = data.getExtras();
+
+            Content = b.getString("Content","No Value");
+            Content = Content.substring(9,Content.length());
+            Toast.makeText(getBaseContext(),(CharSequence) Content,Toast.LENGTH_SHORT).show();
+            Format = b.getString("Format","No Format");
+            //
+            Format = Format.substring(7,Format.length());
+            Toast.makeText(getBaseContext(), (CharSequence) Format,Toast.LENGTH_SHORT).show();
+           // data.getStringArrayExtra("content");
+
+        }
+    }
+
+    public void Callbridge()
+    {
+        Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
+        startActivityForResult(i,0,null);
+
+    }
 
 }

@@ -71,6 +71,17 @@ public class QRScannerActivity extends ActionBarActivity {
             //output to UI
             formatTxt.setText((CharSequence) ("FORMAT: " + scanFormat));
             contentTxt.setText((CharSequence) ("CONTENT: " + scanContent));
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            Bundle B = new Bundle();
+            B.putString("Content",(String) contentTxt.getText());
+            B.putString("Format", (String) formatTxt.getText());
+            Intent i = getIntent();
+            i.putExtras(B);
+            setIntent(i);
+            setResult(RESULT_OK,i);
+            finish();
+
         }
         else{
             //invalid scan data or scan cancelled
