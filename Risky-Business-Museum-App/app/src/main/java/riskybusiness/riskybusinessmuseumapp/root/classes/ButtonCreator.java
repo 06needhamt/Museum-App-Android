@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -44,6 +45,8 @@ public class ButtonCreator {
     final String[] iconOverNamesTop = {"green__icon_trail_ancientworld", "green__icon_trail_bugs", "green__icon_trail_worldcultures", "green__icon_trail_dinosaurs", "green__icon_trail_space"};
     final String[] iconUnderNamesBottom = {"blue__icon_question", "blue__icon_trail", "blue__icon_qr", "blue__icon_map", "blue__icon_information"};
     final String[] iconOverNamesBottom = {"green__icon_question", "green__icon_trail", "green__icon_qr", "green__icon_map", "green__icon_information"};
+    final String[] iconUnderNamesMap = {"blue__icon_floorg", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floor5"};
+    final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
     public ButtonCreator(Activity A, int toptable, int bottomtable, Field[] fields, Fragment[] fragments)
@@ -113,15 +116,23 @@ public class ButtonCreator {
 
     public void populateMapButtons()
     {
-        System.out.println("There are " + Toptable.getChildCount() + "Rows");
-        tableRowTop.removeAllViews();
-        //Toptable.removeViews(1, Toptable.getChildCount() - 1);
+       for(int i = 0; i < Topbuttons.length; i++)
+       {
+           //Topbuttons[i] = new Button(act);
+           //Topbuttons[i].setBackgroundColor(act.getResources().getColor(R.color.White));
+           Topbuttons[i].setBackground(act.getResources().getDrawable(drawableList.getId(iconUnderNamesMap[i])));
+           Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+               }
+           });
+       }
     }
     public void populateTopButtons() {
 
-        Toptable = (TableLayout) act.findViewById(toptableid); // Table to be populated
-
         getDrawables();
+        Toptable = (TableLayout) act.findViewById(toptableid); // Table to be populated
 
         tableRowTop = new TableRow(act); // Create new table row
 
@@ -222,12 +233,14 @@ public class ButtonCreator {
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
+                resetButtonBackgroundTop(-1);
                 break;
             }
             case 1:
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
+                resetButtonBackgroundTop(-1);
                 break;
             }
             case 2:
@@ -236,18 +249,22 @@ public class ButtonCreator {
                 resetButtonBackgroundBottom(btn);
                 Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
                 startActivity(act,I);
+                resetButtonBackgroundTop(-1);
                 break;
             }
             case 3:
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                resetButtonBackgroundBottom(btn);
+                populateMapButtons();
+                resetButtonBackgroundMap(-1);
+                //resetButtonBackgroundTop(-1);
                 break;
             }
             case 4:
             {
                 Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
+                resetButtonBackgroundTop(-1);
                 break;
             }
         }
@@ -261,16 +278,64 @@ public class ButtonCreator {
 
         for(int i = 0; i < 5; i++)
         {
+            final int col = i;
             if(i != btn)
             {
                 int id = drawableList.getId(iconUnderNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
+                Bottombuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TopgridButtonClicked(col);
+                    }
+                });
                 // index++;
             }
             else
             {
                 int id = drawableList.getId(iconOverNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
+                Bottombuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TopgridButtonClicked(col);
+                    }
+                });
+                //index++;
+            }
+        }
+
+    }
+
+    public void resetButtonBackgroundMap(int btn)
+    {
+        // int index=0;
+
+        for(int i = 0; i < 5; i++)
+        {
+            final int col = i;
+            if(i != btn)
+            {
+                int id = drawableList.getId(iconUnderNamesMap[i]);
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                // index++;
+            }
+            else
+            {
+                int id = drawableList.getId(iconOverNamesMap[i]);
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+                    }
+                });
                 //index++;
             }
         }
