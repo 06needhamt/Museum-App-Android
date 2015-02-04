@@ -15,6 +15,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.GroundFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
@@ -77,7 +78,7 @@ public class HomePageActivity extends FragmentActivity {
     }
 
     public void AddFragment() {
-        ChooseATrailFragment fragment = new ChooseATrailFragment();
+        GroundFloorFragment fragment = new GroundFloorFragment();
     getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
     @Override

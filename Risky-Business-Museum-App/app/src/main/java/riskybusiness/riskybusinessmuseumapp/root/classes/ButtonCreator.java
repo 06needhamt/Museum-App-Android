@@ -4,9 +4,7 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,7 +15,6 @@ import java.lang.reflect.Field;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 
 
 /**
@@ -33,7 +30,8 @@ public class ButtonCreator {
     int toptableid;
     int bottomtableid;
     Field[] fields;
-    Fragment[] fragments;
+    Fragment[] Trailfragments;
+    Fragment[] Mapfragments;
     TableRow tableRowTop;
 
     Button[] Topbuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -51,13 +49,14 @@ public class ButtonCreator {
     final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] fragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments)
     {
         this.act = A;
         this.toptableid = toptable;
         this.bottomtableid = bottomtable;
         this.fields = fields;
-        this.fragments = fragments;
+        this.Trailfragments = Trailfragments;
+        //this.Mapfragments = Mapfragments;
     }
 
     //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -224,7 +223,7 @@ public class ButtonCreator {
 
         //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
-        act.getFragmentManager().beginTransaction().replace(R.id.frame, fragments[btn]).commit();
+        act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
 
     }
 
