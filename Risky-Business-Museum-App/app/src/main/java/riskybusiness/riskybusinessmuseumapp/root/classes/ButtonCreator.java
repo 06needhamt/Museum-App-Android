@@ -31,6 +31,7 @@ public class ButtonCreator {
     int bottomtableid;
     Field[] fields;
     Fragment[] fragments;
+    TableRow tableRowTop;
 
     Button[] Topbuttons = new Button[NUM_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -109,16 +110,23 @@ public class ButtonCreator {
         }
     }
 
+
+    public void populateMapButtons()
+    {
+        System.out.println("There are " + Toptable.getChildCount() + "Rows");
+        tableRowTop.removeAllViews();
+        //Toptable.removeViews(1, Toptable.getChildCount() - 1);
+    }
     public void populateTopButtons() {
 
-        Bottomtable = (TableLayout) act.findViewById(toptableid); // Table to be populated
+        Toptable = (TableLayout) act.findViewById(toptableid); // Table to be populated
 
         getDrawables();
 
-        TableRow tableRow = new TableRow(act); // Create new table row
+        tableRowTop = new TableRow(act); // Create new table row
 
-        Bottomtable.addView(tableRow);  // Add the row to the table
-        tableRow.setLayoutParams(new TableLayout.LayoutParams(
+        Toptable.addView(tableRowTop);  // Add the row to the table
+        tableRowTop.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT, // Width
                 180/*TableLayout.LayoutParams.MATCH_PARENT*/, // Height
                 1.0f)); // Scale
@@ -156,7 +164,7 @@ public class ButtonCreator {
                     TopgridButtonClicked(finalCol);
                 }
             });
-            tableRow.addView(button); // Add button to the table
+            tableRowTop.addView(button); // Add button to the table
             Topbuttons[col] = button; // Add the button to the buttons array
 
         }

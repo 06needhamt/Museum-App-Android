@@ -33,6 +33,7 @@ public class HomePageActivity extends FragmentActivity {
         ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
+        //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
         AddFragment();
 
