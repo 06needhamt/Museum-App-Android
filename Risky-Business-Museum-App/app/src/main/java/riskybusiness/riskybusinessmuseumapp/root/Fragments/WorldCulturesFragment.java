@@ -67,7 +67,7 @@ public class WorldCulturesFragment extends Fragment{
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
 
         ImageView Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable._m3_third_view_2);
+        Map.setImageResource(R.drawable.x_3_third_view_2_copy);
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
         Map.setOnClickListener(new View.OnClickListener() {
             @Override

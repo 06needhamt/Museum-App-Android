@@ -65,7 +65,7 @@ public class SpaceAndTimeFragment extends Fragment{
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
 
         ImageView Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable._m5_fifth_view_2);
+        Map.setImageResource(R.drawable.x_5_fifth_view_2_copy);
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
         Map.setOnClickListener(new View.OnClickListener() {
             @Override
