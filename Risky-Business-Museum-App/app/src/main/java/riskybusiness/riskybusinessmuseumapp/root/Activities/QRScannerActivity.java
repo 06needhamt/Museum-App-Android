@@ -76,6 +76,7 @@ public class QRScannerActivity extends ActionBarActivity {
             Bundle B = new Bundle();
             B.putString("Content",(String) contentTxt.getText());
             B.putString("Format", (String) formatTxt.getText());
+            B.putString("FROM", "QRScannerActivity");
             Intent i = getIntent();
             i.putExtras(B);
             setIntent(i);

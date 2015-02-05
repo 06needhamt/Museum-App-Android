@@ -35,6 +35,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity" />
         </activity>
+        <activity
+            android:name=".root.Activities.SingleAnswerActivity"
+            android:label="@string/title_activity_single_answer"
+            android:parentActivityName=".root.Activities.HomePageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity" />
+        </activity>
     </application>
 
 </manifest>

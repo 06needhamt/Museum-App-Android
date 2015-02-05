@@ -23,6 +23,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ThirdFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
+import riskybusiness.riskybusinessmuseumapp.root.questionmanager.*;
 
 public class HomePageActivity extends FragmentActivity {
 
@@ -32,6 +33,7 @@ public class HomePageActivity extends FragmentActivity {
     Fragment[] Mapfragments;
     String Content;
     String Format;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,29 +103,81 @@ public class HomePageActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
- //       Toast.makeText(getBaseContext(),resultCode,Toast.LENGTH_SHORT).show();
 
-        if(resultCode == RESULT_OK)
-        {
-            Bundle b = data.getExtras();
+        Toast.makeText(getBaseContext(),"In Return function",Toast.LENGTH_SHORT).show();
 
-            Content = b.getString("Content","No Value");
-            Content = Content.substring(9,Content.length());
-            Toast.makeText(getBaseContext(),(CharSequence) Content,Toast.LENGTH_SHORT).show();
-            Format = b.getString("Format","No Format");
-            //
-            Format = Format.substring(7,Format.length());
-            Toast.makeText(getBaseContext(), (CharSequence) Format,Toast.LENGTH_SHORT).show();
-           // data.getStringArrayExtra("content");
+        Bundle tempBundle = data.getExtras();
+        String from = tempBundle.getString("FROM", "");
+
+        if(from.equals("MultiChoiceActivity")) {
+
+            if(resultCode == RESULT_OK){
+                Bundle b = data.getExtras();
+                score = b.getInt("Score", -1);
+            }
+
+            Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+        }
+        else if(from.equals("QRScannerActivity")) {
+            if (resultCode == RESULT_OK) {
+                Bundle b = data.getExtras();
+
+                Content = b.getString("Content", "No Value");
+                Content = Content.substring(9, Content.length());
+                Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
+                Format = b.getString("Format", "No Format");
+                //
+                Format = Format.substring(7, Format.length());
+                Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
+                // data.getStringArrayExtra("content");
+
+            }
 
         }
+//        else if(data.getClass().getSimpleName().equals(ImageQuestionActivity.class)) {
+//            if(resultCode == RESULT_OK){
+//                Bundle b = data.getExtras();
+//                score = b.getInt("Score", -1);
+//            }
+//              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+//        }
+//        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
+//            if(resultCode == RESULT_OK){
+//                Bundle b = data.getExtras();
+//                score = b.getInt("Score", -1);
+//            }
+//              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+//        }
+        else {
+            // Error invalid something or other
+            Toast.makeText(getBaseContext(), "In Else :(", Toast.LENGTH_LONG ).show();
+        }
+
     }
 
-    public void Callbridge()
+    public void CallQRScannerActivity()
     {
         Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
         startActivityForResult(i,0,null);
-
     }
+
+    public void callMultiChoiceActivity(){
+        Intent i = new Intent(getBaseContext(), MultiChoiceActivity.class);
+        startActivityForResult(i, 0, null);
+    }
+
+//    public void callSingleAnswerActivity(){
+//        Intent i = new Intent(getBaseContext(), SingleAnswerActivity.class);
+//
+//        startActivityForResult(i, 0, null);
+//    }
+
+//    public void callImagequestionActivity(){
+//        Intent i = new Intent(getBaseContext(), ImageQuestionActivity.class);
+//
+//        startActivityForResult(i, 0, null);
+//    }
+
+
 
 }

@@ -1,5 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.questionmanager;
 
+import android.content.Intent;
+
 import java.util.LinkedList;
 
 import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
@@ -79,17 +81,12 @@ public class QuestionManager {
 
         // Trail ended, give scores and further options to the user
 
-
-
     }
 
     public int receiveData(int score){
         return score;
     }
 
-    public void callMultiChoiceActivity(){
 
-
-    }
 
 }

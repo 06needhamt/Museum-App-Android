@@ -283,7 +283,7 @@ public class ButtonCreator {
     private void StartQRActivity() {
 
         Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
-        act.Callbridge();
+        act.CallQRScannerActivity();
         resetButtonBackgroundTop(-1);
     }
 

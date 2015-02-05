@@ -7,5 +7,6 @@
     <string name="title_activity_home_page">HomePageActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_multi_choice">MultiChoiceActivity</string>
+    <string name="title_activity_single_answer">SingleAnswerActivity</string>
 
 </resources>

@@ -46,6 +46,8 @@ public class MultiChoiceActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show();
+                score = 10;
+                passData();
             }
         });
 
@@ -159,6 +161,7 @@ public class MultiChoiceActivity extends ActionBarActivity {
         Bundle bundle = new Bundle();
         Intent it = getIntent();
         bundle.putInt("Score", score);
+        bundle.putString("FROM", "MultiChoiceActivity");
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
