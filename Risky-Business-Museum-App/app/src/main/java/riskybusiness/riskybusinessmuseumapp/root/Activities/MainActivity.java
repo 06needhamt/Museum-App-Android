@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
 
 
@@ -21,17 +25,28 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        DatabaseAccessWrapper db = new DatabaseAccessWrapper(getBaseContext());
-//
-//        database = db.OpenDatabase();
-//
-//
-//
-//        if(database == null)
-//           return;
-//        else
-//            database.close();
+        //DatabaseAccessWrapper db = new DatabaseAccessWrapper(getBaseContext());
+        DataBaseHelper dbh = new DataBaseHelper(getBaseContext());
+        //database = db.OpenDatabase();
+        try {
+            //database = dbh.createDataBase(getBaseContext());
+            database = SQLiteDatabase.openOrCreateDatabase(dbh.dbfile, null);
+        }
+        catch(Exception E){
+            E.printStackTrace();
+        }
 
+        System.out.println("Are we here yet?");
+        //database = SQLiteDatabase.create(null);
+
+        if(database == null) {
+            Toast.makeText(getBaseContext(), "DB NOT Okay", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else{
+            database.close();
+            Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
+        }
     }
 
 

@@ -1,9 +1,8 @@
 package riskybusiness.riskybusinessmuseumapp.root.Database;
 
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 
 import android.content.ContentValues;
@@ -11,9 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.provider.BaseColumns;
-import android.widget.Toast;
-
-import riskybusiness.riskybusinessmuseumapp.root.Dialogs.DatabaseAccessErrorDialogFragment;
 
 
 public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
@@ -30,7 +26,9 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
 
     ///////////////////////////////
     //The Android's default system path of your application database.
-    private static String DB_PATH = "data/data/riskybusiness.riskybusinessmuseumapp.root/databases/";
+    //private static String DB_PATH = "data\\data\\riskybusiness.riskybusinessmuseumapp.root\\databases\\";
+    //private static String DB_PATH ="app\\src\\main\\assets\\";
+    private static String DB_PATH = "No Value";
     private static String DB_NAME = "MuseumDB";
     private static String TABLE_LOCATION = "trailStep";
     /////////////////////////////
@@ -46,6 +44,9 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
 
     public DatabaseAccessWrapper(Context context) {
         this.context = context;
+        //DB_PATH = context.getFilesDir().toString();
+        DB_PATH = "/app/src/main/assets/";
+        System.out.println("DB_PATH = " + DB_PATH);
     }
 	
 	public SQLiteDatabase OpenDatabase()
@@ -56,18 +57,20 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
         SQLiteDatabase db = null;
         String path = DB_PATH + DB_NAME;
         Boolean databaseOk;
+        String copyLocation = "/data/data/riskybusiness.riskybusinessmuseumapp.root/databases/";
 
+
+        //if(!databaseOk) {
+            //try {
+                db = copyDataBase(DB_NAME, copyLocation);
+//            } catch (IOException e) {
+//                System.out.println("Problem with database");
+//                e.printStackTrace();
+//                return null;
+//            }
+        //}
+        /*
         databaseOk = checkDataBase();
-
-        if(!databaseOk) {
-            try {
-                copyDataBase();
-            } catch (IOException e) {
-                System.out.println("Problem with database");
-                e.printStackTrace();
-                return null;
-            }
-        }
 
         try {
              db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);;
@@ -80,9 +83,35 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
             Toast.makeText(context, "Database Opened", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(context, "Database NOT Opened :(", Toast.LENGTH_LONG).show();
-
+        */
         return db;
 	}
+
+    private SQLiteDatabase copyDataBase(String DBname, String copyLocation){
+        File f = new File(copyLocation + "/" + DBname);
+        SQLiteDatabase db = null;
+        if(!f.exists()){
+            try{
+                InputStream is = context.getAssets().open(DBname);
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(buffer);
+                fos.close();
+            }
+            catch (Exception E){
+                E.printStackTrace();
+                return null;
+            }
+
+                db.openOrCreateDatabase(f, null);
+
+        }
+        return db;
+    }
 
     // Check if the database exist to avoid re-copy the data
     private boolean checkDataBase(){
@@ -103,6 +132,7 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
         if(checkDB != null){
 
             checkDB.close();
+            return true;
 
         }
 
@@ -114,31 +144,44 @@ public class DatabaseAccessWrapper implements IFeedEntry, BaseColumns{
 
     ////////////////////////////////////////////////
     // copy your assets db to the new system DB
+    /* OLD copyDataBase function
     private void copyDataBase() throws IOException {
 
+        String outFileName = DB_PATH + DB_NAME;
+        File testFile = new File(context.getFilesDir(), DB_NAME);
+        List<String> results = new ArrayList<String>();
+        File[] files = new File(context.getFilesDir().toString()).listFiles();
+        for(File file : files){
+            if(file.isFile()){
+                results.add(file.getName());
+                System.out.println("file: " + file.getName());
+            }
+        }
         //Open your local db as the input stream
         //InputStream myInput = context.getAssets().open(DB_NAME);
-        InputStream myInput = context.getAssets().open(DB_NAME);
+        FileInputStream myInput = new FileInputStream(testFile) {};
 
         // Path to the just created empty db
-        String outFileName = DB_PATH + DB_NAME;
-
+        File newFile = new File("/data/data/riskybusiness.riskybusinessmuseumapp.root/databases/");
+        //if(!newFile.exists()) newFile.createNewFile();
         //Open the empty db as the output stream
-        OutputStream myOutput = new FileOutputStream(outFileName);
+        FileOutputStream myFileOutput = new FileOutputStream(newFile);
+        System.out.println("newFile = " + newFile.toString());
+        //myFileOutput = context.openFileOutput((outFileName), context.MODE_PRIVATE);
 
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
         while ((length = myInput.read(buffer))>0){
-            myOutput.write(buffer, 0, length);
+            myFileOutput.write(buffer, 0, length);
         }
 
         //Close the streams
-        myOutput.flush();
-        myOutput.close();
+        myFileOutput.flush();
+        myFileOutput.close();
         myInput.close();
-
-    }
+        System.out.println("Copied db okay");
+    }*/
     ////////////////////////////////////////////////////
 
 
