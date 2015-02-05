@@ -66,7 +66,7 @@ public class DinosaursFragment extends Fragment{
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
 
         ImageView Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.x_4_fourth_view_2_copy);
+        Map.setImageResource(R.drawable.floor_4);
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
         Map.setOnClickListener(new View.OnClickListener() {
             @Override

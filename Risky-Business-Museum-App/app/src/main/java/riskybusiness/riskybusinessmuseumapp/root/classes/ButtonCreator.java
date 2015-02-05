@@ -49,14 +49,14 @@ public class ButtonCreator {
     final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments)
     {
         this.act = A;
         this.toptableid = toptable;
         this.bottomtableid = bottomtable;
         this.fields = fields;
         this.Trailfragments = Trailfragments;
-        //this.Mapfragments = Mapfragments;
+        this.Mapfragments = Mapfragments;
     }
 
     //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -229,8 +229,9 @@ public class ButtonCreator {
 
     public void MapgridButtonClicked(int btn)
     {
+        //Toast.makeText(act, "Map Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundMap(btn);
-        Toast.makeText(act.getBaseContext(),"Map button Clicked",Toast.LENGTH_SHORT).show();
+        act.getFragmentManager().beginTransaction().replace(R.id.frame, Mapfragments[btn]).commit();
 
     }
 

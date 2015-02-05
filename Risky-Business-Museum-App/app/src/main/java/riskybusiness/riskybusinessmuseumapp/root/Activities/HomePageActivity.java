@@ -15,8 +15,12 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.FifthFloorFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.ForthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.GroundFloorFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.SecondFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.ThirdFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 
@@ -25,6 +29,7 @@ public class HomePageActivity extends FragmentActivity {
     int toptable;
     int bottomtable;
     Fragment[] fragments;
+    Fragment[] Mapfragments;
     String Content;
     String Format;
 
@@ -35,7 +40,8 @@ public class HomePageActivity extends FragmentActivity {
         toptable = R.id.topTableForButtons;
         bottomtable = R.id.bottomTableForButtons;
         fragments = CreateFragments();
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments);
+        Mapfragments = CreateMapFragments();
+        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -51,6 +57,17 @@ public class HomePageActivity extends FragmentActivity {
         fragments[2] = new WorldCulturesFragment();
         fragments[3] = new DinosaursFragment();
         fragments[4] = new SpaceAndTimeFragment();
+        return fragments;
+    }
+
+    private Fragment[] CreateMapFragments()
+    {
+        Fragment[] fragments = new Fragment[5];
+        fragments[0] = new GroundFloorFragment();
+        fragments[1] = new SecondFloorFragment();
+        fragments[2] = new ThirdFloorFragment();
+        fragments[3] = new ForthFloorFragment();
+        fragments[4] = new FifthFloorFragment();
         return fragments;
     }
 
@@ -78,7 +95,7 @@ public class HomePageActivity extends FragmentActivity {
     }
 
     public void AddFragment() {
-        GroundFloorFragment fragment = new GroundFloorFragment();
+        ChooseATrailFragment fragment = new ChooseATrailFragment();
     getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
     @Override
