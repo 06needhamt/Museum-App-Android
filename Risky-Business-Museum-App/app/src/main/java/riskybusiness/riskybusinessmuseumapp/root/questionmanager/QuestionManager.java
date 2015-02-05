@@ -2,6 +2,8 @@ package riskybusiness.riskybusinessmuseumapp.root.questionmanager;
 
 import java.util.LinkedList;
 
+import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
+
 import static java.lang.Integer.parseInt;
 
 /**
@@ -16,9 +18,11 @@ public class QuestionManager {
     int questionNum = 0; // The number of the current question
     int answerNum = 0;
     boolean trailEnded = false; // Trail has not ended
+    MultiChoiceActivity mc;
 
     // Construct question manager passing it the value received from the QR code
-    public QuestionManager(int qrCode) {
+    public QuestionManager(int qrCode, MultiChoiceActivity mc) {
+        this.mc = mc;
 
         /**
         // Next we would query the database to identify what trail(s) that code belongs to
@@ -79,5 +83,13 @@ public class QuestionManager {
 
     }
 
+    public int receiveData(int score){
+        return score;
+    }
+
+    public void callMultiChoiceActivity(){
+
+
+    }
 
 }

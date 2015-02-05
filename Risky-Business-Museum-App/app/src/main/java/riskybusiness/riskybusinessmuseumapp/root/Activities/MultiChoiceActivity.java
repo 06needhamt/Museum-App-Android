@@ -1,5 +1,6 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import riskybusiness.riskybusinessmuseumapp.R;
@@ -18,11 +20,16 @@ public class MultiChoiceActivity extends ActionBarActivity {
     private int screenHeight;
     private int screenWidth;
     private Button btnMcA, btnMcB, btnMcC, btnMcD;
+    private TextView multiChoiceQuestion;
+    private final int MAX_SCORE = 10;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_choice);
+        score = MAX_SCORE;
+        multiChoiceQuestion = (TextView) findViewById(R.id.multiChoiceQuestion);
         setButtonListeners();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -74,6 +81,16 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcB.setLayoutParams(btnMcBLayout(screenHeight, screenWidth));
         btnMcC.setLayoutParams(btnMcCLayout(screenHeight, screenWidth));
         btnMcD.setLayoutParams(btnMcDLayout(screenHeight, screenWidth));
+        multiChoiceQuestion.setLayoutParams(multiChoiceQuestionLayout(screenHeight, screenWidth));
+    }
+
+    private FrameLayout.LayoutParams multiChoiceQuestionLayout(int screenHeight, int screenWidth){
+        int textHeight, textWidth;
+        textHeight = (int) (screenHeight * 0.30); //
+        textWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(textWidth, textHeight);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        return params;
     }
 
     private FrameLayout.LayoutParams btnMcALayout (int screenHeight, int screenWidth) {
@@ -136,5 +153,16 @@ public class MultiChoiceActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Bundle passData(){
+        Bundle bundle = new Bundle();
+        Intent it = getIntent();
+        bundle.putInt("Score", score);
+        it.putExtras(bundle);
+        setIntent(it);
+        setResult(RESULT_OK, it);
+        finish();
+        return bundle;
     }
 }

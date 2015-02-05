@@ -14,6 +14,7 @@ import java.io.IOException;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
+import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -74,6 +75,11 @@ public class MainActivity extends ActionBarActivity {
         //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
         Intent i = new Intent(getBaseContext(),MultiChoiceActivity.class);
         startActivity(i);
-        finish();
+        //finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
     }
 }
