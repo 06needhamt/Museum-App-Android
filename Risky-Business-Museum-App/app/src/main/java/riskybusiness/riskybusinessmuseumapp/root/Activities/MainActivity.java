@@ -29,8 +29,8 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper dbh = new DataBaseHelper(getBaseContext());
         //database = db.OpenDatabase();
         try {
-            //database = dbh.createDataBase(getBaseContext());
-            database = SQLiteDatabase.openOrCreateDatabase(dbh.dbfile, null);
+            database = dbh.createDataBase(getBaseContext());
+            //database = SQLiteDatabase.openOrCreateDatabase(dbh.dbfile, null);
         }
         catch(Exception E){
             E.printStackTrace();
