@@ -137,6 +137,11 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        try {
+            mDataBase = SQLiteDatabase.openOrCreateDatabase(dbfile,null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

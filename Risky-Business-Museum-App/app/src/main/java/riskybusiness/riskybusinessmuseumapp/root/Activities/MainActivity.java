@@ -37,15 +37,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         System.out.println("Are we here yet?");
-        //database = SQLiteDatabase.create(null);
+        database = SQLiteDatabase.create(null);
 
-        if(database == null) {
-            Toast.makeText(getBaseContext(), "DB NOT Okay", Toast.LENGTH_LONG).show();
-            return;
-        }
-        else{
-            database.close();
+        if(database != null) {
             Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
+            return;
         }
     }
 
