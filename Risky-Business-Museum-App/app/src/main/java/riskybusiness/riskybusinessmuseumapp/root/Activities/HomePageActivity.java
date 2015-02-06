@@ -34,6 +34,7 @@ public class HomePageActivity extends FragmentActivity {
     String Content;
     String Format;
     int score;
+    QuestionManager qm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +119,8 @@ public class HomePageActivity extends FragmentActivity {
             }
 
             Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+            qm.nextQuestion();
+
         }
         else if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
@@ -141,6 +144,7 @@ public class HomePageActivity extends FragmentActivity {
                 score += b.getInt("Score", -1);
             }
               Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+            qm.nextQuestion();
         }
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
 //            if(resultCode == RESULT_OK){
@@ -189,7 +193,8 @@ public class HomePageActivity extends FragmentActivity {
 //    }
 
     public void callQuestionManager(){
-        QuestionManager qm = new QuestionManager(this);
+        qm = new QuestionManager(this);
+        qm.nextQuestion();
     }
 
 
