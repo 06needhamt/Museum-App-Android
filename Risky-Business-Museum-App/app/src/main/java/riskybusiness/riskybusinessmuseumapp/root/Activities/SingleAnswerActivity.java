@@ -79,11 +79,11 @@ public class SingleAnswerActivity extends ActionBarActivity {
         SingleAnswerQRButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "QR Button clicked", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "QR Button clicked", Toast.LENGTH_LONG).show();
                 //Start scanning QR code
                 //if it is the right answer: score = 10;
                 CallQRScannerActivity();
-                passData();
+                //passData();
             }
         }));
     }
@@ -120,19 +120,21 @@ public class SingleAnswerActivity extends ActionBarActivity {
 
                 Content = b.getString("Content", "No Value");
                 Content = Content.substring(9, Content.length());
-                Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
                 Format = b.getString("Format", "No Format");
                 Format = Format.substring(7, Format.length());
-                Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
                 // data.getStringArrayExtra("content");
 
-                if(b.getString("Content").equals(CorrectAnswer) || score <= 0){
+
+                if(Content.equals(CorrectAnswer) || score <= 0){
                     passData();
                 }
                 else {
                     score -= 5;
                     //You've done it wrong pop-up
                     //CallQRScannerActivity();
+                    Toast.makeText(getBaseContext(), (CharSequence) "Wrong answer.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -149,6 +151,7 @@ public class SingleAnswerActivity extends ActionBarActivity {
         Intent it = getIntent();
         bundle.putInt("Score", score);
         bundle.putString("FROM", "SingleAnswerActivity");
+        bundle.putString("QRANSWER", Content);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);

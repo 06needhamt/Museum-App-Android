@@ -241,28 +241,28 @@ public class ButtonCreator {
         {
             case 0:
             {
-                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
             }
             case 1:
             {
-                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
             }
             case 2:
             {
-                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
                 StartQRActivity();
                 break;
             }
             case 3:
             {
-                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 populateMapButtons();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(-1);
@@ -272,7 +272,7 @@ public class ButtonCreator {
             }
             case 4:
             {
-                Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;

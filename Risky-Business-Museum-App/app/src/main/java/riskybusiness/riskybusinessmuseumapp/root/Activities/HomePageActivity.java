@@ -106,7 +106,7 @@ public class HomePageActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
 
-        Toast.makeText(getBaseContext(),"In Return function",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(),"In Return function",Toast.LENGTH_SHORT).show();
 
         Bundle tempBundle = data.getExtras();
         String from = tempBundle.getString("FROM", "");
@@ -128,11 +128,11 @@ public class HomePageActivity extends FragmentActivity {
 
                 Content = b.getString("Content", "No Value");
                 Content = Content.substring(9, Content.length());
-                Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
                 Format = b.getString("Format", "No Format");
                 //
                 Format = Format.substring(7, Format.length());
-                Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
                 // data.getStringArrayExtra("content");
 
             }
@@ -142,9 +142,12 @@ public class HomePageActivity extends FragmentActivity {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
                 score += b.getInt("Score", -1);
+
+
+                qm.nextQuestion();
             }
               Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
-            qm.nextQuestion();
+    //            qm.nextQuestion();
         }
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
 //            if(resultCode == RESULT_OK){

@@ -61,6 +61,8 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcB.setText(list.get(1));
         btnMcC.setText(list.get(2));
         btnMcD.setText(list.get(3));
+        multiChoiceQuestion.setText(question);
+
     }
     private void applyAnswers(String temp){
         answers = Arrays.asList(temp.split("\\s*,\\s*"));
