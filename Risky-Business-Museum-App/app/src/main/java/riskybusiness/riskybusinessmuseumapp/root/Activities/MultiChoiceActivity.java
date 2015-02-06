@@ -13,6 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 import riskybusiness.riskybusinessmuseumapp.R;
 
 
@@ -23,6 +27,9 @@ public class MultiChoiceActivity extends ActionBarActivity {
     private TextView multiChoiceQuestion;
     private final int MAX_SCORE = 10;
     private int score;
+    private String question;
+    private List<String> answers;
+    private String correctAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,23 @@ public class MultiChoiceActivity extends ActionBarActivity {
         screenWidth = metrics.widthPixels;
 
         createLayoutParams(screenHeight, screenWidth);
+
+        Bundle bundle = getIntent().getExtras();
+        question = bundle.getString("QUESTION");
+        String temp = bundle.getString("ANSWER");
+        applyAnswers(temp);
+        correctAnswer = answers.get(0);
+        populateButtons(answers);
+    }
+
+    private void populateButtons(List<String> list){
+        btnMcA.setText(list.get(0));
+        btnMcB.setText(list.get(1));
+        btnMcC.setText(list.get(2));
+        btnMcD.setText(list.get(3));
+    }
+    private void applyAnswers(String temp){
+        answers = Arrays.asList(temp.split("\\s*,\\s*"));
     }
 
     private void setButtonListeners(){

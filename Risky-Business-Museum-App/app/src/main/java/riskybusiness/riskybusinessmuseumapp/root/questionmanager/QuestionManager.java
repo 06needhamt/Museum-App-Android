@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import java.util.LinkedList;
 
+import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 
 import static java.lang.Integer.parseInt;
@@ -21,10 +22,12 @@ public class QuestionManager {
     int answerNum = 0;
     boolean trailEnded = false; // Trail has not ended
     MultiChoiceActivity mc;
+    HomePageActivity hm;
 
     // Construct question manager passing it the value received from the QR code
-    public QuestionManager(int qrCode, MultiChoiceActivity mc) {
-        this.mc = mc;
+    public QuestionManager(HomePageActivity hm) {
+        //this.mc = mc;
+        this.hm = hm;
 
         /**
         // Next we would query the database to identify what trail(s) that code belongs to
@@ -50,10 +53,12 @@ public class QuestionManager {
             switch (question.questionType) {
                 case 0: // normal question
                     //answerNum = ...; // Open intent and Get the answer
+                    hm.callSingleAnswerActivity(question.question, question.answer);
                     break;
                 case 1: // Multi choice question
                     //answerNum = ...; // Open intent and Get the answer
                     // call intent passing question
+                    hm.callMultiChoiceActivity(question.question, question.answer);
                     break;
                 case 2: // Picture question
                     //answerNum = ...; // Open intent and Get the answer
@@ -64,11 +69,11 @@ public class QuestionManager {
             }
 
 
-            if (answerNum == parseInt(question.answer) || answerNum == 0) { // Correct answer supplied
-
-            } else { // Incorrect answer given
-
-            }
+//            if (answerNum == parseInt(question.answer) || answerNum == 0) { // Correct answer supplied
+//
+//            } else { // Incorrect answer given
+//
+//            }
 
             questionNum++; // increment question number
 

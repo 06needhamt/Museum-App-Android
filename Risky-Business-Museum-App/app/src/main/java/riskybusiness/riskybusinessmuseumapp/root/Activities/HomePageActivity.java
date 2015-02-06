@@ -49,6 +49,7 @@ public class HomePageActivity extends FragmentActivity {
         //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
         AddFragment();
+        score = 0;
 
     }
 
@@ -113,7 +114,7 @@ public class HomePageActivity extends FragmentActivity {
 
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                score = b.getInt("Score", -1);
+                score += b.getInt("Score", -1);
             }
 
             Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
@@ -134,13 +135,13 @@ public class HomePageActivity extends FragmentActivity {
             }
 
         }
-//        else if(data.getClass().getSimpleName().equals(ImageQuestionActivity.class)) {
-//            if(resultCode == RESULT_OK){
-//                Bundle b = data.getExtras();
-//                score = b.getInt("Score", -1);
-//            }
-//              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
-//        }
+        else if(from.equals("SingleAnswerActivity")) {
+            if(resultCode == RESULT_OK){
+                Bundle b = data.getExtras();
+                score += b.getInt("Score", -1);
+            }
+              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+        }
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
 //            if(resultCode == RESULT_OK){
 //                Bundle b = data.getExtras();
@@ -161,22 +162,35 @@ public class HomePageActivity extends FragmentActivity {
         startActivityForResult(i,0,null);
     }
 
-    public void callMultiChoiceActivity(){
+    public void callMultiChoiceActivity(String question, String answer){
         Intent i = new Intent(getBaseContext(), MultiChoiceActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        i.putExtras(bundle);
+        setIntent(i);
         startActivityForResult(i, 0, null);
     }
 
-//    public void callSingleAnswerActivity(){
-//        Intent i = new Intent(getBaseContext(), SingleAnswerActivity.class);
-//
-//        startActivityForResult(i, 0, null);
-//    }
+    public void callSingleAnswerActivity(String question, String answer){
+        Intent i = new Intent(getBaseContext(), SingleAnswerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivityForResult(i, 0, null);
+    }
 
 //    public void callImagequestionActivity(){
 //        Intent i = new Intent(getBaseContext(), ImageQuestionActivity.class);
 //
 //        startActivityForResult(i, 0, null);
 //    }
+
+    public void callQuestionManager(){
+        QuestionManager qm = new QuestionManager(this);
+    }
 
 
 

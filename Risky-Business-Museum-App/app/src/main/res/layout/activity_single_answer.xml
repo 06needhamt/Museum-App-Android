@@ -10,22 +10,24 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:textSize="30sp"
+            android:text="The Oba used this to make contact with the spirits of his ancestors"
             android:id="@+id/SingleAnswerQuestion"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            android:gravity="center_horizontal"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/SingleAnswerQRButton"
             android:layout_gravity="center_horizontal|top"
             android:clickable="true"
             android:baselineAlignBottom="false"
-            android:src="@drawable/blue__icon_qr" />
+            android:background="@drawable/blue__icon_qr" />
     </FrameLayout>
 </RelativeLayout>
