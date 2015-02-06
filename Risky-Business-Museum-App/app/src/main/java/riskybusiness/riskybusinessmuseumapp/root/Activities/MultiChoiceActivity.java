@@ -1,6 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -49,6 +50,8 @@ public class MultiChoiceActivity extends ActionBarActivity {
         question = bundle.getString("QUESTION");
         String temp = bundle.getString("ANSWER");
         applyAnswers(temp);
+
+        // Need to put code to randomise answers here
         correctAnswer = answers.get(0);
         populateButtons(answers);
     }
@@ -69,9 +72,13 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show();
-                score = 10;
-                passData();
+                Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show(); //////////////delete
+                if(checkAnswer(btnMcA)) {
+                    passData(); // Correct answer
+                }
+                else {
+                    numGuesses(); // Incorrect answer
+                }
             }
         });
 
@@ -80,7 +87,13 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();//////////////////
+                if(checkAnswer(btnMcB)) {
+                    passData(); // Correct answer
+                }
+                else {
+                    numGuesses(); // Incorrect answer
+                }
             }
         });
 
@@ -89,7 +102,13 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();///////////////
+                if(checkAnswer(btnMcC)) {
+                    passData(); // Correct answer
+                }
+                else {
+                    numGuesses(); // Incorrect answer
+                }
             }
         });
 
@@ -98,10 +117,53 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();//////////////
+                if(checkAnswer(btnMcD)) {
+                    passData(); // Correct answer
+                }
+                else {
+                    numGuesses(); // Incorrect answer
+                }
             }
         });
     }
+
+    private boolean checkAnswer(Button btn) {
+        // Hightlite button to indicate used
+
+        String answer = (String)btn.getText(); // Get button text
+
+        if(answer.equals(correctAnswer)) {
+            btn.setBackgroundColor(getResources().getColor(R.color.Green));
+            Toast.makeText(getBaseContext(), "Correct!", Toast.LENGTH_LONG).show();
+
+        }
+        else {
+            btn.setBackgroundColor(getResources().getColor(R.color.Red));
+            Toast.makeText(getBaseContext(), "Wrong answer " + score / 5 + " Guesses Left", Toast.LENGTH_LONG).show();
+         }
+
+        CountDownTimer timer = new CountDownTimer(5000, 1) { // Pause the thread
+            @Override
+            public void onTick(long millisUntilFinished) { }
+
+            @Override
+            public void onFinish() {
+               int x = 0; // just something to give the timer to do!
+            }
+        }.start();
+
+        return answer.equals(correctAnswer) ? true : false;
+    }
+
+    private void numGuesses() { // Check the guesses state and adjust score
+        score -= 5; // Reduce the score
+        if(score <= 0) { // Check if any guesses left
+            passData(); // no guesses exit activity returning data
+        }
+    }
+
+
     private void createLayoutParams(int screenHeight, int screenWidth){
         btnMcA.setLayoutParams(btnMcALayout(screenHeight,screenWidth));
         btnMcB.setLayoutParams(btnMcBLayout(screenHeight, screenWidth));

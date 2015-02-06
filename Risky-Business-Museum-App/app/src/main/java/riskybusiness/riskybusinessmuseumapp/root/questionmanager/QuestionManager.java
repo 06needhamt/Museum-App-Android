@@ -30,68 +30,64 @@ public class QuestionManager {
         this.hm = hm;
 
         /**
-        // Next we would query the database to identify what trail(s) that code belongs to
-        // Output to the screen the available trails and let the user select the required one
-        // Then retrieve the selected trail questions from the database
-        // and start the trail
-        */
-
-
+         // Next we would query the database to identify what trail(s) that code belongs to
+         // Output to the screen the available trails and let the user select the required one
+         // Then retrieve the selected trail questions from the database
+         // and start the trail
+         */
         qs = new PopulateQuestions(); // Populate simulated trail
         steps = qs.questionList;      // get the questions list
+        questionNum = 0;              // Set the question counter
+        trailEnded = false;           // The trail has not ended
+    }
 
-        do {
+    /**
+     * nextQuestion
+     * @return TRUE trail has ended, FALSE trail not ended
+     * Runs the next question activity according to the question type
+     */
+    public boolean nextQuestion() { // Gets the next/first question from the list
+        // Starting from the current question
+        // According to the question type, display the required intent passing it the question details
 
-            // Starting from the first question
-            // According to the question type, display the required intent passing it the question details
+        if (trailEnded) { // Trail has already ended - ensure we don't outrun the array
+            return true;
+        }
 
-            question = steps.get(questionNum); // copy the current question into question
+        question = steps.get(questionNum); // copy the current question
 
-            // Open the intent and get the answer - in the case of multi choice the intent should
-            // reutrn 0 = correct answer, -1 wrong answer
+        // Open the intent and get the answer - in the case of multi choice the intent should
+        // reutrn 0 = correct answer, -1 wrong answer
 
-            switch (question.questionType) {
-                case 0: // normal question
-                    //answerNum = ...; // Open intent and Get the answer
-                    hm.callSingleAnswerActivity(question.question, question.answer);
-                    break;
-                case 1: // Multi choice question
-                    //answerNum = ...; // Open intent and Get the answer
-                    // call intent passing question
-                    hm.callMultiChoiceActivity(question.question, question.answer);
-                    break;
-                case 2: // Picture question
-                    //answerNum = ...; // Open intent and Get the answer
-                    break;
-                default:
-                    // Oh crap - error!
-                    break;
-            }
+        switch (question.questionType) {
+            case 0: // normal question
+                //answerNum = ...; // Open intent and Get the answer
+                hm.callSingleAnswerActivity(question.question, question.answer);
+                break;
+            case 1: // Multi choice question
+                //answerNum = ...; // Open intent and Get the answer
+                // call intent passing question
+                hm.callMultiChoiceActivity(question.question, question.answer);
+                break;
+            case 2: // Picture question
+                //answerNum = ...; // Open intent and Get the answer
+                break;
+            default:
+                // Oh crap - error!
+                break;
+        }
 
+        questionNum++; // increment question number
 
-//            if (answerNum == parseInt(question.answer) || answerNum == 0) { // Correct answer supplied
-//
-//            } else { // Incorrect answer given
-//
-//            }
+        if (questionNum >= steps.size()) { // Trail ended
+            trailEnded = true;
+        }
 
-            questionNum++; // increment question number
-
-            if (questionNum >= steps.size()) { // Trail ended
-                trailEnded = true;
-            }
-
-
-        } while(!trailEnded);
-
-        // Trail ended, give scores and further options to the user
-
+        return trailEnded;
     }
 
     public int receiveData(int score){
         return score;
     }
-
-
 
 }
