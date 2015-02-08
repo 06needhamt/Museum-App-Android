@@ -1,6 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -38,10 +39,16 @@ public class MainActivity extends ActionBarActivity {
         }
 
         System.out.println("Are we here yet?");
-        //database = SQLiteDatabase.create(null);
+        database = SQLiteDatabase.openDatabase(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath(),null,0);
 
         if(database != null) {
             Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
+            database.beginTransaction();
+            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
+            if(c != null)
+            {
+                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
+            }
             return;
         }
     }
