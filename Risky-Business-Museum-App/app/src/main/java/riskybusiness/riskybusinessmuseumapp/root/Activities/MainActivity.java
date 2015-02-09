@@ -43,12 +43,13 @@ public class MainActivity extends ActionBarActivity {
 
         if(database != null) {
             Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
-            database.beginTransaction();
-            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
-            if(c != null)
-            {
-                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
-            }
+            System.out.println(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath());
+//            database.beginTransaction();
+//            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
+//            if(c != null)
+//            {
+//                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
+//            }
             return;
         }
     }
