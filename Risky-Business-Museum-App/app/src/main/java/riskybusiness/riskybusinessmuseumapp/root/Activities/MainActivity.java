@@ -44,12 +44,19 @@ public class MainActivity extends ActionBarActivity {
         if(database != null) {
             Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
             System.out.println(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath());
-//            database.beginTransaction();
-//            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
-//            if(c != null)
-//            {
-//                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
-//            }
+            database.beginTransaction();
+            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
+            if(c != null)
+            {
+                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
+                c.moveToFirst();
+                while (!c.isLast())
+                {
+                    c.moveToNext();
+                    Toast.makeText(getBaseContext(),(CharSequence)c.getString(0),Toast.LENGTH_SHORT).show();
+                }
+            }
+            database.endTransaction();
             return;
         }
     }
@@ -88,6 +95,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-
+        super.onActivityResult(requestCode,resultCode,data);
     }
 }
