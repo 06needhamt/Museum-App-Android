@@ -15,6 +15,7 @@ import java.io.IOException;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
+import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
 import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
 
 
@@ -41,24 +42,24 @@ public class MainActivity extends ActionBarActivity {
         System.out.println("Are we here yet?");
         database = SQLiteDatabase.openDatabase(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath(),null,0);
 
-        if(database != null) {
-            Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
-            System.out.println(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath());
-            database.beginTransaction();
-            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
-            if(c != null)
-            {
-                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
-                c.moveToFirst();
-                while (!c.isLast())
-                {
-                    c.moveToNext();
-                    Toast.makeText(getBaseContext(),(CharSequence)c.getString(0),Toast.LENGTH_SHORT).show();
-                }
-            }
-            database.endTransaction();
-            return;
-        }
+//        if(database != null) {
+//            Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
+//            System.out.println(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath());
+//            database.beginTransaction();
+//            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
+//            if(c != null)
+//            {
+//                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
+//                c.moveToFirst();
+//                while (!c.isLast())
+//                {
+//                    c.moveToNext();
+//                    Toast.makeText(getBaseContext(),(CharSequence)c.getString(0),Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            database.endTransaction();
+//            return;
+//        }
     }
 
 
@@ -88,7 +89,8 @@ public class MainActivity extends ActionBarActivity {
     public void LoadMainPage(View v)
     {
         Intent i = new Intent(getBaseContext(),HomePageActivity.class);
-//        Intent i = new Intent(getBaseContext(),MultiChoiceActivity.class);
+        //Intent i = new Intent(getBaseContext(),MultiChoiceActivity.class);
+        //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
         startActivity(i);
         //finish();
     }

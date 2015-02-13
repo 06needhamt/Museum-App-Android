@@ -43,6 +43,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity" />
         </activity>
+        <activity
+            android:name=".root.Activities.MultiTouchActivity"
+            android:label="MultiTouchActivity">
+        </activity>
     </application>
 
 </manifest>
