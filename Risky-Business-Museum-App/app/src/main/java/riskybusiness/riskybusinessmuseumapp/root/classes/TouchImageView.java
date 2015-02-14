@@ -46,6 +46,10 @@ public class TouchImageView extends ImageView {
 
     Context context;
 
+    private int OLD_ID;
+    private float OLD_ZOOM;
+    private int NEW_ID;
+    private float NEW_ZOOM;
     public TouchImageView(Context context) {
         super(context);
         sharedConstructing(context);
@@ -55,6 +59,17 @@ public class TouchImageView extends ImageView {
         super(context, attrs);
         sharedConstructing(context);
     }
+
+//    public TouchImageView(Context context, int OLD_ID, float OLD_ZOOM, int NEW_ID, float NEW_ZOOM)
+//    {
+//        super(context);
+//        this.OLD_ID = OLD_ID;
+//        this.OLD_ZOOM = OLD_ZOOM;
+//        this.NEW_ID = NEW_ID;
+//        this.NEW_ZOOM = NEW_ZOOM;
+//        this.setImageResource(OLD_ID);
+//        this.setMaxZoom(OLD_ZOOM);
+//    }
     
     private void sharedConstructing(Context context) {
         super.setClickable(true);
@@ -74,7 +89,8 @@ public class TouchImageView extends ImageView {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                     last.set(curr);
+                        ChangeImage(NEW_ID,NEW_ZOOM);
+                        last.set(curr);
                         start.set(last);
                         mode = DRAG;
                         break;
@@ -92,6 +108,7 @@ public class TouchImageView extends ImageView {
                         break;
 
                     case MotionEvent.ACTION_UP:
+                        ChangeImage(OLD_ID,OLD_ZOOM);
                         mode = NONE;
                         int xDiff = (int) Math.abs(curr.x - start.x);
                         int yDiff = (int) Math.abs(curr.y - start.y);
@@ -106,10 +123,17 @@ public class TouchImageView extends ImageView {
                 
                 setImageMatrix(matrix);
                 invalidate();
+                setScaleX(1.0f);
+                setScaleY(1.0f);
                 return true; // indicate event was handled
             }
 
         });
+    }
+
+    private void ChangeImage(int id, float zoom) {
+        this.setImageResource(id);
+        this.setMaxZoom(zoom);
     }
 
     public void setMaxZoom(float x) {
@@ -228,5 +252,13 @@ public class TouchImageView extends ImageView {
             setImageMatrix(matrix);
         }
         fixTrans();
+    }
+
+    public void passImageData(int oldid, float oldzoom, int newid, float newzoom)
+    {
+        this.OLD_ID = oldid;
+        this.OLD_ZOOM = oldzoom;
+        this.NEW_ID = newid;
+        this.NEW_ZOOM = newzoom;
     }
 }

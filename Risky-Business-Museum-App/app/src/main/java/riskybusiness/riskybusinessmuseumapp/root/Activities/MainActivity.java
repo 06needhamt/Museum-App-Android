@@ -88,9 +88,9 @@ public class MainActivity extends ActionBarActivity {
 
     public void LoadMainPage(View v)
     {
-        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
         //Intent i = new Intent(getBaseContext(),MultiChoiceActivity.class);
-        //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
+        Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
         startActivity(i);
         //finish();
     }

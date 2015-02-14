@@ -13,11 +13,10 @@ public class MultiTouchActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-
         TouchImageView img = new TouchImageView(this);
+        img.passImageData(R.drawable.ice_age_2,4.0f,R.drawable.google_maps_hello_world,4.0f);
         img.setImageResource(R.drawable.ice_age_2);
-        img.setMaxZoom(4f);
-
+        img.setMaxZoom(4.0f);
         setContentView(img);
     }
 
