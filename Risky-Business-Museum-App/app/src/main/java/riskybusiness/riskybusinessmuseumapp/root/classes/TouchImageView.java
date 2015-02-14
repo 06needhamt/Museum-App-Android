@@ -108,7 +108,7 @@ public class TouchImageView extends ImageView {
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        ChangeImage(OLD_ID,OLD_ZOOM);
+                        //ChangeImage(OLD_ID,OLD_ZOOM);
                         mode = NONE;
                         int xDiff = (int) Math.abs(curr.x - start.x);
                         int yDiff = (int) Math.abs(curr.y - start.y);
@@ -212,7 +212,7 @@ public class TouchImageView extends ImageView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-        
+
         //
         // Rescales image on rotation
         //
@@ -231,7 +231,7 @@ public class TouchImageView extends ImageView {
                 return;
             int bmWidth = drawable.getIntrinsicWidth();
             int bmHeight = drawable.getIntrinsicHeight();
-            
+
             Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
 
             float scaleX = (float) viewWidth / (float) bmWidth;
@@ -261,4 +261,12 @@ public class TouchImageView extends ImageView {
         this.NEW_ID = newid;
         this.NEW_ZOOM = newzoom;
     }
+    public void resetImage()
+    {
+        this.setImageResource(OLD_ID);
+        this.setMaxZoom(OLD_ZOOM);
+        this.setScaleX(1.0f);
+        this.setScaleY(1.0f);
+    }
+
 }
