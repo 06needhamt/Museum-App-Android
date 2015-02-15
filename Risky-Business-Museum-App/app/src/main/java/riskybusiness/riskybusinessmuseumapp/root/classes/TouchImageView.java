@@ -26,6 +26,7 @@ public class TouchImageView extends ImageView {
     static final int DRAG = 1;
     static final int ZOOM = 2;
     int mode = NONE;
+    PointF curr;
 
     // Remember some things for zooming
     PointF last = new PointF();
@@ -85,7 +86,7 @@ public class TouchImageView extends ImageView {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mScaleDetector.onTouchEvent(event);
-                PointF curr = new PointF(event.getX(), event.getY());
+                curr = new PointF(event.getX(), event.getY());
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -254,19 +255,22 @@ public class TouchImageView extends ImageView {
         fixTrans();
     }
 
-    public void passImageData(int oldid, float oldzoom, int newid, float newzoom)
+    public void passImageData(int oldid, float oldzoom, int newid, float newzoom) // pass image ids and zoom levels
     {
         this.OLD_ID = oldid;
         this.OLD_ZOOM = oldzoom;
         this.NEW_ID = newid;
         this.NEW_ZOOM = newzoom;
     }
-    public void resetImage()
+    public void resetImage() // attempt to fix image scaling on reset not working yet
     {
         this.setImageResource(OLD_ID);
         this.setMaxZoom(OLD_ZOOM);
-        this.setScaleX(1.0f);
-        this.setScaleY(1.0f);
+//        this.setScaleX(minScale);
+//        this.setScaleY(minScale);
+//        matrix.setScale(minScale,minScale);
+//        this.setImageMatrix(matrix);
+//        curr.set(start);
     }
 
 }
