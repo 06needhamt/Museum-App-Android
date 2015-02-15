@@ -266,10 +266,10 @@ public class TouchImageView extends ImageView {
     {
         this.setImageResource(OLD_ID);
         this.setMaxZoom(OLD_ZOOM);
-//        this.setScaleX(minScale);
-//        this.setScaleY(minScale);
-//        matrix.setScale(minScale,minScale);
-//        this.setImageMatrix(matrix);
+        this.setScaleX(minScale);
+        this.setScaleY(minScale);
+        matrix.setScale(minScale,minScale);
+        this.setImageMatrix(matrix);
 //        curr.set(start);
     }
 
