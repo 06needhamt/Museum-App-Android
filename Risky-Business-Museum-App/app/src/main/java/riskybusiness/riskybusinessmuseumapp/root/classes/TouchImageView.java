@@ -2,6 +2,7 @@
  * TouchImageView.java
  * By: Rathod
  * Multi touch pinch zoom & panning Image view
+ * From http://www.c-sharpcorner.com/UploadFile/88b6e5/multi-touch-panning-pinch-zoom-image-view-in-android-using/
  */
 
 package riskybusiness.riskybusinessmuseumapp.root.classes;
@@ -31,8 +32,12 @@ public class TouchImageView extends ImageView {
     // Remember some things for zooming
     PointF last = new PointF();
     PointF start = new PointF();
+    private int OLD_ID;
+    private float OLD_ZOOM;
+    private int NEW_ID;
+    private float NEW_ZOOM;
     float minScale = 1f;
-    float maxScale = 3f;
+    float maxScale = OLD_ZOOM;
     float[] m;
 
 
@@ -44,13 +49,11 @@ public class TouchImageView extends ImageView {
 
 
     ScaleGestureDetector mScaleDetector;
+    float mScaleFactor;
 
     Context context;
 
-    private int OLD_ID;
-    private float OLD_ZOOM;
-    private int NEW_ID;
-    private float NEW_ZOOM;
+
     public TouchImageView(Context context) {
         super(context);
         sharedConstructing(context);
@@ -135,6 +138,8 @@ public class TouchImageView extends ImageView {
     private void ChangeImage(int id, float zoom) {
         this.setImageResource(id);
         this.setMaxZoom(zoom);
+        this.NEW_ZOOM = zoom;
+        this.maxScale = NEW_ZOOM;
     }
 
     public void setMaxZoom(float x) {
@@ -150,7 +155,7 @@ public class TouchImageView extends ImageView {
 
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            float mScaleFactor = detector.getScaleFactor();
+             mScaleFactor = detector.getScaleFactor();
             float origScale = saveScale;
             saveScale *= mScaleFactor;
             if (saveScale > maxScale) {
@@ -266,11 +271,13 @@ public class TouchImageView extends ImageView {
     {
         this.setImageResource(OLD_ID);
         this.setMaxZoom(OLD_ZOOM);
-        this.setScaleX(minScale);
-        this.setScaleY(minScale);
-        matrix.setScale(minScale,minScale);
+        this.maxScale = OLD_ZOOM;
+        mScaleFactor = mScaleDetector.getScaleFactor();
+        float oldscale = (1 / mScaleFactor);
+        this.setScaleX(oldscale);
+        this.setScaleY(oldscale);
+        matrix.setScale(this.getScaleX(),this.getScaleY());
         this.setImageMatrix(matrix);
-//        curr.set(start);
     }
 
 }
