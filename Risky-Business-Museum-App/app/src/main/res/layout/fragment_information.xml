@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.InformationFragment"
+    android:background="@drawable/royal_blue_ipad_wallpaper">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose a help category:"
+        android:textSize="20sp"
+        android:id="@+id/HelpCategory"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="App Info"
+        android:id="@+id/AppInfoButton"
+        android:layout_gravity="center_horizontal|top"
+        android:nestedScrollingEnabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Museum Info"
+        android:id="@+id/MuseumInfoButton"
+        android:layout_gravity="center_horizontal|top"
+        android:nestedScrollingEnabled="false" />
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/webViewInfo"
+        android:layout_gravity="center_horizontal|top"
+        android:visibility="invisible"
+        android:background="@color/Transparent" />
+</FrameLayout>

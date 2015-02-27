@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.text.Format;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 
 public class SingleAnswerActivity extends ActionBarActivity {
 
@@ -24,7 +25,7 @@ public class SingleAnswerActivity extends ActionBarActivity {
     private int screenHeight, screenWidth;
     private ImageButton SingleAnswerQRButton;
     private TextView SingleAnswerQuestion;
-    private String Content;
+    private String ValidatedContent;
     private String Format;
 
     private String CorrectAnswer;
@@ -91,7 +92,7 @@ public class SingleAnswerActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_single_answer, menu);
+        //getMenuInflater().inflate(R.menu.menu_single_answer, menu);
         return true;
     }
 
@@ -110,6 +111,7 @@ public class SingleAnswerActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         Bundle tempBundle = data.getExtras();
@@ -117,52 +119,65 @@ public class SingleAnswerActivity extends ActionBarActivity {
         if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
-
-                Content = b.getString("Content", "No Value");
-                if(Content.equals("No Value"))
+                QRResultHandler qrrh = new QRResultHandler(b.getString("Content", "No Value"));
+                ValidatedContent = qrrh.getResult();
+                if(ValidatedContent.equals("No Content"))
                 {
-                    Toast.makeText(getBaseContext(),"Returned with no value",Toast.LENGTH_LONG);
-
+                    Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show();
+                    return;
+                } else if(ValidatedContent.equals("No Identifier"))
+                {
+                    Toast.makeText(getBaseContext(),"This is not one of our QR-codes!",Toast.LENGTH_LONG).show();
                     return;
                 }
+                if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
+                    passData();
+                }
+                else
+                {
+                    score -= 5;
+                    //You've done it wrong pop-up
+                    //CallQRScannerActivity();
+                    Toast.makeText(getBaseContext(), "Wrong answer.", Toast.LENGTH_SHORT).show();
+                }
+
                 // Logic for qr codes from either other exibits or not containing our identifier
 //                else if()
 //                {
 //
 //                }
-                Content = Content.substring(9, Content.length());
+                //Content = Content.substring(9, Content.length());
                 //Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
-                Format = b.getString("Format", "No Format");
-                Format = Format.substring(7, Format.length());
+                //Format = b.getString("Format", "No Format");
+                //Format = Format.substring(7, Format.length());
                 //Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
                 // data.getStringArrayExtra("content");
-
-
-                if(Content.equals(CorrectAnswer) || score <= 0){
-                    passData();
-                }
-                else {
-                    score -= 5;
-                    //You've done it wrong pop-up
-                    //CallQRScannerActivity();
-                    Toast.makeText(getBaseContext(), (CharSequence) "Wrong answer.", Toast.LENGTH_SHORT).show();
-                }
             }
         }
     }
 
+    /**
+     * This method is a call-bridge used by the @link QuestionManager class as you can not start activities that return a value from inside an intent.
+     * This is because an onActivityResult() method is required in order to return a value from one intent into another.
+     * This method may only be implemented in a class that extends @link Activity or one of its subclasses.
+     */
     public void CallQRScannerActivity()
     {
         Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
         startActivityForResult(i, 0, null);
     }
 
+    /**
+     * This method returns a bundle containing all the relevant data to the intent calling it via a
+     * call-bridge @link CallQRScannerActivity() the use of @link startActivityForResult()
+     * @return Bundle containing all relevant data
+     */
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
         bundle.putInt("Score", score);
         bundle.putString("FROM", "SingleAnswerActivity");
-        bundle.putString("QRANSWER", Content);
+        bundle.putString("QRANSWER", ValidatedContent);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);

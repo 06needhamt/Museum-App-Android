@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.InformationFragment;
 
 
 /**
@@ -32,6 +33,7 @@ public class ButtonCreator {
     Field[] fields;
     Fragment[] Trailfragments;
     Fragment[] Mapfragments;
+    Fragment[] BottomFragments;
     TableRow tableRowTop;
 
     Button[] Topbuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -49,7 +51,7 @@ public class ButtonCreator {
     final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments)
     {
         this.act = A;
         this.toptableid = toptable;
@@ -57,6 +59,7 @@ public class ButtonCreator {
         this.fields = fields;
         this.Trailfragments = Trailfragments;
         this.Mapfragments = Mapfragments;
+        this.BottomFragments = BottomFragments;
     }
 
     //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -223,6 +226,7 @@ public class ButtonCreator {
 
         //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
+        resetButtonBackgroundBottom(-1);
         act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
 
     }
@@ -275,6 +279,8 @@ public class ButtonCreator {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
+                act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
+
                 break;
             }
         }

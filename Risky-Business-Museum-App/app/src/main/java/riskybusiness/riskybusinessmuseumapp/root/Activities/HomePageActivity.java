@@ -18,6 +18,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.FifthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ForthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.GroundFloorFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.InformationFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.SecondFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ThirdFloorFragment;
@@ -31,6 +32,7 @@ public class HomePageActivity extends FragmentActivity {
     int bottomtable;
     Fragment[] fragments;
     Fragment[] Mapfragments;
+    Fragment[] BottomFragments;
     String Content;
     String Format;
     int score;
@@ -44,7 +46,8 @@ public class HomePageActivity extends FragmentActivity {
         bottomtable = R.id.bottomTableForButtons;
         fragments = CreateFragments();
         Mapfragments = CreateMapFragments();
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments);
+        BottomFragments = CreateBottomFragments();
+        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -75,6 +78,15 @@ public class HomePageActivity extends FragmentActivity {
         return fragments;
     }
 
+    private Fragment[] CreateBottomFragments(){
+        Fragment[] fragments = new Fragment[5];
+        fragments[0] = null;
+        fragments[1] = null;
+        fragments[2] = null;
+        fragments[3] = null;
+        fragments[4] = new InformationFragment();
+        return fragments;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
