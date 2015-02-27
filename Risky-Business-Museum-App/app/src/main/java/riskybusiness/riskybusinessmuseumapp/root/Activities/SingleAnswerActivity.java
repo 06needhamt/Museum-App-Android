@@ -119,6 +119,17 @@ public class SingleAnswerActivity extends ActionBarActivity {
                 Bundle b = data.getExtras();
 
                 Content = b.getString("Content", "No Value");
+                if(Content.equals("No Value"))
+                {
+                    Toast.makeText(getBaseContext(),"Returned with no value",Toast.LENGTH_LONG);
+
+                    return;
+                }
+                // Logic for qr codes from either other exibits or not containing our identifier
+//                else if()
+//                {
+//
+//                }
                 Content = Content.substring(9, Content.length());
                 //Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
                 Format = b.getString("Format", "No Format");
