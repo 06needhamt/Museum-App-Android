@@ -31,5 +31,13 @@
             android:clickable="true"
             android:baselineAlignBottom="false"
             android:background="@drawable/blue__icon_qr" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Next Question"
+            android:id="@+id/btnNextQuestionSA"
+            android:layout_gravity="center_horizontal|top" />
     </FrameLayout>
 </RelativeLayout>

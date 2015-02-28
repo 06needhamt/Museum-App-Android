@@ -54,5 +54,13 @@
             android:text="D"
             android:id="@+id/btnMcD"
             android:layout_gravity="center_horizontal|top" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Next Question"
+            android:id="@+id/btnNextQuestionMC"
+            android:layout_gravity="center_horizontal|top" />
     </FrameLayout>
 </RelativeLayout>

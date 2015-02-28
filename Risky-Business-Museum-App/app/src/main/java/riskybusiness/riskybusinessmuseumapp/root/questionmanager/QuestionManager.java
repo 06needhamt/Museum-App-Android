@@ -1,7 +1,5 @@
 package riskybusiness.riskybusinessmuseumapp.root.questionmanager;
 
-import android.content.Intent;
-
 import java.util.LinkedList;
 
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
@@ -20,7 +18,7 @@ public class QuestionManager {
     PopulateQuestions qs;  // Will hold the trail steps for this trail
     int questionNum = 0; // The number of the current question
     int answerNum = 0;
-    boolean trailEnded = false; // Trail has not ended
+    private boolean trailEnded = false; // Trail has not ended
     MultiChoiceActivity mc;
     HomePageActivity hm;
 
@@ -38,7 +36,7 @@ public class QuestionManager {
         qs = new PopulateQuestions(); // Populate simulated trail
         steps = qs.questionList;      // get the questions list
         questionNum = 0;              // Set the question counter
-        trailEnded = false;           // The trail has not ended
+        setTrailEnded(false);           // The trail has not ended
     }
 
     /**
@@ -50,7 +48,7 @@ public class QuestionManager {
         // Starting from the current question
         // According to the question type, display the required intent passing it the question details
 
-        if (trailEnded) { // Trail has already ended - ensure we don't outrun the array
+        if (isTrailEnded()) { // Trail has already ended - ensure we don't outrun the array
             return true;
         }
 
@@ -80,14 +78,21 @@ public class QuestionManager {
         questionNum++; // increment question number
 
         if (questionNum >= steps.size()) { // Trail ended
-            trailEnded = true;
+            setTrailEnded(true);
         }
 
-        return trailEnded;
+        return isTrailEnded();
     }
 
     public int receiveData(int score){
         return score;
     }
 
+    public boolean isTrailEnded() {
+        return trailEnded;
+    }
+
+    public void setTrailEnded(boolean trailEnded) {
+        this.trailEnded = trailEnded;
+    }
 }

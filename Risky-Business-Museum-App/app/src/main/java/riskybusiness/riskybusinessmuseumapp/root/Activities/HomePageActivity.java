@@ -24,6 +24,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ThirdFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
+import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.questionmanager.*;
 
 public class HomePageActivity extends FragmentActivity {
@@ -122,43 +123,52 @@ public class HomePageActivity extends FragmentActivity {
 
         Bundle tempBundle = data.getExtras();
         String from = tempBundle.getString("FROM", "");
+        boolean exit = false;
 
         if(from.equals("MultiChoiceActivity")) {
 
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                exit = b.getBoolean("EXIT", false);
+                if(exit){
+                    score = 0;
+                    qm.setTrailEnded(true);
+                    qm.nextQuestion();
+                    return;
+                }
                 score += b.getInt("Score", -1);
+                Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+                qm.nextQuestion();
             }
-
-            Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
-            qm.nextQuestion();
-
         }
+
         else if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
 
                 Content = b.getString("Content", "No Value");
-                Content = Content.substring(9, Content.length());
-                //Toast.makeText(getBaseContext(), (CharSequence) Content, Toast.LENGTH_SHORT).show();
-                Format = b.getString("Format", "No Format");
-                //
-                Format = Format.substring(7, Format.length());
-                //Toast.makeText(getBaseContext(), (CharSequence) Format, Toast.LENGTH_SHORT).show();
-                // data.getStringArrayExtra("content");
-
+                QRResultHandler qrh = new QRResultHandler(Content);
+//                if(qrh.getResult().equals(DATABASE EXHIBIT ITEM)){
+//                    Show information on the item the person scanned
+//                    Or ask user if they want to start a trail from this exhibit
+//                }
             }
-
         }
         else if(from.equals("SingleAnswerActivity")) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
                 score += b.getInt("Score", -1);
-
-
+                exit = b.getBoolean("EXIT", false);
+                if(exit){
+                    score = 0;
+                    qm.setTrailEnded(true);
+                    qm.nextQuestion();
+                    return;
+                }
+                Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
                 qm.nextQuestion();
             }
-              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+
     //            qm.nextQuestion();
         }
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
@@ -170,7 +180,7 @@ public class HomePageActivity extends FragmentActivity {
 //        }
         else {
             // Error invalid something or other
-            Toast.makeText(getBaseContext(), "In Else :(", Toast.LENGTH_LONG ).show();
+            //Toast.makeText(getBaseContext(), "In Else :(", Toast.LENGTH_LONG ).show();
         }
 
     }

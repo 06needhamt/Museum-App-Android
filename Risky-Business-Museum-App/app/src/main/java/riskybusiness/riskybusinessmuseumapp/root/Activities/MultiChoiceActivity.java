@@ -1,11 +1,12 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,19 +15,21 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 
 
-public class MultiChoiceActivity extends ActionBarActivity {
+public class MultiChoiceActivity extends FragmentActivity implements IConfirmDialogCompliant {
     private int screenHeight;
     private int screenWidth;
-    private Button btnMcA, btnMcB, btnMcC, btnMcD;
+    private Button btnMcA, btnMcB, btnMcC, btnMcD, btnNextQuestionMC;
     private TextView multiChoiceQuestion;
     private final int MAX_SCORE = 10;
+    private boolean endtrail = false; //set this to true for the trail to end after this question and false for it not to end after this question
     private int score;
     private String question;
     private List<String> answers;
@@ -56,11 +59,26 @@ public class MultiChoiceActivity extends ActionBarActivity {
         populateButtons(answers);
     }
 
+    @Override
+    public boolean onKeyDown(int keycode, KeyEvent event){
+        if(keycode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
+            onBackPressed();
+        }
+        return super.onKeyDown(keycode, event);
+    }
+
+    @Override
+    public void onBackPressed(){
+        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment("Do you want to leave this trail? Your score will be lost and you will return to the main menu.", this);
+        dialog.show(this.getFragmentManager(), null);
+    }
+
     private void populateButtons(List<String> list){
         btnMcA.setText(list.get(0));
         btnMcB.setText(list.get(1));
         btnMcC.setText(list.get(2));
         btnMcD.setText(list.get(3));
+        btnNextQuestionMC.setText("Next Question");
         multiChoiceQuestion.setText(question);
 
     }
@@ -76,10 +94,12 @@ public class MultiChoiceActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show(); //////////////delete
                 if(checkAnswer(btnMcA)) {
-                    passData(); // Correct answer
+                    //passData(); // Correct answer
+                    btnNextQuestionMC.setVisibility(View.VISIBLE);
+                    btnNextQuestionMC.setClickable(true);
                 }
                 else {
-                    numGuesses(); // Incorrect answer
+                    numGuesses(btnMcA); // Incorrect answer
                 }
             }
         });
@@ -91,10 +111,12 @@ public class MultiChoiceActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();//////////////////
                 if(checkAnswer(btnMcB)) {
-                    passData(); // Correct answer
+                    //passData(); // Correct answer
+                    btnNextQuestionMC.setVisibility(View.VISIBLE);
+                    btnNextQuestionMC.setClickable(true);
                 }
                 else {
-                    numGuesses(); // Incorrect answer
+                    numGuesses(btnMcB); // Incorrect answer
                 }
             }
         });
@@ -106,10 +128,12 @@ public class MultiChoiceActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();///////////////
                 if(checkAnswer(btnMcC)) {
-                    passData(); // Correct answer
+                    //passData(); // Correct answer
+                    btnNextQuestionMC.setVisibility(View.VISIBLE);
+                    btnNextQuestionMC.setClickable(true);
                 }
                 else {
-                    numGuesses(); // Incorrect answer
+                    numGuesses(btnMcC); // Incorrect answer
                 }
             }
         });
@@ -121,11 +145,23 @@ public class MultiChoiceActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();//////////////
                 if(checkAnswer(btnMcD)) {
-                    passData(); // Correct answer
+                    //passData(); // Correct answer
+                    btnNextQuestionMC.setVisibility(View.VISIBLE);
+                    btnNextQuestionMC.setClickable(true);
                 }
                 else {
-                    numGuesses(); // Incorrect answer
+                    numGuesses(btnMcD); // Incorrect answer
                 }
+            }
+        });
+
+        btnNextQuestionMC = (Button) findViewById(R.id.btnNextQuestionMC);
+        btnNextQuestionMC.setVisibility(View.INVISIBLE);
+        btnNextQuestionMC.setClickable(false);
+        btnNextQuestionMC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passData();
             }
         });
     }
@@ -145,24 +181,39 @@ public class MultiChoiceActivity extends ActionBarActivity {
             Toast.makeText(getBaseContext(), "Wrong answer " + score / 5 + " Guesses Left", Toast.LENGTH_LONG).show();
          }
 
-        CountDownTimer timer = new CountDownTimer(5000, 1) { // Pause the thread
-            @Override
-            public void onTick(long millisUntilFinished) { }
+//        CountDownTimer timer = new CountDownTimer(5000, 1) { // Pause the thread
+//            @Override
+//            public void onTick(long millisUntilFinished) { int y = 10; while()}
+//
+//            @Override
+//            public void onFinish() {
+//               int x = 0; // just something to give the timer to do!
+//            }
+//        };
+//        timer.start();
 
-            @Override
-            public void onFinish() {
-               int x = 0; // just something to give the timer to do!
-            }
-        }.start();
+
 
         return answer.equals(correctAnswer) ? true : false;
     }
 
-    private void numGuesses() { // Check the guesses state and adjust score
+    private void numGuesses(Button btn) { // Check the guesses state and adjust score
         score -= 5; // Reduce the score
         if(score <= 0) { // Check if any guesses left
-            passData(); // no guesses exit activity returning data
+            // no guesses exit activity returning data
         }
+        //setting the button that has been clicked to unclickable state
+        btn.setClickable(false);
+
+    }
+
+    private void resetButtonsToClickable(){
+        btnMcA.setClickable(true);
+        btnMcB.setClickable(true);
+        btnMcC.setClickable(true);
+        btnMcD.setClickable(true);
+        btnNextQuestionMC.setClickable(false);
+        btnNextQuestionMC.setVisibility(View.INVISIBLE);
     }
 
 
@@ -171,6 +222,7 @@ public class MultiChoiceActivity extends ActionBarActivity {
         btnMcB.setLayoutParams(btnMcBLayout(screenHeight, screenWidth));
         btnMcC.setLayoutParams(btnMcCLayout(screenHeight, screenWidth));
         btnMcD.setLayoutParams(btnMcDLayout(screenHeight, screenWidth));
+        btnNextQuestionMC.setLayoutParams(btnNextQuestionLayout(screenHeight, screenWidth));
         multiChoiceQuestion.setLayoutParams(multiChoiceQuestionLayout(screenHeight, screenWidth));
     }
 
@@ -223,6 +275,17 @@ public class MultiChoiceActivity extends ActionBarActivity {
         return params;
     }
 
+    private FrameLayout.LayoutParams btnNextQuestionLayout(int screenHeight, int screenWidth) {
+        int btnDHeight, btnDWidth;
+        btnDHeight = (int) (screenHeight * 0.10);
+        btnDWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.73); //!!!!
+        return params;
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -250,10 +313,22 @@ public class MultiChoiceActivity extends ActionBarActivity {
         Intent it = getIntent();
         bundle.putInt("Score", score);
         bundle.putString("FROM", "MultiChoiceActivity");
+        bundle.putBoolean("EXIT", endtrail);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
         finish();
         return bundle;
+    }
+
+    @Override
+    public void doYesConfirmClick() {
+        endtrail = true;
+        passData();
+    }
+
+    @Override
+    public void doNoConfirmClick() {
+        //Do nothing
     }
 }

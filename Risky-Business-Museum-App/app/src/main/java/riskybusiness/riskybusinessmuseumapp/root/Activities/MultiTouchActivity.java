@@ -1,7 +1,8 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.os.Bundle;
-import android.app.Activity;
+//import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
@@ -11,7 +12,7 @@ import android.widget.FrameLayout;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
 
-public class MultiTouchActivity extends Activity {
+public class MultiTouchActivity extends FragmentActivity {
 
     FrameLayout fl;
     TouchImageView img;

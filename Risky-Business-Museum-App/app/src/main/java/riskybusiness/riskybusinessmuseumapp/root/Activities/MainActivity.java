@@ -3,7 +3,8 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
 import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
 
     SQLiteDatabase database;
 
@@ -89,7 +90,6 @@ public class MainActivity extends ActionBarActivity {
     public void LoadMainPage(View v)
     {
         Intent i = new Intent(getBaseContext(),HomePageActivity.class);
-        //Intent i = new Intent(getBaseContext(),MultiChoiceActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
         startActivity(i);
         //finish();

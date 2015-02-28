@@ -1,13 +1,16 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,17 +19,21 @@ import android.widget.Toast;
 import java.text.Format;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 
-public class SingleAnswerActivity extends ActionBarActivity {
+public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant{
 
     private final int MAX_SCORE = 10;
     private int score;
     private int screenHeight, screenWidth;
     private ImageButton SingleAnswerQRButton;
+    private Button btnNextQuestionSA;
     private TextView SingleAnswerQuestion;
     private String ValidatedContent;
     private String Format;
+    private boolean endtrail = false;
 
     private String CorrectAnswer;
 
@@ -36,22 +43,41 @@ public class SingleAnswerActivity extends ActionBarActivity {
         setContentView(R.layout.activity_single_answer);
         score = MAX_SCORE;
         SingleAnswerQRButton = (ImageButton) findViewById(R.id.SingleAnswerQRButton);
+        btnNextQuestionSA = (Button) findViewById(R.id.btnNextQuestionSA);
         setButtonListener();
+
+
         SingleAnswerQuestion = (TextView) findViewById(R.id.SingleAnswerQuestion);
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
 
+
         SingleAnswerQRButton.setLayoutParams(QRButtonLayout(screenHeight, screenWidth));
         SingleAnswerQuestion.setLayoutParams(SingleAnswerQuestionLayout(screenHeight, screenWidth));
+        btnNextQuestionSA.setLayoutParams(btnNextQuestionLayout(screenHeight, screenWidth));
+
 
         Bundle bundle = getIntent().getExtras();
         SingleAnswerQuestion.setText(bundle.getString("QUESTION"));
         CorrectAnswer = bundle.getString("ANSWER");
+    }
 
+    @Override
+    public boolean onKeyDown(int keycode, KeyEvent event){
+        if(keycode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
+            onBackPressed();
+        }
+        return super.onKeyDown(keycode, event);
+    }
 
+    @Override
+    public void onBackPressed(){
+        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment("Do you want to leave this trail? Your score will be lost and you will return to the main menu.", this);
+        dialog.show(this.getFragmentManager(), null);
     }
 
     private FrameLayout.LayoutParams SingleAnswerQuestionLayout(int screenHeight, int screenWidth){
@@ -69,9 +95,19 @@ public class SingleAnswerActivity extends ActionBarActivity {
         btnWidth = (int) (screenHeight * 0.2);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnWidth, btnHeight);
-        params.topMargin = (int) (screenHeight * 0.60);
+        params.topMargin = (int) (screenHeight * 0.55);
         params.gravity = Gravity.CENTER_HORIZONTAL;
 
+        return params;
+    }
+
+    private FrameLayout.LayoutParams btnNextQuestionLayout(int screenHeight, int screenWidth) {
+        int btnDHeight, btnDWidth;
+        btnDHeight = (int) (screenHeight * 0.10);
+        btnDWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.78); //!!!!
         return params;
     }
 
@@ -80,13 +116,19 @@ public class SingleAnswerActivity extends ActionBarActivity {
         SingleAnswerQRButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getBaseContext(), "QR Button clicked", Toast.LENGTH_LONG).show();
-                //Start scanning QR code
-                //if it is the right answer: score = 10;
                 CallQRScannerActivity();
-                //passData();
             }
         }));
+
+        btnNextQuestionSA.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passData();
+            }
+        }));
+
+        btnNextQuestionSA.setClickable(false);
+        btnNextQuestionSA.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -131,7 +173,11 @@ public class SingleAnswerActivity extends ActionBarActivity {
                     return;
                 }
                 if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
-                    passData();
+                    //making next question button visible and clickable, disabling QR scanner button and making it green
+                    SingleAnswerQRButton.setClickable(false);
+                    SingleAnswerQRButton.setBackgroundResource(R.drawable.green__icon_qr);
+                    btnNextQuestionSA.setClickable(true);
+                    btnNextQuestionSA.setVisibility(View.VISIBLE);
                 }
                 else
                 {
@@ -178,10 +224,22 @@ public class SingleAnswerActivity extends ActionBarActivity {
         bundle.putInt("Score", score);
         bundle.putString("FROM", "SingleAnswerActivity");
         bundle.putString("QRANSWER", ValidatedContent);
+        bundle.putBoolean("EXIT",endtrail);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
         finish();
         return bundle;
+    }
+
+    @Override
+    public void doYesConfirmClick() {
+        endtrail = true;
+        passData();
+    }
+
+    @Override
+    public void doNoConfirmClick() {
+        //Do nothing
     }
 }
