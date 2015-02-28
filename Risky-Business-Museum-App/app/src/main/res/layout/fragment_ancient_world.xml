@@ -17,7 +17,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="Welcome to The Ancient World Trail!"
+        android:text="Welcome to the 'Ancient World' trail."
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
         android:textSize="24dp"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore ancient Egypt, Greece, Rome and England On the Third Floor!"
+        android:text="You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of the past millennia. You may find this exhibit on the third floor."
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"

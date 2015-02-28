@@ -44,21 +44,34 @@ public class InformationFragment extends Fragment {
         browser = (WebView) (view.findViewById(R.id.webViewInfo));
         setUpWebView(browser);
         CreateLayoutParams(height,width,view);
-
-
         return view;
     }
 
+    /**
+     * Loading the embedded HTML page containing museum information
+     * @param v View used by the intent (currently unused)
+     */
     public void loadMuseumInfoPage(View v){
         browser.setVisibility(View.VISIBLE);
         browser.loadUrl("http://google.co.uk");
     }
 
+    /**
+     * Loading the embedded HTML page containing app information
+     * @param v View used by the intent (currently unused)
+     */
     public void loadAppInfoPage(View v){
         browser.setVisibility(View.VISIBLE);
         browser.loadUrl("http://google.co.uk");
     }
 
+    /**
+     * Method to give the single fragments used on the intent their location. This is
+     * dynamically sized depending on screen resolution of the device.
+     * @param height Integer representing height of the devices screen in pixels
+     * @param width Integer representing the width of the devices screen in pixels
+     * @param view View used by the intent
+     */
     private void CreateLayoutParams(int height, int width, View view){
         //Creating all relevant layout parameters
         TextView HelperField = (TextView) (view.findViewById(R.id.HelpCategory));
@@ -73,6 +86,7 @@ public class InformationFragment extends Fragment {
                 loadAppInfoPage(v);
             }
         });
+        AppInfoBtn.setTextColor(getResources().getColor(R.color.White));
 
         Button MuseumInfoBtn = (Button) (view.findViewById(R.id.MuseumInfoButton));
         MuseumInfoBtn.setLayoutParams(CreateMuseumInfoButtonParams(height, width));
@@ -82,10 +96,17 @@ public class InformationFragment extends Fragment {
                 loadMuseumInfoPage(v);
             }
         });
+        MuseumInfoBtn.setTextColor(getResources().getColor(R.color.White));
 
         browser.setLayoutParams(CreateBrowserParams(height,width));
     }
 
+    /**
+     * Method used to create the layout parameters for the TextView used in the @link InformationFragment
+     * @param height Integer representing height of the devices screen in pixels
+     * @param width Integer representing the width of the devices screen in pixels
+     * @return FrameLayout.LayoutParams containing the parameters for the TextView used in @link InformationFragment
+     */
     private FrameLayout.LayoutParams CreateHelpCategoryTextFieldParams(int height, int width){
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
         params.gravity = Gravity.CENTER_HORIZONTAL;
@@ -95,26 +116,44 @@ public class InformationFragment extends Fragment {
         return params;
     }
 
+    /**
+     * Method used to create the layout parameters for the AppButton used in the @link InformationFragment
+     * @param height Integer representing height of the devices screen in pixels
+     * @param width Integer representing the width of the devices screen in pixels
+     * @return FrameLayout.LayoutParams containing the parameters for the AppButton used in @link InformationFragment
+     */
     private FrameLayout.LayoutParams CreateAppInfoButtonParams(int height, int width){
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (height*0.15);
+        params.topMargin = (int) (height*0.12); //make sure this is identical to the other button!
         params.width = (width / 2) - 10;
         params.leftMargin = (params.width / 2) + 2;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
         return params;
     }
 
+    /**
+     * Method used to create the layout parameters for the MuseumButton used in the @link InformationFragment
+     * @param height Integer representing height of the devices screen in pixels
+     * @param width Integer representing the width of the devices screen in pixels
+     * @return FrameLayout.LayoutParams containing the parameters for the MuseumButton used in @link InformationFragment
+     */
     private FrameLayout.LayoutParams CreateMuseumInfoButtonParams(int height, int width){
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (height*0.15);
+        params.topMargin = (int) (height*0.12); //make sure this is identical to the other button!
         params.width = (width / 2) - 10;
         params.rightMargin = (params.width / 2) + 2;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
         return params;
     }
 
+    /**
+     * Method used to create the layout parameters for the WebView used in the @link InformationFragment
+     * @param height Integer representing height of the devices screen in pixels
+     * @param width Integer representing the width of the devices screen in pixels
+     * @return FrameLayout.LayoutParams containing the parameters for the WebView used in @link InformationFragment
+     */
     private FrameLayout.LayoutParams CreateBrowserParams(int height, int width){
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
         params.gravity = Gravity.CENTER_HORIZONTAL;
@@ -124,6 +163,11 @@ public class InformationFragment extends Fragment {
         return params;
     }
 
+    /**
+     * Method used to set the settings of the browser. It will disable javascript, load with overview mode,
+     * use wide view port, set the text zoom to 100% and disable support zoom.
+     * @param view
+     */
     private void setUpWebView(WebView view){
         view.setWebViewClient(new CustomWebViewClient());
         view.getSettings().setJavaScriptEnabled(false);

@@ -52,7 +52,7 @@ public class ForthFloorFragment extends Fragment{
         TopTextWidth = screenWidth - 20;
         TopTextHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(TopTextWidth, TopTextHeight); //setting gravity to center horizontal
-        params.topMargin = (int) (screenHeight * 0.13); //!!!!
+        params.topMargin = (int) (screenHeight * 0.05); //!!!!
         params.gravity = Gravity.CENTER_HORIZONTAL;
         return params;
     }
