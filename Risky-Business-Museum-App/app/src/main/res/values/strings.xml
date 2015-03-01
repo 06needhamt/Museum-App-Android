@@ -8,5 +8,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_multi_choice">MultiChoiceActivity</string>
     <string name="title_activity_single_answer">SingleAnswerActivity</string>
+    <string name="AncientWorldTitle">Welcome to the \'Ancient World\' trail</string>
+    <string name="AncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of the past millennia. You may find this exhibit on the third floor.</string>
+    <string name="BugsWorldTitle">Welcome to the \'Bug House\' trail</string>
+    <string name="BugsWorldIntro">Learn about beetles, flies, spiders, scorpions, centipedes and millipedes. There are even live ant and bee colonies! You may find this exhibit on the second floor.</string>
+    <string name="WorldCulturesTitle">Welcome to the \'World Cultures\' trail</string>
+    <string name="WorldCulturesIntro">Explore traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor.</string>
+    <string name="DinosaurTitle">Welcome to the \'Jurassic Park\' trail!</string>
+    <string name="DinosaurIntro">Travel back in time when dinosaurs roamed our planet and explore life-sized replicas of prehistoric predators! You may find this exhibit on the fourth floor.</string>
+
+
 
 </resources>

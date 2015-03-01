@@ -17,7 +17,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="Welcome to the 'World Cultures' trail!"
+        android:text="@string/WorldCulturesTitle"
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
         android:textSize="24dp"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor."
+        android:text="@string/WorldCulturesIntro"
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"

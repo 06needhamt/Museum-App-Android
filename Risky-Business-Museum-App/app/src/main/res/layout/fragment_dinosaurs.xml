@@ -17,7 +17,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="Welcome to the 'Jurassic Park' trail!"
+        android:text="@string/DinosaurTitle"
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
         android:textSize="24dp"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Travel back in time where dinosaurs roamed our planet and explore live-sized replicas of prehistoric predators! You may find this exhibit on the fourth floor."
+        android:text="@string/DinosaurIntro"
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"
