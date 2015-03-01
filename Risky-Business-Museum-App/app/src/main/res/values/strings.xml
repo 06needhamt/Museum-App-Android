@@ -8,13 +8,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_multi_choice">MultiChoiceActivity</string>
     <string name="title_activity_single_answer">SingleAnswerActivity</string>
-    <string name="AncientWorldTitle">Welcome to the \'Ancient World\' trail</string>
-    <string name="AncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of the past millennia. You may find this exhibit on the third floor.</string>
-    <string name="BugsWorldTitle">Welcome to the \'Bug House\' trail</string>
+    <string name="AncientWorldTitle">Welcome to the Ancient World trail</string>
+    <string name="AncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of past millennia. You may find this exhibit on the third floor.</string>
+    <string name="BugsWorldTitle">Welcome to the Bug House trail</string>
     <string name="BugsWorldIntro">Learn about beetles, flies, spiders, scorpions, centipedes and millipedes. There are even live ant and bee colonies! You may find this exhibit on the second floor.</string>
-    <string name="WorldCulturesTitle">Welcome to the \'World Cultures\' trail</string>
+    <string name="WorldCulturesTitle">Welcome to the World Cultures trail</string>
     <string name="WorldCulturesIntro">Explore traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor.</string>
-    <string name="DinosaurTitle">Welcome to the \'Jurassic Park\' trail!</string>
+    <string name="DinosaurTitle">Welcome to the Jurassic Park trail!</string>
     <string name="DinosaurIntro">Travel back in time when dinosaurs roamed our planet and explore life-sized replicas of prehistoric predators! You may find this exhibit on the fourth floor.</string>
     <string name="WelcomeTitle">Welcome to the Liverpool World Museum!</string>
     <string name="WelcomeTrailInfo">Trail - take on a quiz that will guide you through an exhibit of your choice.</string>
@@ -22,6 +22,8 @@
     <string name="WelcomeQRScannerInfo">Scan any of our QR-codes to get more information.</string>
     <string name="WelcomeMapInfo">A floor plan detailing all our exhibits and their location within the museum.</string>
     <string name="WelcomeMoreInfo">Go here for more information on Liverpool World Museum and for help with using this App.</string>
+    <string name="title_activity_language">LanguageActivity</string>
+    <string name="ChooseLanguage">Choose your preferred language</string>
 
 
 </resources>

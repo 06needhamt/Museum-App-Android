@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Risky Business Museum App</string>
+
+	<string name="app_name">Museo de negocio riesgoso App</string>
+	<string name="hello_world">¡Hola mundo!</string>
+	<string name="action_settings">Configuración</string>
+	<string name="title_activity_home_page">HomePageActivity</string>
+	<string name="hello_blank_fragment">Hola fragmento en blanco</string>
+	<string name="title_activity_multi_choice">MultiChoiceActivity</string>
+	<string name="title_activity_single_answer">SingleAnswerActivity</string>
+	<string name="AncientWorldTitle">Bienvenido a la ruta del antiguo</string>
+	<string name="AncientWorldIntro">Exploraremos antiguo Egipto, Grecia, Roma e Inglaterra. Aprender sobre las culturas y personas importantes de los últimos milenios. Usted puede encontrar esta exposición en el tercer piso.</string>
+	<string name="BugsWorldTitle">¡ Bienvenido al sendero del hormiguero</string>
+	<string name="BugsWorldIntro">Aprende sobre los escarabajos, moscas, arañas, escorpiones, ciempiés y milpiés. Hay colonias de hormigas y abejas aún vivos! Usted puede encontrar esta exposición en el segundo piso.</string>
+	<string name="WorldCulturesTitle">Bienvenido a la ruta de las culturas del mundo</string>
+	<string name="WorldCulturesIntro">Explorar las tradiciones y culturas de todo el mundo y ver los objetos de las Américas, África, Asia y Oceanía. Contamos con las espadas y armaduras Samurai! Usted puede encontrar esta exposición en el tercer piso.</string>
+	<string name="DinosaurTitle">¡ Bienvenido a la ruta de Jurassic Park!</string>
+	<string name="DinosaurIntro">Viajar en el tiempo cuando los dinosaurios vagaban por nuestro planeta y explore réplicas de tamaño natural de los depredadores prehistóricos! Usted puede encontrar esta exposición en el cuarto piso.</string>
+	<string name="WelcomeTitle">¡ Bienvenido al Museo mundial de Liverpool.</string>
+	<string name="WelcomeTrailInfo">Trail - tomar en un examen que le guiará a través de una exposición de su elección.</string>
+	<string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, por favor me editar!</string>
+	<string name="WelcomeQRScannerInfo">Exploración de los QR-codes para obtener más información.</string>
+	<string name="WelcomeMapInfo">Un plano detallando todas nuestras exposiciones y su ubicación dentro del Museo.</string>
+	<string name="WelcomeMoreInfo">Vaya aquí para más información sobre el Museo mundial de Liverpool y ayuda con el uso de esta aplicación.</string>
+	<string name="title_activity_language">LanguageActivity</string>
+	<string name="ChooseLanguage">Seleccione su idioma preferido</string>
+
 </resources>

@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -47,7 +46,11 @@
         </activity>
         <activity
             android:name=".root.Activities.MultiTouchActivity"
-            android:label="MultiTouchActivity">
+            android:label="MultiTouchActivity" >
+        </activity>
+        <activity
+            android:name=".root.Activities.LanguageActivity"
+            android:label="@string/title_activity_language" >
         </activity>
     </application>
 
