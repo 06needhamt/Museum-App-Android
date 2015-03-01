@@ -1,6 +1,8 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -17,7 +19,8 @@ import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 
-public class LanguageActivity extends ActionBarActivity {
+public class LanguageActivity extends FragmentActivity {
+    final String[] langs = {"en", "de", "fr", "es"}; // Language specifiers
 
     TextView Title;
     ImageView England, Germany, France, Spain;
@@ -44,67 +47,53 @@ public class LanguageActivity extends ActionBarActivity {
         England.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetLanguageEnglish();
+                setLanguage("en");
             }
         });
         Germany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetLanguageGerman();
+                setLanguage("de");
             }
         });
         France.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetLanguageFrench();
+                setLanguage("fr");
             }
         });
         Spain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetLanguageSpanish();
+                setLanguage("es");
             }
         });
     }
 
-    private void SetLanguageSpanish() {
-        Toast.makeText(getBaseContext(),"Button Clicked",Toast.LENGTH_LONG).show();
-        Locale locale = new Locale("es");
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
+    private void startHomePageActivity() {
+        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        startActivity(i);
+        finish();
     }
 
-    private void SetLanguageFrench() {
-        Toast.makeText(getBaseContext(),"Button Clicked",Toast.LENGTH_LONG).show();
-        Locale locale = new Locale("fr");
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
-    }
+    private void setLanguage(String lang) {
+        String chosenLang = "en";
 
-    private void SetLanguageGerman() {
-        Toast.makeText(getBaseContext(),"Button Clicked",Toast.LENGTH_LONG).show();
-        Locale locale = new Locale("de");
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
-    }
+        //Toast.makeText(getBaseContext(),"Button Clicked",Toast.LENGTH_LONG).show();
 
-    private void SetLanguageEnglish() {
-        Toast.makeText(getBaseContext(),"Button Clicked",Toast.LENGTH_LONG).show();
-        Locale locale = new Locale("en");
+        for(String l : langs) { // Make sure that a valid language is chosen or default to English
+            if(l.equals(lang))
+                chosenLang = l;
+        }
+
+        Locale locale = new Locale(chosenLang);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
+
+        startHomePageActivity();
     }
 
     private void SetAllLayoutParams(int height, int width)
