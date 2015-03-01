@@ -14,7 +14,7 @@ public class PopulateQuestions {
     private int[] questionType = {1, 0, 0, 0, 0, 1, 1, 0, 0}; // Question type array
 
     private String[] questions = { // Questions
-            "Is Alex smart?",
+            "Is there a 'for some reason dialog fragment' in this app?",
             "This brass staff was probably kept on a royal alter",
             "This brass figure depicts 'Cat's whisker' scars",
             "A costume ornament made from a wild cat",
@@ -26,7 +26,7 @@ public class PopulateQuestions {
     };
 
     private String[] answers = { // Either the artifact number to be retrieved from the QR or multi-choice options
-            "Yes, No, No, No",
+            "Yes, No, Maybe, What?",
             "1",
             "2",
             "6",

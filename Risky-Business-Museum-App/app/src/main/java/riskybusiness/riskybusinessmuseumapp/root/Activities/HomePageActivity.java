@@ -13,7 +13,7 @@ import android.widget.Toast;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.ChooseATrailFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.WelcomeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.FifthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.ForthFloorFragment;
@@ -112,7 +112,7 @@ public class HomePageActivity extends FragmentActivity {
     }
 
     public void AddFragment() {
-        ChooseATrailFragment fragment = new ChooseATrailFragment();
+        WelcomeFragment fragment = new WelcomeFragment();
     getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
     @Override

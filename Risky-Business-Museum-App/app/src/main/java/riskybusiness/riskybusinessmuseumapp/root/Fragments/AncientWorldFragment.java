@@ -36,7 +36,7 @@ public class AncientWorldFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_ancient_world, container, false);
         view.setPadding(0,0,0,0);
-        /*Button btnEnter = (Button) view.findViewById(R.id.btnEnter);
+        /*Button btnEnter = (Button) OurView.findViewById(R.id.btnEnter);
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

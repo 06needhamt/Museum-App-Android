@@ -61,8 +61,9 @@ public class InformationFragment extends Fragment {
      * @param v View used by the intent (currently unused)
      */
     public void loadAppInfoPage(View v){
-        browser.setVisibility(View.VISIBLE);
-        browser.loadUrl("http://google.co.uk");
+        //browser.setVisibility(View.VISIBLE);
+        //browser.loadUrl("http://google.co.uk");
+        this.getActivity().getFragmentManager().beginTransaction().replace(R.id.frame, new WelcomeFragment()).commit();
     }
 
     /**
@@ -165,7 +166,7 @@ public class InformationFragment extends Fragment {
 
     /**
      * Method used to set the settings of the browser. It will disable javascript, load with overview mode,
-     * use wide view port, set the text zoom to 100% and disable support zoom.
+     * use wide OurView port, set the text zoom to 100% and disable support zoom.
      * @param view
      */
     private void setUpWebView(WebView view){
