@@ -30,7 +30,7 @@
             android:layout_gravity="center_horizontal|top"
             android:clickable="true"
             android:baselineAlignBottom="false"
-            android:background="@drawable/blue__icon_qr" />
+            android:background="@drawable/transparent__icon_qr" />
 
         <Button
             android:layout_width="match_parent"

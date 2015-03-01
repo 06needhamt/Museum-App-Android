@@ -22,7 +22,7 @@ public final class QRResultHandler {
      */
     private String returnresult(String Content)
     {
-        if(Content == null || Content.equals("No Value")) {
+        if(Content == null || Content.equals("No Value") || Content.contains("null")) {
             setResult("No Content");
         }
         else if(Content.contains(identifier))

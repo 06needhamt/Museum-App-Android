@@ -24,6 +24,8 @@
     <string name="WelcomeMoreInfo">Go here for more information on Liverpool World Museum and for help with using this App.</string>
     <string name="title_activity_language">LanguageActivity</string>
     <string name="ChooseLanguage">Choose your preferred language</string>
+    <string name="QRFragmentTitle">QR-Scanner</string>
+    <string name="QRFragmentHint">Hint: scan any of our QR-codes to get more information.</string>
 
 
 </resources>

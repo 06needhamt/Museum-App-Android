@@ -13,6 +13,7 @@ import android.widget.Toast;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WelcomeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.FifthFloorFragment;
@@ -83,7 +84,7 @@ public class HomePageActivity extends FragmentActivity {
         Fragment[] fragments = new Fragment[5];
         fragments[0] = null;
         fragments[1] = null;
-        fragments[2] = null;
+        fragments[2] = new QRFragment();
         fragments[3] = null;
         fragments[4] = new InformationFragment();
         return fragments;

@@ -16,6 +16,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.InformationFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
 
 
 /**
@@ -261,7 +262,8 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 resetButtonBackgroundBottom(btn);
-                StartQRActivity();
+                act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
+                //StartQRActivity();
                 break;
             }
             case 3:

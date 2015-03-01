@@ -43,6 +43,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         setContentView(R.layout.activity_single_answer);
         score = MAX_SCORE;
         SingleAnswerQRButton = (ImageButton) findViewById(R.id.SingleAnswerQRButton);
+        SingleAnswerQRButton.setScaleX(3.0f); //trippling size
+        SingleAnswerQRButton.setScaleY(3.0f);
         btnNextQuestionSA = (Button) findViewById(R.id.btnNextQuestionSA);
         setButtonListener();
 
@@ -90,11 +92,9 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
     private FrameLayout.LayoutParams QRButtonLayout(int screenHeight, int screenWidth){
-        int btnHeight, btnWidth;
-        btnHeight = (int) (screenHeight * 0.2);
-        btnWidth = (int) (screenHeight * 0.2);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnWidth, btnHeight);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenWidth, screenHeight);
+        params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.topMargin = (int) (screenHeight * 0.55);
         params.gravity = Gravity.CENTER_HORIZONTAL;
 
@@ -173,9 +173,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                     return;
                 }
                 if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
-                    //making next question button visible and clickable, disabling QR scanner button and making it green
+                    //making next question button visible and clickable, disabling QR scanner button
                     SingleAnswerQRButton.setClickable(false);
-                    SingleAnswerQRButton.setBackgroundResource(R.drawable.green__icon_qr);
                     btnNextQuestionSA.setClickable(true);
                     btnNextQuestionSA.setVisibility(View.VISIBLE);
                 }
