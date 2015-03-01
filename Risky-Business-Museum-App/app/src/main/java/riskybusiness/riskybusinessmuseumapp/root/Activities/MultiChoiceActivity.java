@@ -15,8 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
@@ -27,6 +30,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     private int screenHeight;
     private int screenWidth;
     private Button btnMcA, btnMcB, btnMcC, btnMcD, btnNextQuestionMC;
+    private Button[] answerButtons;
     private TextView multiChoiceQuestion;
     private final int MAX_SCORE = 10;
     private boolean endtrail = false; //set this to true for the trail to end after this question and false for it not to end after this question
@@ -53,10 +57,24 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         question = bundle.getString("QUESTION");
         String temp = bundle.getString("ANSWER");
         applyAnswers(temp);
-
-        // Need to put code to randomise answers here
         correctAnswer = answers.get(0);
-        populateButtons(answers);
+        //randomising the answers
+        theOldSwitcheroo(); //this will call populateButtons()
+
+    }
+
+    private void theOldSwitcheroo(){
+        Random rd = new Random();
+        LinkedList<String> tempy = new LinkedList<>();
+        tempy.addAll(answers);
+        List<String> newAnswers = new ArrayList<>();
+        int currentRoll;
+        for(int i = 0; i < 4; i++){
+            currentRoll = rd.nextInt(4 - i); // returns pseudo random integer ranging from 0 (inclusive) to the given parameter (exclusive)
+            newAnswers.add(tempy.get(currentRoll)); //add the selected answer to the new list of answers
+            tempy.remove(currentRoll);
+        }
+        populateButtons(newAnswers);
     }
 
     @Override
@@ -80,8 +98,8 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcD.setText(list.get(3));
         btnNextQuestionMC.setText("Next Question");
         multiChoiceQuestion.setText(question);
-
     }
+
     private void applyAnswers(String temp){
         answers = Arrays.asList(temp.split("\\s*,\\s*"));
     }
@@ -92,11 +110,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show(); //////////////delete
+                //Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show(); //////////////delete
                 if(checkAnswer(btnMcA)) {
                     //passData(); // Correct answer
                     btnNextQuestionMC.setVisibility(View.VISIBLE);
                     btnNextQuestionMC.setClickable(true);
+                    disableAllAnswerButtons();
                 }
                 else {
                     numGuesses(btnMcA); // Incorrect answer
@@ -109,11 +128,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();//////////////////
+                //Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();//////////////////
                 if(checkAnswer(btnMcB)) {
                     //passData(); // Correct answer
                     btnNextQuestionMC.setVisibility(View.VISIBLE);
                     btnNextQuestionMC.setClickable(true);
+                    disableAllAnswerButtons();
                 }
                 else {
                     numGuesses(btnMcB); // Incorrect answer
@@ -126,11 +146,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();///////////////
+                //Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();///////////////
                 if(checkAnswer(btnMcC)) {
                     //passData(); // Correct answer
                     btnNextQuestionMC.setVisibility(View.VISIBLE);
                     btnNextQuestionMC.setClickable(true);
+                    disableAllAnswerButtons();
                 }
                 else {
                     numGuesses(btnMcC); // Incorrect answer
@@ -143,11 +164,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();//////////////
+                //Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();//////////////
                 if(checkAnswer(btnMcD)) {
                     //passData(); // Correct answer
                     btnNextQuestionMC.setVisibility(View.VISIBLE);
                     btnNextQuestionMC.setClickable(true);
+                    disableAllAnswerButtons();
                 }
                 else {
                     numGuesses(btnMcD); // Incorrect answer
@@ -306,6 +328,13 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void disableAllAnswerButtons(){
+        btnMcA.setClickable(false);
+        btnMcB.setClickable(false);
+        btnMcC.setClickable(false);
+        btnMcD.setClickable(false);
     }
 
     private Bundle passData(){
