@@ -7,9 +7,11 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import android.inputmethodservice.Keyboard;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,6 +54,11 @@ public class QRScannerActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int KeyCode, KeyEvent event)
+    {
+        if(KeyCode = )
+    }
     public void initiateScan()
     {
         //instantiate ZXing integration class

@@ -89,8 +89,8 @@ public class MainActivity extends FragmentActivity {
 
     public void LoadMainPage(View v)
     {
-        //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
-        Intent i = new Intent(getBaseContext(),LanguageActivity.class);
+        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        //Intent i = new Intent(getBaseContext(),LanguageActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
         startActivity(i);
         //finish();
