@@ -57,13 +57,20 @@ public class QRScannerActivity extends ActionBarActivity {
     @Override
     public boolean onKeyDown(int KeyCode, KeyEvent event)
     {
-        Bundle B = Bundle.EMPTY;
-        Intent i = getIntent();
-        i.putExtras(B);
-        setIntent(i);
-        setResult(RESULT_OK,i);
-        finish();
-        return true;
+        if(KeyCode == KeyEvent.KEYCODE_BACK) {
+            Bundle B = Bundle.EMPTY;
+            Intent i = getIntent();
+            i.putExtras(B);
+            setIntent(i);
+            setResult(RESULT_OK, i);
+            finish();
+            return true;
+        }
+        else
+        {
+            super.onKeyDown(KeyCode,event);
+            return false;
+        }
     }
     public void initiateScan()
     {
