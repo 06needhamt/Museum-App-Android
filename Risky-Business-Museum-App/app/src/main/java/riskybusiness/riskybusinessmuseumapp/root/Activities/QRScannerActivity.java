@@ -57,7 +57,7 @@ public class QRScannerActivity extends ActionBarActivity {
     @Override
     public boolean onKeyDown(int KeyCode, KeyEvent event)
     {
-        if(KeyCode = )
+        return true;
     }
     public void initiateScan()
     {
