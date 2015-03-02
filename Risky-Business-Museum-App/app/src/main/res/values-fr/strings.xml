@@ -25,6 +25,6 @@
 	<string name="title_activity_language">LanguageActivity</string>
 	<string name="ChooseLanguage">Choisissez votre langue pr?f?r?e</string>
 	<string name="QRFragmentTitle">QR-Scanner</string>
-	<string name="QRFragmentHint">Conseil : Scannez n'importe quel notre QR-code pour obtenir plus d'informations.</string>
+	<string name="QRFragmentHint">Conseil : Scannez n\'importe quel notre QR-code pour obtenir plus d\'informations.</string>
 
 </resources>
