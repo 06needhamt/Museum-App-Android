@@ -302,7 +302,7 @@ public class ButtonCreator {
     {
         // int index=0;
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < NUM_BUTTONS; i++)
         {
             final int col = i;
             if(i != btn)
@@ -325,7 +325,7 @@ public class ButtonCreator {
     {
         // int index=0;
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
             if(i != btn)
@@ -361,7 +361,7 @@ public class ButtonCreator {
     {
         // int index=0;
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
             if(i != btn)
