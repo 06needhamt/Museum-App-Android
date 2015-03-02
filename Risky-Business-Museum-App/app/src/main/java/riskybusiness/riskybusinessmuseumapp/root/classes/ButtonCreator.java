@@ -41,6 +41,9 @@ public class ButtonCreator {
     Button[] Topbuttons = new Button[NUM_TOP_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
 
+    boolean[] TopButtonState = {false, false, false, false, false, false}; // Which top button is pressed?
+    boolean[] BottomButtonState = {false, false, false, false, false}; // Which bottom button is pressed?
+    boolean[] MapButtonState = {false, false, false, false, false, false}; // Which map button is pressed?
 
     //ArrayList<IconInfo> drawableList = new ArrayList<>(); // Array list of type IconInfo for drawables
 
@@ -300,8 +303,6 @@ public class ButtonCreator {
     //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundBottom(int btn)
     {
-        // int index=0;
-
         for(int i = 0; i < NUM_BUTTONS; i++)
         {
             final int col = i;
@@ -309,13 +310,13 @@ public class ButtonCreator {
             {
                 int id = drawableList.getId(iconUnderNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
-                // index++;
+                BottomButtonState[i] = false; ;
             }
             else
             {
                 int id = drawableList.getId(iconOverNamesBottom[i]);
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
-                //index++;
+                BottomButtonState[i] = true;
             }
         }
 
@@ -323,8 +324,6 @@ public class ButtonCreator {
 
     public void resetButtonBackgroundMap(int btn)
     {
-        // int index=0;
-
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
@@ -340,7 +339,7 @@ public class ButtonCreator {
 
                     }
                 });
-                // index++;
+                MapButtonState[i] = false;
             }
             else
             {
@@ -352,15 +351,14 @@ public class ButtonCreator {
                         MapgridButtonClicked(col);
                     }
                 });
-                //index++;
+                MapButtonState[i] = true;
             }
         }
 
     }
+
     public void resetButtonBackgroundTop(int btn)
     {
-        // int index=0;
-
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
@@ -374,7 +372,7 @@ public class ButtonCreator {
                         TopgridButtonClicked(col);
                     }
                 });
-                // index++;
+                TopButtonState[i] = false;
             }
             else
             {
@@ -386,13 +384,36 @@ public class ButtonCreator {
                         TopgridButtonClicked(col);
                     }
                 });
-                //index++;
+                TopButtonState[i] = true;
             }
         }
     }
 
-    private void startActivity(Activity A, Intent I)
-    {
-        A.startActivity(I);
+    public int getPressedTop() {
+        for(int t = 0; t < TopButtonState.length; t++)
+            if(TopButtonState[t])
+                return t; // return the index of the pressed button
+
+        return -1; // Error - no buttons pressed
+
     }
+
+    public int getPressedBottom () {
+        for(int t = 0; t < BottomButtonState.length; t++)
+            if(BottomButtonState[t])
+                return t; // return the index of the pressed button
+
+        return -1; // Error - no buttons pressed
+
+    }
+
+    public int getPressedMap() {
+        for(int t = 0; t < MapButtonState.length; t++)
+            if(MapButtonState[t])
+                return t; // return the index of the pressed button
+
+        return -1; // Error - no buttons pressed
+    }
+
+
 }

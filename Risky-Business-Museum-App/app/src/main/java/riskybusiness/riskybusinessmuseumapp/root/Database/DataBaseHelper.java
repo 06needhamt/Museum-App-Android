@@ -86,6 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         copyDataBase();
         return getmDataBase();
     }
+
     //Check that the database exists here: /data/data/your package/databases/Da Name
     private boolean checkDataBase()
     {
