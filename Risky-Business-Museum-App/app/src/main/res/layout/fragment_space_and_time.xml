@@ -17,7 +17,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="Welcome to the 'Space and Time' trail!"
+        android:text="@string/SpaceTitle"
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/White"
         android:textSize="24dp"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Take on a journey that is from out of this world. The free planetarium will take you on a spectacular trip through the Universe. You may find this exhibit on the fifth floor."
+        android:text="@string/spaceIntro"
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"

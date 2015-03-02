@@ -121,7 +121,11 @@ public class HomePageActivity extends FragmentActivity {
     {
 
         //Toast.makeText(getBaseContext(),"In Return function",Toast.LENGTH_SHORT).show();
-
+        if(data.getExtras() == Bundle.EMPTY)
+        {
+            Toast.makeText(getBaseContext(),"Not Ok",Toast.LENGTH_LONG).show();
+            return;
+        }
         Bundle tempBundle = data.getExtras();
         String from = tempBundle.getString("FROM", "");
         boolean exit = false;
@@ -145,6 +149,11 @@ public class HomePageActivity extends FragmentActivity {
 
         else if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
+                if(!data.hasExtra("B"))
+                {
+                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Bundle b = data.getExtras();
 
                 Content = b.getString("Content", "No Value");
@@ -153,6 +162,11 @@ public class HomePageActivity extends FragmentActivity {
 //                    Show information on the item the person scanned
 //                    Or ask user if they want to start a trail from this exhibit
 //                }
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(),"Not Ok",Toast.LENGTH_LONG).show();
+                return;
             }
         }
         else if(from.equals("SingleAnswerActivity")) {

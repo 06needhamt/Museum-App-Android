@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Risky Business Mus�e App</string>
+	<string name="app_name">Risky Business Mus?e App</string>
 	<string name="hello_world">Salut tout le monde!</string>
-	<string name="action_settings">Param�tres</string>
+	<string name="action_settings">Param?tres</string>
 	<string name="title_activity_home_page">HomePageActivity</string>
 	<string name="hello_blank_fragment">Bonjour fragment vide</string>
 	<string name="title_activity_multi_choice">MultiChoiceActivity</string>
 	<string name="title_activity_single_answer">SingleAnswerActivity</string>
 	<string name="AncientWorldTitle">Bienvenue sur le sentier de l\'ancien monde</string>
-	<string name="AncientWorldIntro">Vous explorerez ancienne Egypte, Gr�ce, Rome et l\'Angleterre. D�couvrez les cultures et les personnes importantes des derniers mill�naires. Vous pouvez trouver cette pi�ce au troisi�me �tage.</string>
+	<string name="AncientWorldIntro">Vous explorerez ancienne Egypte, Gr?ce, Rome et l\'Angleterre. D?couvrez les cultures et les personnes importantes des derniers mill?naires. Vous pouvez trouver cette pi?ce au troisi?me ?tage.</string>
 	<string name="BugsWorldTitle">Bienvenue sur le sentier de la maison de Bug</string>
-	<string name="BugsWorldIntro">Renseignez-vous sur les col�opt�res, mouches, araign�es, scorpions, mille-pattes et les mille-pattes. Il y a des colonies de fourmis et les abeilles encore vivants ! Vous pouvez trouver cette pi�ce � l\'�tage.</string>
+	<string name="BugsWorldIntro">Renseignez-vous sur les col?opt?res, mouches, araign?es, scorpions, mille-pattes et les mille-pattes. Il y a des colonies de fourmis et les abeilles encore vivants ! Vous pouvez trouver cette pi?ce ? l\'?tage.</string>
 	<string name="WorldCulturesTitle">Bienvenue sur le sentier des Cultures du monde</string>
-	<string name="WorldCulturesIntro">D�couvrir les traditions et les cultures de partout dans le monde et voir les objets provenant des Am�riques, en Afrique, en Asie et en Oc�anie. Nous avons des �p�es et des armures de samoura� ! Vous pouvez trouver cette pi�ce au troisi�me �tage.</string>
+	<string name="WorldCulturesIntro">D?couvrir les traditions et les cultures de partout dans le monde et voir les objets provenant des Am?riques, en Afrique, en Asie et en Oc?anie. Nous avons des ?p?es et des armures de samoura? ! Vous pouvez trouver cette pi?ce au troisi?me ?tage.</string>
 	<string name="DinosaurTitle">Bienvenue sur le sentier de Jurassic Park !</string>
-	<string name="DinosaurIntro">Voyage dans le temps o� les dinosaures parcouraient notre plan�te et explorez les r�pliques grandeur nature de pr�dateurs pr�historiques ! Vous pouvez trouver cette pi�ce au quatri�me �tage.</string>
-	<string name="WelcomeTitle">Bienvenue dans le Mus�e Liverpool du monde !</string>
-	<string name="WelcomeTrailInfo">Trail - prendre un quizz qui vous guidera au travers d\'une pi�ce de votre choix.</string>
-	<string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, s\'il vous pla�t modifier moi !</string>
-	<string name="WelcomeQRScannerInfo">Num�riser n\'importe quel notre QR-code pour obtenir plus d\'informations.</string>
-	<string name="WelcomeMapInfo">Un plan d�taillant toutes nos expositions et leur emplacement au sein du Mus�e.</string>
-	<string name="WelcomeMoreInfo">Allez ici pour plus d\'informations sur le Mus�e Liverpool du monde et pour obtenir de l\'aide de cette application.</string>
+	<string name="DinosaurIntro">Voyage dans le temps o? les dinosaures parcouraient notre plan?te et explorez les r?pliques grandeur nature de pr?dateurs pr?historiques ! Vous pouvez trouver cette pi?ce au quatri?me ?tage.</string>
+	<string name="WelcomeTitle">Bienvenue dans le Mus?e Liverpool du monde !</string>
+	<string name="WelcomeTrailInfo">Trail - prendre un quizz qui vous guidera au travers d\'une pi?ce de votre choix.</string>
+	<string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, s\'il vous pla?t modifier moi !</string>
+	<string name="WelcomeQRScannerInfo">Num?riser n\'importe quel notre QR-code pour obtenir plus d\'informations.</string>
+	<string name="WelcomeMapInfo">Un plan d?taillant toutes nos expositions et leur emplacement au sein du Mus?e.</string>
+	<string name="WelcomeMoreInfo">Allez ici pour plus d\'informations sur le Mus?e Liverpool du monde et pour obtenir de l\'aide de cette application.</string>
 	<string name="title_activity_language">LanguageActivity</string>
-	<string name="ChooseLanguage">Choisissez votre langue pr�f�r�e</string>
+	<string name="ChooseLanguage">Choisissez votre langue pr?f?r?e</string>
+	<string name="QRFragmentTitle">QR-Scanner</string>
+	<string name="QRFragmentHint">Conseil : Scannez n'importe quel notre QR-code pour obtenir plus d'informations.</string>
 
 </resources>

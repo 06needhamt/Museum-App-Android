@@ -9,20 +9,22 @@
 	<string name="title_activity_multi_choice">MultiChoiceActivity</string>
 	<string name="title_activity_single_answer">SingleAnswerActivity</string>
 	<string name="AncientWorldTitle">Herzlich Willkommen Sie auf den Spuren der Antike</string>
-	<string name="AncientWorldIntro">Sie untersuchen alten Ägypten, Griechenland, Rom und England. Erfahren Sie mehr über die Kulturen und wichtige Leute der vergangenen Jahrtausende. Sie können diese Ausstellung in der dritten Etage finden.</string>
+	<string name="AncientWorldIntro">Sie untersuchen alten ?gypten, Griechenland, Rom und England. Erfahren Sie mehr ?ber die Kulturen und wichtige Leute der vergangenen Jahrtausende. Sie k?nnen diese Ausstellung in der dritten Etage finden.</string>
 	<string name="BugsWorldTitle">Herzlich Willkommen Sie auf der Bug-Hausweg</string>
-	<string name="BugsWorldIntro">Erfahren Sie mehr über Käfer, fliegen, Spinnen, Skorpione, Tausendfüßler und Tausendfüßer. Es gibt sogar Ant und Biene Kolonien! Vielleicht finden Sie diese Ausstellung auf der zweiten Etage.</string>
+	<string name="BugsWorldIntro">Erfahren Sie mehr ?ber K?fer, fliegen, Spinnen, Skorpione, Tausendf??ler und Tausendf??er. Es gibt sogar Ant und Biene Kolonien! Vielleicht finden Sie diese Ausstellung auf der zweiten Etage.</string>
 	<string name="WorldCulturesTitle">Willkommen Sie bei der Weltkulturen-trail</string>
-	<string name="WorldCulturesIntro">Entdecken Sie Traditionen und Kulturen aus der ganzen Welt und finden Sie Objekte aus der Amerika, Afrika, Asien und Ozeanien. Wir haben Samurai-Rüstungen und Schwerter! Sie können diese Ausstellung in der dritten Etage finden.</string>
+	<string name="WorldCulturesIntro">Entdecken Sie Traditionen und Kulturen aus der ganzen Welt und finden Sie Objekte aus der Amerika, Afrika, Asien und Ozeanien. Wir haben Samurai-R?stungen und Schwerter! Sie k?nnen diese Ausstellung in der dritten Etage finden.</string>
 	<string name="DinosaurTitle">Willkommen Sie bei der Jurassic Park-Trail!</string>
-	<string name="DinosaurIntro">Reise in die Vergangenheit, als Dinosaurier unseren Planeten durchstreiften, und erkunden Sie lebensgroße Nachbildungen der prähistorische Raubtiere! Vielleicht finden Sie diese Ausstellung in der vierten Etage.</string>
+	<string name="DinosaurIntro">Reise in die Vergangenheit, als Dinosaurier unseren Planeten durchstreiften, und erkunden Sie lebensgro?e Nachbildungen der pr?historische Raubtiere! Vielleicht finden Sie diese Ausstellung in der vierten Etage.</string>
 	<string name="WelcomeTitle">Das Liverpool Museum Willkommen!</string>
-	<string name="WelcomeTrailInfo">Trail - nehmen auf ein Quiz, das Sie durch eine Ausstellung Ihrer Wahl führt.</string>
+	<string name="WelcomeTrailInfo">Trail - nehmen auf ein Quiz, das Sie durch eine Ausstellung Ihrer Wahl f?hrt.</string>
 	<string name="WelcomeExplorerTrailInfo">Explorer-Trail - Chris, bearbeiten Sie bitte mich!</string>
 	<string name="WelcomeQRScannerInfo">Scannen Sie unsere QR-Codes um weitere Informationen zu erhalten.</string>
 	<string name="WelcomeMapInfo">Einen Grundriss, der detailliert alle unsere Exponate und ihre Position innerhalb des Museums.</string>
-	<string name="WelcomeMoreInfo">Gehen Sie hier für weitere Informationen über World Museum Liverpool und Hilfe bei der Verwendung dieser App.</string>
+	<string name="WelcomeMoreInfo">Gehen Sie hier f?r weitere Informationen ?ber World Museum Liverpool und Hilfe bei der Verwendung dieser App.</string>
 	<string name="title_activity_language">LanguageActivity</string>
-	<string name="ChooseLanguage">Wählen Sie Ihre bevorzugte Sprache</string>
+	<string name="ChooseLanguage">W?hlen Sie Ihre bevorzugte Sprache</string>
+	<string name="QRFragmentTitle">QR-Scanner</string>
+	<string name="QRFragmentHint">Tipp: Scannen Sie eines unserer QR-Codes um weitere Informationen zu erhalten.</string>
 
 </resources>
