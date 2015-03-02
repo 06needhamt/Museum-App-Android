@@ -20,6 +20,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 
 /**
  * Created by Alex and Chris on 01/03/2015
+ * Database repo test
  */
 public class QRFragment extends Fragment {
     View OurView;
