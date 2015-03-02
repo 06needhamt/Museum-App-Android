@@ -26,6 +26,7 @@ public class ButtonCreator {
 
 
     public static final int NUM_BUTTONS = 5; // Number of BUTTONS (Columns in table)
+    public static final int NUM_TOP_BUTTONS = 6; // Number of Buttons on top
     HomePageActivity act;
     TableLayout Toptable;
     TableLayout Bottomtable;
@@ -37,19 +38,19 @@ public class ButtonCreator {
     Fragment[] BottomFragments;
     TableRow tableRowTop;
 
-    Button[] Topbuttons = new Button[NUM_BUTTONS]; // Array for buttons
+    Button[] Topbuttons = new Button[NUM_TOP_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
 
 
     //ArrayList<IconInfo> drawableList = new ArrayList<>(); // Array list of type IconInfo for drawables
 
     IconList drawableList = new IconList(act); // Array list of type IconInfo for drawables
-    final String[] iconUnderNamesTop = {"blue__icon_trail_ancientworld", "blue__icon_trail_bugs", "blue__icon_trail_worldcultures", "blue__icon_trail_dinosaurs", "blue__icon_trail_space"};
-    final String[] iconOverNamesTop = {"green__icon_trail_ancientworld", "green__icon_trail_bugs", "green__icon_trail_worldcultures", "green__icon_trail_dinosaurs", "green__icon_trail_space"};
+    final String[] iconUnderNamesTop = {"blue__icon_trail_ancientworld","blue__icon_trail_aquarium", "blue__icon_trail_bugs", "blue__icon_trail_worldcultures", "blue__icon_trail_dinosaurs", "blue__icon_trail_space"};
+    final String[] iconOverNamesTop = {"green__icon_trail_ancientworld","green__icon_trail_aquarium", "green__icon_trail_bugs", "green__icon_trail_worldcultures", "green__icon_trail_dinosaurs", "green__icon_trail_space"};
     final String[] iconUnderNamesBottom = {"blue__icon_question", "blue__icon_trail", "blue__icon_qr", "blue__icon_map", "blue__icon_information"};
     final String[] iconOverNamesBottom = {"green__icon_question", "green__icon_trail", "green__icon_qr", "green__icon_map", "green__icon_information"};
-    final String[] iconUnderNamesMap = {"blue__icon_floorg", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floor5"};
-    final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
+    final String[] iconUnderNamesMap = {"blue__icon_floorg","blue__icon_floor1", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floor5"};
+    final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor1","green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
 
 
     public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments)
@@ -149,7 +150,7 @@ public class ButtonCreator {
                 1.0f)); // Scale
 
 
-        for(int col = 0; col < NUM_BUTTONS; col++) {
+        for(int col = 0; col < NUM_TOP_BUTTONS; col++) {
             final int finalCol = col;
             Button button = new Button(act); // Create button
 
@@ -270,9 +271,9 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 populateMapButtons();
+                act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 resetButtonBackgroundBottom(btn);
-                resetButtonBackgroundMap(-1);
-                //resetButtonBackgroundTop(-1);
+                resetButtonBackgroundMap(0);
                 //StartQRActivity();
                 break;
             }

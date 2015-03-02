@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.AquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.FirstFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.WelcomeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.DinosaursFragment;
@@ -60,23 +62,25 @@ public class HomePageActivity extends FragmentActivity {
     }
 
     private Fragment[] CreateFragments() {
-        Fragment[] fragments = new Fragment[5];
+        Fragment[] fragments = new Fragment[6];
         fragments[0] = new AncientWorldFragment();
-        fragments[1] = new BugsFragment();
-        fragments[2] = new WorldCulturesFragment();
-        fragments[3] = new DinosaursFragment();
-        fragments[4] = new SpaceAndTimeFragment();
+        fragments[1] = new AquariumFragment();
+        fragments[2] = new BugsFragment();
+        fragments[3] = new WorldCulturesFragment();
+        fragments[4] = new DinosaursFragment();
+        fragments[5] = new SpaceAndTimeFragment();
         return fragments;
     }
 
     private Fragment[] CreateMapFragments()
     {
-        Fragment[] fragments = new Fragment[5];
+        Fragment[] fragments = new Fragment[6];
         fragments[0] = new GroundFloorFragment();
-        fragments[1] = new SecondFloorFragment();
-        fragments[2] = new ThirdFloorFragment();
-        fragments[3] = new ForthFloorFragment();
-        fragments[4] = new FifthFloorFragment();
+        fragments[1] = new FirstFloorFragment();
+        fragments[2] = new SecondFloorFragment();
+        fragments[3] = new ThirdFloorFragment();
+        fragments[4] = new ForthFloorFragment();
+        fragments[5] = new FifthFloorFragment();
         return fragments;
     }
 
@@ -85,7 +89,7 @@ public class HomePageActivity extends FragmentActivity {
         fragments[0] = null;
         fragments[1] = null;
         fragments[2] = new QRFragment();
-        fragments[3] = null;
+        fragments[3] = new GroundFloorFragment();
         fragments[4] = new InformationFragment();
         return fragments;
     }
