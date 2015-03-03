@@ -74,7 +74,7 @@ public class BugsFragment extends Fragment {
             texts[i].setText(trails[i]);
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_rows, trails);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trails);
         dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
         BugsTrailSpinner.setAdapter(dataAdapter);
     }
@@ -115,7 +115,7 @@ public class BugsFragment extends Fragment {
         BugsTrailSpinner = (Spinner) view.findViewById(R.id.BugsTrailSpinner);
 
         BugsGoButton = (ImageButton) view.findViewById(R.id.BugsGoButton);
-        BugsGoButton.setImageResource(R.drawable.transparent__icon_trail_bugs); //Placeholder image for "GO!" Button
+        BugsGoButton.setBackgroundResource(R.drawable.transparent__icon_trail_bugs); //Placeholder image for "GO!" Button
         BugsGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +189,7 @@ public class BugsFragment extends Fragment {
     private FrameLayout.LayoutParams BugsGoButtonParams(int screenHeight, int screenWidth) {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenHeight, screenWidth);
         params.gravity = Gravity.RIGHT;
-        params.topMargin = (int) (screenHeight * 0.62); //!!!
+        params.topMargin = (int) (screenHeight * 0.66); //!!!
         params.rightMargin = (int) (screenWidth * 0.1);
         //params.leftMargin= BugsTrailSpinner.getMeasuredWidth() + (int) (screenWidth * 0.02) + 10; //moving this depending on the width of the BugsTrailSpinner width + it's left margin + 10 pixels for good measure
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;

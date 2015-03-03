@@ -7,9 +7,11 @@
         android:singleLine="true"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/lightBlue"
-        android:background="@color/Transparent"
-        android:popupBackground="@color/transparent"
+        android:textColor="@color/White"
+        android:background="@color/lightBlue"
+        android:popupBackground="@color/lightBlue"
         android:ellipsize="marquee"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
     />
 
