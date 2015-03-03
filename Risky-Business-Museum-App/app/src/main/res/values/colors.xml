@@ -8,4 +8,9 @@
     <color name="lightBlue">#FF2E9AFE</color>
     <color name="White">#FFFFFFFF</color>
     <color name="backgroundcol">#FF194479</color>
+    <color name="SpinnerGradientStart">#FF7db9e8</color>
+    <color name="SpinnerGradientCenter">#FF207cca</color>
+    <color name="SpinnerGradientEnd">#FF1E5799</color>
+
+
 </resources>
