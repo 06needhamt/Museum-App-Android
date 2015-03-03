@@ -29,5 +29,10 @@
     <string name="QRFragmentTitle">QR-Scanner</string>
     <string name="QRFragmentHint">Hint: scan any of our QR-codes to get more information.</string>
 
+    <string-array name="BugTrails">
+        <item>Creepy Crawly</item>
+        <item>Butterflies</item>
+        <item>Web Spinners</item>
+    </string-array>
 
 </resources>

@@ -77,9 +77,7 @@ public class WorldCulturesFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity().getBaseContext(), "Map Clicked", Toast.LENGTH_SHORT).show();
-
                 HomePageActivity hp = (HomePageActivity) getActivity();
-                //hp.callMultiChoiceActivity();
                 hp.callQuestionManager();
     }
 });

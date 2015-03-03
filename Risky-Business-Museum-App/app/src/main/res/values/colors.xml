@@ -4,6 +4,7 @@
     <color name="Blue">#FF0000FF</color>
     <color name="Green">#FF00FF00</color>
     <color name="Transparent">#00FFFFFF</color>
+    <color name="transparent">#00000000</color>
     <color name="White">#FFFFFFFF</color>
     <color name="backgroundcol">#FF194479</color>
 
