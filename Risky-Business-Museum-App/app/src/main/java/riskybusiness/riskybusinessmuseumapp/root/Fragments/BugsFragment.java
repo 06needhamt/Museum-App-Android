@@ -60,24 +60,23 @@ public class BugsFragment extends Fragment {
         int width = size.widthPixels;
         //Toast.makeText(getActivity().getBaseContext(), (CharSequence) String.valueOf(height),Toast.LENGTH_SHORT).show();
         allocateViews(view);
-        getSpinnerWorking();
+        getSpinnerWorking(view);
         //setSpinnerContentSylte();
         createLayoutParams(height, width, view);
 
         return view;
     }
 
-    private void getSpinnerWorking(){ //view http://examples.javacodegeeks.com/android/core/ui/spinner/android-spinner-drop-down-list-example/ and http://www.mkyong.com/android/android-spinner-drop-down-list-example/
+    private void getSpinnerWorking(View view){ //view http://examples.javacodegeeks.com/android/core/ui/spinner/android-spinner-drop-down-list-example/ and http://www.mkyong.com/android/android-spinner-drop-down-list-example/
         String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
         TextView[] texts = new TextView[trails.length];
         for(int i = 0; i > trails.length; i++){
             texts[i].setText(trails[i]);
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.spinner_rows, trails);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_rows, trails);
         dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
         BugsTrailSpinner.setAdapter(dataAdapter);
-
     }
 
     private void setSpinnerContentSylte(){

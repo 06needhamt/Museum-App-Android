@@ -7,8 +7,8 @@
         android:singleLine="true"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="#2E9AFE"
-        android:background="@color/transparent"
+        android:textColor="@color/lightBlue"
+        android:background="@color/Transparent"
         android:popupBackground="@color/transparent"
         android:ellipsize="marquee"
     />
