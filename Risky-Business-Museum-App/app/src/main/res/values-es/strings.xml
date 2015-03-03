@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Museo de negocio riesgoso App</string>
-	<string name="hello_world">Hola mundo!</string>
-	<string name="action_settings">Configuraci?n</string>
-	<string name="title_activity_home_page">HomePageActivity</string>
-	<string name="hello_blank_fragment">Hola fragmento en blanco</string>
-	<string name="title_activity_multi_choice">MultiChoiceActivity</string>
-	<string name="title_activity_single_answer">SingleAnswerActivity</string>
-	<string name="AncientWorldTitle">Bienvenido a la ruta del antiguo</string>
-	<string name="AncientWorldIntro">Exploraremos antiguo Egipto, Grecia, Roma e Inglaterra. Aprender sobre las culturas y personas importantes de los ?ltimos milenios. Usted puede encontrar esta exposici?n en el tercer piso.</string>
-	<string name="BugsWorldTitle">Bienvenido al sendero del hormiguero</string>
-	<string name="BugsWorldIntro">Aprende sobre los escarabajos, moscas, ara?as, escorpiones, ciempi?s y milpi?s. Hay colonias de hormigas y abejas a?n vivos! Usted puede encontrar esta exposici?n en el segundo piso.</string>
-	<string name="WorldCulturesTitle">Bienvenido a la ruta de las culturas del mundo</string>
-	<string name="WorldCulturesIntro">Explorar las tradiciones y culturas de todo el mundo y ver los objetos de las Am?ricas, ?frica, Asia y Ocean?a. Contamos con las espadas y armaduras Samurai! Usted puede encontrar esta exposici?n en el tercer piso.</string>
-	<string name="DinosaurTitle">Bienvenido a la ruta de Jurassic Park!</string>
-	<string name="DinosaurIntro">Viajar en el tiempo cuando los dinosaurios vagaban por nuestro planeta y explore r?plicas de tama?o natural de los depredadores prehist?ricos! Usted puede encontrar esta exposici?n en el cuarto piso.</string>
-	<string name="WelcomeTitle">Bienvenido al Museo mundial de Liverpool.</string>
-	<string name="WelcomeTrailInfo">Trail - tomar en un examen que le guiar? a trav?s de una exposici?n de su elecci?n.</string>
-	<string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, por favor me editar!</string>
-	<string name="WelcomeQRScannerInfo">Exploraci?n de los QR-codes para obtener m?s informaci?n.</string>
-	<string name="WelcomeMapInfo">Un plano detallando todas nuestras exposiciones y su ubicaci?n dentro del Museo.</string>
-	<string name="WelcomeMoreInfo">Vaya aqu? para m?s informaci?n sobre el Museo mundial de Liverpool y ayuda con el uso de esta aplicaci?n.</string>
-	<string name="title_activity_language">LanguageActivity</string>
-	<string name="ChooseLanguage">Seleccione su idioma preferido</string>
-	<string name="QRFragmentTitle">QR-Scanner</string>
-	<string name="QRFragmentHint">Sugerencia: escanear cualquiera de los QR-codes para obtener m�s informaci�n.</string>
+    <string name="app_name">Museo de negocio riesgoso App</string>
+    <string name="hello_world">Hola mundo!</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="title_activity_multi_choice">MultiChoiceActivity</string>
+    <string name="title_activity_single_answer">SingleAnswerActivity</string>
+    <string name="AncientWorldTitle">Bienvenido a la ruta del antiguo</string>
+    <string name="AncientWorldIntro">Exploraremos antiguo Egipto, Grecia, Roma e Inglaterra. Aprender sobre las culturas y personas importantes de los altimos milenios. Usted puede encontrar esta exposici?n en el tercer piso.</string>
+    <string name="BugsWorldTitle">Bienvenido al sendero del hormiguero</string>
+    <string name="BugsWorldIntro">Aprende sobre los escarabajos, moscas, ara?as, escorpiones, ciempies y milpies. Hay colonias de hormigas y abejas a?n vivos! Usted puede encontrar esta exposici?n en el segundo piso.</string>
+    <string name="WorldCulturesTitle">Bienvenido a la ruta de las culturas del mundo</string>
+    <string name="WorldCulturesIntro">Explorar las tradiciones y culturas de todo el mundo y ver los objetos de las Américas, África, Asia y Oceania. Contamos con las espadas y armaduras Samurai! Usted puede encontrar esta exposicion en el tercer piso.</string>
+    <string name="DinosaurTitle">Bienvenido a la ruta de Jurassic Park!</string>
+    <string name="DinosaurIntro">Viajar en el tiempo cuando los dinosaurios vagaban por nuestro planeta y explore réplicas de tamaro <!-- unsure of this word tamaro--> natural de los depredadores prehist?ricos! Usted puede encontrar esta exposición en el cuarto piso.</string>
+    <string name="WelcomeTitle">Bienvenido al Museo mundial de Liverpool.</string>
+    <string name="WelcomeTrailInfo">Rastro<!-- Trail --> - tomar en un examen que le guiar a viajes <!--viajes Travel--> <!-- travás Traverse--> de una exposicion de su eleccion.</string>
+    <string name="WelcomeExplorerTrailInfo">Explorador rastro <!-- Explorer Trail --> - Chris, por favor me editar!</string>
+    <string name="WelcomeQRScannerInfo">Exploracón de los QR-codes para obtener más información.</string>
+    <string name="WelcomeMapInfo">Un plano detallando todas nuestras exposiciones y su ubicación dentro del Museo.</string>
+    <string name="WelcomeMoreInfo">Vaya aquí para más información sobre el Museo mundial de Liverpool y ayuda con el uso de esta aplicación.</string>
+    <string name="title_activity_language">LanguageActivity</string>
+    <string name="ChooseLanguage">Seleccione su idioma preferido</string>
+    <string name="QRFragmentTitle">QR-Scanner</string>
+    <string name="QRFragmentHint">Sugerencia: escanear cualquiera de los QR-codes para obtener más información.</string>
 
 </resources>
