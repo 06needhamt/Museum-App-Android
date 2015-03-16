@@ -1,6 +1,9 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 //import android.support.v7.app.ActionBarActivity;
@@ -12,55 +15,117 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
-import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
-import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
+//import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
+//import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
+import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
 import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
 import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
 
 
 public class MainActivity extends FragmentActivity {
+    private final String PREF_NAMES = "myAppPrefs";
 
     SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseHelper db = null;
+        SQLiteDatabase myDataBase;
+
+        int status = 0; // Status value returned from createDatabase 0 == OK
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //DatabaseAccessWrapper db = new DatabaseAccessWrapper(getBaseContext());
-        DataBaseHelper dbh = new DataBaseHelper(getBaseContext());
-        //database = db.OpenDatabase();
+        // CheckForLanguageChoice(); // Checks to see if the language has been chosen
+
+        db = new DatabaseHelper(this);
+
+
+        System.out.println("Hello World");
+
+        System.out.println("Database name: " + db.getDatabaseName());
+
         try {
-            database = dbh.createDataBase(getBaseContext());
-            //database = SQLiteDatabase.openOrCreateDatabase(dbh.dbfile, null);
-        }
-        catch(Exception E){
-            E.printStackTrace();
+            status = db.createDataBase(); // Checks if database already exists - if not tries to create it
+        } catch(Exception e) {
+            System.out.println("Database not created!");
         }
 
-        System.out.println("Are we here yet?");
-        database = SQLiteDatabase.openDatabase(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath(),null,0);
+        if(status != 0) {
+            System.out.println("Error initialising database, status value = " + status);
+        }
 
-//        if(database != null) {
-//            Toast.makeText(getBaseContext(), "DB Okay", Toast.LENGTH_LONG).show();
-//            System.out.println(getBaseContext().getDatabasePath("MuseumDB").getAbsolutePath());
-//            database.beginTransaction();
-//            Cursor c = database.rawQuery("SELECT * FROM TrailStep",null);
-//            if(c != null)
-//            {
-//                Toast.makeText(getBaseContext(), "Query Okay", Toast.LENGTH_LONG).show();
-//                c.moveToFirst();
-//                while (!c.isLast())
-//                {
-//                    c.moveToNext();
-//                    Toast.makeText(getBaseContext(),(CharSequence)c.getString(0),Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            database.endTransaction();
-//            return;
-//        }
+        myDataBase = db.getReadableDatabase();
+
+        db.openDataBase();
+
+        try {
+            Cursor cursor;
+
+            System.out.println("Database is open: " + db.getDatabaseName());
+
+            System.out.println("Ready to query database");
+
+            cursor = myDataBase.rawQuery("SELECT trail._id as t_ID, trail.name as trailName, trailStep.* FROM trail join trailStep on trailStep.trailID = t_ID", new String[]{});
+
+            System.out.println("Query executed, results:");
+
+            if(cursor != null) {
+                cursor.moveToFirst();
+
+                while(!cursor.isAfterLast()) {
+                    System.out.println("Trail = " + cursor.getString(cursor.getColumnIndex("trailName")) + ", Record = " + cursor.getString(cursor.getColumnIndex("question")));
+
+                    cursor.moveToNext();
+                }
+
+            }
+
+//            populateListViewFromDatabase(); // Query the database and populate list view with records
+
+            db.close(); // Close the database
+
+        } catch (Exception e) {
+            System.out.println("Unable to create or open database");
+        }
+
+        System.out.println("Finished messing about, ");
+
+    }
+
+
+    public void CheckForLanguageChoice(View v) {
+        SharedPreferences prefs = getBaseContext().getSharedPreferences(PREF_NAMES, Context.MODE_PRIVATE);
+        SharedPreferencesHandler prh = new SharedPreferencesHandler(prefs);
+
+        System.out.println("Chosen Language = " + prh.getLanguage());
+
+        if(prh.getLanguage().equals("Not Chosen"))
+        {
+            Intent i = new Intent(getBaseContext(), LanguageActivity.class);
+            startActivity(i);
+        }
+        else
+        {
+            System.out.println("Chosen Language - in ELSE");
+
+            SetLanguage(prh.getLanguage());
+            LoadMainPage(v);
+        }
+    }
+
+    private void SetLanguage(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
     }
 
 
@@ -89,9 +154,16 @@ public class MainActivity extends FragmentActivity {
 
     public void LoadMainPage(View v)
     {
+        System.out.println("Load Main Page" );
+
+        //CheckForLanguageChoice(new View(getBaseContext());  // Checks to see if the language has been chosen
+
         Intent i = new Intent(getBaseContext(),HomePageActivity.class);
         //Intent i = new Intent(getBaseContext(),LanguageActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
+
+
+
         startActivity(i);
         //finish();
     }

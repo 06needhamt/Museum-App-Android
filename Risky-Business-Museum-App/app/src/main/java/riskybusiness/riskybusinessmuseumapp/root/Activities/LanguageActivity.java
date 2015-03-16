@@ -1,11 +1,14 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +21,10 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
 
 public class LanguageActivity extends FragmentActivity {
+    private final String PREF_NAMES = "myAppPrefs";
     final String[] langs = {"en", "de", "fr", "es"}; // Language specifiers
 
     TextView Title;
@@ -93,7 +98,15 @@ public class LanguageActivity extends FragmentActivity {
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
+        saveLanguageChoice(lang);
         startHomePageActivity();
+    }
+
+    private void saveLanguageChoice(String lang) {
+        SharedPreferences prefs = getBaseContext().getSharedPreferences(PREF_NAMES, Context.MODE_PRIVATE);
+        SharedPreferencesHandler sph = new SharedPreferencesHandler(prefs);
+        sph.setLanguage(lang);
+        Log.e("Prefs", "Language = " + sph.getLanguage());
     }
 
     private void SetAllLayoutParams(int height, int width)

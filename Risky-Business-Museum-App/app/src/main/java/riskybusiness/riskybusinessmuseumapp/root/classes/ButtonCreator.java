@@ -220,9 +220,9 @@ public class ButtonCreator {
 
         // Debuging output, itterate throught the icon list and print info
         System.out.println("Icons found:");
-        for(IconInfo icn : drawableList.icons) {
-            System.out.println(icn.name + " : " + icn.iconID);
-        }
+//        for(IconInfo icn : drawableList.icons) {
+//            System.out.println(icn.name + " : " + icn.iconID);
+//        }
     }
 
 
