@@ -37,6 +37,7 @@ public class HomePageActivity extends FragmentActivity {
     Fragment[] fragments;
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
+    Fragment[] InfoFragments;
     String Content;
     String Format;
     int score;
@@ -51,7 +52,8 @@ public class HomePageActivity extends FragmentActivity {
         fragments = CreateFragments();
         Mapfragments = CreateMapFragments();
         BottomFragments = CreateBottomFragments();
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments);
+        InfoFragments = CreateInfoFragments();
+        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,InfoFragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -91,6 +93,17 @@ public class HomePageActivity extends FragmentActivity {
         fragments[2] = new QRFragment();
         fragments[3] = new GroundFloorFragment();
         fragments[4] = new InformationFragment();
+        return fragments;
+    }
+    private Fragment[] CreateInfoFragments()
+    {
+        Fragment[] fragments = new Fragment[6];
+        fragments[0] = new Fragment();
+        fragments[1] = new Fragment();
+        fragments[2] = new Fragment();
+        fragments[3] = new Fragment();
+        fragments[4] = new Fragment();
+        fragments[5] = new Fragment();
         return fragments;
     }
 
