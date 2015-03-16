@@ -1,16 +1,22 @@
 package riskybusiness.riskybusinessmuseumapp.root.classes;
 
 //import android.annotation.TargetApi;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
@@ -36,6 +42,7 @@ public class ButtonCreator {
     Fragment[] Trailfragments;
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
+    Fragment[] InfoFragments;
     TableRow tableRowTop;
 
     Button[] Topbuttons = new Button[NUM_TOP_BUTTONS]; // Array for buttons
@@ -44,6 +51,7 @@ public class ButtonCreator {
     boolean[] TopButtonState = {false, false, false, false, false, false}; // Which top button is pressed?
     boolean[] BottomButtonState = {false, false, false, false, false}; // Which bottom button is pressed?
     boolean[] MapButtonState = {false, false, false, false, false, false}; // Which map button is pressed?
+    boolean[] InfoButtonState = {false, false, false, false, false, false}; // Which map button is pressed?
 
     //ArrayList<IconInfo> drawableList = new ArrayList<>(); // Array list of type IconInfo for drawables
 
@@ -54,9 +62,11 @@ public class ButtonCreator {
     final String[] iconOverNamesBottom = {"green__icon_question", "green__icon_trail", "green__icon_qr", "green__icon_map", "green__icon_information"};
     final String[] iconUnderNamesMap = {"blue__icon_floorg","blue__icon_floor1", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floor5"};
     final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor1","green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
+    ////////////////////// icon names needs changing  ///////////////////////////////
+    final String[] iconUnderNamesInfo = {"blue__icon_floorg","blue__icon_floor1", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floorg"};
+    final String[] iconOverNamesInfo = {"green__icon_floorg", "green__icon_floor1","green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floorg"};
 
-
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, Fragment[] InfoFragments)
     {
         this.act = A;
         this.toptableid = toptable;
@@ -65,9 +75,10 @@ public class ButtonCreator {
         this.Trailfragments = Trailfragments;
         this.Mapfragments = Mapfragments;
         this.BottomFragments = BottomFragments;
+        this.InfoFragments = InfoFragments;
     }
 
-    //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 
     public void populateBottomButtons() {
 
@@ -138,6 +149,22 @@ public class ButtonCreator {
                }
            });
        }
+    }
+    public void populateInfoButtons()
+    {
+        for(int i = 0; i < Topbuttons.length; i++)
+        {
+            final int btn = i;
+            //Topbuttons[i] = new Button(act);
+            //Topbuttons[i].setBackgroundColor(act.getResources().getColor(R.color.White));
+            Topbuttons[i].setBackground(act.getResources().getDrawable(drawableList.getId(iconUnderNamesInfo[i])));
+            Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MapgridButtonClicked(btn);
+                }
+            });
+        }
     }
     public void populateTopButtons() {
 
@@ -220,9 +247,9 @@ public class ButtonCreator {
 
         // Debuging output, itterate throught the icon list and print info
         System.out.println("Icons found:");
-        for(IconInfo icn : drawableList.icons) {
-            System.out.println(icn.name + " : " + icn.iconID);
-        }
+//        for(IconInfo icn : drawableList.icons) {
+//            System.out.println(icn.name + " : " + icn.iconID);
+//        }
     }
 
 
@@ -244,6 +271,15 @@ public class ButtonCreator {
 
     }
 
+    public void InfogridButtonClicked(int btn)
+    {
+        //Toast.makeText(act, "Map Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+        resetButtonBackgroundInfo(btn);
+        act.getFragmentManager().beginTransaction().replace(R.id.frame, InfoFragments[btn]).commit();
+
+    }
+
+
     public void BottomgridButtonClicked(int btn) { // Show Toast message
 
         switch(btn)
@@ -251,6 +287,7 @@ public class ButtonCreator {
             case 0:
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //populateTopButtons();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
@@ -258,6 +295,7 @@ public class ButtonCreator {
             case 1:
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //populateTopButtons();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
@@ -265,6 +303,7 @@ public class ButtonCreator {
             case 2:
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //populateTopButtons();
                 resetButtonBackgroundBottom(btn);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 //StartQRActivity();
@@ -273,7 +312,7 @@ public class ButtonCreator {
             case 3:
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                populateMapButtons();
+                //populateMapButtons();
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(0);
@@ -283,8 +322,10 @@ public class ButtonCreator {
             case 4:
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
+                //populateInfoButtons();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
+                resetButtonBackgroundInfo(0);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
 
                 break;
@@ -300,7 +341,7 @@ public class ButtonCreator {
     }
 
 
-    //@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundBottom(int btn)
     {
         for(int i = 0; i < NUM_BUTTONS; i++)
@@ -389,6 +430,38 @@ public class ButtonCreator {
         }
     }
 
+    public void resetButtonBackgroundInfo(int btn)
+    {
+        for(int i = 0; i < NUM_TOP_BUTTONS; i++)
+        {
+            final int col = i;
+            if(i != btn)
+            {
+                int id = drawableList.getId(iconUnderNamesInfo[i]);
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InfogridButtonClicked(col);
+                    }
+                });
+                InfoButtonState[i] = false;
+            }
+            else
+            {
+                int id = drawableList.getId(iconOverNamesInfo[i]);
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+                Topbuttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InfogridButtonClicked(col);
+                    }
+                });
+                InfoButtonState[i] = true;
+            }
+        }
+    }
+
     public int getPressedTop() {
         for(int t = 0; t < TopButtonState.length; t++)
             if(TopButtonState[t])
@@ -410,6 +483,14 @@ public class ButtonCreator {
     public int getPressedMap() {
         for(int t = 0; t < MapButtonState.length; t++)
             if(MapButtonState[t])
+                return t; // return the index of the pressed button
+
+        return -1; // Error - no buttons pressed
+    }
+
+    public int getPressedInfo() {
+        for(int t = 0; t < InfoButtonState.length; t++)
+            if(InfoButtonState[t])
                 return t; // return the index of the pressed button
 
         return -1; // Error - no buttons pressed
