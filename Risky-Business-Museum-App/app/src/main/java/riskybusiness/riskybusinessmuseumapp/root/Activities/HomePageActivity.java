@@ -166,11 +166,11 @@ public class HomePageActivity extends FragmentActivity {
 
         else if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
-                if(!data.hasExtra("B"))
-                {
-                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
-                    return;
-                }
+//                if(!data.hasExtra("B"))
+//                {
+//                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
+//                    return;
+//                }
                 Bundle b = data.getExtras();
 
                 Content = b.getString("Content", "No Value");
