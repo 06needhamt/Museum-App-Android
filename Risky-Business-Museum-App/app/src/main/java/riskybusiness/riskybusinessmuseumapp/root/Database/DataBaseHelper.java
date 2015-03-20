@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
     private String DB_PATH;
-    private static String DB_NAME = "museumDB";
+    private static String DB_NAME = "MuseumDB";
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 

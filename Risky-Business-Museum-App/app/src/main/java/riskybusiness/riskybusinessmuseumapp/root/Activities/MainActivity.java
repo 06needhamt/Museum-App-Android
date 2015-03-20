@@ -100,23 +100,27 @@ public class MainActivity extends FragmentActivity {
 
 
     public void CheckForLanguageChoice(View v) {
-        SharedPreferences prefs = getBaseContext().getSharedPreferences(PREF_NAMES, Context.MODE_PRIVATE);
-        SharedPreferencesHandler prh = new SharedPreferencesHandler(prefs);
-
-        System.out.println("Chosen Language = " + prh.getLanguage());
-
-        if(prh.getLanguage().equals("Not Chosen"))
-        {
-            Intent i = new Intent(getBaseContext(), LanguageActivity.class);
-            startActivity(i);
-        }
-        else
-        {
-            System.out.println("Chosen Language - in ELSE");
-
-            SetLanguage(prh.getLanguage());
-            LoadMainPage(v);
-        }
+        ///////////////////////// Debug Start DBImage Activity Remove Later  ///////////////////////////////
+        Intent dbi = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
+        startActivity(dbi);
+        //////////////////////////////////// End of Debug Calls ////////////////////////////////////////////
+//        SharedPreferences prefs = getBaseContext().getSharedPreferences(PREF_NAMES, Context.MODE_PRIVATE);
+//        SharedPreferencesHandler prh = new SharedPreferencesHandler(prefs);
+//
+//        System.out.println("Chosen Language = " + prh.getLanguage());
+//
+//        if(prh.getLanguage().equals("Not Chosen"))
+//        {
+//            Intent i = new Intent(getBaseContext(), LanguageActivity.class);
+//            startActivity(i);
+//        }
+//        else
+//        {
+//            System.out.println("Chosen Language - in ELSE");
+//
+//            SetLanguage(prh.getLanguage());
+//            LoadMainPage(v);
+//        }
     }
 
     private void SetLanguage(String lang) {
@@ -158,7 +162,8 @@ public class MainActivity extends FragmentActivity {
 
         //CheckForLanguageChoice(new View(getBaseContext());  // Checks to see if the language has been chosen
 
-        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        Intent i = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
         //Intent i = new Intent(getBaseContext(),LanguageActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
 

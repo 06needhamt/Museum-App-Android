@@ -52,6 +52,10 @@
             android:name=".root.Activities.LanguageActivity"
             android:label="@string/title_activity_language" >
         </activity>
+        <activity
+            android:name=".root.Activities.DataBaseImageTestActivity"
+            android:label="@string/title_activity_data_base_image_test" >
+        </activity>
     </application>
 
 </manifest>

@@ -36,5 +36,6 @@
         <item>Ant colony</item>
         <item>Edo Kingdom</item>
     </string-array>
+    <string name="title_activity_data_base_image_test">DataBaseImageTestActivity</string>
 
 </resources>
