@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,14 +15,14 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import riskybusiness.riskybusinessmuseumapp.R;
-import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
 
 public class DataBaseImageTestActivity extends FragmentActivity {
 
     ImageView dbimage;
     int status;
     SQLiteDatabase myDataBase;
-    DataBaseHelper db;
+    DatabaseHelper db;
     final int IMAGE_COLUMN = 0;
 
     @Override
@@ -74,7 +75,7 @@ public class DataBaseImageTestActivity extends FragmentActivity {
 
     public void openDatabase()
     {
-        db = new DataBaseHelper(this);
+        db = new DatabaseHelper(this);
 
 
         System.out.println("Hello World");

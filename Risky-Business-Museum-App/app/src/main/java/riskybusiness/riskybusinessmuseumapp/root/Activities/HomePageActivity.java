@@ -166,18 +166,15 @@ public class HomePageActivity extends FragmentActivity {
 
         else if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
-//                if(!data.hasExtra("B"))
-//                {
-//                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-
-
+                if(!data.hasExtra("B"))
+                {
+                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Bundle b = data.getExtras();
 
                 Content = b.getString("Content", "No Value");
                 QRResultHandler qrh = new QRResultHandler(Content);
-                qrh.getResult();
 //                if(qrh.getResult().equals(DATABASE EXHIBIT ITEM)){
 //                    Show information on the item the person scanned
 //                    Or ask user if they want to start a trail from this exhibit

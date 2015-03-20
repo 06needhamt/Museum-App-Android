@@ -19,7 +19,7 @@ import java.io.OutputStream;
  * From: http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
  */
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
     private String DB_PATH;
@@ -32,7 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
      * @param context
      */
-    public DataBaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
 
         super(context, DB_NAME, null, 1);
 
