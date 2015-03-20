@@ -321,6 +321,7 @@ public class IntentIntegrator {
     intentScan.setPackage(targetAppPackage);
     intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+    intentScan.putExtra("SAVE_HISTORY", false); //this stops saving your barcode in barcode scanner app's history
     attachMoreExtras(intentScan);
     startActivityForResult(intentScan, REQUEST_CODE);
     return null;
