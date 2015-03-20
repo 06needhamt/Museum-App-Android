@@ -307,6 +307,7 @@ public class IntentIntegrator {
         joinedByComma.append(format);
       }
       intentScan.putExtra("SCAN_FORMATS", joinedByComma.toString());
+      intentScan.putExtra("SAVE_HISTORY", false); //this stops saving your barcode in barcode scanner app's history
     }
 
     // check requested camera ID
