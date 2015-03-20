@@ -1,8 +1,6 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,18 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
-import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
-import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
-import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
-import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 
 
 public class MainActivity extends FragmentActivity {
@@ -33,17 +26,21 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DatabaseHelper db = null;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        connectDatabase();
+    }
+
+    private void connectDatabase() {
+
+        DataBaseHelper db = null;
         SQLiteDatabase myDataBase;
 
         int status = 0; // Status value returned from createDatabase 0 == OK
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         // CheckForLanguageChoice(); // Checks to see if the language has been chosen
 
-        db = new DatabaseHelper(this);
+        db = new DataBaseHelper(this);
 
 
         System.out.println("Hello World");
@@ -97,6 +94,7 @@ public class MainActivity extends FragmentActivity {
         System.out.println("Finished messing about, ");
 
     }
+
 
 
     public void CheckForLanguageChoice(View v) {
