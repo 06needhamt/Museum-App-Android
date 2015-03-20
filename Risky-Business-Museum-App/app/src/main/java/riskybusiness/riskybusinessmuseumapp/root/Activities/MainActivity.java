@@ -12,18 +12,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
-import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
-import riskybusiness.riskybusinessmuseumapp.root.classes.TouchImageView;
-import riskybusiness.riskybusinessmuseumapp.root.questionmanager.QuestionManager;
 
 
 public class MainActivity extends FragmentActivity {
@@ -33,7 +29,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DatabaseHelper db = null;
+        DataBaseHelper db = null;
         SQLiteDatabase myDataBase;
 
         int status = 0; // Status value returned from createDatabase 0 == OK
@@ -43,7 +39,7 @@ public class MainActivity extends FragmentActivity {
 
         // CheckForLanguageChoice(); // Checks to see if the language has been chosen
 
-        db = new DatabaseHelper(this);
+        db = new DataBaseHelper(this);
 
 
         System.out.println("Hello World");
@@ -162,8 +158,8 @@ public class MainActivity extends FragmentActivity {
 
         //CheckForLanguageChoice(new View(getBaseContext());  // Checks to see if the language has been chosen
 
-        //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
-        Intent i = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
+        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+//        Intent i = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
         //Intent i = new Intent(getBaseContext(),LanguageActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
 
