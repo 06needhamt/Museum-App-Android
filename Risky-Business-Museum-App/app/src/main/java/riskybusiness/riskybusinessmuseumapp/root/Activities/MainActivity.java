@@ -1,6 +1,8 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +19,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
 //import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseAccessWrapper;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DataBaseHelper;
+import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
 
 
 public class MainActivity extends FragmentActivity {
@@ -160,8 +163,8 @@ public class MainActivity extends FragmentActivity {
 
         //CheckForLanguageChoice(new View(getBaseContext());  // Checks to see if the language has been chosen
 
-        //Intent i = new Intent(getBaseContext(),HomePageActivity.class);
-        Intent i = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
+        Intent i = new Intent(getBaseContext(),HomePageActivity.class);
+        //Intent i = new Intent(getBaseContext(),DataBaseImageTestActivity.class);
         //Intent i = new Intent(getBaseContext(),LanguageActivity.class);
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
 
