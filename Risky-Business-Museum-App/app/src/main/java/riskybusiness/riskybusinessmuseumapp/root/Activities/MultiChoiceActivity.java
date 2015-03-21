@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 
@@ -29,15 +30,18 @@ import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant
 public class MultiChoiceActivity extends FragmentActivity implements IConfirmDialogCompliant {
     private int screenHeight;
     private int screenWidth;
-    private Button btnMcA, btnMcB, btnMcC, btnMcD, btnNextQuestionMC;
+    private Button btnMcA, btnMcB, btnMcC, btnMcD, btnSkipOrNext;
     private Button[] answerButtons;
-    private TextView multiChoiceQuestion;
-    private final int MAX_SCORE = 10;
+    private TextView multiChoiceQuestion, ScoreField, TrailPositionField;
+    private final int MAX_SCORE = 100;
     private boolean endtrail = false; //set this to true for the trail to end after this question and false for it not to end after this question
     private int score;
     private String question;
     private List<String> answers;
     private String correctAnswer;
+    private boolean hasBeenSkipped = false;
+    private int currentPosition;
+    private int trailLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         setContentView(R.layout.activity_multi_choice);
         score = MAX_SCORE;
         multiChoiceQuestion = (TextView) findViewById(R.id.multiChoiceQuestion);
+        ScoreField = (TextView) findViewById(R.id.McScore);
+        TrailPositionField = (TextView) findViewById(R.id.McTrailPosition);
         setButtonListeners();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -52,17 +58,27 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         screenWidth = metrics.widthPixels;
 
         createLayoutParams(screenHeight, screenWidth);
-
         Bundle bundle = getIntent().getExtras();
-        question = bundle.getString("QUESTION");
-        String temp = bundle.getString("ANSWER");
-        applyAnswers(temp);
-        correctAnswer = answers.get(0);
+        unpackBundle(bundle); //unpacking bundle and assigning all relevant data
+
         //randomising the answers
         theOldSwitcheroo(); //this will call populateButtons()
 
     }
 
+    private void unpackBundle(Bundle bundle){ //unpacking bundle and assigning all relevant data
+        question = bundle.getString("QUESTION");
+        String temp = bundle.getString("ANSWER");
+        applyAnswers(temp);
+        correctAnswer = answers.get(0);
+        currentPosition = bundle.getInt("TRAIL_POSITION", -1);
+        trailLength = bundle.getInt("TRAIL_LENGTH", -1);
+    }
+
+    /**
+     * This method will randomise the order of the four questions and populate the buttons with the new answers.
+     * The correct answer is still saved in the String correctAnswer and will be checked against when pressing one of the buttons
+     */
     private void theOldSwitcheroo(){
         Random rd = new Random();
         LinkedList<String> tempy = new LinkedList<>();
@@ -87,7 +103,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
 
     @Override
     public void onBackPressed(){
-        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment("Do you want to leave this trail? Your score will be lost and you will return to the main menu.", this);
+        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment(R.string.BackToMainFragmentText, this);
         dialog.show(this.getFragmentManager(), null);
     }
 
@@ -96,15 +112,41 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcB.setText(list.get(1));
         btnMcC.setText(list.get(2));
         btnMcD.setText(list.get(3));
-        btnNextQuestionMC.setText("Next Question");
+        btnSkipOrNext.setText(R.string.Skip);
         multiChoiceQuestion.setText(question);
+        updateScore(score); //updating score field with the default score
+        updateTrailPosition(currentPosition, trailLength); //setting the current trail position, i.e. Question 1 of 10
     }
 
+    private void updateScore(int score){
+        ScoreField.setText("Score: " + score);
+    }
+
+    private void updateTrailPosition(int currpos, int max){
+        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max + 1)); //add 1 to them since these values come from a 0 indexed list
+    }
+
+    /**
+     * Splitting the passed String at commas and converting it to a List<String>.
+     * @param temp String containing comma separated answers to the question, first one being the correct answer
+     */
     private void applyAnswers(String temp){
         answers = Arrays.asList(temp.split("\\s*,\\s*"));
     }
 
+    /**
+     * Converting the button from saying Skip to saying Next.
+     * This should be called when the user gives the correct answer.
+     */
+    private void makeSkipToNextButton() {
+        btnSkipOrNext.setText(R.string.Next);
+    }
+
+    /**
+     * Sets the onClickListeners for all buttons on the screen.
+     */
     private void setButtonListeners(){
+        //BUTTON A
         btnMcA = (Button) findViewById(R.id.btnMcA);
         btnMcA.setClickable(true);
         btnMcA.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +155,9 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
                 //Toast.makeText(getBaseContext(), "Button A clicked", Toast.LENGTH_LONG).show(); //////////////delete
                 if(checkAnswer(btnMcA)) {
                     //passData(); // Correct answer
-                    btnNextQuestionMC.setVisibility(View.VISIBLE);
-                    btnNextQuestionMC.setClickable(true);
+                    btnSkipOrNext.setVisibility(View.VISIBLE);
+                    btnSkipOrNext.setClickable(true);
+                    makeSkipToNextButton();
                     disableAllAnswerButtons();
                 }
                 else {
@@ -123,6 +166,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
             }
         });
 
+        //BUTTON B------------------------------------------
         btnMcB = (Button) findViewById(R.id.btnMcB);
         btnMcB.setClickable(true);
         btnMcB.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +175,9 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
                 //Toast.makeText(getBaseContext(), "Button B clicked", Toast.LENGTH_LONG).show();//////////////////
                 if(checkAnswer(btnMcB)) {
                     //passData(); // Correct answer
-                    btnNextQuestionMC.setVisibility(View.VISIBLE);
-                    btnNextQuestionMC.setClickable(true);
+                    btnSkipOrNext.setVisibility(View.VISIBLE);
+                    btnSkipOrNext.setClickable(true);
+                    makeSkipToNextButton();
                     disableAllAnswerButtons();
                 }
                 else {
@@ -141,6 +186,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
             }
         });
 
+        //BUTTON C------------------------------------------
         btnMcC = (Button) findViewById(R.id.btnMcC);
         btnMcC.setClickable(true);
         btnMcC.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +195,9 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
                 //Toast.makeText(getBaseContext(), "Button C clicked", Toast.LENGTH_LONG).show();///////////////
                 if(checkAnswer(btnMcC)) {
                     //passData(); // Correct answer
-                    btnNextQuestionMC.setVisibility(View.VISIBLE);
-                    btnNextQuestionMC.setClickable(true);
+                    btnSkipOrNext.setVisibility(View.VISIBLE);
+                    btnSkipOrNext.setClickable(true);
+                    makeSkipToNextButton();
                     disableAllAnswerButtons();
                 }
                 else {
@@ -159,6 +206,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
             }
         });
 
+        //BUTTON D------------------------------------------
         btnMcD = (Button) findViewById(R.id.btnMcD);
         btnMcD.setClickable(true);
         btnMcD.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +215,9 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
                 //Toast.makeText(getBaseContext(), "Button D clicked", Toast.LENGTH_LONG).show();//////////////
                 if(checkAnswer(btnMcD)) {
                     //passData(); // Correct answer
-                    btnNextQuestionMC.setVisibility(View.VISIBLE);
-                    btnNextQuestionMC.setClickable(true);
+                    btnSkipOrNext.setVisibility(View.VISIBLE);
+                    btnSkipOrNext.setClickable(true);
+                    makeSkipToNextButton();
                     disableAllAnswerButtons();
                 }
                 else {
@@ -177,17 +226,37 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
             }
         });
 
-        btnNextQuestionMC = (Button) findViewById(R.id.btnNextQuestionMC);
-        btnNextQuestionMC.setVisibility(View.INVISIBLE);
-        btnNextQuestionMC.setClickable(false);
-        btnNextQuestionMC.setOnClickListener(new View.OnClickListener() {
+        //BUTTON SKIP OR NEXT-------------------------------
+        btnSkipOrNext = (Button) findViewById(R.id.btnMcSkipOrNext);
+        btnSkipOrNext.setVisibility(View.VISIBLE);
+        btnSkipOrNext.setClickable(true);
+        btnSkipOrNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                passData();
+                if(btnSkipOrNext.getText().equals(getResources().getString(R.string.Skip))){ //if the button is still set to Skip, reduce the score to 0
+                    applySkipDialog();
+                }
+                else if (btnSkipOrNext.getText().equals(getResources().getString(R.string.Next))){
+                    passData();
+                }
             }
         });
     }
 
+    /**
+     * Creates an AreYouSureToSkipDialogFragment
+     */
+    private void applySkipDialog(){
+        AreYouSureToSkipDialogFragment dialog = new AreYouSureToSkipDialogFragment(R.string.SkipFragmentText, this);
+        dialog.show(getFragmentManager(), null);
+    }
+
+
+    /**
+     * Checks the content of the button to see if it is the right answer.
+     * @param btn
+     * @return
+     */
     private boolean checkAnswer(Button btn) {
         // Hightlite button to indicate used
 
@@ -200,7 +269,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         }
         else {
             btn.setBackgroundColor(getResources().getColor(R.color.Red));
-            Toast.makeText(getBaseContext(), "Wrong answer " + score / 5 + " Guesses Left", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Wrong answer " + score / 50 + " Guesses Left", Toast.LENGTH_LONG).show();
          }
 
 //        CountDownTimer timer = new CountDownTimer(5000, 1) { // Pause the thread
@@ -220,13 +289,13 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void numGuesses(Button btn) { // Check the guesses state and adjust score
-        score -= 5; // Reduce the score
+        score -= 25; // Reduce the score
         if(score <= 0) { // Check if any guesses left
             // no guesses exit activity returning data
         }
-        //setting the button that has been clicked to unclickable state
+        //setting the button that has been clicked to un-clickable state
         btn.setClickable(false);
-
+        updateScore(score); //update the score field with the new score
     }
 
     private void resetButtonsToClickable(){
@@ -234,8 +303,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcB.setClickable(true);
         btnMcC.setClickable(true);
         btnMcD.setClickable(true);
-        btnNextQuestionMC.setClickable(false);
-        btnNextQuestionMC.setVisibility(View.INVISIBLE);
+        btnSkipOrNext.setClickable(true);
     }
 
 
@@ -244,16 +312,17 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcB.setLayoutParams(btnMcBLayout(screenHeight, screenWidth));
         btnMcC.setLayoutParams(btnMcCLayout(screenHeight, screenWidth));
         btnMcD.setLayoutParams(btnMcDLayout(screenHeight, screenWidth));
-        btnNextQuestionMC.setLayoutParams(btnNextQuestionLayout(screenHeight, screenWidth));
+        btnSkipOrNext.setLayoutParams(btnNextOrSkipLayout(screenHeight, screenWidth));
         multiChoiceQuestion.setLayoutParams(multiChoiceQuestionLayout(screenHeight, screenWidth));
     }
 
     private FrameLayout.LayoutParams multiChoiceQuestionLayout(int screenHeight, int screenWidth){
         int textHeight, textWidth;
-        textHeight = (int) (screenHeight * 0.30); //
+        textHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         textWidth = FrameLayout.LayoutParams.MATCH_PARENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(textWidth, textHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.05); //!!!!
         return params;
     }
 
@@ -297,12 +366,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         return params;
     }
 
-    private FrameLayout.LayoutParams btnNextQuestionLayout(int screenHeight, int screenWidth) {
+    private FrameLayout.LayoutParams btnNextOrSkipLayout(int screenHeight, int screenWidth) {
         int btnDHeight, btnDWidth;
         btnDHeight = (int) (screenHeight * 0.10);
-        btnDWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+        btnDWidth = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
-        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.gravity = Gravity.RIGHT;
         params.topMargin = (int) (screenHeight * 0.73); //!!!!
         return params;
     }
@@ -337,12 +406,18 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcD.setClickable(false);
     }
 
+    /**
+     * Create a bundle containing all the relevant information for the activity which as started
+     * this activity for a result.
+     * @return Bundle with all relevant data from this activity, including tags "FROM", "Score", "EXIT" and "SKIPPED"
+     */
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
         bundle.putInt("Score", score);
         bundle.putString("FROM", "MultiChoiceActivity");
         bundle.putBoolean("EXIT", endtrail);
+        bundle.putBoolean("SKIPPED", hasBeenSkipped);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
@@ -351,13 +426,20 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     @Override
-    public void doYesConfirmClick() {
-        endtrail = true;
-        passData();
+    public void doYesConfirmClick(final int from) { //this is called in the dialog fragment when the user presses the yes button.
+        if(from == IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG) {
+            endtrail = true;
+            passData();
+        }
+        else if (from == IConfirmDialogCompliant.FROM_SKIP_DIALOG){
+            score = 0;
+            hasBeenSkipped = true;
+            passData();
+        }
     }
 
     @Override
-    public void doNoConfirmClick() {
+    public void doNoConfirmClick(final int from) {
         //Do nothing
     }
 }

@@ -228,6 +228,8 @@ public class HomePageActivity extends FragmentActivity {
         Bundle bundle = new Bundle();
         bundle.putString("QUESTION", question);
         bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -238,6 +240,8 @@ public class HomePageActivity extends FragmentActivity {
         Bundle bundle = new Bundle();
         bundle.putString("QUESTION", question);
         bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);

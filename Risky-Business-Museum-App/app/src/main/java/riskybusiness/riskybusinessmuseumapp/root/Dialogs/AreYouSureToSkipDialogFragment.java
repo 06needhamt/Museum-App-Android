@@ -9,23 +9,23 @@ import android.os.Bundle;
 import riskybusiness.riskybusinessmuseumapp.R;
 
 /**
- * Created by Alex on 28/02/2015.
+ * Created by Alex on 21/03/2015.
  */
-public class BackToMainMenuDialogFragment extends DialogFragment {
+public class AreYouSureToSkipDialogFragment extends DialogFragment {
     private String question;
-    private IConfirmDialogCompliant ICDC;
     private int resID = 0;
-    public BackToMainMenuDialogFragment(){}
+    private IConfirmDialogCompliant ICDC;
+    public AreYouSureToSkipDialogFragment(){}
 
     @Deprecated
-    public BackToMainMenuDialogFragment(String question){this.question = question;}
+    public AreYouSureToSkipDialogFragment(String question){this.question = question;}
 
     @Deprecated
-    public BackToMainMenuDialogFragment(String question, IConfirmDialogCompliant ICDC){this.question = question; this.ICDC = ICDC;}
+    public AreYouSureToSkipDialogFragment(String question, IConfirmDialogCompliant ICDC){this.question = question; this.ICDC = ICDC;}
 
-    public BackToMainMenuDialogFragment(int resID) {this.resID = resID;}
+    public AreYouSureToSkipDialogFragment(int resID){this.resID = resID;}
 
-    public BackToMainMenuDialogFragment(int resID, IConfirmDialogCompliant ICDC) {this.resID = resID; this.ICDC = ICDC;}
+    public AreYouSureToSkipDialogFragment(int resID, IConfirmDialogCompliant ICDC){this.resID = resID; this.ICDC = ICDC;}
 
     @Override
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
@@ -38,7 +38,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
+                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
                         this.finalize();
                     } catch (Throwable e) {
                         e.printStackTrace();
@@ -52,7 +52,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
+                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
                         this.finalize();
                     } catch (Throwable E) {
                         E.printStackTrace();
@@ -68,7 +68,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
+                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
                         this.finalize();
                     } catch (Throwable e) {
                         e.printStackTrace();
@@ -82,7 +82,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
+                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
                         this.finalize();
                     } catch (Throwable E) {
                         E.printStackTrace();

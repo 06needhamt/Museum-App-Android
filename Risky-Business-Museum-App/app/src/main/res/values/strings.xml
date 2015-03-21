@@ -28,6 +28,14 @@
     <string name="ChooseLanguage">Choose your preferred language</string>
     <string name="QRFragmentTitle">QR-Scanner</string>
     <string name="QRFragmentHint">Hint: scan any of our QR-codes to get more information.</string>
+    <string name="Skip">Skip</string>
+    <string name="Next">Next</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="SkipFragmentText">Are you sure you want to skip this question? You will not get any points!</string>
+    <string name="BackToMainFragmentText">Do you want to leave this trail? Your score will be lost and you will return to the main menu.</string>
+    <string name="NotOneOfOurQRCodesMessage">This is not one of our QR-codes.</string>
+    <string name="WrongAnswer">This is the wrong answer, try again!</string>
 
     <string-array name="BugTrails">
         <item>Creepy Crawly</item>

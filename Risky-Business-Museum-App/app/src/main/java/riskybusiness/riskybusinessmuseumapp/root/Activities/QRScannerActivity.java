@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import riskybusiness.riskybusinessmuseumapp.R;
 
 
@@ -72,13 +76,20 @@ public class QRScannerActivity extends ActionBarActivity {
             return false;
         }
     }
+
+    /**
+     * Start a scan only accepting QR codes and not saving them to the history.
+     */
     public void initiateScan()
     {
         //instantiate ZXing integration class
         IntentIntegrator scanIntegrator = new IntentIntegrator(this);
         //start scanning
-        scanIntegrator.initiateScan();
+        List<String> formats = new ArrayList<String>();
+        formats.add("QR_CODE");
+        scanIntegrator.initiateScan(formats,-1);
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve result of scanning - instantiate ZXing object
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);

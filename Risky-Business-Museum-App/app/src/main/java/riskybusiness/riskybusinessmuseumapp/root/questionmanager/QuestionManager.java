@@ -13,10 +13,10 @@ import static java.lang.Integer.parseInt;
  * Created by Chris on 05/02/2015.
  */
 public class QuestionManager {
-    LinkedList<TrailStep> steps; // = new LinkedList<TrailStep>(); // List for trail steps
+    private LinkedList<TrailStep> steps; // = new LinkedList<TrailStep>(); // List for trail steps
     TrailStep question;    // The current trail step
     PopulateQuestions qs;  // Will hold the trail steps for this trail
-    int questionNum = 0; // The number of the current question
+    private int questionNum = 0; // The number of the current question
     int answerNum = 0;
     private boolean trailEnded = false; // Trail has not ended
     MultiChoiceActivity mc;
@@ -34,8 +34,8 @@ public class QuestionManager {
          // and start the trail
          */
         qs = new PopulateQuestions(); // Populate simulated trail
-        steps = qs.questionList;      // get the questions list
-        questionNum = 0;              // Set the question counter
+        setSteps(qs.questionList);      // get the questions list
+        setQuestionNum(0);              // Set the question counter
         setTrailEnded(false);           // The trail has not ended
     }
 
@@ -52,7 +52,7 @@ public class QuestionManager {
             return true;
         }
 
-        question = steps.get(questionNum); // copy the current question
+        question = getSteps().get(getQuestionNum()); // copy the current question
 
         // Open the intent and get the answer - in the case of multi choice the intent should
         // reutrn 0 = correct answer, -1 wrong answer
@@ -75,9 +75,9 @@ public class QuestionManager {
                 break;
         }
 
-        questionNum++; // increment question number
+        setQuestionNum(getQuestionNum() + 1); // increment question number
 
-        if (questionNum >= steps.size()) { // Trail ended
+        if (getQuestionNum() >= getSteps().size()) { // Trail ended
             setTrailEnded(true);
         }
 
@@ -94,5 +94,21 @@ public class QuestionManager {
 
     public void setTrailEnded(boolean trailEnded) {
         this.trailEnded = trailEnded;
+    }
+
+    public LinkedList<TrailStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(LinkedList<TrailStep> steps) {
+        this.steps = steps;
+    }
+
+    public int getQuestionNum() {
+        return questionNum;
+    }
+
+    public void setQuestionNum(int questionNum) {
+        this.questionNum = questionNum;
     }
 }
