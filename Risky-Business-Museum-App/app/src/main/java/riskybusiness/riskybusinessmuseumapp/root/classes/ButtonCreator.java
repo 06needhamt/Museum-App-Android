@@ -56,15 +56,15 @@ public class ButtonCreator {
     //ArrayList<IconInfo> drawableList = new ArrayList<>(); // Array list of type IconInfo for drawables
 
     IconList drawableList = new IconList(act); // Array list of type IconInfo for drawables
-    final String[] iconUnderNamesTop = {"blue__icon_trail_ancientworld","blue__icon_trail_aquarium", "blue__icon_trail_bugs", "blue__icon_trail_worldcultures", "blue__icon_trail_dinosaurs", "blue__icon_trail_space"};
-    final String[] iconOverNamesTop = {"green__icon_trail_ancientworld","green__icon_trail_aquarium", "green__icon_trail_bugs", "green__icon_trail_worldcultures", "green__icon_trail_dinosaurs", "green__icon_trail_space"};
-    final String[] iconUnderNamesBottom = {"blue__icon_question", "blue__icon_trail", "blue__icon_qr", "blue__icon_map", "blue__icon_information"};
-    final String[] iconOverNamesBottom = {"green__icon_question", "green__icon_trail", "green__icon_qr", "green__icon_map", "green__icon_information"};
-    final String[] iconUnderNamesMap = {"blue__icon_floorg","blue__icon_floor1", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floor5"};
-    final String[] iconOverNamesMap = {"green__icon_floorg", "green__icon_floor1","green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floor5"};
+    final String[] iconUnderNamesTop = {"blue___icon_ancientworld","blue___icon_aquarium", "blue___icon_bugs", "blue___icon_worldcultures", "blue___icon_dinosaurs", "blue___icon_space"};
+    final String[] iconOverNamesTop = {"green___icon_ancientworld","green___icon_aquarium", "green___icon_bugs", "green___icon_worldcultures", "green___icon_dinosaurs", "green___icon_space"};
+    final String[] iconUnderNamesBottom = {"blue___icon_question", "blue___icon_explorer", "blue___icon_qr", "blue___icon_map", "blue___icon_information"};
+    final String[] iconOverNamesBottom = {"green___icon_question", "green___icon_explorer", "green___icon_qr", "green___icon_map", "green___icon_information"};
+    final String[] iconUnderNamesMap = {"blue___icon_floorg","blue___icon_floor1", "blue___icon_floor2", "blue___icon_floor3", "blue___icon_floor4", "blue___icon_floor5"};
+    final String[] iconOverNamesMap = {"green___icon_floorg", "green___icon_floor1","green___icon_floor2", "green___icon_floor3", "green___icon_floor4", "green___icon_floor5"};
     ////////////////////// icon names needs changing  ///////////////////////////////
-    final String[] iconUnderNamesInfo = {"blue__icon_floorg","blue__icon_floor1", "blue__icon_floor2", "blue__icon_floor3", "blue__icon_floor4", "blue__icon_floorg"};
-    final String[] iconOverNamesInfo = {"green__icon_floorg", "green__icon_floor1","green__icon_floor2", "green__icon_floor3", "green__icon_floor4", "green__icon_floorg"};
+    final String[] iconUnderNamesInfo = {"blue___icon_appinfo","blue___icon_museuminfo", "blue___icon_planetarium", "blue___icon_cafe", "blue___icon_toilets", "blue___icon_information"};
+    final String[] iconOverNamesInfo = {"green___icon_appinfo", "green___icon_museuminfo","green___icon_planetarium", "green___icon_cafe", "green___icon_toilets", "green___icon_information"};
 
     public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, Fragment[] InfoFragments)
     {
