@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -133,7 +134,7 @@ public class ButtonCreator {
         }
     }
 
-
+@Deprecated
     public void populateMapButtons()
     {
        for(int i = 0; i < Topbuttons.length; i++)
@@ -150,6 +151,7 @@ public class ButtonCreator {
            });
        }
     }
+    @Deprecated
     public void populateInfoButtons()
     {
         for(int i = 0; i < Topbuttons.length; i++)
@@ -232,8 +234,10 @@ public class ButtonCreator {
                 String name = F.getName();
                 int id = act.getResources().getIdentifier(name, "drawable", act.getPackageName()); // Get the resource ID
                 //Drawable d = getResources().getDrawable(id); // Don't need to get this, just retrieve id instead
+                if(name.contains("blue___") || name.contains("green___")) {
+                    drawableList.add(new IconInfo(name, id)); // Add IconInfo with icon details
+                }
 
-                drawableList.add(new IconInfo(name, id)); // Add IconInfo with icon details
 
 
             }
@@ -324,8 +328,8 @@ public class ButtonCreator {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateInfoButtons();
                 resetButtonBackgroundBottom(btn);
-                resetButtonBackgroundTop(-1);
-                resetButtonBackgroundInfo(0);
+                //resetButtonBackgroundTop(-1);
+                resetButtonBackgroundInfo(-1);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
 
                 break;
@@ -362,7 +366,7 @@ public class ButtonCreator {
         }
 
     }
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundMap(int btn)
     {
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
@@ -397,7 +401,7 @@ public class ButtonCreator {
         }
 
     }
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundTop(int btn)
     {
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
@@ -429,15 +433,24 @@ public class ButtonCreator {
             }
         }
     }
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundInfo(int btn)
     {
+        for(String s : iconUnderNamesInfo)
+        {
+            Log.e("Array",s);
+        }
+        //Log.e("Contains", String.valueOf(drawableList.getIcon("blue___icon_appinfo").iconID));
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
+            Log.e("btn", String.valueOf(iconUnderNamesInfo[i]));
+
             if(i != btn)
             {
                 int id = drawableList.getId(iconUnderNamesInfo[i]);
+                //Log.e("Icon id", String.valueOf(id));
+                //Log.e("under names",iconOverNamesInfo[i]);
                 Topbuttons[i].setBackground(act.getResources().getDrawable(id));
                 Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
