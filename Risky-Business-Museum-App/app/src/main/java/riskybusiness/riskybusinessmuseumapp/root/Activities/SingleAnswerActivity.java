@@ -16,9 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.Format;
-
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
@@ -29,11 +28,12 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private int score;
     private int screenHeight, screenWidth;
     private ImageButton SingleAnswerQRButton;
-    private Button btnNextQuestionSA;
-    private TextView SingleAnswerQuestion;
+    private Button btnSkipOrNext;
+    private TextView SingleAnswerQuestion, ScoreField, TrailPositionField;
     private String ValidatedContent;
     private String Format;
     private boolean endtrail = false;
+    private boolean hasBeenSkipped = false;
 
     private String CorrectAnswer;
 
@@ -45,11 +45,14 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         SingleAnswerQRButton = (ImageButton) findViewById(R.id.SingleAnswerQRButton);
         SingleAnswerQRButton.setScaleX(3.0f); //trippling size
         SingleAnswerQRButton.setScaleY(3.0f);
-        btnNextQuestionSA = (Button) findViewById(R.id.btnNextQuestionSA);
+        btnSkipOrNext = (Button) findViewById(R.id.bntSaSkipOrNext);
+        btnSkipOrNext.setText(R.string.Skip);
         setButtonListener();
 
 
         SingleAnswerQuestion = (TextView) findViewById(R.id.SingleAnswerQuestion);
+        ScoreField = (TextView) findViewById(R.id.SaScore);
+        TrailPositionField = (TextView) findViewById(R.id.SaTrailPosition);
 
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -60,12 +63,12 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
 
         SingleAnswerQRButton.setLayoutParams(QRButtonLayout(screenHeight, screenWidth));
         SingleAnswerQuestion.setLayoutParams(SingleAnswerQuestionLayout(screenHeight, screenWidth));
-        btnNextQuestionSA.setLayoutParams(btnNextQuestionLayout(screenHeight, screenWidth));
+        btnSkipOrNext.setLayoutParams(btnSkipOrNextLayout(screenHeight, screenWidth));
 
 
         Bundle bundle = getIntent().getExtras();
-        SingleAnswerQuestion.setText(bundle.getString("QUESTION"));
-        CorrectAnswer = bundle.getString("ANSWER");
+        unpackBundle(bundle);
+
     }
 
     @Override
@@ -82,12 +85,28 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         dialog.show(this.getFragmentManager(), null);
     }
 
+    private void unpackBundle(Bundle bundle){
+        SingleAnswerQuestion.setText(bundle.getString("QUESTION"));
+        CorrectAnswer = bundle.getString("ANSWER");
+        updateScore(score);
+        updateTrailPosition(bundle.getInt("TRAIL_POSITION"), bundle.getInt("TRAIL_LENGTH"));
+    }
+
+    private void updateScore(int score){
+        ScoreField.setText("Score: " + score);
+    }
+
+    private void updateTrailPosition(int currpos, int max){
+        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max + 1)); //add 1 to them since these values come from a 0 indexed list
+    }
+
     private FrameLayout.LayoutParams SingleAnswerQuestionLayout(int screenHeight, int screenWidth){
         int textHeight, textWidth;
         textHeight = (int) (screenHeight * 0.30); //
         textWidth = FrameLayout.LayoutParams.MATCH_PARENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(textWidth, textHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.topMargin = (int) (screenHeight * 0.05); //!!!!
         return params;
     }
 
@@ -95,18 +114,18 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenWidth, screenHeight);
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
-        params.topMargin = (int) (screenHeight * 0.55);
+        params.topMargin = (int) (screenHeight * 0.55); //!!!!
         params.gravity = Gravity.CENTER_HORIZONTAL;
 
         return params;
     }
 
-    private FrameLayout.LayoutParams btnNextQuestionLayout(int screenHeight, int screenWidth) {
+    private FrameLayout.LayoutParams btnSkipOrNextLayout(int screenHeight, int screenWidth) {
         int btnDHeight, btnDWidth;
         btnDHeight = (int) (screenHeight * 0.10);
-        btnDWidth = FrameLayout.LayoutParams.MATCH_PARENT;
+        btnDWidth = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
-        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.gravity = Gravity.RIGHT;
         params.topMargin = (int) (screenHeight * 0.78); //!!!!
         return params;
     }
@@ -120,15 +139,17 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
             }
         }));
 
-        btnNextQuestionSA.setOnClickListener((new View.OnClickListener() {
+        btnSkipOrNext.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                passData();
+                if(btnSkipOrNext.getText().equals(getResources().getString(R.string.Skip))){ //if the button is still set to Skip, reduce the score to 0
+                    applySkipDialog();
+                }
+                else if (btnSkipOrNext.getText().equals(getResources().getString(R.string.Next))){
+                    passData();
+                }
             }
         }));
-
-        btnNextQuestionSA.setClickable(false);
-        btnNextQuestionSA.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -154,6 +175,11 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
 
+    private void applySkipDialog(){
+        AreYouSureToSkipDialogFragment dialog = new AreYouSureToSkipDialogFragment(R.string.SkipFragmentText, this);
+        dialog.show(getFragmentManager(), null);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         Bundle tempBundle = data.getExtras();
@@ -175,12 +201,12 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
                     //making next question button visible and clickable, disabling QR scanner button
                     SingleAnswerQRButton.setClickable(false);
-                    btnNextQuestionSA.setClickable(true);
-                    btnNextQuestionSA.setVisibility(View.VISIBLE);
+                    makeSkipToNextButton();
                 }
                 else
                 {
                     score -= 25;
+                    updateScore(score);
                     //You've done it wrong pop-up
                     //CallQRScannerActivity();
                     Toast.makeText(getBaseContext(), R.string.WrongAnswer, Toast.LENGTH_SHORT).show();
@@ -199,6 +225,10 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 // data.getStringArrayExtra("content");
             }
         }
+    }
+
+    private void makeSkipToNextButton() {
+        btnSkipOrNext.setText(R.string.Next);
     }
 
     /**
@@ -224,6 +254,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         bundle.putString("FROM", "SingleAnswerActivity");
         bundle.putString("QRANSWER", ValidatedContent);
         bundle.putBoolean("EXIT",endtrail);
+        bundle.putBoolean("SKIPPED", hasBeenSkipped);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
@@ -232,9 +263,16 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
     @Override
-    public void doYesConfirmClick(final int from) {
-        endtrail = true;
-        passData();
+    public void doYesConfirmClick(final int from) { //this is called in the dialog fragment when the user presses the yes button.
+        if(from == IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG) {
+            endtrail = true;
+            passData();
+        }
+        else if (from == IConfirmDialogCompliant.FROM_SKIP_DIALOG){
+            score = 0;
+            hasBeenSkipped = true;
+            passData();
+        }
     }
 
     @Override

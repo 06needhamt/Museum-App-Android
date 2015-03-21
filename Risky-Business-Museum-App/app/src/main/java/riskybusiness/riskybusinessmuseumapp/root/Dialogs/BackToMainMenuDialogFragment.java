@@ -38,7 +38,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
+                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
                         this.finalize();
                     } catch (Throwable e) {
                         e.printStackTrace();
@@ -52,7 +52,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
+                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
                         this.finalize();
                     } catch (Throwable E) {
                         E.printStackTrace();
@@ -68,7 +68,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
+                        ICDC.doYesConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
                         this.finalize();
                     } catch (Throwable e) {
                         e.printStackTrace();
@@ -82,7 +82,7 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
-                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
+                        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
                         this.finalize();
                     } catch (Throwable E) {
                         E.printStackTrace();

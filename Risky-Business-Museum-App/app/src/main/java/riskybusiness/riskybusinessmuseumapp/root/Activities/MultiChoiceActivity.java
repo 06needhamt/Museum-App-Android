@@ -303,8 +303,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcB.setClickable(true);
         btnMcC.setClickable(true);
         btnMcD.setClickable(true);
-        btnSkipOrNext.setClickable(false);
-        btnSkipOrNext.setVisibility(View.INVISIBLE);
+        btnSkipOrNext.setClickable(true);
     }
 
 
