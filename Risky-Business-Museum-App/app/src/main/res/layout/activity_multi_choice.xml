@@ -14,6 +14,26 @@
         android:layout_centerHorizontal="true">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Score:"
+            android:textColor="@color/White"
+            android:id="@+id/McScore"
+            android:layout_gravity="right|top"
+            android:gravity="center_horizontal|right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Question 1 of n"
+            android:textColor="@color/White"
+            android:id="@+id/McTrailPosition"
+            android:layout_gravity="left|top"
+            android:gravity="center_horizontal|left" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
@@ -59,8 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="Next Question"
-            android:id="@+id/btnNextQuestionMC"
+            android:text="Skip"
+            android:id="@+id/btnMcSkipOrNext"
             android:layout_gravity="center_horizontal|top" />
     </FrameLayout>
 </RelativeLayout>

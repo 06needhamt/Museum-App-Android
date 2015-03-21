@@ -25,7 +25,7 @@ import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 
 public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant{
 
-    private final int MAX_SCORE = 10;
+    private final int MAX_SCORE = 100;
     private int score;
     private int screenHeight, screenWidth;
     private ImageButton SingleAnswerQRButton;
@@ -78,7 +78,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
 
     @Override
     public void onBackPressed(){
-        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment("Do you want to leave this trail? Your score will be lost and you will return to the main menu.", this);
+        BackToMainMenuDialogFragment dialog = new BackToMainMenuDialogFragment(R.string.BackToMainFragmentText, this);
         dialog.show(this.getFragmentManager(), null);
     }
 
@@ -165,11 +165,11 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 ValidatedContent = qrrh.getResult();
                 if(ValidatedContent.equals("No Content"))
                 {
-                    Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show(); //THIS WILL REMOVED IN THE FINAL VERSION
                     return;
                 } else if(ValidatedContent.equals("No Identifier"))
                 {
-                    Toast.makeText(getBaseContext(),"This is not one of our QR-codes!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),R.string.NotOneOfOurQRCodesMessage,Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
@@ -180,10 +180,10 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 }
                 else
                 {
-                    score -= 5;
+                    score -= 25;
                     //You've done it wrong pop-up
                     //CallQRScannerActivity();
-                    Toast.makeText(getBaseContext(), "Wrong answer.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), R.string.WrongAnswer, Toast.LENGTH_SHORT).show();
                 }
 
                 // Logic for qr codes from either other exibits or not containing our identifier
@@ -232,13 +232,13 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
     @Override
-    public void doYesConfirmClick() {
+    public void doYesConfirmClick(final int from) {
         endtrail = true;
         passData();
     }
 
     @Override
-    public void doNoConfirmClick() {
+    public void doNoConfirmClick(final int from) {
         //Do nothing
     }
 }
