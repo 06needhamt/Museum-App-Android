@@ -336,7 +336,7 @@ public class ButtonCreator {
             }
         }
     }
-
+@Deprecated
     private void StartQRActivity() {
 
         Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
@@ -447,7 +447,7 @@ public class ButtonCreator {
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
-            Log.e("btn", String.valueOf(iconUnderNamesInfo[i]));
+            //Log.e("btn", String.valueOf(iconUnderNamesInfo[i]));
 
             if(i != btn)
             {
