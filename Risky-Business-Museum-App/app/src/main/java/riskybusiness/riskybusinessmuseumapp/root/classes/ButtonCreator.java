@@ -441,8 +441,9 @@ public class ButtonCreator {
 //            Log.e("Array",s);
 //        }
         //Log.e("Contains", String.valueOf(drawableList.getIcon("blue___icon_appinfo").iconID));
-        final int[] idsblueinfo = {2130837557,2130837571,2130837572,2130837560,2130837576,2130837569};
-        final int[] idsgreeninfo = {2130837598,2130837612,2130837613,2130837601,2130837617,2130837610};
+//        final int[] idsblueinfo = {2130837557,2130837571,2130837572,2130837560,2130837576,2130837569};
+//        final int[] idsgreeninfo = {2130837598,2130837612,2130837613,2130837601,2130837617,2130837610};
+
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
@@ -450,10 +451,11 @@ public class ButtonCreator {
 
             if(i != btn)
             {
-                //int id = drawableList.getId(iconUnderNamesInfo[i]);
+                int id = drawableList.getId(iconUnderNamesInfo[i]);
                 //Log.e("Icon id", String.valueOf(id));
                 //Log.e("under names",iconOverNamesInfo[i]);
-                Topbuttons[i].setBackground(act.getResources().getDrawable((idsblueinfo[i])));
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+//                Topbuttons[i].setBackground(act.getResources().getDrawable((idsblueinfo[i])));
                 Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -465,7 +467,8 @@ public class ButtonCreator {
             else
             {
                 int id = drawableList.getId(iconOverNamesInfo[i]);
-                Topbuttons[i].setBackground(act.getResources().getDrawable(idsgreeninfo[i]));
+                Topbuttons[i].setBackground(act.getResources().getDrawable(id));
+//                Topbuttons[i].setBackground(act.getResources().getDrawable(idsgreeninfo[i]));
                 Topbuttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
