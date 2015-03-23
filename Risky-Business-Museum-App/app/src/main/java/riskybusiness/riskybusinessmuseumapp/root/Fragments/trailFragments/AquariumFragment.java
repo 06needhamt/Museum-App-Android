@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
 
 import android.app.Fragment;
 

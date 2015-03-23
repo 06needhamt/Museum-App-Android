@@ -1,6 +1,7 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -14,15 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
+import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 
 /**
  * Created by Tom on 03/02/2015.
  */
-public class DinosaursFragment extends Fragment{
+public class WorldCulturesFragment extends Fragment{
 
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);}
+        super.onCreate(savedInstanceState);
+    }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -30,7 +34,7 @@ public class DinosaursFragment extends Fragment{
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_dinosaurs, container, false);
+        View view = inflater.inflate(R.layout.fragment_world_cultures, container, false);
         view.setPadding(0,0,0,0);
         /*Button btnEnter = (Button) OurView.findViewById(R.id.btnEnter);
         btnEnter.setOnClickListener(new View.OnClickListener() {
@@ -61,23 +65,26 @@ public class DinosaursFragment extends Fragment{
         TextView Title = (TextView) view.findViewById(R.id.title);
 
 
+
         TextView SubTitle = (TextView) view.findViewById(R.id.subTitle);
         SubTitle.setGravity(Gravity.CENTER);
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
 
         ImageView Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.floor_4);
+        Map.setImageResource(R.drawable.floor_3);
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
         Map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getBaseContext(), "Map Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+                //Toast.makeText(getActivity().getBaseContext(), "Map Clicked", Toast.LENGTH_SHORT).show();
+                HomePageActivity hp = (HomePageActivity) getActivity();
+                hp.callQuestionManager();
+    }
+});
 
         TextView Description = (TextView) view.findViewById(R.id.description);
         Description.setGravity(Gravity.CENTER);
-        Description.setLayoutParams(descriptionLayoutParams(screenHeight,screenWidth));
+        Description.setLayoutParams(descriptionLayoutParams(screenHeight, screenWidth));
     }
 
     /**

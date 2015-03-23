@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 /**
  * Created by Tom on 04/02/2015.
  */
-public class ThirdFloorFragment extends Fragment{
+public class SecondFloorFragment extends Fragment{
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);}
@@ -27,7 +27,7 @@ public class ThirdFloorFragment extends Fragment{
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_third, container, false);
+        View view = inflater.inflate(R.layout.fragment_second, container, false);
         DisplayMetrics size = new DisplayMetrics() ;
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(size);
         int height = size.heightPixels;
@@ -42,7 +42,7 @@ public class ThirdFloorFragment extends Fragment{
         TopText.setLayoutParams(TopTextLayoutParams(screenHeight,screenWidth));
         TopText.setGravity(Gravity.CENTER);
         ImageView Map = (ImageView) v.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.floor_3);
+        Map.setImageResource(R.drawable.floor_2);
         Map.setLayoutParams(mapLayoutParams(screenHeight,screenWidth));
 
     }

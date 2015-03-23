@@ -10,7 +10,7 @@
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
     android:layout_above="@+id/bottomTableForButtons"
-    tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.AncientWorldFragment"
+    tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AncientWorldFragment"
     android:focusable="false"
     android:background="@drawable/royal_blue_ipad_wallpaper">
 

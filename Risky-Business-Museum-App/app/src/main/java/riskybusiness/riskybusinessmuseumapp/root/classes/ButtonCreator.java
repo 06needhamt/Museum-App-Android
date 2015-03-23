@@ -2,7 +2,6 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 
 //import android.annotation.TargetApi;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
@@ -11,19 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.InformationFragment;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
 
 
 /**
@@ -132,6 +124,14 @@ public class ButtonCreator {
             Bottombuttons[col] = button; // Add the button to the buttons array
 
         }
+    }
+
+    public void makeTopButtonsInvisible(){
+        Toptable.setVisibility(View.GONE);
+    }
+
+    public void makeTopButtonsVisible(){
+        Toptable.setVisibility(View.VISIBLE);
     }
 
 @Deprecated
@@ -292,6 +292,7 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateTopButtons();
+                makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
@@ -300,6 +301,7 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateTopButtons();
+                makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 break;
@@ -308,6 +310,7 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateTopButtons();
+                makeTopButtonsInvisible();
                 resetButtonBackgroundBottom(btn);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 //StartQRActivity();
@@ -317,6 +320,7 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateMapButtons();
+                makeTopButtonsVisible();
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(0);
@@ -327,6 +331,7 @@ public class ButtonCreator {
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateInfoButtons();
+                makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 //resetButtonBackgroundTop(-1);
                 resetButtonBackgroundInfo(-1);

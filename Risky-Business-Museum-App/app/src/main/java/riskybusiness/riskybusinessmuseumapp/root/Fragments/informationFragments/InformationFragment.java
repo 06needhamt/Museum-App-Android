@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.WelcomeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.CustomWebViewClient;
 
 /**
@@ -53,7 +54,9 @@ public class InformationFragment extends Fragment {
      */
     public void loadMuseumInfoPage(View v){
         browser.setVisibility(View.VISIBLE);
-        browser.loadUrl("http://google.co.uk");
+        browser.setBackgroundColor(getResources().getColor((R.color.transparent))); //make background transparent
+        // browser.setAlpha(1.0f);
+        browser.loadUrl("file:///android_asset/webpages/index.html"); //using assets folder for resource
     }
 
     /**
