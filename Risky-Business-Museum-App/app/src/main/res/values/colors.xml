@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="Red">#FFFF0000</color>
+    <color name="TransparentLightRed">#7CF50000</color>
     <color name="Blue">#FF0000FF</color>
     <color name="Green">#FF00FF00</color>
+    <color name="TransparentLightGreen">#7C00F504</color>
     <color name="Transparent">#00FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="lightBlue">#FF2E9AFE</color>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -31,11 +32,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     private int screenHeight;
     private int screenWidth;
     private Button btnMcA, btnMcB, btnMcC, btnMcD, btnSkipOrNext;
-    private Button[] answerButtons;
+    private Button[] answerButtons = { btnMcA, btnMcB, btnMcC, btnMcD};
     private TextView multiChoiceQuestion, ScoreField, TrailPositionField;
     private final int MAX_SCORE = 100;
     private boolean endtrail = false; //set this to true for the trail to end after this question and false for it not to end after this question
-    private int score;
+    private int scoreForThisQuestion;
+    private int totalScore;
     private String question;
     private List<String> answers;
     private String correctAnswer;
@@ -47,7 +49,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_choice);
-        score = MAX_SCORE;
+        scoreForThisQuestion = MAX_SCORE;
         multiChoiceQuestion = (TextView) findViewById(R.id.multiChoiceQuestion);
         ScoreField = (TextView) findViewById(R.id.McScore);
         TrailPositionField = (TextView) findViewById(R.id.McTrailPosition);
@@ -63,12 +65,14 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
 
         //randomising the answers
         theOldSwitcheroo(); //this will call populateButtons()
+        formatButtons(); // formatting button text color and text size
 
     }
 
     private void unpackBundle(Bundle bundle){ //unpacking bundle and assigning all relevant data
         question = bundle.getString("QUESTION");
         String temp = bundle.getString("ANSWER");
+        totalScore = bundle.getInt("SCORE", 0); //getting total score with error handling for 0
         applyAnswers(temp);
         correctAnswer = answers.get(0);
         currentPosition = bundle.getInt("TRAIL_POSITION", -1);
@@ -107,6 +111,34 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         dialog.show(this.getFragmentManager(), null);
     }
 
+    private void formatButtons() {
+        Button[] btns = new Button[4];
+        btns[0] = btnMcA;
+        btns[1] = btnMcB;
+        btns[2] = btnMcC;
+        btns[3] = btnMcD;
+
+        //remember the buttons padding
+        int pl, pr, pt, pb;
+        pl = btnMcA.getTotalPaddingLeft();
+        pt = btnMcA.getTotalPaddingTop();
+        pr = btnMcA.getTotalPaddingRight();
+        pb = btnMcA.getTotalPaddingBottom();
+        for (Button b : btns) {
+            b.setTextColor(getResources().getColor(R.color.White)); //setting text colour to white
+            b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15); //setting text size to 15sp (scaled pixels)
+            b.setPadding(pl, pt, pr, pb);
+        }
+
+        pl = btnSkipOrNext.getPaddingLeft();
+        pt = btnSkipOrNext.getPaddingTop();
+        pr = btnSkipOrNext.getPaddingRight();
+        pb = btnSkipOrNext.getPaddingBottom();
+        btnSkipOrNext.setTextColor(getResources().getColor(R.color.White));
+        btnSkipOrNext.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        btnSkipOrNext.setPadding(pl, pt, pr, pb);
+    }
+
     private void populateButtons(List<String> list){
         btnMcA.setText(list.get(0));
         btnMcB.setText(list.get(1));
@@ -114,7 +146,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnMcD.setText(list.get(3));
         btnSkipOrNext.setText(R.string.Skip);
         multiChoiceQuestion.setText(question);
-        updateScore(score); //updating score field with the default score
+        updateScore(totalScore); //updating score field with the total score
         updateTrailPosition(currentPosition, trailLength); //setting the current trail position, i.e. Question 1 of 10
     }
 
@@ -258,18 +290,37 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
      * @return
      */
     private boolean checkAnswer(Button btn) {
-        // Hightlite button to indicate used
+        // Highlight button to indicate used
 
         String answer = (String)btn.getText(); // Get button text
+//        int pl, pr, pt, pb; //remembering padding
+//        pl = btn.getTotalPaddingLeft();
+//        pt = btn.getTotalPaddingTop();
+//        pr = btn.getTotalPaddingRight();
+//        pb = btn.getTotalPaddingBottom();
+//
+//        //remembering shadow
+//        int sc = btn.getShadowColor();
+//        float sdx = btn.getShadowDx();
+//        float sdy = btn.getShadowDy();
+//        float sradius = btn.getShadowRadius();
 
         if(answer.equals(correctAnswer)) {
-            btn.setBackgroundColor(getResources().getColor(R.color.Green));
-            Toast.makeText(getBaseContext(), "Correct!", Toast.LENGTH_LONG).show();
+
+            btn.setBackgroundColor(getResources().getColor(R.color.TransparentLightGreen));
+//            btn.setPadding(pl, pt, pr, pb); //setting padding after changing colour
+//            btn.setShadowLayer(sradius, sdx, sdy, sc); //setting shadow after changing colour
+            //adding spaces to the toast as they get removed from the xml files
+            Toast.makeText(getBaseContext(), getResources().getString(R.string.CorrectGuessPart1of2) + " " + scoreForThisQuestion + " " + getResources().getString(R.string.CorrectGuessPart2of2), Toast.LENGTH_LONG).show();
+            updateScore(scoreForThisQuestion + totalScore);
 
         }
         else {
-            btn.setBackgroundColor(getResources().getColor(R.color.Red));
-            Toast.makeText(getBaseContext(), "Wrong answer " + score / 50 + " Guesses Left", Toast.LENGTH_LONG).show();
+            btn.setBackgroundColor(getResources().getColor(R.color.TransparentLightRed));
+//            btn.setPadding(pl, pt, pr, pb); //setting padding after changing colour
+//            btn.setShadowLayer(sradius, sdx, sdy, sc); //setting shadow after changing colour
+            //adding spaces to the toast as they get removed from the xml files
+            Toast.makeText(getBaseContext(), getResources().getString(R.string.WrongGuessPart1of2) + " " + scoreForThisQuestion / 50 + " " + getResources().getString(R.string.WrongGuessPart2of2), Toast.LENGTH_LONG).show();
          }
 
 //        CountDownTimer timer = new CountDownTimer(5000, 1) { // Pause the thread
@@ -289,13 +340,12 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void numGuesses(Button btn) { // Check the guesses state and adjust score
-        score -= 25; // Reduce the score
-        if(score <= 0) { // Check if any guesses left
+        scoreForThisQuestion -= 25; // Reduce the score
+        if(scoreForThisQuestion <= 0) { // Check if any guesses left
             // no guesses exit activity returning data
         }
         //setting the button that has been clicked to un-clickable state
         btn.setClickable(false);
-        updateScore(score); //update the score field with the new score
     }
 
     private void resetButtonsToClickable(){
@@ -342,7 +392,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnBWidth = FrameLayout.LayoutParams.MATCH_PARENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnBWidth, btnBHeight); //setting gravity to center horizontal
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.43); //!!!!
+        params.topMargin = (int) (screenHeight * 0.44); //!!!!
         return params;
     }
 
@@ -352,7 +402,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnCWidth = FrameLayout.LayoutParams.MATCH_PARENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnCWidth, btnCHeight); //setting gravity to center horizontal
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.53); //!!!!
+        params.topMargin = (int) (screenHeight * 0.55); //!!!!
         return params;
     }
 
@@ -362,7 +412,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnDWidth = FrameLayout.LayoutParams.MATCH_PARENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.63); //!!!!
+        params.topMargin = (int) (screenHeight * 0.66); //!!!!
         return params;
     }
 
@@ -372,7 +422,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         btnDWidth = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnDWidth, btnDHeight); //setting gravity to center horizontal
         params.gravity = Gravity.RIGHT;
-        params.topMargin = (int) (screenHeight * 0.73); //!!!!
+        params.topMargin = (int) (screenHeight * 0.80); //!!!!
         return params;
     }
 
@@ -414,7 +464,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putInt("Score", score);
+        bundle.putInt("Score", scoreForThisQuestion);
         bundle.putString("FROM", "MultiChoiceActivity");
         bundle.putBoolean("EXIT", endtrail);
         bundle.putBoolean("SKIPPED", hasBeenSkipped);
@@ -432,7 +482,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
             passData();
         }
         else if (from == IConfirmDialogCompliant.FROM_SKIP_DIALOG){
-            score = 0;
+            scoreForThisQuestion = 0;
             hasBeenSkipped = true;
             passData();
         }

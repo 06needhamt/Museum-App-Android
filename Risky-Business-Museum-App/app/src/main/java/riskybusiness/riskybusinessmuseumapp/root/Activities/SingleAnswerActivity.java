@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -25,7 +26,8 @@ import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant{
 
     private final int MAX_SCORE = 100;
-    private int score;
+    private int scoreForThisQuestion;
+    private int totalScore;
     private int screenHeight, screenWidth;
     private ImageButton SingleAnswerQRButton;
     private Button btnSkipOrNext;
@@ -41,12 +43,14 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_answer);
-        score = MAX_SCORE;
+        scoreForThisQuestion = MAX_SCORE;
         SingleAnswerQRButton = (ImageButton) findViewById(R.id.SingleAnswerQRButton);
         SingleAnswerQRButton.setScaleX(3.0f); //trippling size
         SingleAnswerQRButton.setScaleY(3.0f);
         btnSkipOrNext = (Button) findViewById(R.id.bntSaSkipOrNext);
         btnSkipOrNext.setText(R.string.Skip);
+        btnSkipOrNext.setTextColor(getResources().getColor(R.color.White)); //setting text colour to white
+        btnSkipOrNext.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15); //setting text size to 15sp (scaled pixels)
         setButtonListener();
 
 
@@ -88,7 +92,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private void unpackBundle(Bundle bundle){
         SingleAnswerQuestion.setText(bundle.getString("QUESTION"));
         CorrectAnswer = bundle.getString("ANSWER");
-        updateScore(score);
+        totalScore = bundle.getInt("SCORE");
+        updateScore(totalScore);
         updateTrailPosition(bundle.getInt("TRAIL_POSITION"), bundle.getInt("TRAIL_LENGTH"));
     }
 
@@ -142,7 +147,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         btnSkipOrNext.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btnSkipOrNext.getText().equals(getResources().getString(R.string.Skip))){ //if the button is still set to Skip, reduce the score to 0
+                if(btnSkipOrNext.getText().equals(getResources().getString(R.string.Skip))){ //if the button is still set to Skip, reduce the scoreForThisQuestion to 0
                     applySkipDialog();
                 }
                 else if (btnSkipOrNext.getText().equals(getResources().getString(R.string.Next))){
@@ -191,22 +196,25 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 ValidatedContent = qrrh.getResult();
                 if(ValidatedContent.equals("No Content"))
                 {
-                    Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show(); //THIS WILL REMOVED IN THE FINAL VERSION
+                    Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show(); //THIS WILL REMOVED IN THE FINAL VERSION - USED FOR DEBUGGING
                     return;
                 } else if(ValidatedContent.equals("No Identifier"))
                 {
                     Toast.makeText(getBaseContext(),R.string.NotOneOfOurQRCodesMessage,Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(ValidatedContent.equals(CorrectAnswer) || score <= 0){
+                if(ValidatedContent.equals(CorrectAnswer) || scoreForThisQuestion <= 0){ //this is the correct answer
                     //making next question button visible and clickable, disabling QR scanner button
                     SingleAnswerQRButton.setClickable(false);
                     makeSkipToNextButton();
+                    //adding spaces to the toast as they get removed from the xml files
+                    Toast.makeText(getBaseContext(), getResources().getString(R.string.CorrectGuessPart1of2) + " " + scoreForThisQuestion + " " + getResources().getString(R.string.CorrectGuessPart2of2), Toast.LENGTH_LONG).show();
+                    updateScore(scoreForThisQuestion + totalScore);
                 }
                 else
                 {
-                    score -= 25;
-                    updateScore(score);
+                    scoreForThisQuestion -= 25;
+                    updateScore(scoreForThisQuestion);
                     //You've done it wrong pop-up
                     //CallQRScannerActivity();
                     Toast.makeText(getBaseContext(), R.string.WrongAnswer, Toast.LENGTH_SHORT).show();
@@ -250,7 +258,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putInt("Score", score);
+        bundle.putInt("Score", scoreForThisQuestion);
         bundle.putString("FROM", "SingleAnswerActivity");
         bundle.putString("QRANSWER", ValidatedContent);
         bundle.putBoolean("EXIT",endtrail);
@@ -269,7 +277,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
             passData();
         }
         else if (from == IConfirmDialogCompliant.FROM_SKIP_DIALOG){
-            score = 0;
+            scoreForThisQuestion = 0;
             hasBeenSkipped = true;
             passData();
         }

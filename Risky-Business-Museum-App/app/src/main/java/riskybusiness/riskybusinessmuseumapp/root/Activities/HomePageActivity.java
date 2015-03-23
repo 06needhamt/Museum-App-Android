@@ -41,7 +41,7 @@ public class HomePageActivity extends FragmentActivity {
     Fragment[] InfoFragments;
     String Content;
     String Format;
-    int score;
+    int currentTrailScore;
     QuestionManager qm;
 
     @Override
@@ -61,7 +61,7 @@ public class HomePageActivity extends FragmentActivity {
         //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
         AddFragment();
-        score = 0;
+        currentTrailScore = 0;
 
     }
 
@@ -155,13 +155,12 @@ public class HomePageActivity extends FragmentActivity {
                 Bundle b = data.getExtras();
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
-                    score = 0;
+                    currentTrailScore = 0;
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
                 }
-                score += b.getInt("Score", -1);
-                Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+                currentTrailScore += b.getInt("Score", -1);
                 qm.nextQuestion();
             }
         }
@@ -191,15 +190,14 @@ public class HomePageActivity extends FragmentActivity {
         else if(from.equals("SingleAnswerActivity")) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                score += b.getInt("Score", -1);
+                currentTrailScore += b.getInt("Score", -1);
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
-                    score = 0;
+                    currentTrailScore = 0;
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
                 }
-                Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
                 qm.nextQuestion();
             }
 
@@ -208,9 +206,9 @@ public class HomePageActivity extends FragmentActivity {
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
 //            if(resultCode == RESULT_OK){
 //                Bundle b = data.getExtras();
-//                score = b.getInt("Score", -1);
+//                currentTrailScore = b.getInt("Score", -1);
 //            }
-//              Toast.makeText(getBaseContext(), "Score:" + score,Toast.LENGTH_LONG ).show();
+//              Toast.makeText(getBaseContext(), "Score:" + currentTrailScore,Toast.LENGTH_LONG ).show();
 //        }
         else {
             // Error invalid something or other
@@ -232,6 +230,7 @@ public class HomePageActivity extends FragmentActivity {
         bundle.putString("ANSWER", answer);
         bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
         bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -244,6 +243,7 @@ public class HomePageActivity extends FragmentActivity {
         bundle.putString("ANSWER", answer);
         bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
         bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);

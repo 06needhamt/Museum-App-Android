@@ -36,6 +36,10 @@
     <string name="BackToMainFragmentText">Do you want to leave this trail? Your score will be lost and you will return to the main menu.</string>
     <string name="NotOneOfOurQRCodesMessage">This is not one of our QR-codes.</string>
     <string name="WrongAnswer">This is the wrong answer, try again!</string>
+    <string name="WrongGuessPart1of2">Wrong answer, you have</string>
+    <string name="WrongGuessPart2of2"> guesses left.</string>
+    <string name="CorrectGuessPart1of2">Correct! You get</string>
+    <string name="CorrectGuessPart2of2">points.</string>
 
     <string-array name="BugTrails">
         <item>Creepy Crawly</item>
