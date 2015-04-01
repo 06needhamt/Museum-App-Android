@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-//import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,8 @@ import java.util.Locale;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
 import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
+
+//import android.support.v7.app.ActionBarActivity;
 
 
 public class MainActivity extends FragmentActivity {

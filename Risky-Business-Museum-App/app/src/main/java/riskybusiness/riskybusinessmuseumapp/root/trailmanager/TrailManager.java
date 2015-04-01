@@ -12,6 +12,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
+
 
 /**
  *

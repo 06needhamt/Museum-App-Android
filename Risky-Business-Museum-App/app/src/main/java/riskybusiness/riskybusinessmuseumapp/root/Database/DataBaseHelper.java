@@ -15,8 +15,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import riskybusiness.riskybusinessmuseumapp.R;
-
 /**
  * Created by Chris on 07/02/2015.
  * From: http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
@@ -25,7 +23,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/riskybusiness.databasetest/databases/";
+    private static String DB_PATH = "/data/data/riskybusiness.riskybusinessmuseumapp/databases/";
     private static String DB_NAME = "museumDB";
     private SQLiteDatabase myDataBase;
     private final Context context;
@@ -57,12 +55,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             cur = myDataBase.rawQuery(queryString, new String[]{});
         } catch(SQLException e) {
-            Log.d(context.getResources().getString(R.string.app_name), ">>>> SQL Exception in queryDatabase: " + e.getMessage());
+            Log.d("Risky Business", ">>>> SQL Exception in queryDatabase: " + e.getMessage());
             return null;
         }
 
         if(cur.getCount() <= 0) { // No results returned from query
-            Log.d(context.getResources().getString(R.string.app_name), "No records returned from query using: " + queryString + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            Log.d("Risky Business", "No records returned from query using: " + queryString + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             return null;
         }
 
@@ -75,16 +73,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void initialiseDatabase() {
         int status = 0; // Status value returned from createDatabase 0 == OK
 
-        Log.d(context.getResources().getString(R.string.app_name), "Database name: " + db.getDatabaseName());
+        Log.d("Risky Business", "Database name: " + getDatabaseName());
+
+        if(checkDataBase()) // If the database exists, return
+            return;
 
         try {
-            status = db.createDataBase(); // Checks if database already exists - if not tries to create it
+            //status = db.createDataBase(); // Checks if database already exists - if not tries to create it
+            status = createDataBase();
         } catch(Exception e) {
-            Log.d(context.getResources().getString(R.string.app_name), "Database not created!");
+            Log.d("Risky Business", "Database not created!");
         }
 
         if(status != 0) {
-            Log.d(context.getResources().getString(R.string.app_name),"Error initialising database, status value = " + status );
+            Log.d("Risky Business","Error initialising database, status value = " + status );
         }
     }
 
@@ -98,14 +100,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         boolean dbExist; // Used to check if the database exists
         int status = 0; // Status indicates 0 ==OK or position of error
 
-        Log.d(context.getResources().getString(R.string.app_name), "In createDataBase");
+        Log.d("Risky Business", "In createDataBase");
 
-        dbExist = checkDataBase(); // Does the database already exist?
-
-        if(dbExist){ // Database exists - nothing to do
-            Log.d(context.getResources().getString(R.string.app_name), "Database exists!");
-            return status; // Database ok
-        }
+//        dbExist = checkDataBase(); // Does the database already exist?
+//
+//        if(dbExist){ // Database exists - nothing to do
+//            Log.d("Risky Business", "Database exists!");
+//            return status; // Database ok
+//        }
 
         // Check the folder structure is in place
         File dir = new File(DB_PATH);
@@ -118,13 +120,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // If the folder still does not exist there has been a problem creating it
         if(!dir.exists()) {
 
-            Log.d(context.getResources().getString(R.string.app_name), "Folder still does not exist  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            Log.d("Risky Business", "Folder still does not exist  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             status = 1;    // Error creating folder structure
             return status; // Failed to create database
         }
 
         // Folder structure in place
-        Log.d(context.getResources().getString(R.string.app_name), "Folder Exists/Created: " + dir.getName() + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        Log.d("Risky Business", "Folder Exists/Created: " + dir.getName() + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         //By calling this method an empty database will be created into the default system path
         //of your application so we now overwrite that database with our database.
@@ -157,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
         }catch(SQLiteException e){
 
+            System.out.println("Database does not exist on device.");
             //database does't exist yet.
         }
 
@@ -172,7 +175,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Copies your database from your local assets-folder to the just created empty database in the
      * system folder, from where it can be accessed and handled.
-     * This is done by transfering bytestream.
+     * This is done by transferring bytestream.
      * */
     private void copyDataBase() throws IOException{
 
