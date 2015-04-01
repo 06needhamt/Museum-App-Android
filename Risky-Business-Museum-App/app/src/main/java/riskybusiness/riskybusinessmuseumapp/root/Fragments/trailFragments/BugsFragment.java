@@ -1,6 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.res.Resources;
 import android.media.Image;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
 /**
  * Created by Tom on 03/02/2015.
@@ -35,6 +38,14 @@ public class BugsFragment extends Fragment {
     ImageView Map;
     ImageButton BugsGoButton;
     Spinner BugsTrailSpinner;
+
+    /**
+     * List<TrailInfo> trails:
+     * Used to store a list of trail info from database
+     * This is initialised in getSpinnerWorking
+     * Reference this for trail information when the user selects a trail
+     */
+    List<TrailInfo> trails;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);}
@@ -68,15 +79,33 @@ public class BugsFragment extends Fragment {
     }
 
     private void getSpinnerWorking(View view){ //view http://examples.javacodegeeks.com/android/core/ui/spinner/android-spinner-drop-down-list-example/ and http://www.mkyong.com/android/android-spinner-drop-down-list-example/
-        String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
-        TextView[] texts = new TextView[trails.length];
-        for(int i = 0; i > trails.length; i++){
-            texts[i].setText(trails[i]);
-        }
+        //String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
+        trails = new ArrayList<>();
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trails);
-        dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
-        BugsTrailSpinner.setAdapter(dataAdapter);
+        Context context = getActivity(); // Need the context for the TrailManager
+
+        if(context == null) { // Context not initialised
+            System.out.println("Error in Bugs trail spinner initialisation");
+        }
+        else {
+            TrailManager tm = new TrailManager(getActivity());
+
+            trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
+
+            TextView[] texts = new TextView[trails.size()];
+            String[] trailNames = new String[trails.size()];
+
+            for (int i = 0; i < trails.size(); i++) {
+                //texts[i].setText(trails.get(i).name); // Get the name of the trail
+                trailNames[i] = trails.get(i).name;
+            }
+
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trailNames);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
+            BugsTrailSpinner.setAdapter(dataAdapter);
+
+
+        }
     }
 
     private void setSpinnerContentSylte(){
@@ -89,6 +118,7 @@ public class BugsFragment extends Fragment {
             t.setTextSize(20);
             counter++;
         }
+
     }
     private void allocateViews(View view){
         Title = (TextView) view.findViewById(R.id.title);

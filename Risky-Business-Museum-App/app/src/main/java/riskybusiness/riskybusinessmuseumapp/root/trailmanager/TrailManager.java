@@ -185,7 +185,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
 
     /**
      * Get all trails that belong to a specific exhibit, these are stored in trailList
-     * @param exhibitType Exhibit that requires trails
+     * @param exhibitType Exhibit Type from database that requires trails
      * @return List of trails found or NULL if query failed
      */
     public List<TrailInfo> getExhibitTrails(int exhibitType) {
