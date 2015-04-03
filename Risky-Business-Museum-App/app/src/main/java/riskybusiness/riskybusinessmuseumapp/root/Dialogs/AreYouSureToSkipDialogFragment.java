@@ -11,7 +11,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 /**
  * Created by Alex on 21/03/2015.
  */
-public class AreYouSureToSkipDialogFragment extends DialogFragment {
+public class AreYouSureToSkipDialogFragment extends DialogFragment implements DialogInterface{
     private String question;
     private int resID = 0;
     private IConfirmDialogCompliant ICDC;
@@ -92,6 +92,11 @@ public class AreYouSureToSkipDialogFragment extends DialogFragment {
             });
         }
         return builder.create();
+    }
+
+    @Override
+    public void cancel() {
+        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_SKIP_DIALOG);
     }
 }
 

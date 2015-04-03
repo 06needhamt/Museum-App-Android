@@ -9,17 +9,21 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IChoiceDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.TrailChangeDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.SharedPreferencesHandler;
 
 //import android.support.v7.app.ActionBarActivity;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements IChoiceDialogCompliant{
     private final String PREF_NAMES = "myAppPrefs";
     DatabaseHelper db = null;
     //SQLiteDatabase database;
@@ -32,6 +36,13 @@ public class MainActivity extends FragmentActivity {
 
         db = new DatabaseHelper(this); // Prepare database
         db.initialiseDatabase(); // Initialise the database. In the case of first run , this will copy database from assets
+        DisplayDialog();
+    }
+
+    private void DisplayDialog() {
+
+        TrailChangeDialogFragment t = new TrailChangeDialogFragment("Test Message", this);
+        t.show(getFragmentManager(),null);
     }
 
 
@@ -114,5 +125,26 @@ public class MainActivity extends FragmentActivity {
         super.onActivityResult(requestCode,resultCode,data);
     }
 
+    @Override
+    public void doYesConfirmClick(int from, int selected) {
+        switch (selected)
+        {
+            case 0:
+                Toast.makeText(getBaseContext(),"Staying on trail",Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                Toast.makeText(getBaseContext(),"Changing to new Trail",Toast.LENGTH_LONG).show();
+                break;
+            case 2:
+                Toast.makeText(getBaseContext(),"Entering Browse Mode",Toast.LENGTH_LONG).show();
+                break;
+            default:
+                Toast.makeText(getBaseContext(),"Unexpected value returned",Toast.LENGTH_LONG).show();
+        }
+    }
 
+    @Override
+    public void doNoConfirmClick(int from, int selected) {
+        Toast.makeText(getBaseContext(),"Cancel was clicked", Toast.LENGTH_LONG).show();
+    }
 }
