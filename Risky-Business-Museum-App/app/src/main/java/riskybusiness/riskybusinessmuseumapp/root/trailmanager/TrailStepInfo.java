@@ -3,6 +3,9 @@ package riskybusiness.riskybusinessmuseumapp.root.trailmanager;
 import java.util.Arrays;
 import java.util.List;
 
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseConstants;
+
 /**
  * Created by Chris on 21/03/2015.
  * Holds the information about a question from the trailStep table
@@ -10,7 +13,7 @@ import java.util.List;
 
 // Question information, holds information regarding a single question
 public class TrailStepInfo implements AppConstants, DatabaseConstants {
-    int stepID;   // Question ID
+    int stepID;       // Question ID
     int trailID;      // trail ID
     int questionType; // Question type indicator 0 = normal, 1 = multi-choice, 2 = picture question
     String question;  // Question string
@@ -25,13 +28,7 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
      * @param trailStep ParseRecord holding the name:value pairs of trail step information
      */
     public TrailStepInfo(ParseRecord trailStep) {
-
         setData(trailStep); // Populate member variables
-
-        if(questionType == QUESTION_MULTI) { // If the question is multi-choice, split the answer string into a list
-            multiChoiceAnswers = parseMultiChoice(answer);
-        }
-
     }
 
     /**
@@ -66,6 +63,10 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
         // Get the image ID
         temp = trailStep.getValue(STP_IMAGE);
         imageID = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
+
+        if(questionType == QUESTION_MULTI) { // If the question is multi-choice, split the answer string into a list
+            multiChoiceAnswers = parseMultiChoice(answer);
+        }
     }
 
     // Converts comma separated string into string array for multi-choice
@@ -78,6 +79,24 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
         return answerList; // Return the list of answer strings - in original order
     }
 
+    /**
+     * Getters for class members
+     * @return associated value
+     */
+    public int getStepID() { return stepID; }
 
+    public int getTrailID() { return trailID; }
+
+    public int getQuestionType() { return questionType; }
+
+    public String getQuestion() { return question; }
+
+    public String getAnswer() { return answer; }
+
+    public int getQrCode() { return qrCode; }
+
+    public int getImageID() { return imageID; }
+
+    public List<String> getMultiChoiceAnswers() { return multiChoiceAnswers; }
 
 }

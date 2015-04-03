@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
-
+import android.os.Build;
 
 public class QRScannerActivity extends ActionBarActivity {
 
@@ -35,7 +35,28 @@ public class QRScannerActivity extends ActionBarActivity {
         setContentView(R.layout.activity_qr);
         formatTxt = (TextView) findViewById(R.id.formatTxt);
         contentTxt = (TextView) findViewById(R.id.contentTxt);
-        initiateScan();
+
+        System.out.println("Android Build = " + Build.BRAND);
+
+        // TODO: The following code tests if it being run on an emulator (generic), if so does not call the QR scanner
+        if(Build.BRAND.contains("generic")) { // Generic emulator
+            Bundle B = new Bundle();
+
+            String artefactNumber = "8"; //<<<<<<<<----- change the number to simulate scanning different artefacts
+
+            B.putString("Content", "CONTENT: http://riskybuisiness.co.uk/" + artefactNumber);
+            B.putString("Format", "FORMAT: Test");
+            B.putString("FROM", "QRScannerActivity");
+            Intent i = getIntent();
+            i.putExtras(B);
+            setIntent(i);
+            setResult(RESULT_OK, i);
+            finish();
+        }
+        else { // Not running on emulator so use QR scanner
+            initiateScan();
+        }
+
     }
 
 

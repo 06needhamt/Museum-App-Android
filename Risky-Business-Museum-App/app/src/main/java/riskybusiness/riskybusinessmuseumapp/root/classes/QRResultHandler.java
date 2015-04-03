@@ -1,5 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.classes;
 
+import android.util.Log;
+
 /**
  * this class handles the string returned from @link QRScannerActivity
  * Created by Thomas Needham on 27/02/2015.
@@ -40,6 +42,24 @@ public final class QRResultHandler {
     public String getResult() {
         return result;
     }
+
+    /**
+     * Gets the code from the QR result string
+      * @return result value or -1 in case of invalid QR result
+     */
+    public int getCode() {
+        int code;
+
+        try {
+            code = Integer.parseInt(result); // get the value of result
+            return code;
+        } catch(NumberFormatException e) { // result contains non-numeric characters
+            Log.e("riskybusinessmuseumapp", e.getMessage());
+        }
+
+        return -1; // Error in code or no content
+
+    } // Gets the integer version of the code from the QR result string
 
     private void setResult(String result) {
         this.result = result;

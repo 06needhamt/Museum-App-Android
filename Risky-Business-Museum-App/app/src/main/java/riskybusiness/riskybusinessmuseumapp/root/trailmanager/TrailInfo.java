@@ -1,10 +1,15 @@
 package riskybusiness.riskybusinessmuseumapp.root.trailmanager;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseConstants;
+
 /**
  * Created by Chris on 21/03/2015.
  */
 // Trail contents includes general information about the trail and all questions belonging to the trail
-public class TrailInfo implements DatabaseConstants{
+public class TrailInfo implements DatabaseConstants {
     public int trailID;    // Trail ID - database primary key
     public int exhibitID;    // Exhibit ID - database primary key
     public String name;    // name of the trail
@@ -44,6 +49,7 @@ public class TrailInfo implements DatabaseConstants{
         temp = trailInfo.getValue(TRA_TYPE);
         trailType = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
     }
+
 }
 
 

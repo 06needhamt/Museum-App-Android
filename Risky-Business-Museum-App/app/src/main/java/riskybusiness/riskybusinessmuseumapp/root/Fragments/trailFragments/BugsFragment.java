@@ -46,6 +46,7 @@ public class BugsFragment extends Fragment {
      * Reference this for trail information when the user selects a trail
      */
     List<TrailInfo> trails;
+    int trailID = 0; // The ID of the chosen trail
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);}
@@ -82,6 +83,7 @@ public class BugsFragment extends Fragment {
         //String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
         trails = new ArrayList<>();
 
+
         Context context = getActivity(); // Need the context for the TrailManager
 
         if(context == null) { // Context not initialised
@@ -90,7 +92,7 @@ public class BugsFragment extends Fragment {
         else {
             TrailManager tm = new TrailManager(getActivity());
 
-            trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
+            trails = tm.getExhibitTrails(1); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
 
             TextView[] texts = new TextView[trails.size()];
             String[] trailNames = new String[trails.size()];
@@ -150,7 +152,11 @@ public class BugsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HomePageActivity hp = (HomePageActivity) getActivity();
-                hp.callQuestionManager();
+
+                // TODO: Get the chosen trail id from the spinner
+                trailID = 5; // Testing trailID
+
+                hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
             }
         });
     }

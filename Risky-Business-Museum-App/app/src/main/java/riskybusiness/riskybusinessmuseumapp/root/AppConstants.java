@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.trailmanager;
+package riskybusiness.riskybusinessmuseumapp.root;
 
 /**
  * Created by Chris on 21/03/2015.

@@ -78,7 +78,7 @@ public class WorldCulturesFragment extends Fragment{
             public void onClick(View v) {
                 //Toast.makeText(getActivity().getBaseContext(), "Map Clicked", Toast.LENGTH_SHORT).show();
                 HomePageActivity hp = (HomePageActivity) getActivity();
-                hp.callQuestionManager();
+                hp.callQuestionManager(0); // TODO: Should QuestionManager still be called here? If so, need to fix the trailID parameter
     }
 });
 

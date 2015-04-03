@@ -13,7 +13,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 public class QuestionManagerOLD {
     LinkedList<TrailStep> steps; // = new LinkedList<TrailStep>(); // List for trail steps
     TrailStep question;    // The current trail step
-    PopulateQuestions qs;  // Will hold the trail steps for this trail
+    //PopulateQuestions qs;  // Will hold the trail steps for this trail
     int questionNum = 0; // The number of the current question
     int answerNum = 0;
     boolean trailEnded = false; // Trail has not ended
@@ -33,8 +33,8 @@ public class QuestionManagerOLD {
         */
 
 
-        qs = new PopulateQuestions(); // Populate simulated trail
-        steps = qs.questionList;      // get the questions list
+        //qs = new PopulateQuestions(); // Populate simulated trail
+        //steps = qs.questionList;      // get the questions list
 
         do {
 

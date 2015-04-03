@@ -61,6 +61,7 @@ public class ButtonCreator {
 
     public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, Fragment[] InfoFragments)
     {
+
         this.act = A;
         this.toptableid = toptable;
         this.bottomtableid = bottomtable;

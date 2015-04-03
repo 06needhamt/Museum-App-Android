@@ -7,18 +7,22 @@ package riskybusiness.riskybusinessmuseumapp.root.trailmanager;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
 
 
 /**
  *
- * The Trail Manager will be Final class implemented globally
+ * The Trail Manager will be a Singleton class implemented globally
  *
  * The TrailManager manages the users interactions within the museum. It includes managing:
  * Interactions with the database retrieving information about artefacts and trails
@@ -32,6 +36,8 @@ import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseHelper;
  */
 
 public class TrailManager implements AppConstants, DatabaseConstants {
+    private static TrailManager trailManagerInstance = null; // This will hold a Singleton instance of the TrailManager
+
     DatabaseHelper db;
     //DatabaseConstants dc = new DatabaseConstants(); // Constant String values for use with database
     Context context;
@@ -41,8 +47,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     List<TrailInfo> trailList;      // List of trails associated with the artefact
     List<TrailStepInfo> trailSteps; // List of trail steps for current trail
 
-
-    public TrailManager(Context context) { // trail manager constructor
+    private TrailManager(Context context) { // trail manager constructor
         this.context = context;
         db = new DatabaseHelper(context);
         mode = MODE_BROWSE; // Just browsing
@@ -54,6 +59,20 @@ public class TrailManager implements AppConstants, DatabaseConstants {
             db.openDataBase(); // Open the database for use
         } catch (Exception e) {
             Log.d("TRAILMANAGER CONST:", "Error opening the database in TrailManager: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Creates a Singleton object of the TrailManager
+     * @param context Required context
+     * @return Instance of TrailManager
+     */
+    public static synchronized TrailManager getTrailManagerInstance(Context context) {
+        if(trailManagerInstance != null)
+            return trailManagerInstance;
+        else {
+            trailManagerInstance = new TrailManager(context);
+            return trailManagerInstance;
         }
     }
 
@@ -92,10 +111,10 @@ public class TrailManager implements AppConstants, DatabaseConstants {
             for (TrailInfo ti : trailList) {                 // There are trails associated, find out what types
                 artefact.trailStatus |= ti.trailType;        // Set the trail type using bitwise OR
             }
-            Log.d(context.getResources().getString(R.string.app_name), "Trails found = " + trailList.size());
+            Log.d(context.getResources().getString(R.string.app_name) + ": TrailManager, browseArtefactID", "Trails found = " + trailList.size());
         }
         else {
-            Log.d(context.getResources().getString(R.string.app_name), "No Trails found for Artefact ID " + artefact.artefactID);
+            Log.d(context.getResources().getString(R.string.app_name) + ": TrailManager, browseArtefactID", "No Trails found for Artefact ID " + artefact.artefactID);
         }
 
         return artefact;
@@ -132,7 +151,8 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         mode = MODE_BROWSE;  // Not on a trail
         boolean trailFound = false;  // Indicate whether trail found or not
 
-        if(trailList != null) {  // First check if the trail is already loaded
+        // First check if the trail is already loaded
+        if(trailList != null) {
             for(int t = 0; t < trailList.size(); t++) { // search for trail info in trailList and set currentTrail
                 if(trailList.get(t).trailID == trailID) {
                     currentTrail = trailList.get(t); // Set the current trail
@@ -141,7 +161,10 @@ public class TrailManager implements AppConstants, DatabaseConstants {
             }
         }
 
-        if(!trailFound) {// The required trail is not already loaded, try to get it from the database
+        // If the required trail is not already loaded, try to get it from the database
+        if(!trailFound) {
+            clearData(); // Clear any old data from the trail manager
+
             if(getTrail(trailID)) {// If the trail was loaded from the database
                 currentTrail = trailList.get(0); // Get the trail from the list
             }
@@ -154,7 +177,9 @@ public class TrailManager implements AppConstants, DatabaseConstants {
 
         mode = MODE_ON_TRAIL; // Indicate on a trail
 
-        return getTrailSteps(trailID); // Populate the trail steps and indicate True = success or False = failure
+        trailFound = getTrailSteps(trailID); // Populate the trail steps and indicate True = success or False = failure
+
+        return trailFound; // Indicate if getTrailSteps was successful
     }
 
     /**
@@ -203,6 +228,14 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         }
 
         return trailList; // Return the trails
+    }
+
+    /**
+     * Gets the steps for the current trail
+     * @return List of trailStepInfo containing trail steps
+     */
+    public List<TrailStepInfo> getCurrentTrailSteps() {
+        return trailSteps;
     }
 
 

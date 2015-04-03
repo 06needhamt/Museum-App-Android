@@ -1,14 +1,9 @@
 package riskybusiness.riskybusinessmuseumapp.root.trailmanager;
 
-import android.app.DownloadManager;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.os.Bundle;
-
 import java.lang.Integer;
 import java.lang.String;
-import java.util.ArrayList;
-import java.util.List;
+
+import riskybusiness.riskybusinessmuseumapp.root.Database.DatabaseConstants;
 
 //import riskybusiness.databasetest.DatabaseConstants;
 //import riskybusiness.databasetest.ParseRecord;
@@ -24,7 +19,7 @@ public class ArtefactInfo implements DatabaseConstants {
     public String description; // desctription of artefact
     public String imageName; // Name of image file
     public String museumNo; // Museum's code for the artefact (if available)
-    public int trailStatus; // Is the artefact: a) on its own, b) part of a trail, c) part of explorer trail, d) trail and explorer
+    public int trailStatus; // Is the artefact: a) on its own, b) part of a normal trail, c) part of explorer trail, d) trail and explorer
     public int floor; // floor number of artefact
 
     //DatabaseConstants dc = new DatabaseConstants();
