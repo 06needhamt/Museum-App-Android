@@ -235,9 +235,7 @@ public class ButtonCreator {
                 String name = F.getName();
                 int id = act.getResources().getIdentifier(name, "drawable", act.getPackageName()); // Get the resource ID
                 //Drawable d = getResources().getDrawable(id); // Don't need to get this, just retrieve id instead
-                if(name.contains("blue___") || name.contains("green___") || name.contains("purple___")) {
-                    drawableList.add(new IconInfo(name, id)); // Add IconInfo with icon details
-                }
+                drawableList.add(new IconInfo(name, id)); // Add IconInfo with icon details
 
 
 
@@ -248,12 +246,6 @@ public class ButtonCreator {
                 ex.printStackTrace();
 
             }
-        }
-
-        // Debuging output, itterate throught the icon list and print info
-        System.out.println("Icons found:");
-        for(IconInfo icn : drawableList.icons) {
-            Log.e("Icon Info",icn.name + " : " + icn.iconID);
         }
     }
 

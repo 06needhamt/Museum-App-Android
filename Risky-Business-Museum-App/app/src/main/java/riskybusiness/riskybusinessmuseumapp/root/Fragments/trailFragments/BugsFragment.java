@@ -90,7 +90,7 @@ public class BugsFragment extends Fragment {
             System.out.println("Error in Bugs trail spinner initialisation");
         }
         else {
-            TrailManager tm = new TrailManager(getActivity());
+            TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
             trails = tm.getExhibitTrails(1); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
 

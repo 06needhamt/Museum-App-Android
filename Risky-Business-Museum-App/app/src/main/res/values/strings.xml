@@ -32,6 +32,8 @@
     <string name="Next">Next</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="OK">OK!</string>
+    <string name="Cancel">Cancel</string>
     <string name="SkipFragmentText">Are you sure you want to skip this question? You will not get any points!</string>
     <string name="BackToMainFragmentText">Do you want to leave this trail? Your score will be lost and you will return to the main menu.</string>
     <string name="NotOneOfOurQRCodesMessage">This is not one of our QR-codes.</string>
@@ -49,5 +51,11 @@
         <item>Edo Kingdom</item>
     </string-array>
     <string name="title_activity_data_base_image_test">DataBaseImageTestActivity</string>
+
+    <string-array name="TrailChangeChoices">
+        <item> Continue on your current trail</item>
+        <item> Leave your current trail and start the trail which this artifact belongs to </item>
+        <item> Leave your current trail and enter browser mode </item>
+    </string-array>
 
 </resources>
