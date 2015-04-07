@@ -92,7 +92,7 @@ public class BugsFragment extends Fragment {
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
-            trails = tm.getExhibitTrails(1); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
+            trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
 
             TextView[] texts = new TextView[trails.size()];
             String[] trailNames = new String[trails.size()];
