@@ -22,6 +22,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogF
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
 public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant{
 
@@ -38,6 +39,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private boolean hasBeenSkipped = false;
 
     private String CorrectAnswer;
+
+    private TrailManager trailManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         SingleAnswerQuestion.setLayoutParams(SingleAnswerQuestionLayout(screenHeight, screenWidth));
         btnSkipOrNext.setLayoutParams(btnSkipOrNextLayout(screenHeight, screenWidth));
 
+        trailManager = TrailManager.getTrailManagerInstance(getBaseContext()); // Get TrailManager
 
         Bundle bundle = getIntent().getExtras();
         unpackBundle(bundle);
@@ -194,6 +198,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 Bundle b = data.getExtras();
                 QRResultHandler qrrh = new QRResultHandler(b.getString("Content", "No Value"));
                 ValidatedContent = qrrh.getResult();
+
                 if(ValidatedContent.equals("No Content"))
                 {
                     Toast.makeText(getBaseContext(),"Returned without content",Toast.LENGTH_LONG).show(); //THIS WILL REMOVED IN THE FINAL VERSION - USED FOR DEBUGGING
@@ -203,6 +208,19 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                     Toast.makeText(getBaseContext(),R.string.NotOneOfOurQRCodesMessage,Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                // TODO: Need to check if the code scanned is part of this trail, if not the user may have moved on. This also needs to be done anywhere else necessary
+                // Not sure if this is the right place to put the code or not
+                // Use call to TrailManager.checkArtefact(artefact number), to check if the scanned artefact is on the current trail
+                if(trailManager.checkArtefact(3) == -1) { // Artefact  not on trail
+                    // display message asking the user if they want to return to the trail,
+                    // join the new trail belonging to the scanned artefact or leave the trail altogether and just browse
+
+
+                }
+
+
+
                 if(ValidatedContent.equals(CorrectAnswer) || scoreForThisQuestion <= 0){ //this is the correct answer
                     //making next question button visible and clickable, disabling QR scanner button
                     SingleAnswerQRButton.setClickable(false);

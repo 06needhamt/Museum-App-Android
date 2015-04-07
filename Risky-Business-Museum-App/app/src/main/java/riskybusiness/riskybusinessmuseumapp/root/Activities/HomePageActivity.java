@@ -11,7 +11,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.util.List;
+
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AncientWorldFragment;
@@ -30,9 +33,12 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.WorldC
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.questionmanager.*;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.ArtefactInfo;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailStepInfo;
 
-public class HomePageActivity extends FragmentActivity {
-
+public class HomePageActivity extends FragmentActivity implements AppConstants {
     int toptable;
     int bottomtable;
     Fragment[] fragments;
@@ -42,7 +48,10 @@ public class HomePageActivity extends FragmentActivity {
     String Content;
     String Format;
     int currentTrailScore;
+    TrailManager trailManager;
     QuestionManager qm;
+    ArtefactInfo artefact;  // Stores artefact information from the database
+    List<TrailInfo> trails; // List of trails
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,9 @@ public class HomePageActivity extends FragmentActivity {
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
+
+        trailManager = TrailManager.getTrailManagerInstance(this); // Instantiate (If not already) Singleton TrailManager
+
         AddFragment();
         currentTrailScore = 0;
 
@@ -133,8 +145,9 @@ public class HomePageActivity extends FragmentActivity {
 
     public void AddFragment() {
         WelcomeFragment fragment = new WelcomeFragment();
-    getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
+        getFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -165,8 +178,9 @@ public class HomePageActivity extends FragmentActivity {
             }
         }
 
-        else if(from.equals("QRScannerActivity")) {
+        else if(from.equals("QRScannerActivity")) { // Browsing QR codes
             if (resultCode == RESULT_OK) {
+                int qrCode;
 //                if(!data.hasExtra("B"))
 //                {
 //                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
@@ -176,6 +190,25 @@ public class HomePageActivity extends FragmentActivity {
 
                 Content = b.getString("Content", "No Value");
                 QRResultHandler qrh = new QRResultHandler(Content);
+
+
+                // Get the result from the scanned code
+                qrCode = qrh.getCode(); // Get the code from the QR code
+
+                //  Retrieve the artefact information from the TrailManager, this includes associated trail types
+                artefact = trailManager.browseArtefactID(qrCode);
+
+                // Get the TrailManager to pre-load any associated trails information
+                // trailManager.getArtefactTrails(artefact.artefactID);
+
+                // TODO: Display the artefact information on screen
+
+
+
+                // TODO: Indicate types of trails for the browsed artefact on bottom fragment using:
+                // artefact.trailStatus 0 = non, 1 = Normal, 2 = Explorer, 3 = Normal and explorer
+
+
 //                if(qrh.getResult().equals(DATABASE EXHIBIT ITEM)){
 //                    Show information on the item the person scanned
 //                    Or ask user if they want to start a trail from this exhibit
@@ -249,17 +282,31 @@ public class HomePageActivity extends FragmentActivity {
         startActivityForResult(i, 0, null);
     }
 
-//    public void callImagequestionActivity(){
+//    public void callImageQuestionActivity(){
 //        Intent i = new Intent(getBaseContext(), ImageQuestionActivity.class);
 //
 //        startActivityForResult(i, 0, null);
 //    }
 
-    public void callQuestionManager(){
-        qm = new QuestionManager(this);
-        qm.nextQuestion();
+    /**
+     * Instantiate a QuestionManager
+     * Before calling this the TrailManager must be set to the appropriate trail using a call to:
+     * TrailManager.setTrail(trailID)
+     */
+    public void callQuestionManager(int trailID){
+
+        trailManager.setTrail(trailID); // Set the trail and loads all associated trail steps
+
+        // Check that a trail has been set using TrailManager.setTrail for the QuestionManager to use
+        if(trailManager.getMode() == MODE_ON_TRAIL) {
+
+            // Instantiate new QuestionManager passing it the trail steps
+            qm = new QuestionManager(this, trailManager.getCurrentTrailSteps());
+
+            qm.nextQuestion();
+        }
+        else {
+            Log.d("RiskyBusinessMuseumApp", "HomePageActivity, callQuestionManager(): No Trails found for Trail ID " + trailID);
+        }
     }
-
-
-
 }

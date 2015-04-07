@@ -7,7 +7,7 @@ import java.util.LinkedList;
  * Used to simulate getting data back from database query
  * Created by Chris on 05/02/2015.
  */
-public class PopulateQuestions {
+public class OLDPopulateQuestions {
     public LinkedList<TrailStep> questionList = new LinkedList<TrailStep>(); // Instantiate empty question list
 
     // Data to be used when initialising simulated questions
@@ -37,7 +37,7 @@ public class PopulateQuestions {
             "24"
     };
 
-    public PopulateQuestions() { // constructor
+    public OLDPopulateQuestions() { // constructor
 
         for (int t = 0; t < questionType.length; t++) { // Populate the questions list
             TrailStep q = new TrailStep();

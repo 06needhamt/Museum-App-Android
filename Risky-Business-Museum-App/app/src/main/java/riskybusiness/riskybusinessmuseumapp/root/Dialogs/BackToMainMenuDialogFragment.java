@@ -11,7 +11,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 /**
  * Created by Alex on 28/02/2015.
  */
-public class BackToMainMenuDialogFragment extends DialogFragment {
+public class BackToMainMenuDialogFragment extends DialogFragment implements DialogInterface{
     private String question;
     private IConfirmDialogCompliant ICDC;
     private int resID = 0;
@@ -92,6 +92,11 @@ public class BackToMainMenuDialogFragment extends DialogFragment {
             });
         }
         return builder.create();
+    }
+
+    @Override
+    public void cancel() {
+        ICDC.doNoConfirmClick(IConfirmDialogCompliant.FROM_BACK_TO_MAIN_DIALOG);
     }
 }
 
