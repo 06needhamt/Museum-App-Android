@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @return returns an integer indicating 0 == OK or position of error 1+
      * */
-    public int createDataBase() throws IOException {
+    public synchronized int createDataBase() throws IOException {
         boolean dbExist; // Used to check if the database exists
         int status = 0; // Status indicates 0 ==OK or position of error
 
@@ -138,7 +138,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (IOException e) {
 
             status = 2; // Error copying database
-            throw new Error("Error copying database");
 
         }
 
@@ -150,7 +149,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Check if the database already exist to avoid re-copying the file each time you open the application.
      * @return true if it exists, false if it doesn't
      */
-    private boolean checkDataBase() {
+    private synchronized boolean checkDataBase() {
 
         SQLiteDatabase checkDB = null;
         String myPath = DB_PATH + DB_NAME;
@@ -177,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * system folder, from where it can be accessed and handled.
      * This is done by transferring bytestream.
      * */
-    private void copyDataBase() throws IOException{
+    private synchronized void copyDataBase() throws IOException{
 
         //Open your local db as the input stream
         InputStream myInput = context.getAssets().open(DB_NAME);
@@ -206,7 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Opens the database
      * @throws SQLException
      */
-    public void openDataBase() throws SQLException {
+    public synchronized void openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
