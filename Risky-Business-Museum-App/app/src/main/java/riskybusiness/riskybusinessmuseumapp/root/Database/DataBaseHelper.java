@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //private DatabaseConstants dc = new DatabaseConstants(); // Holds constants for database
 
     DatabaseHelper db = null;
-
+    // Renamed
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
