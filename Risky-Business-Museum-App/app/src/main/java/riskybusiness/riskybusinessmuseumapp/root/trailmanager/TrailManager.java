@@ -140,6 +140,11 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         return -1; // Artefact not found
     }
 
+    /**
+     * TODO: Is the artefact within the current exhibit????
+     */
+
+
 
     /**
      * Sets the Trail based on ID and loads the appropriate trail steps
@@ -242,7 +247,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     /**
      * Gets a specific trail from the database based on the trailID
      * @param trailID Required trail ID
-     * @return Trail infor
+     * @return Trail information
      */
     private boolean getTrail(int trailID) {
         TrailInfo trail = null;

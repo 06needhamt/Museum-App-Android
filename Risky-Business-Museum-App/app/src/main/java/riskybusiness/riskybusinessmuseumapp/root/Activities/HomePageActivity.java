@@ -206,7 +206,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
 
                 // TODO: Indicate types of trails for the browsed artefact on bottom fragment using:
-                // artefact.trailStatus 0 = non, 1 = Normal, 2 = Explorer, 3 = Normal and explorer
+                // artefact.trailStatus 0 = No trail, 1 = Normal, 2 = Explorer, 3 = Normal and explorer
 
 
 //                if(qrh.getResult().equals(DATABASE EXHIBIT ITEM)){
