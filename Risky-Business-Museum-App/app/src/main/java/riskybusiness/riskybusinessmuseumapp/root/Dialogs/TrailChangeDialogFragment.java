@@ -46,7 +46,7 @@ public class TrailChangeDialogFragment extends DialogFragment {
         this.resID = resID;
     }
 
-    @Deprecated
+
     public TrailChangeDialogFragment(int resID, IChoiceDialogCompliant caller) {
         this.resID = resID;
         this.Caller = caller;
