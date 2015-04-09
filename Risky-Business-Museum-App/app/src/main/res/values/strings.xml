@@ -47,6 +47,8 @@
     <string name="CorrectGuessPart1of2">Correct! You get</string>
     <string name="CorrectGuessPart2of2">points.</string>
     <string name="TrailName">Trail name:</string>
+    <string name="TotalScore">Total Score:</string>
+    <string name="Skipped">Skipped</string>
 
 
     <string-array name="BugTrails">

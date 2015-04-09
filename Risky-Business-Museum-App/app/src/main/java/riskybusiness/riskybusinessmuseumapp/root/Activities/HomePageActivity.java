@@ -285,6 +285,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         Bundle bundle = new Bundle();
         bundle.putInt("SCORE", currentTrailScore);
         bundle.putIntegerArrayList("QSCORES", questionScores);
+        //TODO Add the current trail name to the bundle
         i.putExtras(bundle);
         setIntent(i);
         startActivity(i);
