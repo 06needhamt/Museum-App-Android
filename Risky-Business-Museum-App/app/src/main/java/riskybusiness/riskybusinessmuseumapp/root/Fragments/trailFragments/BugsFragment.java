@@ -106,7 +106,6 @@ public class BugsFragment extends Fragment {
             dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
             BugsTrailSpinner.setAdapter(dataAdapter);
 
-
         }
     }
 
@@ -153,8 +152,8 @@ public class BugsFragment extends Fragment {
             public void onClick(View v) {
                 HomePageActivity hp = (HomePageActivity) getActivity();
 
-                // TODO: Get the chosen trail id from the spinner
-                trailID = 5; // Testing trailID
+                // TODO: Get the chosen trail id from the spinner before setting trailID
+                trailID = 1; // Testing trailID
 
                 hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
             }

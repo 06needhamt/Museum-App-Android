@@ -198,6 +198,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
                 //  Retrieve the artefact information from the TrailManager, this includes associated trail types
                 artefact = trailManager.browseArtefactID(qrCode);
 
+                System.out.println("Browsed Artefact = " + artefact.artefactID + " " + artefact.name);
+
                 // Get the TrailManager to pre-load any associated trails information
                 // trailManager.getArtefactTrails(artefact.artefactID);
 
