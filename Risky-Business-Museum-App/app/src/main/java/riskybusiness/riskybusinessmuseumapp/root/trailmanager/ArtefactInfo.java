@@ -17,10 +17,11 @@ public class ArtefactInfo implements DatabaseConstants {
     public int artefactID; // ID of the artefact
     public String name; // Title of the artefact
     public String description; // desctription of artefact
-    public String imageName; // Name of image file
-    public String museumNo; // Museum's code for the artefact (if available)
-    public int trailStatus; // Is the artefact: a) on its own, b) part of a normal trail, c) part of explorer trail, d) trail and explorer
-    public int floor; // floor number of artefact
+    public String imageName;   // Name of image file
+    public String museumNo;    // Museum's code for the artefact (if available)
+    public int exhibitID;      // The exhibit that the artefact belongs to
+    public int trailStatus;    // Is the artefact: a) on its own, b) part of a normal trail, c) part of explorer trail, d) trail and explorer
+    public int floor;          // floor number of artefact
 
     //DatabaseConstants dc = new DatabaseConstants();
 
@@ -43,6 +44,8 @@ public class ArtefactInfo implements DatabaseConstants {
         ParseRecord artefactInfo; // This holds the parsed record information
 
         artefactID = Integer.parseInt(record.getValue(ART_ID));
+
+        exhibitID = Integer.parseInt(record.getValue(ART_EXHIBIT_ID));
 
         name = record.getValue(ART_NAME);
         //title = record.getValue("title"); // Get the title of the record

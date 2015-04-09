@@ -140,9 +140,23 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         return -1; // Artefact not found
     }
 
+
     /**
      * TODO: Is the artefact within the current exhibit????
      */
+    public boolean isArtefactInExhibit(int artefactID) {
+        ArtefactInfo artefact = browseArtefactID(artefactID); // Get the artefact details
+
+        if(mode != MODE_ON_TRAIL) {
+            return false; // Indicate not on a trail
+        }
+
+        if(artefact.exhibitID == currentTrail.exhibitID) {
+            return true; // Artefact is in the current trails exhibit
+        }
+
+        return false; // Artefact not part of the current trails exhibit
+    }
 
 
 
@@ -221,7 +235,8 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     public List<TrailInfo> getExhibitTrails(int exhibitType) {
         String queryString;
 
-        // Query string to retrieve trails associated with the artefact
+        // Query string to retrieve trails associated with exhibit
+        // SELECT * FROM trail JOIN exhibit where exhibit._id = trail.tra_exhibitID and exhibit.exh_type = ?
         queryString =
                 "SELECT trail._id as " + TRA_ID + ", * FROM trail " +
                         "JOIN exhibit on trail.tra_exhibitID = exhibit._id AND exhibit.exh_type = " + exhibitType;
