@@ -37,6 +37,8 @@ public class TrailResultActivity extends FragmentActivity {
         Bundle bundle = getIntent().getExtras();
         unpackBundle(bundle);
         setFormattedScores();
+        updateTrailName();
+        updateTotalScore();
         displayFormattedStatistics();
     }
 
@@ -47,6 +49,7 @@ public class TrailResultActivity extends FragmentActivity {
     private void unpackBundle(Bundle b){
         questionScores =  b.getIntegerArrayList("QSCORES");
         totalScore = b.getInt("SCORE");
+        //TODO Unpack current trail name
     }
 
     /**
@@ -75,16 +78,37 @@ public class TrailResultActivity extends FragmentActivity {
      * Setting the ArrayList of Strings formattedScores to the format required to be correctly displayed when {@link #displayFormattedStatistics} is called
      */
     private void setFormattedScores(){
+        if(formattedScores == null){
+            formattedScores = new ArrayList<>();
+        }
         for(int i = 0; i < questionScores.size(); i++){
-            formattedScores.add( (i+1) + " " + getString(R.string.Question) + ": " + questionScores.get(i) + "/" + MAX_SCORE);
+
+            if(questionScores.get(i) == 0){ //TODO use skipped flag instead of score of 0. This only works for demonstration purposes.
+                formattedScores.add( (i+1) + ". " + getString(R.string.Question) + ": " + questionScores.get(i) + "/" + MAX_SCORE + " (" + getString(R.string.Skipped) + ")");
+            } else {
+                formattedScores.add((i + 1) + ". " + getString(R.string.Question) + ": " + questionScores.get(i) + "/" + MAX_SCORE);
+            }
+            //adding String in the format of e.g.:
+            // 1. Question: 50/100
         }
     }
 
+    /**
+     * Displaying formatted statistics starting with "Statistics:" and a line break, followed by each question score and a line break between them
+     */
     private void displayFormattedStatistics(){
         Statistics.setText(getString(R.string.Statistics) + ":\n"); //setting initial line of the TextView
         for(String r : formattedScores){
             Statistics.append(r + "\n");
         }
+    }
+
+    private void updateTrailName(){
+        TrailName.setText(getString(R.string.TrailName) + " " + "Default Trail Name"); //TODO add the current trail name
+    }
+
+    private void updateTotalScore(){
+        Score.setText(getString(R.string.TotalScore) + " " + totalScore + "/" + MAX_SCORE * questionScores.size());
     }
 
     @Override
