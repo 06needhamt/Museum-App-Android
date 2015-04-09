@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
@@ -48,6 +49,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     String Content;
     String Format;
     int currentTrailScore;
+    ArrayList<Integer> questionScores;
     TrailManager trailManager;
     QuestionManager qm;
     ArtefactInfo artefact;  // Stores artefact information from the database
@@ -74,6 +76,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
         AddFragment();
         currentTrailScore = 0;
+        questionScores = new ArrayList<Integer>();
 
     }
 
@@ -166,6 +169,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
                     currentTrailScore = 0;
@@ -223,6 +227,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else if(from.equals("SingleAnswerActivity")) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
                 currentTrailScore += b.getInt("Score", -1);
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
@@ -250,6 +255,10 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     }
 
+    private void appendQuestionScores(int score){
+        questionScores.add(score);
+    }
+
     public void CallQRScannerActivity()
     {
         Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
@@ -267,6 +276,16 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
+    }
+
+    public void callTrailResultActivity(){
+        Intent i = new Intent(getBaseContext(), TrailResultActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("SCORE", currentTrailScore);
+        bundle.putIntegerArrayList("QSCORES", questionScores);
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivity(i);
     }
 
     public void callSingleAnswerActivity(String question, String answer){

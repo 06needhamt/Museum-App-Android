@@ -32,8 +32,12 @@
     <string name="Next">Next</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
-    <string name="OK">OK!</string>
+    <string name="OK">Okay</string>
+    <string name="Score">Score:</string>
+    <string name="Results">Results</string>
+    <string name="Statistics">Statistics</string>
     <string name="Cancel">Cancel</string>
+    <string name="Question">Question</string>
     <string name="SkipFragmentText">Are you sure you want to skip this question? You will not get any points!</string>
     <string name="BackToMainFragmentText">Do you want to leave this trail? Your score will be lost and you will return to the main menu.</string>
     <string name="NotOneOfOurQRCodesMessage">This is not one of our QR-codes.</string>
@@ -42,6 +46,8 @@
     <string name="WrongGuessPart2of2"> guesses left.</string>
     <string name="CorrectGuessPart1of2">Correct! You get</string>
     <string name="CorrectGuessPart2of2">points.</string>
+    <string name="TrailName">Trail name:</string>
+
 
     <string-array name="BugTrails">
         <item>Creepy Crawly</item>
@@ -57,5 +63,6 @@
         <item> Leave your current trail and start the trail which this artifact belongs to </item>
         <item> Leave your current trail and enter browser mode </item>
     </string-array>
+    <string name="title_activity_trail_result">TrailResultActivity</string>
 
 </resources>

@@ -88,6 +88,10 @@ public class QuestionManager implements AppConstants {
         setQuestionNum(getQuestionNum() + 1); // increment question number
 
         if (getQuestionNum() >= getSteps().size()) { // Trail ended
+
+            //DEBUG: trying out trail result screen
+            hm.callTrailResultActivity();
+            //---
             setTrailEnded(true);
         }
 
