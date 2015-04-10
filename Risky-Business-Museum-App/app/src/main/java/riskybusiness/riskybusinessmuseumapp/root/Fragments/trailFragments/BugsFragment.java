@@ -159,8 +159,6 @@ public class BugsFragment extends Fragment {
 
                 trailID = trails.get(choice).trailID;
 
-                trailID = BugsTrailSpinner.getSelectedItemPosition();
-
                 hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
             }
         });
