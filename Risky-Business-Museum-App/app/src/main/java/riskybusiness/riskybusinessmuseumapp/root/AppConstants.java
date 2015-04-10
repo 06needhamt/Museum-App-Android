@@ -1,5 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root;
 
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
+
 /**
  * Created by Chris on 21/03/2015.
  */
@@ -27,5 +29,7 @@ public interface AppConstants {
     public static final int QUESTION_MULTI = 1;
     public static final int QUESTION_PICTURE = 2;
     public static final int QUESTION_MULTI_PICTURE = 3;
+
+    public static final Class<QRFragment> QR_FRAGMENT_CLASS = QRFragment.class;
 
 }
