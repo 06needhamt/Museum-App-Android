@@ -103,12 +103,18 @@ public class TrailResultActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Show the trail name on the activity
+     */
     private void updateTrailName(){
         TrailName.setText(getString(R.string.TrailName) + " " + "Default Trail Name"); //TODO add the current trail name
     }
 
+    /**
+     * Show the total score on the activity
+     */
     private void updateTotalScore(){
-        Score.setText(getString(R.string.TotalScore) + " " + totalScore + "/" + MAX_SCORE * questionScores.size());
+        Score.setText(getString(R.string.YourTotalScore) + " " + totalScore + "/" + MAX_SCORE * questionScores.size());
     }
 
     @Override

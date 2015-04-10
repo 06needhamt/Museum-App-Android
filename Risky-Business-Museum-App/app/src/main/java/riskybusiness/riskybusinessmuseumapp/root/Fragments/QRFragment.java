@@ -95,7 +95,7 @@ public class QRFragment extends Fragment {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
-        params.topMargin = (int) (height * 0.70); //!!!
+        params.topMargin = (int) (height * 0.80); //!!!
         params.gravity = Gravity.CENTER_HORIZONTAL;
         params.leftMargin = (int) (width * 0.01);
         return params;
@@ -106,7 +106,7 @@ public class QRFragment extends Fragment {
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (height * 0.55); //!!
+        params.topMargin = (int) (height * 0.65); //!!
 
         return params;
     }

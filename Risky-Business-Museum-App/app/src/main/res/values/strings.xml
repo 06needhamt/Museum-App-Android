@@ -49,6 +49,15 @@
     <string name="TrailName">Trail name:</string>
     <string name="TotalScore">Total Score:</string>
     <string name="Skipped">Skipped</string>
+    <string name="YourTotalScore">Your Total Score:</string>
+
+    <string name="DefaultHint">Hint: Press the icon above to start scanning QR-Codes.</string>
+    <string name="Hint1">Hint: Scan any of our QR-Codes to get additional information.</string>
+    <string name="Hint2">Hint: You can select a trail after scanning one of our codes.</string>
+    <string name="Hint3">Interested in an exhibit? Try one of our trails and test your knowledge!</string>
+    <string name="Hint4">Want to learn more? Try an explorer trail!</string>
+    <string name="Hint5">Up for a challenge? An explorer trail might be just your thing!</string>
+    <string name="Hint6">If you get stuck on a question just skip it.</string>
 
 
     <string-array name="BugTrails">
