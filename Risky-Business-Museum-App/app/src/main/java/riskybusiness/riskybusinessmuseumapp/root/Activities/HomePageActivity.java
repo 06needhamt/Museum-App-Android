@@ -152,7 +152,6 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-
         //Toast.makeText(getBaseContext(),"In Return function",Toast.LENGTH_SHORT).show();
         if(data.getExtras() == Bundle.EMPTY)
         {
