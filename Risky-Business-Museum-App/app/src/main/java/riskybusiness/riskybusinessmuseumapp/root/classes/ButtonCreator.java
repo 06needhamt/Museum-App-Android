@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
@@ -17,6 +18,7 @@ import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment;
 
 
 /**
@@ -324,6 +326,10 @@ public class ButtonCreator implements AppConstants{
             {
                 //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
                 //populateTopButtons();
+                if (act.getFragmentManager().findFragmentById(R.id.frame).getClass().equals(QR_FRAGMENT_CLASS))
+                {
+                    Toast.makeText(act.getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+                }
                 makeTopButtonsInvisible();
                 resetButtonBackgroundBottom(btn);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
