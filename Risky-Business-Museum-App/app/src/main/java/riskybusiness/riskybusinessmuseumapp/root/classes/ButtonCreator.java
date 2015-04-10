@@ -16,12 +16,13 @@ import java.lang.reflect.Field;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 
 
 /**
  * Created by Tom on 02/02/2015.
  */
-public class ButtonCreator {
+public class ButtonCreator implements AppConstants{
 
 
     public static final int NUM_BUTTONS = 5; // Number of BUTTONS (Columns in table)
@@ -127,6 +128,26 @@ public class ButtonCreator {
         }
     }
 
+    public void lightUpButtons(final int which){
+        resetButtonBackgroundBottom(-1);
+        if(which == TRAIL) {
+            Bottombuttons[0].setBackgroundResource(R.drawable.purple___icon_question);
+        }
+
+        else if(which == EXPLORER) {
+            Bottombuttons[1].setBackgroundResource(R.drawable.purple___icon_explorer);
+        }
+        else if(which == TRAIL_AND_EXPLORER)
+        {
+            Bottombuttons[0].setBackgroundResource(R.drawable.purple___icon_question);
+            Bottombuttons[1].setBackgroundResource(R.drawable.purple___icon_explorer);
+        }
+        else
+        {
+            throw new Error("Invalid Button Highlight Pattern");
+        }
+        Bottombuttons[2].setBackgroundResource(R.drawable.green___icon_qr);
+    }
     public void makeTopButtonsInvisible(){
         Toptable.setVisibility(View.GONE);
     }
@@ -255,7 +276,7 @@ public class ButtonCreator {
 
         //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
-        resetButtonBackgroundBottom(-1);
+        //resetButtonBackgroundBottom(-1);
         act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
 
     }

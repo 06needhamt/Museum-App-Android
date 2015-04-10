@@ -153,6 +153,7 @@ public class BugsFragment extends Fragment {
                 HomePageActivity hp = (HomePageActivity) getActivity();
 
                 // TODO: Get the chosen trail id from the spinner before setting trailID
+                trailID = BugsTrailSpinner.getSelectedItemPosition();
                 trailID = 1; // Testing trailID
 
                 hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
