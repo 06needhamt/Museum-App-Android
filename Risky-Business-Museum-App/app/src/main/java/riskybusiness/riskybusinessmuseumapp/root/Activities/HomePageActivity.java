@@ -54,6 +54,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     QuestionManager qm;
     ArtefactInfo artefact;  // Stores artefact information from the database
     List<TrailInfo> trails; // List of trails
+    ButtonCreator btncreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         BottomFragments = CreateBottomFragments();
         InfoFragments = CreateInfoFragments();
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,InfoFragments);
+        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,InfoFragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -204,6 +205,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
                 System.out.println("Browsed Artefact = " + artefact.artefactID + " " + artefact.name);
 
+                btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
                 // Get the TrailManager to pre-load any associated trails information
                 // trailManager.getArtefactTrails(artefact.artefactID);
 

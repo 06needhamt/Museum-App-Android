@@ -92,6 +92,7 @@ public class BugsFragment extends Fragment {
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
+            // TODO: set proper search value for bugs trails
             trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
 
             TextView[] texts = new TextView[trails.size()];
@@ -105,7 +106,6 @@ public class BugsFragment extends Fragment {
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trailNames);
             dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
             BugsTrailSpinner.setAdapter(dataAdapter);
-
         }
     }
 
@@ -119,10 +119,10 @@ public class BugsFragment extends Fragment {
             t.setTextSize(20);
             counter++;
         }
-
     }
     private void allocateViews(View view){
         Title = (TextView) view.findViewById(R.id.title);
+
 
         SubTitle = (TextView) view.findViewById(R.id.subTitle);
         SubTitle.setGravity(Gravity.CENTER);
@@ -151,9 +151,13 @@ public class BugsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HomePageActivity hp = (HomePageActivity) getActivity();
+                int choice;
 
-                // TODO: Get the chosen trail id from the spinner before setting trailID
-                trailID = 1; // Testing trailID
+                // Get the chosen trail id from the spinner before setting trailID
+
+                choice = BugsTrailSpinner.getSelectedItemPosition();
+
+                trailID = trails.get(choice).trailID;
 
                 hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
             }
