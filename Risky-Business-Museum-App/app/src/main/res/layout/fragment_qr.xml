@@ -4,27 +4,40 @@
     tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.QRFragment"
     android:background="@drawable/royal_blue_ipad_wallpaper">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ImageButton
+        android:id="@+id/QRFragmentQRButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/QRFragmentQRButton"
         android:layout_gravity="center_horizontal|top" />
 
     <TextView
+        android:id="@+id/QRFragmentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/QRFragmentTitle"
         android:textSize="30sp"
-        android:id="@+id/QRFragmentTitle"
         android:layout_gravity="center_horizontal|top" />
 
+    <ImageView
+        android:id="@+id/QRFragmentItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:adjustViewBounds="true"/>
+
     <TextView
+        android:id="@+id/QRFragmentDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:textSize="10sp"
+        android:scrollbars="vertical"
+        android:textColor="@color/White"
+        android:textSize="12sp"/>
+
+    <TextView
         android:id="@+id/QRFragmentHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DefaultHint"
+        android:textSize="12sp"
         android:layout_gravity="center_horizontal|top" />
 </FrameLayout>

@@ -65,6 +65,10 @@
             android:name=".root.Activities.TrailResultActivity"
             android:label="@string/title_activity_trail_result" >
         </activity>
+        <activity
+            android:name=".root.Activities.BrowseQRCodesActivity"
+            android:label="@string/title_activity_browse_qrcodes" >
+        </activity>
     </application>
 
 </manifest>

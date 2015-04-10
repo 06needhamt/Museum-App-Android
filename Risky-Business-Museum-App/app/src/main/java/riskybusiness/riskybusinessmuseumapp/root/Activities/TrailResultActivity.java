@@ -26,6 +26,7 @@ public class TrailResultActivity extends FragmentActivity {
     ArrayList<String> formattedScores;
     ArrayList<Integer> questionScores;
     int totalScore;
+    String trailName;
     final int MAX_SCORE = 100;
 
     @Override
@@ -49,7 +50,7 @@ public class TrailResultActivity extends FragmentActivity {
     private void unpackBundle(Bundle b){
         questionScores =  b.getIntegerArrayList("QSCORES");
         totalScore = b.getInt("SCORE");
-        //TODO Unpack current trail name
+        trailName = b.getString("TRAILNAME");
     }
 
     /**
