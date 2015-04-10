@@ -60,9 +60,10 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
         temp = trailStep.getValue(STP_QR_CODE);
         qrCode = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
 
+        // TODO Fix image id's
         // Get the image ID
         temp = trailStep.getValue(STP_IMAGE);
-        imageID = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
+        // imageID = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
 
         if(questionType == QUESTION_MULTI) { // If the question is multi-choice, split the answer string into a list
             multiChoiceAnswers = parseMultiChoice(answer);
