@@ -58,7 +58,7 @@ public class QRFragment extends Fragment {
         setAllLayoutParams(height, width, OurView);
 
         //TESTING
-        ItemImage.setImageResource(R.drawable.test_picture_for_scaling_purposes);
+        ItemImage.setImageResource(R.drawable.royal_blue_ipad_wallpaper);
         //TESTING END
         return OurView;
     }

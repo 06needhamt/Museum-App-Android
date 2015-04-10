@@ -28,4 +28,13 @@ public interface AppConstants {
     public static final int QUESTION_PICTURE = 2;
     public static final int QUESTION_MULTI_PICTURE = 3;
 
+    //HTML page names
+    public static final String DEFAULT_PAGE = "file:///android_asset/webpages/index.html";
+    public static final String APP_INFO_PAGE = "file:///android_asset/webpages/AppInfo-4.html";
+    //TODO add museum information page
+    public static final String CAFE_AND_SHOP_PAGE = "file:///android_asset/webpages/Cafe and shop-2.html";
+    public static final String FACILITIES_PAGE = "file:///android_asset/webpages/Facilites-1.html";
+    public static final String INFO_DESK_PAGE = "file:///android_asset/webpages/InfoDesk-3.html";
+    public static final String PLANETARIUM_PAGE = "file:///android_asset/webpages/Planetarium-1.html";
+
 }

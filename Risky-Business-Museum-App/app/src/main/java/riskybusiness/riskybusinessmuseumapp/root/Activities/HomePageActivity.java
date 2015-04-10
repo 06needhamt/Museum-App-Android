@@ -16,6 +16,7 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AncientWorldFragment;
@@ -46,6 +47,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
     Fragment[] InfoFragments;
+    InformationWebView infoWebView;
     String Content;
     String Format;
     int currentTrailScore;
@@ -67,7 +69,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         BottomFragments = CreateBottomFragments();
         InfoFragments = CreateInfoFragments();
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
-        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,InfoFragments);
+        infoWebView = new InformationWebView();
+        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -110,18 +113,20 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         fragments[1] = null;
         fragments[2] = new QRFragment();
         fragments[3] = new GroundFloorFragment();
-        fragments[4] = new InformationFragment();
+        fragments[4] = new InformationWebView();
         return fragments;
     }
+
+    @Deprecated
     private Fragment[] CreateInfoFragments()
     {
         Fragment[] fragments = new Fragment[6];
-        fragments[0] = new Fragment();
-        fragments[1] = new Fragment();
-        fragments[2] = new Fragment();
-        fragments[3] = new Fragment();
-        fragments[4] = new Fragment();
-        fragments[5] = new Fragment();
+        fragments[0] = new InformationWebView();
+        fragments[1] = new InformationWebView();
+        fragments[2] = new InformationWebView();
+        fragments[3] = new InformationWebView();
+        fragments[4] = new InformationWebView();
+        fragments[5] = new InformationWebView();
         return fragments;
     }
 
