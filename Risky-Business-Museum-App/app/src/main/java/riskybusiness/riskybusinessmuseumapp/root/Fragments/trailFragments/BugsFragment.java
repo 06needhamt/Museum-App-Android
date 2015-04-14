@@ -34,7 +34,7 @@ import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
  */
 
 public class BugsFragment extends Fragment {
-    TextView Title, SubTitle, Description;
+    TextView Title, SubTitle, Description, spinnerIstruction;
     ImageView Map;
     ImageButton BugsGoButton;
     Spinner BugsTrailSpinner;
@@ -49,7 +49,8 @@ public class BugsFragment extends Fragment {
     int trailID = 0; // The ID of the chosen trail
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);}
+        super.onCreate(savedInstanceState);
+    }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -92,15 +93,16 @@ public class BugsFragment extends Fragment {
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
-            // TODO: set proper search value for bugs trails
-            trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
+            trails = tm.getExhibitTrails(1); // Search for 2 == Ancient World for testing. Replace with 1 for Bugs trails.
 
-            TextView[] texts = new TextView[trails.size()];
-            String[] trailNames = new String[trails.size()];
+            TextView[] texts = new TextView[trails.size() + 1];
+            String[] trailNames = new String[trails.size() + 1];
+
+            trailNames[0] = "Please select a trail";
 
             for (int i = 0; i < trails.size(); i++) {
                 //texts[i].setText(trails.get(i).name); // Get the name of the trail
-                trailNames[i] = trails.get(i).name;
+                trailNames[i + 1] = trails.get(i).name;
             }
 
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trailNames);
@@ -129,6 +131,10 @@ public class BugsFragment extends Fragment {
 
         Map = (ImageView) view.findViewById(R.id.Map);
         Map.setImageResource(R.drawable.floor_2);
+
+        //spinnerIstruction = (TextView) view.findViewById(R.id.spinnerInstruction);
+        //spinnerIstruction.setText(getActivity().getResources().getString(R.string.SpinnerInstruction));
+
         /**
          Map.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -154,10 +160,11 @@ public class BugsFragment extends Fragment {
                 int choice;
 
                 // Get the chosen trail id from the spinner before setting trailID
-
                 choice = BugsTrailSpinner.getSelectedItemPosition();
 
-                trailID = trails.get(choice).trailID;
+                if(choice == 0) return; // User did not select a trail so ignore trail button
+
+                trailID = trails.get(choice - 1).trailID; // Get choice - ignoring instruction string at element 0
 
                 hp.callQuestionManager(trailID); // Call the questionManager with chosen trail
             }
@@ -165,7 +172,7 @@ public class BugsFragment extends Fragment {
     }
 
     /**
-     * Setting the parameter for all the fragments contained within the Ancient World screen
+     * Setting the parameter for all the fragments contained within the Bugs screen
      * @param screenHeight screen height as integer
      * @param screenWidth screen width as integer
      * @param view View Object
@@ -176,11 +183,13 @@ public class BugsFragment extends Fragment {
         Description.setLayoutParams(descriptionLayoutParams(screenHeight, screenWidth));
         BugsTrailSpinner.setLayoutParams(BugsTrailSpinnerParams(screenHeight,screenWidth)); //Keep this before BugsGoButton as it relies upon it.
         BugsGoButton.setLayoutParams(BugsGoButtonParams(screenHeight, screenWidth));
+        //spinnerIstruction.setLayoutParams(spinnerInstructionLayoutParams(screenHeight, screenWidth));
+
     }
 
     /**
      * Create specified FrameLayout.LayoutParams parameters to be applied to the SubTitle text field
-     * in the Ancient World screen.
+     * in the Bugs screen.
      * @param screenHeight screen height as integer
      * @param screenWidth screen width as integer
      * @return FrameLayout.LayoutParams Object
@@ -215,6 +224,16 @@ public class BugsFragment extends Fragment {
         return params;
     }
 
+    private FrameLayout.LayoutParams spinnerInstructionLayoutParams(int screenHeight, int screenWidth) {
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenWidth, screenHeight);
+        params.gravity = Gravity.LEFT;
+        params.topMargin = (int) (screenHeight * 0.62); //!!!
+        params.leftMargin= (int) (screenWidth * 0.05);
+        params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
+        return params;
+    }
+
     private FrameLayout.LayoutParams BugsTrailSpinnerParams(int screenHeight, int screenWidth) {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenHeight, screenWidth);
         params.gravity = Gravity.LEFT;
@@ -229,7 +248,7 @@ public class BugsFragment extends Fragment {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenHeight, screenWidth);
         params.gravity = Gravity.RIGHT;
         params.topMargin = (int) (screenHeight * 0.66); //!!!
-        params.rightMargin = (int) (screenWidth * 0.1);
+        params.rightMargin = (int) (screenWidth * 0.05);
         //params.leftMargin= BugsTrailSpinner.getMeasuredWidth() + (int) (screenWidth * 0.02) + 10; //moving this depending on the width of the BugsTrailSpinner width + it's left margin + 10 pixels for good measure
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
