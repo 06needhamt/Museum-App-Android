@@ -10,6 +10,10 @@
     <string name="title_activity_single_answer">SingleAnswerActivity</string>
     <string name="AncientWorldTitle">Welcome to the Ancient World trail</string>
     <string name="AncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of past millennia. You may find this exhibit on the third floor.</string>
+
+    <string name="AquariumTitle">Welcome to the Aquarium trail</string>
+    <string name="AquariumIntro">Learn about the aquatic world</string>
+
     <string name="BugsWorldTitle">Welcome to the Bug House trail</string>
     <string name="BugsWorldIntro">Learn about beetles, flies, spiders, scorpions, centipedes and millipedes. There are even live ant and bee colonies! You may find this exhibit on the second floor.</string>
     <string name="WorldCulturesTitle">Welcome to the World Cultures trail</string>
