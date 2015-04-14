@@ -42,7 +42,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     //DatabaseConstants dc = new DatabaseConstants(); // Constant String values for use with database
     Context context;
     int mode; // Mode of use, e.g. MODE_BROWSE, MODE_TRAIL
-    TrailInfo currentTrail;  // Information about the current trail
+    public TrailInfo currentTrail;         // Information about the current trail
     boolean onTrail;                // Indicates if user is on a trail
     List<TrailInfo> trailList;      // List of trails associated with the artefact
     List<TrailStepInfo> trailSteps; // List of trail steps for current trail
@@ -82,18 +82,6 @@ public class TrailManager implements AppConstants, DatabaseConstants {
      */
     public int getMode() {
         return mode;
-    }
-
-    /**
-     * Returns the name of the current trail or null if not on trail
-     * @return name of trail or null
-     */
-    public String getCurrentTrailName() {
-        if(onTrail) { // On trail
-            return currentTrail.name;
-        }
-
-        return null; // Not on trail
     }
 
 

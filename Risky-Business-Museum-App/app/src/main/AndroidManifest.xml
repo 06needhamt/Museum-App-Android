@@ -24,7 +24,7 @@
         <activity
             android:name=".root.Activities.HomePageActivity"
             android:label="@string/title_activity_home_page"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".root.Activities.QRScannerActivity"
@@ -60,6 +60,14 @@
         <activity
             android:name=".root.Activities.DataBaseImageTestActivity"
             android:label="@string/title_activity_data_base_image_test" >
+        </activity>
+        <activity
+            android:name=".root.Activities.TrailResultActivity"
+            android:label="@string/title_activity_trail_result" >
+        </activity>
+        <activity
+            android:name=".root.Activities.BrowseQRCodesActivity"
+            android:label="@string/title_activity_browse_qrcodes" >
         </activity>
     </application>
 

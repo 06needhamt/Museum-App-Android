@@ -155,7 +155,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void updateTrailPosition(int currpos, int max){
-        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max + 1)); //add 1 to them since these values come from a 0 indexed list
+        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max)); //add 1 to them since these values come from a 0 indexed list
     }
 
     /**

@@ -54,7 +54,13 @@ public class QuestionManager implements AppConstants {
         // According to the question type, display the required intent passing it the question details
 
         if (isTrailEnded()) { // Trail has already ended - ensure we don't outrun the array
+            //DEBUG: trying out trail result screen
+            if(getQuestionNum() == getSteps().size()) {
+                hm.callTrailResultActivity();
+            }
+            //DEBUG END---
             return true;
+
         }
 
         question = steps.get(questionNum); // Get the current question from the trail steps List
@@ -62,7 +68,7 @@ public class QuestionManager implements AppConstants {
         //question = getSteps().get(getQuestionNum()); // copy the current question
 
         // Open the intent and get the answer - in the case of multi choice the intent should
-        // reutrn 0 = correct answer, -1 wrong answer
+        // return 0 = correct answer, -1 wrong answer
 
         switch (question.getQuestionType()) {
             case QUESTION_SINGLE: // normal question
@@ -89,6 +95,11 @@ public class QuestionManager implements AppConstants {
 
         if (getQuestionNum() >= getSteps().size()) { // Trail ended
             setTrailEnded(true);
+            //DEBUG: trying out trail result screen
+            if(getQuestionNum() == getSteps().size()) {
+                hm.callTrailResultActivity();
+            }
+            //DEBUG END---
         }
 
         return isTrailEnded();

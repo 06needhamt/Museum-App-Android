@@ -36,8 +36,12 @@
     <string name="Next">Next</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
-    <string name="OK">OK!</string>
+    <string name="OK">Okay</string>
+    <string name="Score">Score:</string>
+    <string name="Results">Results</string>
+    <string name="Statistics">Statistics</string>
     <string name="Cancel">Cancel</string>
+    <string name="Question">Question</string>
     <string name="SkipFragmentText">Are you sure you want to skip this question? You will not get any points!</string>
     <string name="BackToMainFragmentText">Do you want to leave this trail? Your score will be lost and you will return to the main menu.</string>
     <string name="NotOneOfOurQRCodesMessage">This is not one of our QR-codes.</string>
@@ -46,6 +50,28 @@
     <string name="WrongGuessPart2of2"> guesses left.</string>
     <string name="CorrectGuessPart1of2">Correct! You get</string>
     <string name="CorrectGuessPart2of2">points.</string>
+    <string name="TrailName">Trail name:</string>
+    <string name="TotalScore">Total Score:</string>
+    <string name="Skipped">Skipped</string>
+    <string name="YourTotalScore">Your Total Score:</string>
+
+    <string name="DefaultHint">Hint: Press the icon above to start scanning QR-Codes.</string>
+    <string name="Hint1">Hint: Scan any of our QR-Codes to get additional information.</string>
+    <string name="Hint2">Hint: You can select a trail after scanning one of our codes.</string>
+    <string name="Hint3">Interested in an exhibit? Try one of our trails and test your knowledge!</string>
+    <string name="Hint4">Want to learn more? Try an explorer trail!</string>
+    <string name="Hint5">Up for a challenge? An explorer trail might be just your thing!</string>
+    <string name="Hint6">If you get stuck on a question just skip it.</string>
+
+    <string-array name="Hints">
+        <item>@string/DefaultHint</item>
+        <item>@string/Hint1</item>
+        <item>@string/Hint2</item>
+        <item>@string/Hint3</item>
+        <item>@string/Hint4</item>
+        <item>@string/Hint5</item>
+        <item>@string/Hint6</item>
+    </string-array>
 
     <string-array name="BugTrails">
         <item>Creepy Crawly</item>
@@ -54,6 +80,7 @@
         <item>Ant colony</item>
         <item>Edo Kingdom</item>
     </string-array>
+
     <string name="title_activity_data_base_image_test">DataBaseImageTestActivity</string>
 
     <string-array name="TrailChangeChoices">
@@ -61,5 +88,9 @@
         <item> Leave your current trail and start the trail which this artifact belongs to </item>
         <item> Leave your current trail and enter browser mode </item>
     </string-array>
+    <string name="title_activity_trail_result">TrailResultActivity</string>
+    <string name="title_activity_browse_qrcodes">BrowseQRCodesActivity</string>
+
+    <string name="LoremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit a nisi sed venenatis. Quisque auctor, arcu ut viverra hendrerit, risus leo ullamcorper nibh, aliquet viverra mauris ante sed arcu. Suspendisse egestas mi lorem, non dignissim massa pulvinar ut. Proin vulputate eleifend fermentum. Donec odio massa, tempus id quam ac, molestie bibendum leo. Suspendisse id quam mollis, elementum mi eu, aliquet turpis. Maecenas finibus metus in mollis consectetur. Nam non nunc nec est suscipit scelerisque eget vitae ipsum. Aenean ut nisl vel magna pretium pretium. Donec commodo ut neque nec fermentum. Praesent sit amet finibus arcu, et volutpat massa. Mauris turpis sapien, eleifend non libero eu, gravida consectetur augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel nibh mattis, feugiat nulla id, mollis odio. Suspendisse consectetur sem et erat consectetur tempus.</string>
 
 </resources>
