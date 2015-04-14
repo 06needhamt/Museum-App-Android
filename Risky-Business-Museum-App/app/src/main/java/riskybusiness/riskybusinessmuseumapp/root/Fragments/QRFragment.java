@@ -2,6 +2,7 @@ package riskybusiness.riskybusinessmuseumapp.root.Fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,9 +58,10 @@ public class QRFragment extends Fragment {
         setContent();
         setAllLayoutParams(height, width, OurView);
 
-        //TESTING
-        ItemImage.setImageResource(R.drawable.royal_blue_ipad_wallpaper);
+        //TESTING IMAGE - please try different images, all should be fitted into the fragment without overlapping onto any text.
+        updateImage(R.drawable.royal_blue_ipad_wallpaper);
         //TESTING END
+
         return OurView;
     }
 
@@ -76,13 +78,50 @@ public class QRFragment extends Fragment {
     }
 
     /**
-     * selecting and siplaying a randomly selected hint from the array of hints
+     * Displaying a randomly selected hint from the array of hints
      */
     private void selectRandomHint(){
         Random random = new Random();
         Hint.setText(hints[random.nextInt(hints.length)]);
     }
 
+    /**
+     * Public setter method for the text displayed in the Title field of the fragment
+     * @param text String containing the name of the item (Keep short!)
+     */
+    public void updateTitle(String text){
+        Title.setText(text);
+    }
+
+    /**
+     * Public setter method for the text displayed in the scrollable Description field of the fragment
+     * @param text String containing the detailed description of the item (Length should not matter as the TextView scrolls)
+     */
+    public void updateDescription(String text){
+        Description.setText(text);
+    }
+
+    /**
+     * Public setter method for the image displayed on the fragment using a resource ID
+     * @param ID Resource ID of the drawable image
+     */
+    public void updateImage(int ID){
+        ItemImage.setImageResource(ID);
+    }
+
+    /**
+     * Public setter method for the image displayed on the fragment using a drawable
+     * @param drawable Drawable class for the image
+     */
+    public void updateImage(Drawable drawable){
+        ItemImage.setImageDrawable(drawable);
+    }
+
+
+    /**
+     * Setup method that defines a lot of the layout as well as colours, initial texts and scaling.
+     * Also sets up the on click listener for the QR button
+     */
     private void setContent(){
         hints = getResources().getStringArray(R.array.Hints); //array of hints from strings.xml
         Title.setText(R.string.QRFragmentTitle);
@@ -110,6 +149,7 @@ public class QRFragment extends Fragment {
 
         Description.setMovementMethod(new ScrollingMovementMethod()); //taken from http://stackoverflow.com/questions/1748977/making-textview-scrollable-in-android
         Description.setMaxLines(6);
+        Description.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     private void setAllLayoutParams(int height, int width, View view){
