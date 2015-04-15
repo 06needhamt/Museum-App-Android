@@ -50,6 +50,8 @@ public class ArtefactInfo implements DatabaseConstants {
         name = record.getValue(ART_NAME);
         //title = record.getValue("title"); // Get the title of the record
 
+        imageName = record.getValue(ART_IMAGE); // Check that this is not String "NULL" before using it
+
         description = record.getValue(ART_DESCRIPTION);
         museumNo = record.getValue(ART_MUSEUM_NO);
 
