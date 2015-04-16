@@ -23,6 +23,7 @@ import java.util.Random;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
+import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
 
 /**
  * Created by Alex and Chris on 01/03/2015
@@ -59,7 +60,9 @@ public class QRFragment extends Fragment {
         setAllLayoutParams(height, width, OurView);
 
         //TESTING IMAGE - please try different images, all should be fitted into the fragment without overlapping onto any text.
-        updateImage(R.drawable.royal_blue_ipad_wallpaper);
+        //updateImage(R.drawable.royal_blue_ipad_wallpaper);
+
+        updateImage("49_telescopes");
         //TESTING END
 
         return OurView;
@@ -107,6 +110,15 @@ public class QRFragment extends Fragment {
      */
     public void updateImage(int ID){
         ItemImage.setImageResource(ID);
+    }
+
+    /**
+     * Gets an image from the <b>assets/images</b> folder based on imageName
+     * @param imageName the name of the image
+     */
+    public void updateImage(String imageName) {
+        Drawable img = new ArtefactImage(getActivity(), imageName).getImage();
+        ItemImage.setImageDrawable(img);
     }
 
     /**
