@@ -40,7 +40,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
 
     DatabaseHelper db;
     //DatabaseConstants dc = new DatabaseConstants(); // Constant String values for use with database
-    Context context;
+    public Context context;
     int mode; // Mode of use, e.g. MODE_BROWSE, MODE_TRAIL
     public TrailInfo currentTrail;         // Information about the current trail
     boolean onTrail;                // Indicates if user is on a trail
@@ -68,6 +68,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
      * @return Instance of TrailManager
      */
     public static synchronized TrailManager getTrailManagerInstance(Context context) {
+        Log.e("Debugging>>>>>>>>>>>>>", context.getClass().toString());
         if(trailManagerInstance != null)
             return trailManagerInstance;
         else {
