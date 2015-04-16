@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
 
 /**
  * Created by Tom on 04/02/2015.
@@ -44,7 +45,6 @@ public class FifthFloorFragment extends Fragment{
         ImageView Map = (ImageView) v.findViewById(R.id.Map);
         Map.setImageResource(R.drawable.floor_5);
         Map.setLayoutParams(mapLayoutParams(screenHeight,screenWidth));
-
     }
 
     private FrameLayout.LayoutParams TopTextLayoutParams(int screenHeight, int screenWidth) {
