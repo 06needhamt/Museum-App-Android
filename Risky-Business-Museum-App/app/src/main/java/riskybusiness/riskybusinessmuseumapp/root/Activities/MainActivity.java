@@ -36,7 +36,7 @@ public class MainActivity extends FragmentActivity implements IChoiceDialogCompl
 
         db = new DatabaseHelper(this); // Prepare database
         db.initialiseDatabase(); // Initialise the database. In the case of first run , this will copy database from assets
-        DisplayDialog();
+        //DisplayDialog();
     }
 
     private void DisplayDialog() {

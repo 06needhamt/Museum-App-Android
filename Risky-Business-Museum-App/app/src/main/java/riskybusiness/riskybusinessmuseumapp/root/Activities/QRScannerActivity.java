@@ -43,7 +43,7 @@ public class QRScannerActivity extends ActionBarActivity {
             Bundle B = new Bundle();
 
 
-            String artefactNumber = "42"; //<<<<<<<<----- change the number to simulate scanning different artefacts
+            String artefactNumber = "81"; //<<<<<<<<----- change the number to simulate scanning different artefacts
 
             B.putString("Content", "CONTENT: http://riskybuisiness.co.uk/" + artefactNumber);
             B.putString("Format", "FORMAT: Test");
