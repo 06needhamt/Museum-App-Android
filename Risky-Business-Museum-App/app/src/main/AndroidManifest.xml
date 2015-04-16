@@ -69,6 +69,7 @@
             android:name=".root.Activities.BrowseQRCodesActivity"
             android:label="@string/title_activity_browse_qrcodes" >
         </activity>
+
     </application>
 
 </manifest>

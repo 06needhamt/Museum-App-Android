@@ -18,6 +18,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
 
 
 /**
@@ -347,12 +348,14 @@ public class ButtonCreator implements AppConstants{
             }
             case 2:
             {
-                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                //populateTopButtons();
                 makeTopButtonsInvisible();
                 resetButtonBackgroundBottom(btn);
+
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
-                //StartQRActivity();
+
+//                Intent i = new Intent(act.getBaseContext(), BrowseActivity.class);
+//
+//                startBrowseActivity(i);
                 break;
             }
             case 3:
@@ -380,12 +383,10 @@ public class ButtonCreator implements AppConstants{
             }
         }
     }
-@Deprecated
-    private void StartQRActivity() {
 
-        Intent I = new Intent(act.getBaseContext(), QRScannerActivity.class);
-        act.CallQRScannerActivity();
-        resetButtonBackgroundTop(-1);
+
+    private void startBrowseActivity(Intent i) {
+        act.startActivity(i);
     }
 
 

@@ -18,12 +18,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Method;
 import java.util.Random;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
-import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.ArtefactInfo;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
 /**
  * Created by Alex and Chris on 01/03/2015
@@ -37,6 +39,9 @@ public class QRFragment extends Fragment {
     String[] hints;
     int height;
     int width;
+    TrailManager trailManager;
+
+    Method[] method;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,9 @@ public class QRFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_qr, container, false);
+
+        trailManager = TrailManager.getTrailManagerInstance((HomePageActivity) getActivity()); // Instantiate (If not already) Singleton TrailManager
+
         this.OurView = view;
         DisplayMetrics size = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(size);
@@ -64,6 +72,7 @@ public class QRFragment extends Fragment {
 
         updateImage("49_telescopes");
         //TESTING END
+
 
         return OurView;
     }
@@ -135,6 +144,7 @@ public class QRFragment extends Fragment {
      * Also sets up the on click listener for the QR button
      */
     private void setContent(){
+
         hints = getResources().getStringArray(R.array.Hints); //array of hints from strings.xml
         Title.setText(R.string.QRFragmentTitle);
         Title.setTextColor(getResources().getColor(R.color.White)); //White font
@@ -145,11 +155,16 @@ public class QRFragment extends Fragment {
         QRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomePageActivity hp = (HomePageActivity) getActivity();
-                hp.CallQRScannerActivity();
-                selectRandomHint();
+                qrButtonClicked(v);
+//                HomePageActivity hp = (HomePageActivity) getActivity();
+//                hp.CallQRScannerActivity();
+//
+//                getArtefactDetails(hp); // Get the details from the scanned artefact
+//
+//                 selectRandomHint();
             }
         });
+
         QRButton.setScaleX(2.0f);
         QRButton.setScaleY(2.0f); //doubling size of qr button
 
@@ -163,6 +178,31 @@ public class QRFragment extends Fragment {
         Description.setMaxLines(6);
         Description.setGravity(Gravity.CENTER_HORIZONTAL);
     }
+
+    private void qrButtonClicked(View v) {
+        ArtefactInfo artefactInfo;
+
+        HomePageActivity hpa = (HomePageActivity) getActivity(); // Get the real HomePageActivity instance
+
+        hpa.CallQRScannerActivity();
+
+        artefactInfo = hpa.getArtefact(); // Populate the artefact with the corresponding details based on scanned QR.
+        //populateArtefactViews(artefactInfo);
+
+        selectRandomHint();
+
+    }
+
+    /**
+     * Populate the scanned artefact details within the fragment
+     * @param artefactInfo Scanned artefact
+     */
+    private void populateArtefactViews(ArtefactInfo artefactInfo) {
+        Title.setText((CharSequence)artefactInfo.name);
+        Description.setText((CharSequence) artefactInfo.description);
+        ItemImage.setImageDrawable(new ArtefactImage(getActivity(), artefactInfo.imageName));
+    }
+
 
     private void setAllLayoutParams(int height, int width, View view){
         Title.setLayoutParams(createTitleParams(height, width));
