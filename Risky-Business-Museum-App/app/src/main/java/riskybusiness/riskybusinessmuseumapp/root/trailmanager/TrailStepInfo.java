@@ -19,7 +19,7 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
     String question;  // Question string
     String answer;    // Answer to question
     int qrCode;       // QR code with answer in it
-    int imageID;      // Image ID reference to image table
+    String imageName;   // Image name
 
     List<String> multiChoiceAnswers; // Answers to multi choice as List, first element = answer
 
@@ -63,7 +63,7 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
         // TODO Fix image id's
         // Get the image ID
         temp = trailStep.getValue(STP_IMAGE);
-        // imageID = temp.toUpperCase().equals("NULL") ? 0 : Integer.parseInt(temp); // Get value from temp or 0 if null
+        imageName = temp; // Get image name or String "null" from temp
 
         if(questionType == QUESTION_MULTI) { // If the question is multi-choice, split the answer string into a list
             multiChoiceAnswers = parseMultiChoice(answer);
@@ -96,7 +96,7 @@ public class TrailStepInfo implements AppConstants, DatabaseConstants {
 
     public int getQrCode() { return qrCode; }
 
-    public int getImageID() { return imageID; }
+    public String getImageName() { return imageName; } // Returns the name of the image
 
     public List<String> getMultiChoiceAnswers() { return multiChoiceAnswers; }
 

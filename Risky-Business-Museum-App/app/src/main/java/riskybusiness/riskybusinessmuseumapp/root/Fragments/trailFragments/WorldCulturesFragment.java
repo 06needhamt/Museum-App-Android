@@ -207,7 +207,7 @@ public class WorldCulturesFragment extends Fragment{
         mapHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mapWidth, mapHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.00); //!!!
+        params.topMargin = (int) (screenHeight * 0.05); //!!!
         return params;
     }
 

@@ -40,8 +40,7 @@
         android:layout_height="144dp"
         android:id="@+id/Map"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="250dp"
-        android:paddingTop="15dp" />
+        android:layout_marginTop="250dp" />
 
     <TextView
         android:layout_width="wrap_content"
