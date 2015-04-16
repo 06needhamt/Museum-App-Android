@@ -31,7 +31,8 @@
         android:textColor="@color/White"
         android:textSize="16dp"
         android:id="@+id/subTitle"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_gravity="center_horizontal|top"
+        android:paddingTop="15dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -43,9 +44,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
-        android:text="Click Map To Enter"
+        android:text=""
         android:textSize="14dp"
         android:id="@+id/description"
         android:layout_gravity="center_horizontal|top" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SpaceAndTimeTrailSpinner"
+        android:layout_gravity="center_horizontal|top"
+        android:clickable="true"
+        android:gravity="left"
+        android:focusable="false" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SpaceAndTimeGoButton"
+        android:layout_gravity="center_horizontal|top"
+        android:clickable="true" />
 
 </FrameLayout>

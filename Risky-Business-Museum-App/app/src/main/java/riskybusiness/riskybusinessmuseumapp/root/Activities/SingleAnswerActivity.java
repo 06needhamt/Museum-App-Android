@@ -106,7 +106,7 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
     private void updateTrailPosition(int currpos, int max){
-        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max + 1)); //add 1 to them since these values come from a 0 indexed list
+        TrailPositionField.setText("Question " + (currpos + 1) + " of " + (max)); //add 1 to them since these values come from a 0 indexed list
     }
 
     private FrameLayout.LayoutParams SingleAnswerQuestionLayout(int screenHeight, int screenWidth){
@@ -193,6 +193,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         Bundle tempBundle = data.getExtras();
         String from = tempBundle.getString("FROM", "");
+        int artefactID;
+
         if(from.equals("QRScannerActivity")) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
@@ -212,11 +214,18 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 // TODO: Need to check if the code scanned is part of this trail, if not the user may have moved on. This also needs to be done anywhere else necessary
                 // Not sure if this is the right place to put the code or not
                 // Use call to TrailManager.checkArtefact(artefact number), to check if the scanned artefact is on the current trail
-                if(trailManager.checkArtefact(3) == -1) { // Artefact  not on trail
-                    // display message asking the user if they want to return to the trail,
-                    // join the new trail belonging to the scanned artefact or leave the trail altogether and just browse
 
+                artefactID = Integer.parseInt(ValidatedContent);
 
+                if(trailManager.checkArtefact(artefactID) == -1) {       // Artefact  not on trail
+
+                    if(trailManager.isArtefactInExhibit(artefactID)) {// Is the artefact part of the current trails exhibit?
+                        // Artefact is in the exhibit - so wrong QR code scanned (wrong answer)
+                    }
+                    else { // Not part of the current exhibit so user has moved on
+                        // display message asking the user if they want to return to the trail,
+                        // join the new trail belonging to the scanned artefact or leave the trail altogether and just browse
+                    }
                 }
 
 

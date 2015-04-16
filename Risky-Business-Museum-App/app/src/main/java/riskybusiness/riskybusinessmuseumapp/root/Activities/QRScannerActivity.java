@@ -38,11 +38,12 @@ public class QRScannerActivity extends ActionBarActivity {
 
         System.out.println("Android Build = " + Build.BRAND);
 
-        // TODO: The following code tests if it being run on an emulator (generic), if so does not call the QR scanner
+        // The following code tests if it being run on an emulator (generic), if so does not call the QR scanner
         if(Build.BRAND.contains("generic")) { // Generic emulator
             Bundle B = new Bundle();
 
-            String artefactNumber = "8"; //<<<<<<<<----- change the number to simulate scanning different artefacts
+
+            String artefactNumber = "42"; //<<<<<<<<----- change the number to simulate scanning different artefacts
 
             B.putString("Content", "CONTENT: http://riskybuisiness.co.uk/" + artefactNumber);
             B.putString("Format", "FORMAT: Test");

@@ -16,12 +16,14 @@ import java.lang.reflect.Field;
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
 
 
 /**
  * Created by Tom on 02/02/2015.
  */
-public class ButtonCreator {
+public class ButtonCreator implements AppConstants{
 
 
     public static final int NUM_BUTTONS = 5; // Number of BUTTONS (Columns in table)
@@ -37,6 +39,7 @@ public class ButtonCreator {
     Fragment[] BottomFragments;
     Fragment[] InfoFragments;
     TableRow tableRowTop;
+    InformationWebView infoWebView;
 
     Button[] Topbuttons = new Button[NUM_TOP_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -59,7 +62,7 @@ public class ButtonCreator {
     final String[] iconUnderNamesInfo = {"blue___icon_appinfo","blue___icon_museuminfo", "blue___icon_planetarium", "blue___icon_cafe", "blue___icon_toilets", "blue___icon_information"};
     final String[] iconOverNamesInfo = {"green___icon_appinfo", "green___icon_museuminfo","green___icon_planetarium", "green___icon_cafe", "green___icon_toilets", "green___icon_information"};
 
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, Fragment[] InfoFragments)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, InformationWebView infoWebView)
     {
 
         this.act = A;
@@ -69,7 +72,8 @@ public class ButtonCreator {
         this.Trailfragments = Trailfragments;
         this.Mapfragments = Mapfragments;
         this.BottomFragments = BottomFragments;
-        this.InfoFragments = InfoFragments;
+        //this.InfoFragments = InfoFragments;
+        this.infoWebView = infoWebView;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -127,6 +131,26 @@ public class ButtonCreator {
         }
     }
 
+    public void lightUpButtons(final int which){
+        resetButtonBackgroundBottom(-1);
+        if(which == TRAIL) {
+            Bottombuttons[0].setBackgroundResource(R.drawable.purple___icon_question);
+        }
+
+        else if(which == EXPLORER) {
+            Bottombuttons[1].setBackgroundResource(R.drawable.purple___icon_explorer);
+        }
+        else if(which == TRAIL_AND_EXPLORER)
+        {
+            Bottombuttons[0].setBackgroundResource(R.drawable.purple___icon_question);
+            Bottombuttons[1].setBackgroundResource(R.drawable.purple___icon_explorer);
+        }
+        else
+        {
+            throw new Error("Invalid Button Highlight Pattern");
+        }
+        Bottombuttons[2].setBackgroundResource(R.drawable.green___icon_qr);
+    }
     public void makeTopButtonsInvisible(){
         Toptable.setVisibility(View.GONE);
     }
@@ -255,7 +279,7 @@ public class ButtonCreator {
 
         //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
-        resetButtonBackgroundBottom(-1);
+        //resetButtonBackgroundBottom(-1);
         act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
 
     }
@@ -268,12 +292,34 @@ public class ButtonCreator {
 
     }
 
-    public void InfogridButtonClicked(int btn)
-    {
+
+    public void InfogridButtonClicked(int btn) {
         //Toast.makeText(act, "Map Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundInfo(btn);
-        act.getFragmentManager().beginTransaction().replace(R.id.frame, InfoFragments[btn]).commit();
+        //act.getFragmentManager().beginTransaction().replace(R.id.frame, InfoFragments[btn]).commit();
+        infoWebView.loadPage(DEFAULT_PAGE);
 
+        switch(btn){
+            case 0:
+                infoWebView.loadPage(APP_INFO_PAGE);
+                break;
+            case 1:
+                //@TODO add museum information page
+                break;
+            case 2:
+                infoWebView.loadPage(CAFE_AND_SHOP_PAGE);
+                break;
+            case 3:
+                infoWebView.loadPage(FACILITIES_PAGE);
+                break;
+            case 4:
+                infoWebView.loadPage(INFO_DESK_PAGE);
+                break;
+            case 5:
+                infoWebView.loadPage(PLANETARIUM_PAGE);
+                break;
+
+        }
     }
 
 
@@ -328,7 +374,7 @@ public class ButtonCreator {
                 resetButtonBackgroundBottom(btn);
                 //resetButtonBackgroundTop(-1);
                 resetButtonBackgroundInfo(-1);
-                act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
+                act.getFragmentManager().beginTransaction().replace(R.id.frame, infoWebView).commit();
 
                 break;
             }

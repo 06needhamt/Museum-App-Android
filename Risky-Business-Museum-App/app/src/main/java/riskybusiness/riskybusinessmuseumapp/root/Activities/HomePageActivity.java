@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AncientWorldFragment;
@@ -45,13 +47,16 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
     Fragment[] InfoFragments;
+    InformationWebView infoWebView;
     String Content;
     String Format;
     int currentTrailScore;
+    ArrayList<Integer> questionScores;
     TrailManager trailManager;
     QuestionManager qm;
     ArtefactInfo artefact;  // Stores artefact information from the database
     List<TrailInfo> trails; // List of trails
+    ButtonCreator btncreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         BottomFragments = CreateBottomFragments();
         InfoFragments = CreateInfoFragments();
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
-        ButtonCreator btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,InfoFragments);
+        infoWebView = new InformationWebView();
+        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -74,6 +80,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
         AddFragment();
         currentTrailScore = 0;
+        questionScores = new ArrayList<Integer>();
 
     }
 
@@ -106,18 +113,20 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         fragments[1] = null;
         fragments[2] = new QRFragment();
         fragments[3] = new GroundFloorFragment();
-        fragments[4] = new InformationFragment();
+        fragments[4] = new InformationWebView();
         return fragments;
     }
+
+    @Deprecated
     private Fragment[] CreateInfoFragments()
     {
         Fragment[] fragments = new Fragment[6];
-        fragments[0] = new Fragment();
-        fragments[1] = new Fragment();
-        fragments[2] = new Fragment();
-        fragments[3] = new Fragment();
-        fragments[4] = new Fragment();
-        fragments[5] = new Fragment();
+        fragments[0] = new InformationWebView();
+        fragments[1] = new InformationWebView();
+        fragments[2] = new InformationWebView();
+        fragments[3] = new InformationWebView();
+        fragments[4] = new InformationWebView();
+        fragments[5] = new InformationWebView();
         return fragments;
     }
 
@@ -166,6 +175,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
                     currentTrailScore = 0;
@@ -198,6 +208,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
                 //  Retrieve the artefact information from the TrailManager, this includes associated trail types
                 artefact = trailManager.browseArtefactID(qrCode);
 
+                System.out.println("Browsed Artefact = " + artefact.artefactID + " " + artefact.name);
+
+                btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
                 // Get the TrailManager to pre-load any associated trails information
                 // trailManager.getArtefactTrails(artefact.artefactID);
 
@@ -223,6 +236,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else if(from.equals("SingleAnswerActivity")) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
                 currentTrailScore += b.getInt("Score", -1);
                 exit = b.getBoolean("EXIT", false);
                 if(exit){
@@ -250,10 +264,28 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     }
 
+    private void appendQuestionScores(int score){
+        questionScores.add(score);
+    }
+
     public void CallQRScannerActivity()
     {
         Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
         startActivityForResult(i,0,null);
+    }
+
+    public void callPictureQRQuestionActivity(String question, String answer){
+        Intent i = new Intent(getBaseContext(), PictureQRQuestionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
+        //TODO add String or other for the image to be displayed
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivityForResult(i, 0, null);
     }
 
     public void callMultiChoiceActivity(String question, String answer){
@@ -267,6 +299,18 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
+    }
+
+    public void callTrailResultActivity(){
+        Intent i = new Intent(getBaseContext(), TrailResultActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("SCORE", currentTrailScore);
+        bundle.putIntegerArrayList("QSCORES", questionScores);
+        //TODO Add the current trail name to the bundle
+        bundle.putString("TRAILNAME", trailManager.currentTrail.name);
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivity(i);
     }
 
     public void callSingleAnswerActivity(String question, String answer){
