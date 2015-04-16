@@ -274,6 +274,20 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         startActivityForResult(i,0,null);
     }
 
+    public void callPictureQRQuestionActivity(String question, String answer){
+        Intent i = new Intent(getBaseContext(), PictureQRQuestionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
+        //TODO add String or other for the image to be displayed
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivityForResult(i, 0, null);
+    }
+
     public void callMultiChoiceActivity(String question, String answer){
         Intent i = new Intent(getBaseContext(), MultiChoiceActivity.class);
         Bundle bundle = new Bundle();
