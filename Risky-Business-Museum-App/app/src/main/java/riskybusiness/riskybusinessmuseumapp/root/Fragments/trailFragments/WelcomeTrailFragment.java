@@ -30,7 +30,7 @@ public class WelcomeTrailFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_welcome_explorer_trail, container, false);
+        View view = inflater.inflate(R.layout.fragment_welcome_trail, container, false);
         view.setPadding(0,0,0,0);
 
         v = view;
@@ -63,10 +63,10 @@ public class WelcomeTrailFragment extends Fragment {
         subTitle.setLayoutParams(createSubTitleLayoutParams(itemWidth, itemHeight));
 
         instructions = (TextView) v.findViewById(R.id.instructions);
-        instructions.setText(getActivity().getResources().getString(R.string.instructions));
+        instructions.setText(getActivity().getResources().getString(R.string.instructions_trail));
         instructions.setTextColor(getActivity().getResources().getColor(R.color.White));
         instructions.setLayoutParams(createInstructionsLayoutParams(itemWidth, itemHeight));
-
+        instructions.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     private FrameLayout.LayoutParams createTitleLayoutParams(int itemWidth, int itemHeight) {
@@ -102,7 +102,7 @@ public class WelcomeTrailFragment extends Fragment {
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
 
-        params.topMargin = (int) (itemHeight * 0.50);
+        params.topMargin = (int) (itemHeight * 0.60);
 
         return params;
 

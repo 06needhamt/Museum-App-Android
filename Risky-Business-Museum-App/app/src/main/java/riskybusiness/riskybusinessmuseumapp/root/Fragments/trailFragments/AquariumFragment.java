@@ -20,13 +20,14 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
 /**
  * Created by Chris on 14/04/2015.
  */
-public class AquariumFragment extends Fragment{
+public class AquariumFragment extends Fragment implements AppConstants{
     TextView Title, SubTitle, Description, spinnerIstruction;
     ImageView Map;
     ImageButton AquariumGoButton;
@@ -76,7 +77,7 @@ public class AquariumFragment extends Fragment{
     private void getSpinnerWorking(View view){ //view http://examples.javacodegeeks.com/android/core/ui/spinner/android-spinner-drop-down-list-example/ and http://www.mkyong.com/android/android-spinner-drop-down-list-example/
         //String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
         trails = new ArrayList<>();
-
+        String[] trailNames;
 
         Context context = getActivity(); // Need the context for the TrailManager
 
@@ -87,16 +88,22 @@ public class AquariumFragment extends Fragment{
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
             // TODO: set correct trail
-            trails = tm.getExhibitTrails(2); // Search for 2 == Ancient World
+            trails = tm.getExhibitTrails(2, TRAIL); // Search for 2 == Ancient World
 
-            //TextView[] texts = new TextView[trails.size() + 1];
-            String[] trailNames = new String[trails.size() + 1];
+            if(trails != null) { // Trail names to polpulate spinner
+                TextView[] texts = new TextView[trails.size() + 1];
+                trailNames = new String[trails.size() + 1];
 
-            trailNames[0] = "Please select a trail";
+                trailNames[0] = "Please select a trail";
 
-            for (int i = 0; i < trails.size(); i++) {
-                //texts[i].setText(trails.get(i).name); // Get the name of the trail
-                trailNames[i + 1] = trails.get(i).name;
+                for (int i = 0; i < trails.size(); i++) {
+                    trailNames[i + 1] = trails.get(i).name;
+                }
+            }
+            else { // No trail names to populate spinner
+                trailNames = new String[1];
+
+                trailNames[0] = getActivity().getResources().getString(R.string.NoTrails);
             }
 
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trailNames);

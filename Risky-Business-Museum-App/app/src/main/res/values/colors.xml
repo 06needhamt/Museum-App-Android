@@ -9,6 +9,8 @@
     <color name="transparent">#00000000</color>
     <color name="lightBlue">#FF2E9AFE</color>
     <color name="White">#FFFFFFFF</color>
+    <color name="Black">#FF000000</color>
+    <color name="RoyalBlue">#FF0a3675</color>
     <color name="backgroundcol">#FF194479</color>
     <color name="SpinnerGradientStart">#FF7db9e8</color>
     <color name="SpinnerGradientCenter">#FF207cca</color>

@@ -39,6 +39,7 @@ public class ButtonCreator implements AppConstants{
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
     Fragment[] InfoFragments;
+    Fragment[] ExplorerTrailFragments;
     TableRow tableRowTop;
     InformationWebView infoWebView;
 
@@ -63,7 +64,8 @@ public class ButtonCreator implements AppConstants{
     final String[] iconUnderNamesInfo = {"blue___icon_appinfo","blue___icon_museuminfo", "blue___icon_planetarium", "blue___icon_cafe", "blue___icon_toilets", "blue___icon_information"};
     final String[] iconOverNamesInfo = {"green___icon_appinfo", "green___icon_museuminfo","green___icon_planetarium", "green___icon_cafe", "green___icon_toilets", "green___icon_information"};
 
-    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments, Fragment[] BottomFragments, InformationWebView infoWebView)
+    public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments,
+                         Fragment[] BottomFragments, InformationWebView infoWebView, Fragment[] ExplorerTrailFragments )
     {
 
         this.act = A;
@@ -75,6 +77,7 @@ public class ButtonCreator implements AppConstants{
         this.BottomFragments = BottomFragments;
         //this.InfoFragments = InfoFragments;
         this.infoWebView = infoWebView;
+        this.ExplorerTrailFragments = ExplorerTrailFragments;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -281,7 +284,15 @@ public class ButtonCreator implements AppConstants{
         //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
         resetButtonBackgroundTop(btn);
         //resetButtonBackgroundBottom(-1);
-        act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
+
+        if(getPressedBottom() == 1) {
+            act.getFragmentManager().beginTransaction().replace(R.id.frame, ExplorerTrailFragments[btn]).commit();
+        }
+        else {
+            act.getFragmentManager().beginTransaction().replace(R.id.frame, Trailfragments[btn]).commit();
+            resetButtonBackgroundBottom(0);
+        }
+
 
     }
 
@@ -334,6 +345,7 @@ public class ButtonCreator implements AppConstants{
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
+                resetButtonStateBottom(btn);
                 break;
             }
             case 1:
@@ -342,6 +354,7 @@ public class ButtonCreator implements AppConstants{
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame,BottomFragments[btn]).commit();
+                resetButtonStateBottom(btn);
                 break;
             }
             case 2:
@@ -349,6 +362,7 @@ public class ButtonCreator implements AppConstants{
                 makeTopButtonsInvisible();
                 resetButtonBackgroundBottom(btn);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
+                resetButtonStateBottom(btn);
                 break;
             }
             case 3:
@@ -357,6 +371,7 @@ public class ButtonCreator implements AppConstants{
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundMap(0);
+                resetButtonStateBottom(btn);
                 //StartQRActivity();
                 break;
             }
@@ -367,7 +382,7 @@ public class ButtonCreator implements AppConstants{
                 //resetButtonBackgroundTop(-1);
                 resetButtonBackgroundInfo(-1);
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, infoWebView).commit();
-
+                resetButtonStateBottom(btn);
                 break;
             }
         }
@@ -462,6 +477,7 @@ public class ButtonCreator implements AppConstants{
             }
         }
     }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundInfo(int btn)
     {
@@ -535,5 +551,10 @@ public class ButtonCreator implements AppConstants{
         return -1; // Error - no buttons pressed
     }
 
-
+    private void resetButtonStateBottom(int btn) { // Reset all buttons except btn
+        for(boolean b : BottomButtonState) {
+            b = false;
+        }
+        BottomButtonState[btn] = true;
+    }
 }
