@@ -330,8 +330,6 @@ public class ButtonCreator implements AppConstants{
         {
             case 0:
             {
-                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                //populateTopButtons();
                 makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
@@ -340,29 +338,21 @@ public class ButtonCreator implements AppConstants{
             }
             case 1:
             {
-                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                //populateTopButtons();
                 makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
+                act.getFragmentManager().beginTransaction().replace(R.id.frame,BottomFragments[btn]).commit();
                 break;
             }
             case 2:
             {
                 makeTopButtonsInvisible();
                 resetButtonBackgroundBottom(btn);
-
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
-
-//                Intent i = new Intent(act.getBaseContext(), BrowseActivity.class);
-//
-//                startBrowseActivity(i);
                 break;
             }
             case 3:
             {
-                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                //populateMapButtons();
                 makeTopButtonsVisible();
                 act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 resetButtonBackgroundBottom(btn);
@@ -372,8 +362,6 @@ public class ButtonCreator implements AppConstants{
             }
             case 4:
             {
-                //Toast.makeText(act, "Button Clicked " + btn, Toast.LENGTH_SHORT).show();
-                //populateInfoButtons();
                 makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 //resetButtonBackgroundTop(-1);
@@ -383,11 +371,6 @@ public class ButtonCreator implements AppConstants{
                 break;
             }
         }
-    }
-
-
-    private void startBrowseActivity(Intent i) {
-        act.startActivity(i);
     }
 
 
@@ -482,14 +465,6 @@ public class ButtonCreator implements AppConstants{
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void resetButtonBackgroundInfo(int btn)
     {
-//        for(String s : iconUnderNamesInfo)
-//        {
-//            Log.e("Array",s);
-//        }
-        //Log.e("Contains", String.valueOf(drawableList.getIcon("blue___icon_appinfo").iconID));
-//        final int[] idsblueinfo = {2130837557,2130837571,2130837572,2130837560,2130837576,2130837569};
-//        final int[] idsgreeninfo = {2130837598,2130837612,2130837613,2130837601,2130837617,2130837610};
-
         for(int i = 0; i < NUM_TOP_BUTTONS; i++)
         {
             final int col = i;
