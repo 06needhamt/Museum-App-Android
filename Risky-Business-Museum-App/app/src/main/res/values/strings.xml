@@ -95,4 +95,7 @@
     <string name="title_activity_picture_qrquestion">PictureQRQuestionActivity</string>
     <string name="title_activity_picture_multi_choice">PictureMultiChoiceActivity</string>
 
+    <string name="title_trail_welcome">Welcome to Trails</string>
+    <string name="sub_title_trail_welcome">Trails offer you a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
+    <string name="instructions">To begin please choose a trail area from the above options and have fun!</string>
 </resources>

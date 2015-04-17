@@ -33,6 +33,7 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.SecondFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.ThirdFloorFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.WelcomeTrailFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.WorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ButtonCreator;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
@@ -86,14 +87,6 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         currentTrailScore = 0;
         questionScores = new ArrayList<Integer>();
 
-        Context test = this;
-        Log.e("Debugging in HPA>>>>>", test.getClass().toString());
-
-        Method[] method = test.getClass().getDeclaredMethods();
-
-        for(Method m : method) {
-            Log.e("Debugging HPA", m.getName());
-        }
     }
 
     private Fragment[] CreateFragments() {
@@ -121,7 +114,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     private Fragment[] CreateBottomFragments(){
         Fragment[] fragments = new Fragment[5];
-        fragments[0] = null;
+        fragments[0] = new WelcomeTrailFragment();
         fragments[1] = null;
         fragments[2] = qrFragment;
         fragments[3] = new GroundFloorFragment();
