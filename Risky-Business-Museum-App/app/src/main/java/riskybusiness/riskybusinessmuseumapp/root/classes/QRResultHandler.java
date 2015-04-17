@@ -2,13 +2,15 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 
 import android.util.Log;
 
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+
 /**
  * this class handles the string returned from @link QRScannerActivity
  * Created by Thomas Needham on 27/02/2015.
  */
-public final class QRResultHandler {
-    private final String identifier = "http://riskybuisiness.co.uk/";
-    // result string to holsd the final result to be returned to the intent calling this class
+public final class QRResultHandler  implements AppConstants{
+    private final String identifier = QR_RESULT_IDENTIFIER;
+    // result string to hold the final result to be returned to the intent calling this class
     private String result;
     public QRResultHandler(String Content)
     {
@@ -16,7 +18,7 @@ public final class QRResultHandler {
     }
 
     /**
-     * This method parses and returns the result string taken from a @link QRScannerActivity
+     * This method parses and returns the result string taken from a {@link riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity}
      * @param Content String containing the full contents of a read QR-code
      * @return A substring containing the content without the identifier or "No Content" if content
      * is null or "No Identifier" if the content is not null, but is not a valid QR-code containing
@@ -30,7 +32,7 @@ public final class QRResultHandler {
         else if(Content.contains(identifier))
         {
             setResult(Content.substring((identifier.length() + 9),Content.length())); //9 is the amount of characters the Zhinx library adds as a content prefix, i.e. "CONTENT: "
-            //For example: "CONTENT: http://riskybuisiness.co.uk/ID0001" would be converted to "ID0001".
+            //For example: "CONTENT: http://riskybusiness.co.uk/ID0001" would be converted to "ID0001".
         }
         else
         {

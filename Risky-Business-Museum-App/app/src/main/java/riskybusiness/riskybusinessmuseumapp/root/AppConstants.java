@@ -37,4 +37,8 @@ public interface AppConstants {
         public static final String INFO_DESK_PAGE = "file:///android_asset/webpages/InfoDesk-3.html";
         public static final String PLANETARIUM_PAGE = "file:///android_asset/webpages/Planetarium-1.html";
 
+
+    //Score data
+    public static final int MAX_SCORE_FOR_ONE_QUESTION = 100;
+    public static final String QR_RESULT_IDENTIFIER = "http://www.riskybusiness.co.uk/";
 }

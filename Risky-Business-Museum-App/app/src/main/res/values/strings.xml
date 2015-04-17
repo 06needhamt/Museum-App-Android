@@ -92,5 +92,7 @@
     <string name="title_activity_browse_qrcodes">BrowseQRCodesActivity</string>
 
     <string name="LoremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit a nisi sed venenatis. Quisque auctor, arcu ut viverra hendrerit, risus leo ullamcorper nibh, aliquet viverra mauris ante sed arcu. Suspendisse egestas mi lorem, non dignissim massa pulvinar ut. Proin vulputate eleifend fermentum. Donec odio massa, tempus id quam ac, molestie bibendum leo. Suspendisse id quam mollis, elementum mi eu, aliquet turpis. Maecenas finibus metus in mollis consectetur. Nam non nunc nec est suscipit scelerisque eget vitae ipsum. Aenean ut nisl vel magna pretium pretium. Donec commodo ut neque nec fermentum. Praesent sit amet finibus arcu, et volutpat massa. Mauris turpis sapien, eleifend non libero eu, gravida consectetur augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel nibh mattis, feugiat nulla id, mollis odio. Suspendisse consectetur sem et erat consectetur tempus.</string>
+    <string name="title_activity_picture_qrquestion">PictureQRQuestionActivity</string>
+    <string name="title_activity_picture_multi_choice">PictureMultiChoiceActivity</string>
 
 </resources>

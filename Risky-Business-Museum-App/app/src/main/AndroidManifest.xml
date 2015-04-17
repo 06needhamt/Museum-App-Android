@@ -69,6 +69,15 @@
             android:name=".root.Activities.BrowseQRCodesActivity"
             android:label="@string/title_activity_browse_qrcodes" >
         </activity>
+        <activity
+            android:name=".root.Activities.PictureQRQuestionActivity"
+            android:label="@string/title_activity_picture_qrquestion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".root.Activities.PictureMultiChoiceActivity"
+            android:label="@string/title_activity_picture_multi_choice" >
+        </activity>
     </application>
 
 </manifest>

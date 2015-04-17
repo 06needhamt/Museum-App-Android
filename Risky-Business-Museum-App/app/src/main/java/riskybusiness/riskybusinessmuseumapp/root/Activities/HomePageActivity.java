@@ -2,6 +2,7 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +59,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     ArtefactInfo artefact;  // Stores artefact information from the database
     List<TrailInfo> trails; // List of trails
     ButtonCreator btncreate;
+    QRFragment qrFragment = new QRFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,14 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         currentTrailScore = 0;
         questionScores = new ArrayList<Integer>();
 
+        Context test = this;
+        Log.e("Debugging in HPA>>>>>", test.getClass().toString());
+
+        Method[] method = test.getClass().getDeclaredMethods();
+
+        for(Method m : method) {
+            Log.e("Debugging HPA", m.getName());
+        }
     }
 
     private Fragment[] CreateFragments() {
@@ -111,7 +123,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         Fragment[] fragments = new Fragment[5];
         fragments[0] = null;
         fragments[1] = null;
-        fragments[2] = new QRFragment();
+        fragments[2] = qrFragment;
         fragments[3] = new GroundFloorFragment();
         fragments[4] = new InformationWebView();
         return fragments;
@@ -212,10 +224,12 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
                 btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
                 // Get the TrailManager to pre-load any associated trails information
-                // trailManager.getArtefactTrails(artefact.artefactID);
+                trailManager.getArtefactTrails(artefact.artefactID);
 
                 // TODO: Display the artefact information on screen
-
+                qrFragment.updateTitle(artefact.name);
+                qrFragment.updateDescription(artefact.description);
+                qrFragment.updateImage(artefact.imageName);
 
 
                 // TODO: Indicate types of trails for the browsed artefact on bottom fragment using:
@@ -264,6 +278,13 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     }
 
+    /**
+     * Returns the current artefact information (if any)
+     * @return artefact
+     */
+    public ArtefactInfo getArtefact() { return artefact; }
+
+
     private void appendQuestionScores(int score){
         questionScores.add(score);
     }
@@ -272,6 +293,20 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     {
         Intent i = new Intent(getBaseContext(),QRScannerActivity.class);
         startActivityForResult(i,0,null);
+    }
+
+    public void callPictureQRQuestionActivity(String question, String answer){
+        Intent i = new Intent(getBaseContext(), PictureQRQuestionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
+        //TODO add String or other for the image to be displayed
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivityForResult(i, 0, null);
     }
 
     public void callMultiChoiceActivity(String question, String answer){
