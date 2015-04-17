@@ -335,6 +335,7 @@ public class ButtonCreator implements AppConstants{
                 makeTopButtonsVisible();
                 resetButtonBackgroundBottom(btn);
                 resetButtonBackgroundTop(-1);
+                act.getFragmentManager().beginTransaction().replace(R.id.frame, BottomFragments[btn]).commit();
                 break;
             }
             case 1:
