@@ -1,8 +1,7 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -10,20 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
-import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
@@ -31,7 +27,7 @@ import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 /**
  * Created by Tom on 03/02/2015.
  */
-public class WorldCulturesFragment extends Fragment implements AppConstants{
+public class ExploreWorldCulturesFragment extends Fragment implements AppConstants{
     TextView Title, SubTitle, Description, spinnerIstruction;
     ImageView Map;
     ImageButton WorldCulturesGoButton;
@@ -91,7 +87,7 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
-            trails = tm.getExhibitTrails(3, TRAIL); // Search for 3 == World cultures
+            trails = tm.getExhibitTrails(3, EXPLORER); // Search for 3 == World cultures
 
             if(trails != null) { // Trail names to polpulate spinner
                 TextView[] texts = new TextView[trails.size() + 1];

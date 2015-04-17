@@ -18,6 +18,12 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreAncientWorldFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreAquariumFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreBugsFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreDinosaursFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreSpaceAndTimeFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreWorldCulturesFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.WelcomeExplorerTrailFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AquariumFragment;
@@ -51,6 +57,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     Fragment[] Mapfragments;
     Fragment[] BottomFragments;
     Fragment[] InfoFragments;
+    Fragment[] ExplorerTrailFragments;
     InformationWebView infoWebView;
     String Content;
     String Format;
@@ -74,9 +81,11 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         Mapfragments = CreateMapFragments();
         BottomFragments = CreateBottomFragments();
         InfoFragments = CreateInfoFragments();
+        ExplorerTrailFragments = CreateExplorerTrailFragments();
+
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
         infoWebView = new InformationWebView();
-        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView);
+        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView, ExplorerTrailFragments);
         btncreate.populateTopButtons();
         btncreate.populateBottomButtons();
         //btncreate.populateMapButtons();
@@ -135,6 +144,18 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         fragments[5] = new InformationWebView();
         return fragments;
     }
+
+    private Fragment[] CreateExplorerTrailFragments() {
+        Fragment[] fragments = new Fragment[6];
+        fragments[0] = new ExploreAncientWorldFragment();
+        fragments[1] = new ExploreAquariumFragment();
+        fragments[2] = new ExploreBugsFragment();
+        fragments[3] = new ExploreWorldCulturesFragment();
+        fragments[4] = new ExploreDinosaursFragment();
+        fragments[5] = new ExploreSpaceAndTimeFragment();
+        return fragments;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
