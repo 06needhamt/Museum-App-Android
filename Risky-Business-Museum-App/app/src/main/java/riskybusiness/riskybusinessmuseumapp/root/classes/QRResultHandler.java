@@ -32,7 +32,7 @@ public final class QRResultHandler  implements AppConstants{
         else if(Content.contains(identifier))
         {
             setResult(Content.substring((identifier.length() + 9),Content.length())); //9 is the amount of characters the Zhinx library adds as a content prefix, i.e. "CONTENT: "
-            //For example: "CONTENT: http://riskybuisiness.co.uk/ID0001" would be converted to "ID0001".
+            //For example: "CONTENT: http://riskybusiness.co.uk/ID0001" would be converted to "ID0001".
         }
         else
         {
