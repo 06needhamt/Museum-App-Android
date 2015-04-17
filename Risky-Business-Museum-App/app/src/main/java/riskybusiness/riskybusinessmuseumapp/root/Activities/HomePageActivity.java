@@ -18,6 +18,7 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.WelcomeExplorerTrailFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.AquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
@@ -115,8 +116,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     private Fragment[] CreateBottomFragments(){
         Fragment[] fragments = new Fragment[5];
         fragments[0] = new WelcomeTrailFragment();
-        fragments[1] = null;
-        fragments[2] = qrFragment;
+        fragments[1] = new WelcomeExplorerTrailFragment();
+        fragments[2] = qrFragment; // this fragment is pre initialised so that we can dynamically populate information
         fragments[3] = new GroundFloorFragment();
         fragments[4] = new InformationWebView();
         return fragments;

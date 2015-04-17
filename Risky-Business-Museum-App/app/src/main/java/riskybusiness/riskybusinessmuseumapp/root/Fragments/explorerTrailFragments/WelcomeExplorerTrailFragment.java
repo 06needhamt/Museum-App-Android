@@ -1,4 +1,4 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.TextView;
 import riskybusiness.riskybusinessmuseumapp.R;
 
 /**
- * Created by Chris and Tom on 17/04/2015.
+ * Created by Tom on 17/04/2015.
  */
-public class WelcomeTrailFragment extends Fragment {
+public class WelcomeExplorerTrailFragment extends Fragment {
     View v;
     DisplayMetrics dm;
     TextView title, subTitle, instructions;
@@ -30,7 +30,7 @@ public class WelcomeTrailFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_welcome_explorer_trail, container, false);
+        View view = inflater.inflate(R.layout.fragment_welcome_trail, container, false);
         view.setPadding(0,0,0,0);
 
         v = view;
@@ -53,7 +53,7 @@ public class WelcomeTrailFragment extends Fragment {
         itemHeight = dm.heightPixels;
 
         title = (TextView) v.findViewById(R.id.title);
-        title.setText(getActivity().getResources().getString(R.string.title_trail_welcome));
+        title.setText(getActivity().getResources().getString(R.string.title_explorer_trail_welcome));
         title.setTextColor(getActivity().getResources().getColor(R.color.White));
         title.setLayoutParams(createTitleLayoutParams(itemWidth, itemHeight));
 
