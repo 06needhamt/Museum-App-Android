@@ -40,5 +40,5 @@ public interface AppConstants {
 
     //Score data
     public static final int MAX_SCORE_FOR_ONE_QUESTION = 100;
-    public static final String QR_RESULT_IDENTIFIER = "http://www.riskybuisiness.co.uk/";
+    public static final String QR_RESULT_IDENTIFIER = "http://www.riskybusiness.co.uk/";
 }
