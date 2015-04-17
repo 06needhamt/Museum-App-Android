@@ -1,8 +1,7 @@
-package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
+package riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -10,32 +9,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
-import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
 /**
- * Created by Tom on 03/02/2015.
+ * Created by Chris on 14/04/2015.
  */
-public class WorldCulturesFragment extends Fragment implements AppConstants{
+public class ExploreAquariumFragment extends Fragment implements AppConstants{
     TextView Title, SubTitle, Description, spinnerIstruction;
     ImageView Map;
-    ImageButton WorldCulturesGoButton;
-    Spinner WorldCulturesTrailSpinner;
+    ImageButton AquariumGoButton;
+    Spinner AquariumTrailSpinner;
 
     /**
      * List<TrailInfo> trails:
@@ -56,20 +52,14 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_world_cultures, container, false);
+        View view = inflater.inflate(R.layout.fragment_aquarium, container, false);
         view.setPadding(0,0,0,0);
-        /*Button btnEnter = (Button) OurView.findViewById(R.id.btnEnter);
-        btnEnter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Ancient World Button Clicked");
-            }
-        });*/
+
         DisplayMetrics size = new DisplayMetrics() ;
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(size);
         int height = size.heightPixels;
         int width = size.widthPixels;
-        //Toast.makeText(getActivity().getBaseContext(), (CharSequence) String.valueOf(height),Toast.LENGTH_SHORT).show();
+
         allocateViews(view);
         getSpinnerWorking(view);
         //setSpinnerContentSylte();
@@ -81,17 +71,18 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
     private void getSpinnerWorking(View view){ //view http://examples.javacodegeeks.com/android/core/ui/spinner/android-spinner-drop-down-list-example/ and http://www.mkyong.com/android/android-spinner-drop-down-list-example/
         //String[] trails = getActivity().getResources().getStringArray(R.array.BugTrails);
         trails = new ArrayList<>();
-        String[] trailNames;
+        String trailNames[];
 
         Context context = getActivity(); // Need the context for the TrailManager
 
         if(context == null) { // Context not initialised
-            System.out.println("Error in World Cultures trail spinner initialisation");
+            System.out.println("Error in Ancient World trail spinner initialisation");
         }
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
-            trails = tm.getExhibitTrails(3, TRAIL); // Search for 3 == World cultures
+            // TODO: set correct trail
+            trails = tm.getExhibitTrails(2, EXPLORER); // Search for 2 == Ancient World
 
             if(trails != null) { // Trail names to polpulate spinner
                 TextView[] texts = new TextView[trails.size() + 1];
@@ -108,19 +99,18 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
 
                 trailNames[0] = getActivity().getResources().getString(R.string.NoTrails);
             }
-
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(view.getContext(), R.layout.spinner_body, trailNames);
             dataAdapter.setDropDownViewResource(R.layout.spinner_rows);
-            WorldCulturesTrailSpinner.setAdapter(dataAdapter);
+            AquariumTrailSpinner.setAdapter(dataAdapter);
         }
     }
 
     private void setSpinnerContentSylte(){
         //setting text styles for inside the Spinner (as they are taken from strings.xml which does not include any style
         int counter = 0;
-        while(WorldCulturesTrailSpinner.getItemAtPosition(counter) != null){
+        while(AquariumTrailSpinner.getItemAtPosition(counter) != null){
             System.out.println("Inside Spinner Loop");
-            TextView t = (TextView) WorldCulturesTrailSpinner.getItemAtPosition(counter);
+            TextView t = (TextView) AquariumTrailSpinner.getItemAtPosition(counter);
             t.setTextColor(getResources().getColor(R.color.White));
             t.setTextSize(20);
             counter++;
@@ -129,15 +119,11 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
     private void allocateViews(View view){
         Title = (TextView) view.findViewById(R.id.title);
 
-
         SubTitle = (TextView) view.findViewById(R.id.subTitle);
         SubTitle.setGravity(Gravity.CENTER);
 
         Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.floor_2);
-
-        //spinnerIstruction = (TextView) view.findViewById(R.id.spinnerInstruction);
-        //spinnerIstruction.setText(getActivity().getResources().getString(R.string.SpinnerInstruction));
+        Map.setImageResource(R.drawable.floor_1);
 
         /**
          Map.setOnClickListener(new View.OnClickListener() {
@@ -153,18 +139,18 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         Description = (TextView) view.findViewById(R.id.description);
         Description.setGravity(Gravity.CENTER);
 
-        WorldCulturesTrailSpinner = (Spinner) view.findViewById(R.id.WorldCulturesTrailSpinner);
+        AquariumTrailSpinner = (Spinner) view.findViewById(R.id.TrailSpinner);
 
-        WorldCulturesGoButton = (ImageButton) view.findViewById(R.id.WorldCulturesGoButton);
-        WorldCulturesGoButton.setBackgroundResource(R.drawable.transparent__icon_trail_worldcultures); //Placeholder image for "GO!" Button
-        WorldCulturesGoButton.setOnClickListener(new View.OnClickListener() {
+        AquariumGoButton = (ImageButton) view.findViewById(R.id.TrailGoButton);
+        AquariumGoButton.setBackgroundResource(R.drawable.transparent__icon_trail_aquarium); //Placeholder image for "GO!" Button
+        AquariumGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HomePageActivity hp = (HomePageActivity) getActivity();
                 int choice;
 
                 // Get the chosen trail id from the spinner before setting trailID
-                choice = WorldCulturesTrailSpinner.getSelectedItemPosition();
+                choice = AquariumTrailSpinner.getSelectedItemPosition();
 
                 if(choice == 0) return; // User did not select a trail so ignore trail button
 
@@ -176,7 +162,7 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
     }
 
     /**
-     * Setting the parameter for all the fragments contained within the WorldCultures screen
+     * Setting the parameter for all the fragments contained within the Ancient World screen
      * @param screenHeight screen height as integer
      * @param screenWidth screen width as integer
      * @param view View Object
@@ -185,15 +171,15 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         SubTitle.setLayoutParams(subTitleLayoutParams(screenHeight, screenWidth));
         Map.setLayoutParams(mapLayoutParams(screenHeight, screenWidth));
         Description.setLayoutParams(descriptionLayoutParams(screenHeight, screenWidth));
-        WorldCulturesTrailSpinner.setLayoutParams(WorldCulturesTrailSpinnerParams(screenHeight,screenWidth)); //Keep this before WorldCulturesGoButton as it relies upon it.
-        WorldCulturesGoButton.setLayoutParams(WorldCulturesGoButtonParams(screenHeight, screenWidth));
-        //spinnerIstruction.setLayoutParams(spinnerInstructionLayoutParams(screenHeight, screenWidth));
+        AquariumTrailSpinner.setLayoutParams(AquariumTrailSpinnerParams(screenHeight,screenWidth)); //Keep this before AquariumGoButton as it relies upon it.
+        AquariumGoButton.setLayoutParams(AquariumGoButtonParams(screenHeight, screenWidth));
+        //spinnerInstruction.setLayoutParams(spinnerInstructionLayoutParams(screenHeight, screenWidth));
 
     }
 
     /**
      * Create specified FrameLayout.LayoutParams parameters to be applied to the SubTitle text field
-     * in the World Cultures screen.
+     * in the Ancient World screen.
      * @param screenHeight screen height as integer
      * @param screenWidth screen width as integer
      * @return FrameLayout.LayoutParams Object
@@ -214,7 +200,7 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         mapHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(mapWidth, mapHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.15); //!!!
+        params.topMargin = (int) (screenHeight * 0.13); //!!!
         return params;
     }
 
@@ -238,7 +224,7 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         return params;
     }
 
-    private FrameLayout.LayoutParams WorldCulturesTrailSpinnerParams(int screenHeight, int screenWidth) {
+    private FrameLayout.LayoutParams AquariumTrailSpinnerParams(int screenHeight, int screenWidth) {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenHeight, screenWidth);
         params.gravity = Gravity.LEFT;
         params.topMargin = (int) (screenHeight * 0.65); //!!!
@@ -248,14 +234,15 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         return params;
     }
 
-    private FrameLayout.LayoutParams WorldCulturesGoButtonParams(int screenHeight, int screenWidth) {
+    private FrameLayout.LayoutParams AquariumGoButtonParams(int screenHeight, int screenWidth) {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(screenHeight, screenWidth);
         params.gravity = Gravity.RIGHT;
         params.topMargin = (int) (screenHeight * 0.66); //!!!
         params.rightMargin = (int) (screenWidth * 0.05);
-        //params.leftMargin= WorldCulturesTrailSpinner.getMeasuredWidth() + (int) (screenWidth * 0.02) + 10; //moving this depending on the width of the WorldCulturesTrailSpinner width + it's left margin + 10 pixels for good measure
+        //params.leftMargin= BugsTrailSpinner.getMeasuredWidth() + (int) (screenWidth * 0.02) + 10; //moving this depending on the width of the AquariumTrailSpinner width + it's left margin + 10 pixels for good measure
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
         return params;
     }
 }
+
