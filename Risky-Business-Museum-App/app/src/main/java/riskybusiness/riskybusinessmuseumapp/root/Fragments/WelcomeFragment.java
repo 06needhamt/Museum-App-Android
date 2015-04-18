@@ -119,7 +119,7 @@ public class WelcomeFragment extends Fragment{
     }
 
     private void setImageScaling(){
-        final float scale = 2.0f;
+        final float scale = 1.75f; //2.0f;
         final int padding = 0;
         TrailImg.setPadding(padding,padding,padding,padding);
         ExTrailImg.setPadding(padding,padding,padding,padding);
@@ -217,7 +217,7 @@ public class WelcomeFragment extends Fragment{
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
-        params.topMargin = (int) (height * 0.28);
+        params.topMargin = (int) (height * 0.25);
         params.gravity = Gravity.LEFT;
         params.leftMargin = (ExTrailImg.getDrawable().getIntrinsicWidth() * 2) + 3;
         return params;

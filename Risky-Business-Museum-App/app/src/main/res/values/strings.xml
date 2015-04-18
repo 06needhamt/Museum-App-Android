@@ -42,7 +42,7 @@
 
     <string name="WelcomeTitle">Welcome to the Liverpool World Museum!</string>
     <string name="WelcomeTrailInfo">Trail - take on a quiz that will guide you through an exhibit of your choice.</string>
-    <string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, please edit me!</string>
+    <string name="WelcomeExplorerTrailInfo">Explorer Trail - tougher than trails, these are not limited to individual galleries and may even take you on a journey of discovery to other local museums!</string>
     <string name="WelcomeQRScannerInfo">Scan any of our QR-codes to get more information.</string>
     <string name="WelcomeMapInfo">A floor plan detailing all our exhibits and their location within the museum.</string>
     <string name="WelcomeMoreInfo">Go here for more information on Liverpool World Museum and for help with using this App.</string>
@@ -116,10 +116,34 @@
     <string name="title_activity_picture_multi_choice">PictureMultiChoiceActivity</string>
 
     <string name="title_trail_welcome">Welcome to Trails</string>
-    <string name="sub_title_trail_welcome">Trails offer you a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
-    <string name="instructions_trail">To begin please choose a trail area from the above options and have fun!</string>
+    <string name="sub_title_trail_welcome">Would you like a more challenging experience whilst you browse the museum? Why not try our app trails. Trails challenge you with a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
+    <string name="instructions_trail">To begin please choose a trail area galleries above and have fun!</string>
 
     <string name="title_explorer_trail_welcome">Welcome to Explorer Trails</string>
     <string name="sub_title_explorer_trail_welcome">FIX ME! Trails offer you a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
     <string name="instructions_explorer_trail">To begin please choose a trail area from the above options and have fun!</string>
+
+    <string name="trails_intro_title">Welcome to Trails</string>
+
+    <string-array name="trails_intro">
+        <item>Would you like embark on a trail of discovery whilst you browse the museum? Why not try our trails.</item>
+        <item>Trails take you on a journey of discovery by providing you with a series of questions about the artefacts within an exhibit.</item>
+        <item>Trails are confined to particular areas, for example, our Ancient Egypt trails are confined to the Egyptian gallery within the larger Ancient World gallery.</item>
+        <item><b>Remember, the answers to each trail step are right here waiting to be discovered.</b></item>
+        <item><b>Score:</b> As you progress through a trail, you will earn points for correct answers. The better your research and discovery, the better your score! Can you score better than your friends and family?</item>
+        <item><b>Points:</b> Answering a question correctly awards you with a number of points. Getting the answer right first time will award you with the most points, each try at a question (up to a maximum of three) will award fewer points.</item>
+        <item>When you successfully reach the end of a trail your achievements will be displayed.</item>
+        <item><b>Question types include:</b></item>
+        <item>Standard questions, search the gallery for the answer and scan its QR code.</item>
+        <item>Multi-choice questions, can you get the answer correct first time?</item>
+        <item>Picture questions, locate the answer to the question from the picture provided and scan its QR code.</item>
+        <item>Multi-choice picture questions, discover the correct answer to the picture question.</item>
+        <item><b>Good luck and safe journey.</b></item>
+    </string-array>
+
+    <string name="trails_intro_long">&lt;p>Would you like embark on a trail of discovery whilst you browse the museum?&lt;/p>&lt;p>Trails take you on a journey of discovery by providing you with a series of questions about the artefacts within an exhibit.&lt;/p>Trails are confined to particular areas, for example, our Ancient Egypt trails are confined to the Egyptian gallery within the larger Ancient World gallery.&lt;/p>&lt;p>&lt;b>Remember, the answers to each trail step are right here just waiting to be discovered.&lt;/b>&lt;/p>&lt;p>&lt;b>Score:&lt;/b> As you progress through a trail, you will earn points for correct answers. The better your research and discovery, the better your score!&lt;/p>&lt;p>Challenge your friends and family, see who can earn the most points to become the greatest explorer.&lt;/p>&lt;p>&lt;b>Points:&lt;/b> Earn points by correctly answering the questions. Getting the answer correct first try will earn you higher points, each successive attempt at a question (up to a maximum of three) will reward fewer points.&lt;/p>&lt;p>When you successfully reach the end of a trail your achievements will be displayed.&lt;/p>&lt;p>&lt;b>Question types include:&lt;/b>&lt;/p>&lt;p>Standard questions, search the gallery for the answer and scan its QR code.&lt;/p>&lt;p>Multi-choice questions, can you get the answer correct first time?&lt;/p>&lt;p>Picture questions, locate the answer to the question from a picture clue and scan its QR code.&lt;/p>Multi-choice picture questions, discover the correct answer to the picture question.&lt;/p>&lt;p>&lt;b>To begin please choose a trail area from the galleries above.&lt;/b>&lt;/p>&lt;p>Good luck and have fun!&lt;/p></string>
+    <string name="explorer_trails_intro_long">&lt;p>Not for the faint hearted and tougher than normal trails, Explorer trails take you on a longer journey of discovery within the museum while you taking in a variety of exhibits and galleries.&lt;/p>&lt;p>Explorer trails may even lead you to visit other local museums in your quest for the answers (this feature is not implemented in the prototype).&lt;/p>&lt;p>&lt;b>To begin please choose a trail area from the galleries above.&lt;/b>&lt;/p>&lt;p>Good luck and have fun!&lt;/p></string>
+
 </resources>
+
+

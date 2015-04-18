@@ -1,9 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments;
 
 import android.app.Fragment;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,11 +15,10 @@ import riskybusiness.riskybusinessmuseumapp.R;
 /**
  * Created by Chris and Tom on 17/04/2015.
  */
-public class WelcomeTrailFragment extends Fragment {
+public class WelcomeTrailFragmentOld extends Fragment {
     View v;
     DisplayMetrics dm;
-    TextView trailsTitle, trailsDescription;
-    Resources res;
+    TextView title, subTitle, instructions;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +30,7 @@ public class WelcomeTrailFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        res = getResources();
-
-        View view = inflater.inflate(R.layout.fragment_welcome_trail, container, false);
+        View view = inflater.inflate(R.layout.fragment_welcome_trail_old, container, false);
         view.setPadding(0,0,0,0);
 
         v = view;
@@ -53,24 +48,25 @@ public class WelcomeTrailFragment extends Fragment {
 
     private void setupViews() {
         int itemWidth, itemHeight;
-        String description;
-        CharSequence styledDescription;
-
-        description = String.format(res.getString(R.string.trails_intro_long));
-        styledDescription = Html.fromHtml(description);
 
         itemWidth = dm.widthPixels;
         itemHeight = dm.heightPixels;
 
-        trailsTitle = (TextView) v.findViewById(R.id.title);
-        trailsTitle.setText(res.getString(R.string.title_trail_welcome));
-        trailsTitle.setTextColor(res.getColor(R.color.White));
-        trailsTitle.setLayoutParams(createTitleLayoutParams(itemWidth, itemHeight));
+        title = (TextView) v.findViewById(R.id.title);
+        title.setText(getActivity().getResources().getString(R.string.title_trail_welcome));
+        title.setTextColor(getActivity().getResources().getColor(R.color.White));
+        title.setLayoutParams(createTitleLayoutParams(itemWidth, itemHeight));
 
-        trailsDescription = (TextView) v.findViewById(R.id.trailDescription);
-        trailsDescription.setText(styledDescription);
-        trailsDescription.setTextColor(res.getColor(R.color.White));
-        trailsDescription.setLayoutParams(createContentLayoutParams(itemWidth, itemHeight));
+        subTitle = (TextView) v.findViewById(R.id.subTitle);
+        subTitle.setText(getActivity().getResources().getString(R.string.sub_title_trail_welcome));
+        subTitle.setTextColor(getActivity().getResources().getColor(R.color.White));
+        subTitle.setLayoutParams(createSubTitleLayoutParams(itemWidth, itemHeight));
+
+        instructions = (TextView) v.findViewById(R.id.instructions);
+        instructions.setText(getActivity().getResources().getString(R.string.instructions_trail));
+        instructions.setTextColor(getActivity().getResources().getColor(R.color.White));
+        instructions.setLayoutParams(createInstructionsLayoutParams(itemWidth, itemHeight));
+        instructions.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     private FrameLayout.LayoutParams createTitleLayoutParams(int itemWidth, int itemHeight) {
@@ -80,22 +76,36 @@ public class WelcomeTrailFragment extends Fragment {
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
 
-        params.topMargin = (int) (itemHeight * 0.04);
+        params.topMargin = (int) (itemHeight * 0.05);
 
         return params;
 
     }
 
-    private FrameLayout.LayoutParams createContentLayoutParams(int itemWidth, int itemHeight) {
+    private FrameLayout.LayoutParams createSubTitleLayoutParams(int itemWidth, int itemHeight) {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(itemWidth, itemHeight);
 
         params.gravity = Gravity.CENTER_HORIZONTAL;
         params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
         params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
 
-        //params.topMargin = (int) (itemHeight * 0.20);
+        params.topMargin = (int) (itemHeight * 0.20);
 
         return params;
 
     }
+
+    private FrameLayout.LayoutParams createInstructionsLayoutParams(int itemWidth, int itemHeight) {
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(itemWidth, itemHeight);
+
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+        params.height = FrameLayout.LayoutParams.WRAP_CONTENT;
+
+        params.topMargin = (int) (itemHeight * 0.60);
+
+        return params;
+
+    }
+
 }

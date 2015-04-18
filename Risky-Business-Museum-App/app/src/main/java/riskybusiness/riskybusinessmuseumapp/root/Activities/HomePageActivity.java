@@ -2,7 +2,6 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +34,6 @@ import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.Dinosa
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.FifthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.ForthFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.GroundFloorFragment;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.SecondFloorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.SpaceAndTimeFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.mapFragments.ThirdFloorFragment;
@@ -48,7 +45,6 @@ import riskybusiness.riskybusinessmuseumapp.root.questionmanager.*;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.ArtefactInfo;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailInfo;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
-import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailStepInfo;
 
 public class HomePageActivity extends FragmentActivity implements AppConstants {
     int toptable;
