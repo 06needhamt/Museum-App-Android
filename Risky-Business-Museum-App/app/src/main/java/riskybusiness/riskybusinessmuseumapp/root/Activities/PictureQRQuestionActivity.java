@@ -157,6 +157,7 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
     /**
      * Formatting the ScannerButton, i.e. doubling it in size.
      */
+
     @Deprecated
     private void formatScannerButton(){
         //tripling size of the image button

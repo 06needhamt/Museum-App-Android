@@ -125,7 +125,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pr = btnMcA.getTotalPaddingRight();
         pb = btnMcA.getTotalPaddingBottom();
         for (Button b : btns) {
-            b.setTextColor(getResources().getColor(R.color.RoyalBlue)); //setting text colour to white
+        //    b.setTextColor(getResources().getColor(R.color.RoyalBlue)); //setting text colour to white
             b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15); //setting text size to 15sp (scaled pixels)
             b.setPadding(pl, pt, pr, pb);
         }
@@ -134,7 +134,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pt = btnSkipOrNext.getPaddingTop();
         pr = btnSkipOrNext.getPaddingRight();
         pb = btnSkipOrNext.getPaddingBottom();
-        btnSkipOrNext.setTextColor(getResources().getColor(R.color.Black));
+        //btnSkipOrNext.setTextColor(getResources().getColor(R.color.Black));
         btnSkipOrNext.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         btnSkipOrNext.setPadding(pl, pt, pr, pb);
     }
@@ -349,7 +349,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void numGuesses(Button btn) { // Check the guesses state and adjust score
-        scoreForThisQuestion -= 25; // Reduce the score
+        scoreForThisQuestion -= MAX_SCORE / 4; // Reduce the score
         if(scoreForThisQuestion <= 0) { // Check if any guesses left
             // no guesses exit activity returning data
         }

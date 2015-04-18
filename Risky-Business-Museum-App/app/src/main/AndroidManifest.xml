@@ -76,7 +76,8 @@
         </activity>
         <activity
             android:name=".root.Activities.PictureMultiChoiceActivity"
-            android:label="@string/title_activity_picture_multi_choice" >
+            android:label="@string/title_activity_picture_multi_choice"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

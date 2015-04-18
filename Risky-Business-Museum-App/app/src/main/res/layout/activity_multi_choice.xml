@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="A"
+            android:textColor="@color/White"
             android:id="@+id/btnMcA"
             android:layout_gravity="center_horizontal|top"
             android:textAllCaps="false" />
@@ -57,6 +58,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="B"
+            android:textColor="@color/White"
             android:id="@+id/btnMcB"
             android:layout_gravity="center_horizontal|top"
             android:textAllCaps="false"/>
@@ -66,6 +68,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="C"
+            android:textColor="@color/White"
             android:id="@+id/btnMcC"
             android:layout_gravity="center_horizontal|top"
             android:textAllCaps="false"/>
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="D"
+            android:textColor="@color/White"
             android:id="@+id/btnMcD"
             android:layout_gravity="center_horizontal|top"
             android:textAllCaps="false"/>
@@ -84,6 +88,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="Skip"
+            android:textColor="@color/White"
             android:id="@+id/btnMcSkipOrNext"
             android:layout_gravity="center_horizontal|top" />
     </FrameLayout>
