@@ -8,20 +8,38 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_multi_choice">MultiChoiceActivity</string>
     <string name="title_activity_single_answer">SingleAnswerActivity</string>
+
     <string name="AncientWorldTitle">Welcome to the Ancient World trail</string>
-    <string name="AncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of past millennia. You may find this exhibit on the third floor.</string>
+    <string name="AncientWorldIntro">You will discover ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of past millennia. You may find this exhibit on the third floor.</string>
+    <string name="ExploreAncientWorldTitle">Welcome to the Ancient World Explorer trails</string>
+    <string name="ExploreAncientWorldIntro">You will explore ancient Egypt, Greece, Rome and England. Learn about the cultures and important people of past millennia. You may find this exhibit on the third floor.</string>
 
     <string name="AquariumTitle">Welcome to the Aquarium trail</string>
     <string name="AquariumIntro">Learn about the aquatic world</string>
+    <string name="ExploreAquariumTitle">Welcome to the Aquarium explorer trail</string>
+    <string name="ExploreAquariumIntro">Explore the aquatic world</string>
 
     <string name="BugsWorldTitle">Welcome to the Bug House trail</string>
     <string name="BugsWorldIntro">Learn about beetles, flies, spiders, scorpions, centipedes and millipedes. There are even live ant and bee colonies! You may find this exhibit on the second floor.</string>
+    <string name="ExploreBugsWorldTitle">Welcome to the Bug House explorer trail</string>
+    <string name="ExploreBugsWorldIntro">Explore the world of beetles, flies, spiders, scorpions, centipedes and millipedes. You may find this exhibit on the second floor.</string>
+
     <string name="WorldCulturesTitle">Welcome to the World Cultures trail</string>
-    <string name="WorldCulturesIntro">Explore traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor.</string>
-    <string name="DinosaurTitle">Welcome to the Jurassic Park trail!</string>
+    <string name="WorldCulturesIntro">Discover traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor.</string>
+    <string name="ExploreWorldCulturesTitle">Welcome to the World Cultures explorer trail</string>
+    <string name="ExploreWorldCulturesIntro">Explore traditions and cultures from around the globe and see objects from the Americas, Africa, Asia and Oceania. We have Samurai armours and swords! You may find this exhibit on the third floor.</string>
+
+    <string name="DinosaurTitle">Welcome to the Prehistoric trail!</string>
     <string name="DinosaurIntro">Travel back in time when dinosaurs roamed our planet and explore life-sized replicas of prehistoric predators! You may find this exhibit on the fourth floor.</string>
+    <string name="ExploreDinosaurTitle">Welcome to the Prehistoric explorer trail!</string>
+    <string name="ExploreDinosaurIntro">Travel back in time when dinosaurs roamed our planet and explore life-sized replicas of prehistoric predators! You may find this exhibit on the fourth floor.</string>
+
     <string name="SpaceTitle">Welcome to the \'Space and Time\' trail!</string>
     <string name="spaceIntro">Take a journey that is out of this world. The free planetarium will take you on a spectacular trip through the Universe. You may find this exhibit on the fifth floor.</string>
+    <string name="ExploreSpaceTitle">Welcome to the \'Space and Time\' explorer trail!</string>
+    <string name="ExploreSpaceIntro">Take a journey that is out of this world. The free planetarium will take you on a spectacular trip through the Universe. You may find this exhibit on the fifth floor.</string>
+
+
     <string name="WelcomeTitle">Welcome to the Liverpool World Museum!</string>
     <string name="WelcomeTrailInfo">Trail - take on a quiz that will guide you through an exhibit of your choice.</string>
     <string name="WelcomeExplorerTrailInfo">Explorer Trail - Chris, please edit me!</string>
@@ -63,6 +81,8 @@
     <string name="Hint5">Up for a challenge? An explorer trail might be just your thing!</string>
     <string name="Hint6">If you get stuck on a question just skip it.</string>
 
+    <string name="NoTrails">"Trails not available in Prototype"</string>
+
     <string-array name="Hints">
         <item>@string/DefaultHint</item>
         <item>@string/Hint1</item>
@@ -95,4 +115,11 @@
     <string name="title_activity_picture_qrquestion">PictureQRQuestionActivity</string>
     <string name="title_activity_picture_multi_choice">PictureMultiChoiceActivity</string>
 
+    <string name="title_trail_welcome">Welcome to Trails</string>
+    <string name="sub_title_trail_welcome">Trails offer you a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
+    <string name="instructions_trail">To begin please choose a trail area from the above options and have fun!</string>
+
+    <string name="title_explorer_trail_welcome">Welcome to Explorer Trails</string>
+    <string name="sub_title_explorer_trail_welcome">FIX ME! Trails offer you a series of questions that make up a trail through an exhibit. Question types include locating and scanning correct QR codes, answering multiple choice questions, locating items based on an image and multiple choice question images - the clues are all within the artefacts and exhibits</string>
+    <string name="instructions_explorer_trail">To begin please choose a trail area from the above options and have fun!</string>
 </resources>

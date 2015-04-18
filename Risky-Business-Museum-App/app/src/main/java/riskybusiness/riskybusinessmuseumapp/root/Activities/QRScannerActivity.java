@@ -23,9 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+
 import android.os.Build;
 
-public class QRScannerActivity extends ActionBarActivity {
+public class QRScannerActivity extends ActionBarActivity implements AppConstants {
 
     TextView formatTxt;
     TextView contentTxt;
@@ -45,7 +47,7 @@ public class QRScannerActivity extends ActionBarActivity {
 
             String artefactNumber = "81"; //<<<<<<<<----- change the number to simulate scanning different artefacts
 
-            B.putString("Content", "CONTENT: http://riskybuisiness.co.uk/" + artefactNumber);
+            B.putString("Content", "CONTENT: " + QR_RESULT_IDENTIFIER + artefactNumber);
             B.putString("Format", "FORMAT: Test");
             B.putString("FROM", "QRScannerActivity");
             Intent i = getIntent();

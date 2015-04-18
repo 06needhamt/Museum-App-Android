@@ -39,7 +39,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     private int scoreForThisQuestion;
     private int totalScore;
     private String question;
-    private List<String> answers;
+    private ArrayList<String> answers;
     private String correctAnswer;
     private boolean hasBeenSkipped = false;
     private int currentPosition;
@@ -125,7 +125,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pr = btnMcA.getTotalPaddingRight();
         pb = btnMcA.getTotalPaddingBottom();
         for (Button b : btns) {
-            b.setTextColor(getResources().getColor(R.color.White)); //setting text colour to white
+            b.setTextColor(getResources().getColor(R.color.RoyalBlue)); //setting text colour to white
             b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15); //setting text size to 15sp (scaled pixels)
             b.setPadding(pl, pt, pr, pb);
         }
@@ -134,7 +134,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pt = btnSkipOrNext.getPaddingTop();
         pr = btnSkipOrNext.getPaddingRight();
         pb = btnSkipOrNext.getPaddingBottom();
-        btnSkipOrNext.setTextColor(getResources().getColor(R.color.White));
+        btnSkipOrNext.setTextColor(getResources().getColor(R.color.Black));
         btnSkipOrNext.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         btnSkipOrNext.setPadding(pl, pt, pr, pb);
     }
@@ -163,7 +163,16 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
      * @param temp String containing comma separated answers to the question, first one being the correct answer
      */
     private void applyAnswers(String temp){
-        answers = Arrays.asList(temp.split("\\s*,\\s*"));
+        List<String> tempList;
+
+        tempList = Arrays.asList(temp.split("\\s*,\\s*"));
+
+        answers = new ArrayList<>(tempList);
+
+        // In case there are not enough answers to the question - prevents null pointer and indicates incorrect answer list
+        while(answers.size() < 4)
+            answers.add("MISSING ANSWER");
+
     }
 
     /**

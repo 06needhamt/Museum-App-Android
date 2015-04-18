@@ -231,16 +231,24 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     /**
      * Get all trails that belong to a specific exhibit, these are stored in trailList
      * @param exhibitType Exhibit Type from database that requires trails
+     * @param trailType The type of trails required - Normal, Explorer or Both
      * @return List of trails found or NULL if query failed
      */
-    public List<TrailInfo> getExhibitTrails(int exhibitType) {
+    public List<TrailInfo> getExhibitTrails(int exhibitType, final int trailType) {
         String queryString;
 
-        // Query string to retrieve trails associated with exhibit
+        // Initialise boiler plate query
+        // Query string to retrieve trails associated with exhibit based on trailType 1 == Normal, 2 == Explorer, 3 == Both
         // SELECT * FROM trail JOIN exhibit where exhibit._id = trail.tra_exhibitID and exhibit.exh_type = ?
-        queryString =
-                "SELECT trail._id as " + TRA_ID + ", * FROM trail " +
-                        "JOIN exhibit on trail.tra_exhibitID = exhibit._id AND exhibit.exh_type = " + exhibitType;
+        queryString = "SELECT trail._id as " + TRA_ID + ", * FROM trail " +
+                            "JOIN exhibit on trail.tra_exhibitID = exhibit._id AND exhibit.exh_type = " + exhibitType;
+
+        if(trailType == TRAIL) {
+            queryString += " and trail.tra_trailType = 0"; // Normal trails
+        }
+        else if(trailType == EXPLORER) {
+            queryString += " and trail.tra_trailType = 1"; // Explorer trails
+        }
 
         // Query database for the trails info that artefactID is part of
         if(!getDatabaseTrails(queryString)) { // This populates trailList or set it to null

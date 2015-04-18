@@ -1,7 +1,7 @@
 package riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments;
 
 /**
- * Created by Alex on 01/03/2015.
+ * Created by Tom on 17/04/2015.
  */
 public class ExplorerTrailFragment {
 }
