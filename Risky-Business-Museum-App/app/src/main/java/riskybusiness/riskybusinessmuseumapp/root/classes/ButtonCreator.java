@@ -3,8 +3,9 @@ package riskybusiness.riskybusinessmuseumapp.root.classes;
 //import android.annotation.TargetApi;
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -14,16 +15,18 @@ import java.lang.reflect.Field;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
+import riskybusiness.riskybusinessmuseumapp.root.Activities.QRScannerActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
-import riskybusiness.riskybusinessmuseumapp.root.Fragments.ArtefactTrailSelectorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.informationFragments.InformationWebView;
-import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.trailFragments.BugsFragment;
 
 
 /**
  * Created by Tom on 02/02/2015.
  */
 public class ButtonCreator implements AppConstants{
+
+
     public static final int NUM_BUTTONS = 5; // Number of BUTTONS (Columns in table)
     public static final int NUM_TOP_BUTTONS = 6; // Number of Buttons on top
     HomePageActivity act;
@@ -39,7 +42,6 @@ public class ButtonCreator implements AppConstants{
     Fragment[] ExplorerTrailFragments;
     TableRow tableRowTop;
     InformationWebView infoWebView;
-    TrailManager trailManager;
 
     Button[] Topbuttons = new Button[NUM_TOP_BUTTONS]; // Array for buttons
     Button[] Bottombuttons = new Button[NUM_BUTTONS]; // Array for buttons
@@ -65,6 +67,7 @@ public class ButtonCreator implements AppConstants{
     public ButtonCreator(HomePageActivity A, int toptable, int bottomtable, Field[] fields, Fragment[] Trailfragments, Fragment[] Mapfragments,
                          Fragment[] BottomFragments, InformationWebView infoWebView, Fragment[] ExplorerTrailFragments )
     {
+
         this.act = A;
         this.toptableid = toptable;
         this.bottomtableid = bottomtable;
@@ -75,8 +78,6 @@ public class ButtonCreator implements AppConstants{
         //this.InfoFragments = InfoFragments;
         this.infoWebView = infoWebView;
         this.ExplorerTrailFragments = ExplorerTrailFragments;
-
-        trailManager = TrailManager.getTrailManagerInstance(act); // Get the trail manager
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -138,12 +139,6 @@ public class ButtonCreator implements AppConstants{
         resetButtonBackgroundBottom(-1);
         if(which == TRAIL) {
             Bottombuttons[0].setBackgroundResource(R.drawable.purple___icon_question);
-            Bottombuttons[0].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    purpleTrailButtonClicked();
-                }
-            });
         }
 
         else if(which == EXPLORER) {
@@ -160,24 +155,6 @@ public class ButtonCreator implements AppConstants{
         }
         Bottombuttons[2].setBackgroundResource(R.drawable.green___icon_qr);
     }
-
-    private void purpleTrailButtonClicked() {
-        ArtefactTrailSelectorFragment artefactTrailSelectorFragment = new ArtefactTrailSelectorFragment();
-        Bundle b = new Bundle();
-
-        b.putInt("ARTEFACT_NUMBER", trailManager.currentArtefact.artefactID); // Get the artefact number
-
-        artefactTrailSelectorFragment.populateFragment(b); // Populate the spinner based on the artefact number
-
-        act.getFragmentManager().beginTransaction().replace(R.id.frame, artefactTrailSelectorFragment).commit(); // Display the fragment
-
-
-
-    }
-
-
-
-
     public void makeTopButtonsInvisible(){
         Toptable.setVisibility(View.GONE);
     }
@@ -413,7 +390,7 @@ public class ButtonCreator implements AppConstants{
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void resetButtonBackgroundBottom(final int btn)
+    public void resetButtonBackgroundBottom(int btn)
     {
         for(int i = 0; i < NUM_BUTTONS; i++)
         {
@@ -430,14 +407,6 @@ public class ButtonCreator implements AppConstants{
                 Bottombuttons[i].setBackground(act.getResources().getDrawable(id));
                 BottomButtonState[i] = true;
             }
-
-            Bottombuttons[i].setOnClickListener(new View.OnClickListener() { // Reset onClickListeners for bottom buttons
-                @Override
-                public void onClick(View v) {
-                    BottomgridButtonClicked(btn);
-                }
-            });
-
         }
 
     }
