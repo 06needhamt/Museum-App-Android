@@ -50,11 +50,22 @@
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
 
+
+
+    <Button
+        android:id="@+id/PicMCNextOrSkipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Skip"
+        android:textColor="@color/White"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
     <RelativeLayout
         android:id="@+id/PicMCButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/PicMCQuestion">
+        android:layout_above="@id/PicMCNextOrSkipButton">
 
         <Button
             android:id="@+id/PicMCButtonA"
@@ -68,32 +79,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
-            android:layout_below="@id/PicMCButtonA"/>
+            android:layout_below="@id/PicMCButtonA"
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/PicMCButtonC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
-            android:layout_below="@id/PicMCButtonB"/>
+            android:layout_below="@id/PicMCButtonB"
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/PicMCButtonD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
-            android:layout_below="@id/PicMCButtonC"/>
+            android:layout_below="@id/PicMCButtonC"
+            android:layout_marginTop="2dp"/>
 
         </RelativeLayout>
 
-
-    <Button
-        android:id="@+id/PicMCNextOrSkipButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Skip"
-        android:textColor="@color/White"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

@@ -55,6 +55,7 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="OK">Okay</string>
+    <string name="completed">completed</string>
     <string name="Score">Score:</string>
     <string name="Results">Results</string>
     <string name="Statistics">Statistics</string>

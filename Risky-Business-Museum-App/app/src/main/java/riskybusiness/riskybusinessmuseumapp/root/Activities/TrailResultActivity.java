@@ -130,10 +130,11 @@ public class TrailResultActivity extends FragmentActivity implements AppConstant
     }
 
     /**
-     * Show the trail name on the activity
+     * Show the trail name on the activity with trailname and the phrase completed, e.g.
+     * Discover the World of Bugs completed!
      */
     private void updateTrailName(){
-        TrailName.setText(trailName);
+        TrailName.setText(trailName + " " + getResources().getString(R.string.completed) + "!");
     }
 
     /**
@@ -146,10 +147,10 @@ public class TrailResultActivity extends FragmentActivity implements AppConstant
     private String determineRank(){
         double percentage = (double) (totalScore) / ((double) (MAX_SCORE) * (double) (questionScores.size())); //getting the percentage of "correctness"
         String rank = getResources().getString(R.string.Dora); //default value
-
-        System.out.println("percentage = " + percentage);
-        System.out.println("totalScore = " + totalScore);
-        System.out.println("MAX TOTAL SCORE = " + (MAX_SCORE * questionScores.size()));
+//DEBUGGING
+//        System.out.println("percentage = " + percentage);
+//        System.out.println("totalScore = " + totalScore);
+//        System.out.println("MAX TOTAL SCORE = " + (MAX_SCORE * questionScores.size()));
 
         if(percentage == 1.0){ //100% correctness
             rank = ranks[ranks.length - 1]; //last item in the list
