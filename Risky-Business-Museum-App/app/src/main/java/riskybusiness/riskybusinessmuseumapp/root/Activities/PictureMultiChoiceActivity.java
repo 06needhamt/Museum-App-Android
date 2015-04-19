@@ -55,22 +55,8 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
         formatImageField();
         formatQuestionField();
         setupButtonListeners();
-
-        //TESTING
-//        Bundle testBundle = new Bundle();
-//        testBundle.putString("QUESTION", "This is a testing text. Testing scrollable text view: yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda.");
-//        testBundle.putString("ANSWER", "first answer,second answer,third answer,fourth answer");
-//        testBundle.putInt("SCORE", 1234);
-//        testBundle.putInt("TRAIL_POSITION", 13);
-//        testBundle.putInt("TRAIL_LENGTH", 37);
-//        testBundle.putInt("IMAGE", R.drawable.gaia);
-//
-//        unpackAndApplyBundle(testBundle);
-        //Uncomment the following 2 lines when implementing this activity!
         Bundle bundle = getIntent().getExtras();
         unpackAndApplyBundle(bundle); //unpacking bundle and assigning all relevant data
-        //END OF TESTING
-
         setupViewsWithInformation();
         theOldSwitcheroo(); //randomly mixing up the answers on the buttons.
 
@@ -207,15 +193,15 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
      * @param bundle Bundle containing all relevant data
      */
     private void unpackAndApplyBundle(Bundle bundle){
-        question = bundle.getString("QUESTION");
-        String temp = bundle.getString("ANSWER");
-        totalScore = bundle.getInt("SCORE", 0); //getting total score with error handling for 0
+        question = bundle.getString(QUESTION_TAG);
+        String temp = bundle.getString(ANSWER_TAG);
+        totalScore = bundle.getInt(SCORE_TAG, 0); //getting total score with error handling for 0
         //TODO add image to question via either string or resource id.
-        imageName = bundle.getString("IMAGE", "royal_blue_ipad_wallpaper");
+        imageName = bundle.getString(IMAGE_TAG, "royal_blue_ipad_wallpaper");
         applyAnswers(temp);
         correctAnswer = answers.get(0);
-        currentPosition = bundle.getInt("TRAIL_POSITION", -1);
-        trailLength = bundle.getInt("TRAIL_LENGTH", -1);
+        currentPosition = bundle.getInt(TRAIL_POSITION_TAG, -1);
+        trailLength = bundle.getInt(TRAIL_LENGTH_TAG, -1);
     }
 
     /**
@@ -329,10 +315,10 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putInt("Score", scoreForThisQuestion);
-        bundle.putString("FROM", "PictureMultiChoiceActivity");
-        bundle.putBoolean("EXIT", endtrail);
-        bundle.putBoolean("SKIPPED", hasBeenSkipped);
+        bundle.putInt(SCORE_TAG, scoreForThisQuestion);
+        bundle.putString(FROM_TAG, FROM_PICTURE_MULTI_CHOICE);
+        bundle.putBoolean(EXIT_TAG, endtrail);
+        bundle.putBoolean(SKIPPED_TAG, hasBeenSkipped);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);

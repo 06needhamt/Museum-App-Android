@@ -195,41 +195,43 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
             return;
         }
         Bundle tempBundle = data.getExtras();
-        String from = tempBundle.getString("FROM", "");
+        String from = tempBundle.getString(FROM_TAG, "");
         boolean exit = false;
 
-        if(from.equals("MultiChoiceActivity")) {
+        if(from.equals(FROM_MULTI_CHOICE)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                appendQuestionScores(b.getInt("Score", -1));
-                exit = b.getBoolean("EXIT", false);
+                appendQuestionScores(b.getInt(SCORE_TAG, -1));
+                exit = b.getBoolean(EXIT_TAG, false);
                 if(exit){
                     currentTrailScore = 0;
+                    questionScores.clear();
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
                 }
-                currentTrailScore += b.getInt("Score", -1);
+                currentTrailScore += b.getInt(SCORE_TAG, -1);
+                System.out.println("Current trail score = " + currentTrailScore);
                 qm.nextQuestion();
             }
-        } else if(from.equals("PictureMultiChoiceActivity")) {
-
+        } else if(from.equals(FROM_PICTURE_MULTI_CHOICE)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                appendQuestionScores(b.getInt("Score", -1));
-                exit = b.getBoolean("EXIT", false);
+                appendQuestionScores(b.getInt(SCORE_TAG, -1));
+                exit = b.getBoolean(EXIT_TAG, false);
                 if(exit){
                     currentTrailScore = 0;
+                    questionScores.clear();
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
                 }
-                currentTrailScore += b.getInt("Score", -1);
+                currentTrailScore += b.getInt(SCORE_TAG, -1);
                 qm.nextQuestion();
             }
         }
 
-        else if(from.equals("QRScannerActivity")) { // Browsing QR codes
+        else if(from.equals(FROM_QR_SCANNER)) { // Browsing QR codes
             if (resultCode == RESULT_OK) {
                 int qrCode;
 //                if(!data.hasExtra("B"))
@@ -239,7 +241,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 //                }
                 Bundle b = data.getExtras();
 
-                Content = b.getString("Content", "No Value");
+                Content = b.getString(CONTENT_TAG, "No Value");
                 QRResultHandler qrh = new QRResultHandler(Content);
 
 
@@ -276,14 +278,15 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
                 return;
             }
         }
-        else if(from.equals("SingleAnswerActivity")) {
+        else if(from.equals(FROM_SINGLE_ANSWER)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                appendQuestionScores(b.getInt("Score", -1));
-                currentTrailScore += b.getInt("Score", -1);
-                exit = b.getBoolean("EXIT", false);
+                appendQuestionScores(b.getInt(SCORE_TAG, -1));
+                currentTrailScore += b.getInt(SCORE_TAG, -1);
+                exit = b.getBoolean(EXIT_TAG, false);
                 if(exit){
                     currentTrailScore = 0;
+                    questionScores.clear();
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
@@ -291,14 +294,15 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
                 qm.nextQuestion();
             }
         }
-        else if(from.equals("PictureQRQuestionActivity")) {
+        else if(from.equals(FROM_PICTURE_QR_QUESTION)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
-                appendQuestionScores(b.getInt("Score", -1));
-                currentTrailScore += b.getInt("Score", -1);
-                exit = b.getBoolean("EXIT", false);
+                appendQuestionScores(b.getInt(SCORE_TAG, -1));
+                currentTrailScore += b.getInt(SCORE_TAG, -1);
+                exit = b.getBoolean(EXIT_TAG, false);
                 if(exit){
                     currentTrailScore = 0;
+                    questionScores.clear();
                     qm.setTrailEnded(true);
                     qm.nextQuestion();
                     return;
@@ -307,7 +311,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
             }
         }
 
-        else if(from.equals("TrailResultActivity")){
+        else if(from.equals(FROM_TRAIL_RESULT_SCREEN)){
             if(resultCode == RESULT_OK){
                 //resetting trail values
                 currentTrailScore = 0;
@@ -348,12 +352,12 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     public void callPictureQRQuestionActivity(String question, String answer, String image){
         Intent i = new Intent(getBaseContext(), PictureQRQuestionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("QUESTION", question);
-        bundle.putString("ANSWER", answer);
-        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
-        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
-        bundle.putInt("SCORE", currentTrailScore);
-        bundle.putString("IMAGE", image);
+        bundle.putString(QUESTION_TAG, question);
+        bundle.putString(ANSWER_TAG, answer);
+        bundle.putInt(TRAIL_POSITION_TAG, qm.getQuestionNum());
+        bundle.putInt(TRAIL_LENGTH_TAG, qm.getSteps().size());
+        bundle.putInt(SCORE_TAG, currentTrailScore);
+        bundle.putString(IMAGE_TAG, image);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -362,12 +366,12 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     public void callPictureMultiChoiceActivity(String question, String answer, String image){
         Intent i = new Intent(getBaseContext(), PictureMultiChoiceActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("QUESTION", question);
-        bundle.putString("ANSWER", answer);
-        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
-        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
-        bundle.putInt("SCORE", currentTrailScore);
-        bundle.putString("IMAGE", image);
+        bundle.putString(QUESTION_TAG, question);
+        bundle.putString(ANSWER_TAG, answer);
+        bundle.putInt(TRAIL_POSITION_TAG, qm.getQuestionNum());
+        bundle.putInt(TRAIL_LENGTH_TAG, qm.getSteps().size());
+        bundle.putInt(SCORE_TAG, currentTrailScore);
+        bundle.putString(IMAGE_TAG, image);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -376,11 +380,11 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     public void callMultiChoiceActivity(String question, String answer){
         Intent i = new Intent(getBaseContext(), MultiChoiceActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("QUESTION", question);
-        bundle.putString("ANSWER", answer);
-        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
-        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
-        bundle.putInt("SCORE", currentTrailScore);
+        bundle.putString(QUESTION_TAG, question);
+        bundle.putString(ANSWER_TAG, answer);
+        bundle.putInt(TRAIL_POSITION_TAG, qm.getQuestionNum());
+        bundle.putInt(TRAIL_LENGTH_TAG, qm.getSteps().size());
+        bundle.putInt(SCORE_TAG, currentTrailScore);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -389,9 +393,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     public void callTrailResultActivity(){
         Intent i = new Intent(getBaseContext(), TrailResultActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("SCORE", currentTrailScore);
-        bundle.putIntegerArrayList("QSCORES", questionScores);
-        bundle.putString("TRAILNAME", trailManager.currentTrail.name);
+        bundle.putInt(SCORE_TAG, currentTrailScore);
+        bundle.putIntegerArrayList(QUESTION_SCORES_TAG, questionScores);
+        bundle.putString(TRAIL_NAME_TAG, trailManager.currentTrail.name);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -400,11 +404,11 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     public void callSingleAnswerActivity(String question, String answer){
         Intent i = new Intent(getBaseContext(), SingleAnswerActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("QUESTION", question);
-        bundle.putString("ANSWER", answer);
-        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
-        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
-        bundle.putInt("SCORE", currentTrailScore);
+        bundle.putString(QUESTION_TAG, question);
+        bundle.putString(ANSWER_TAG, answer);
+        bundle.putInt(TRAIL_POSITION_TAG, qm.getQuestionNum());
+        bundle.putInt(TRAIL_LENGTH_TAG, qm.getSteps().size());
+        bundle.putInt(SCORE_TAG, currentTrailScore);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);

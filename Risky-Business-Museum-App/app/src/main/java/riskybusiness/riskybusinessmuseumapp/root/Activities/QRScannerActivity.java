@@ -47,9 +47,9 @@ public class QRScannerActivity extends ActionBarActivity implements AppConstants
 
             String artefactNumber = "81"; //<<<<<<<<----- change the number to simulate scanning different artefacts
 
-            B.putString("Content", "CONTENT: " + QR_RESULT_IDENTIFIER + artefactNumber);
-            B.putString("Format", "FORMAT: Test");
-            B.putString("FROM", "QRScannerActivity");
+            B.putString(CONTENT_TAG, "CONTENT: " + QR_RESULT_IDENTIFIER + artefactNumber);
+            B.putString(FORMAT_TAG, "FORMAT: Test");
+            B.putString(FROM_TAG, FROM_QR_SCANNER);
             Intent i = getIntent();
             i.putExtras(B);
             setIntent(i);
@@ -129,9 +129,9 @@ public class QRScannerActivity extends ActionBarActivity implements AppConstants
 
             ///////////////////////////////////////////////////////////////////////////////////
             Bundle B = new Bundle();
-            B.putString("Content",(String) contentTxt.getText());
-            B.putString("Format", (String) formatTxt.getText());
-            B.putString("FROM", "QRScannerActivity");
+            B.putString(CONTENT_TAG,(String) contentTxt.getText());
+            B.putString(FORMAT_TAG, (String) formatTxt.getText());
+            B.putString(FROM_TAG, FROM_QR_SCANNER);
             Intent i = getIntent();
             i.putExtras(B);
             setIntent(i);

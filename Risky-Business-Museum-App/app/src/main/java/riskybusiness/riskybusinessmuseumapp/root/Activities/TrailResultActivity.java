@@ -54,9 +54,9 @@ public class TrailResultActivity extends FragmentActivity implements AppConstant
      * @param b Bundle containing relevant data
      */
     private void unpackBundle(Bundle b){
-        questionScores =  b.getIntegerArrayList("QSCORES");
-        totalScore = b.getInt("SCORE");
-        trailName = b.getString("TRAILNAME");
+        questionScores =  b.getIntegerArrayList(QUESTION_SCORES_TAG);
+        totalScore = b.getInt(SCORE_TAG);
+        trailName = b.getString(TRAIL_NAME_TAG);
 
         //not to do with bundle but getting rank names from Strings.xml
         ranks = getResources().getStringArray(R.array.ExplorerRanking);
@@ -220,7 +220,7 @@ public class TrailResultActivity extends FragmentActivity implements AppConstant
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putString("FROM", "TrailResultActivity");
+        bundle.putString(FROM_TAG, FROM_TRAIL_RESULT_SCREEN);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
