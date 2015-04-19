@@ -26,6 +26,7 @@ import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
 
 public class PictureMultiChoiceActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants {
 
@@ -43,6 +44,7 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
     private int trailLength;
     private int screenheight, screenwidth;
     private int imageResourceID;
+    private String imageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +57,18 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
         setupButtonListeners();
 
         //TESTING
-        Bundle testBundle = new Bundle();
-        testBundle.putString("QUESTION", "This is a testing text. Testing scrollable text view: yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda.");
-        testBundle.putString("ANSWER", "first answer,second answer,third answer,fourth answer");
-        testBundle.putInt("SCORE", 1234);
-        testBundle.putInt("TRAIL_POSITION", 13);
-        testBundle.putInt("TRAIL_LENGTH", 37);
-        testBundle.putInt("IMAGE", R.drawable.gaia);
-
-        unpackAndApplyBundle(testBundle);
+//        Bundle testBundle = new Bundle();
+//        testBundle.putString("QUESTION", "This is a testing text. Testing scrollable text view: yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda.");
+//        testBundle.putString("ANSWER", "first answer,second answer,third answer,fourth answer");
+//        testBundle.putInt("SCORE", 1234);
+//        testBundle.putInt("TRAIL_POSITION", 13);
+//        testBundle.putInt("TRAIL_LENGTH", 37);
+//        testBundle.putInt("IMAGE", R.drawable.gaia);
+//
+//        unpackAndApplyBundle(testBundle);
         //Uncomment the following 2 lines when implementing this activity!
-        //Bundle bundle = getIntent().getExtras();
-        //unpackAndApplyBundle(bundle); //unpacking bundle and assigning all relevant data
+        Bundle bundle = getIntent().getExtras();
+        unpackAndApplyBundle(bundle); //unpacking bundle and assigning all relevant data
         //END OF TESTING
 
         setupViewsWithInformation();
@@ -164,7 +166,6 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
     /**
      * Checking the answer of the given button.
      * @param button Button to be checked
-     * @return true if it is the correct answer, false if not.
      */
     private void checkAnswer(Button button){
         String answer = (String) button.getText();
@@ -203,14 +204,14 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
 
     /**
      * Unpacking and applying all relevant data from the bundle into the views on the activity.
-     * @param bundle
+     * @param bundle Bundle containing all relevant data
      */
     private void unpackAndApplyBundle(Bundle bundle){
         question = bundle.getString("QUESTION");
         String temp = bundle.getString("ANSWER");
         totalScore = bundle.getInt("SCORE", 0); //getting total score with error handling for 0
         //TODO add image to question via either string or resource id.
-        imageResourceID = bundle.getInt("IMAGE", R.drawable.royal_blue_ipad_wallpaper); //defaulting to royal background gradient
+        imageName = bundle.getString("IMAGE", "royal_blue_ipad_wallpaper");
         applyAnswers(temp);
         correctAnswer = answers.get(0);
         currentPosition = bundle.getInt("TRAIL_POSITION", -1);
@@ -237,7 +238,7 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
 
     /**
      * Updating the arrayList by splitting the given string at commas.
-     * @param temp
+     * @param temp comma separated String of answers
      */
     private void applyAnswers(String temp){
         List<String> tempList;
@@ -258,6 +259,7 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
 
         //TODO update the picture with the given file.
         //updateImageField(imageResourceID);
+        updateImageField(imageName);
     }
 
     /**
@@ -282,10 +284,19 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
 
     /**
      * Update the image via a resource id
-     * @param ID
+     * @param ID resource ID of the file
      */
     private void updateImageField(int ID){
         imageField.setImageResource(ID);
+    }
+
+    /**
+     * Update the image via a String
+     * @param name String name of the file
+     */
+    private void updateImageField(String name){
+        ArtefactImage ae = new ArtefactImage(getBaseContext(), name);
+        imageField.setImageDrawable(ae.getImage());
     }
 
     @Override

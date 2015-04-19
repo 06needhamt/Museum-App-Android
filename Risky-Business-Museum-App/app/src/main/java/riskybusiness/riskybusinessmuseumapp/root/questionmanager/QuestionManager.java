@@ -6,6 +6,7 @@ import java.util.List;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.HomePageActivity;
 import riskybusiness.riskybusinessmuseumapp.root.Activities.MultiChoiceActivity;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailStepInfo;
 
 import static java.lang.Integer.parseInt;
@@ -82,24 +83,22 @@ public class QuestionManager implements AppConstants {
                 break;
             case QUESTION_PICTURE: // Picture question
                 //answerNum = ...; // Open intent and Get the answer
+                hm.callPictureQRQuestionActivity(question.getQuestion(), question.getAnswer(), question.getImageName());
                 break;
             case QUESTION_MULTI_PICTURE: // Multi-choice picture question
                 //answerNum = ...; // Open intent and Get the answer
+                hm.callPictureMultiChoiceActivity(question.getQuestion(), question.getAnswer(), question.getImageName());
                 break;
             default:
                 // Oh crap - error!
-                break;
+                throw new Error("This question type does not exist.");
+                //break;
         }
 
         setQuestionNum(getQuestionNum() + 1); // increment question number
 
         if (getQuestionNum() >= getSteps().size()) { // Trail ended
             setTrailEnded(true);
-            //DEBUG: trying out trail result screen
-            if(getQuestionNum() == getSteps().size()) {
-                hm.callTrailResultActivity();
-            }
-            //DEBUG END---
         }
 
         return isTrailEnded();

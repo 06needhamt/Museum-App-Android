@@ -27,6 +27,7 @@ import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
@@ -47,6 +48,7 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
     private String CorrectAnswer;
     private TrailManager trailManager;
     private Drawable imageDrawable;
+    private String imageName;
     private int screenheight, screenwidth;
 
     @Override
@@ -59,21 +61,20 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
         formatQuestionField(); //formatting text area that displays the question on the activity
         formatImageField(); //formatting image area (setting max height)
         //formatScannerButton();
-        //Bundle b = getIntent().getExtras();
-        //unpackAndApplyBundle(b); //unpacking bundle and setting data
+        Bundle b = getIntent().getExtras();
+        unpackAndApplyBundle(b); //unpacking bundle and setting data
 
         //TESTING IMAGE AND BUNDLE
-        Image.setImageResource(R.drawable.royal_blue_ipad_wallpaper);
-        Bundle b = new Bundle();
-        b.putString("QUESTION", "Test question: What is this background? This is also testing the scroll-ability of this text view. Yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda.");
-        b.putString("ANSWER", "1");
-        b.putInt("SCORE", 9001);
-        b.putInt("TRAIL_POSITION", 5);
-        b.putInt("TRAIL_LENGTH", 101);
-
-        unpackAndApplyBundle(b);
+//        Image.setImageResource(R.drawable.royal_blue_ipad_wallpaper);
+//        Bundle b = new Bundle();
+//        b.putString("QUESTION", "Test question: What is this background? This is also testing the scroll-ability of this text view. Yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda.");
+//        b.putString("ANSWER", "1");
+//        b.putInt("SCORE", 9001);
+//        b.putInt("TRAIL_POSITION", 5);
+//        b.putInt("TRAIL_LENGTH", 101);
+//
+//        unpackAndApplyBundle(b);
         //END TESTING
-
     }
 
     /**
@@ -108,10 +109,10 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
         updateQuestion(bundle.getString("QUESTION"));
         CorrectAnswer = bundle.getString("ANSWER");
         totalScore = bundle.getInt("SCORE");
+        imageName = bundle.getString("IMAGE", "rolay_blue_ipad_wallpaper");
         updateScore(totalScore);
         updateTrailPosition(bundle.getInt("TRAIL_POSITION"), bundle.getInt("TRAIL_LENGTH"));
-
-        //TODO pass and set a drawable (or String to fetch it) for the image to be displayed
+        updateImage(imageName);
     }
 
     /**
@@ -184,6 +185,15 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
 
     private void updateQuestion(String question){
         Question.setText(question);
+    }
+
+    /**
+     * Update the image with a given string name of the file
+     * @param name file name of the image
+     */
+    private void updateImage(String name){
+        ArtefactImage ae = new ArtefactImage(getBaseContext(), name);
+        Image.setImageDrawable(ae.getImage());
     }
 
     @Override

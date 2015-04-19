@@ -310,7 +310,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         startActivityForResult(i,0,null);
     }
 
-    public void callPictureQRQuestionActivity(String question, String answer){
+    public void callPictureQRQuestionActivity(String question, String answer, String image){
         Intent i = new Intent(getBaseContext(), PictureQRQuestionActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("QUESTION", question);
@@ -318,7 +318,21 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
         bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
         bundle.putInt("SCORE", currentTrailScore);
-        //TODO add String or other for the image to be displayed
+        bundle.putString("IMAGE", image);
+        i.putExtras(bundle);
+        setIntent(i);
+        startActivityForResult(i, 0, null);
+    }
+
+    public void callPictureMultiChoiceActivity(String question, String answer, String image){
+        Intent i = new Intent(getBaseContext(), PictureMultiChoiceActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("QUESTION", question);
+        bundle.putString("ANSWER", answer);
+        bundle.putInt("TRAIL_POSITION", qm.getQuestionNum());
+        bundle.putInt("TRAIL_LENGTH", qm.getSteps().size());
+        bundle.putInt("SCORE", currentTrailScore);
+        bundle.putString("IMAGE", image);
         i.putExtras(bundle);
         setIntent(i);
         startActivityForResult(i, 0, null);
@@ -342,10 +356,11 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         Bundle bundle = new Bundle();
         bundle.putInt("SCORE", currentTrailScore);
         bundle.putIntegerArrayList("QSCORES", questionScores);
-        //TODO Add the current trail name to the bundle
         bundle.putString("TRAILNAME", trailManager.currentTrail.name);
         i.putExtras(bundle);
         setIntent(i);
+        currentTrailScore = 0; //reset trail score
+        questionScores.clear(); //reset question scores
         startActivity(i);
     }
 

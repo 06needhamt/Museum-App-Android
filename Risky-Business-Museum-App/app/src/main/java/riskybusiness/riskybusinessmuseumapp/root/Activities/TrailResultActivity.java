@@ -108,7 +108,7 @@ public class TrailResultActivity extends FragmentActivity {
      * Show the trail name on the activity
      */
     private void updateTrailName(){
-        TrailName.setText(getString(R.string.TrailName) + " " + "Default Trail Name"); //TODO add the current trail name
+        TrailName.setText(trailName);
     }
 
     /**
