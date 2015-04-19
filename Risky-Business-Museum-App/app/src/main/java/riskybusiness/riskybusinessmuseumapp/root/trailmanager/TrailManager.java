@@ -43,9 +43,12 @@ public class TrailManager implements AppConstants, DatabaseConstants {
     public Context context;
     int mode; // Mode of use, e.g. MODE_BROWSE, MODE_TRAIL
     public TrailInfo currentTrail;         // Information about the current trail
+    public ArtefactInfo currentArtefact;   // Information about the most recently queried artefact
+
     boolean onTrail;                // Indicates if user is on a trail
     List<TrailInfo> trailList;      // List of trails associated with the artefact
     List<TrailStepInfo> trailSteps; // List of trail steps for current trail
+
 
     private TrailManager(Context context) { // trail manager constructor
         this.context = context;
@@ -108,7 +111,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         // Query database for artefact information
         artefact = getDatabaseArtefact(artefactID);
 
-        if(getArtefactTrails(artefact.artefactID) != null) { // Get any trails associated with the artefact.
+        if(getArtefactTrails(artefact.artefactID, TRAIL_AND_EXPLORER) != null) { // Get any trails associated with the artefact.
             for (TrailInfo ti : trailList) {                 // There are trails associated, find out what types
                 artefact.trailStatus |= ti.trailType;        // Set the trail type using bitwise OR
             }
@@ -118,6 +121,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
             Log.d(context.getResources().getString(R.string.app_name) + ": TrailManager, browseArtefactID", "No Trails found for Artefact ID " + artefact.artefactID);
         }
 
+        currentArtefact = artefact; // Set the current artefact - required by ButtonCreator class
         return artefact;
     }
 
@@ -208,7 +212,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
      * @param artefactID int holding required artefact ID
      * @return boolean True method succeeded, False = method failed
      */
-    public List<TrailInfo> getArtefactTrails(int artefactID) {
+    public List<TrailInfo> getArtefactTrails(int artefactID, final int trailType) {
         String queryString;
 
         trailList = new ArrayList<>(); // Start a new empty trailList
@@ -216,7 +220,14 @@ public class TrailManager implements AppConstants, DatabaseConstants {
         // Query string to retrieve trails associated with the artefact
         queryString =
                 "SELECT trail._id as " + TRA_ID + ", * FROM trail " +
-                "JOIN trailstep ON trail._id = trailStep.stp_trailID AND trailStep.stp_qrCode = " + artefactID;
+                "JOIN trailstep ON trail._id = trailStep.stp_trailID AND trailStep.stp_qrCode = " + artefactID; // All trail types
+
+        if(trailType == TRAIL) {
+            queryString += " and trail.tra_trailType = 0"; // Only Normal trails
+        }
+        else if(trailType == EXPLORER) {
+            queryString += " and trail.tra_trailType = 1"; // Only Explorer trails
+        }
 
         // Query database for the trails info that artefactID is part of
         if(!getDatabaseTrails(queryString)) {
@@ -258,6 +269,7 @@ public class TrailManager implements AppConstants, DatabaseConstants {
 
         return trailList; // Return the trails
     }
+
 
     /**
      * Gets the steps for the current trail

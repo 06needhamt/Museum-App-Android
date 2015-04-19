@@ -63,7 +63,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     QuestionManager qm;
     ArtefactInfo artefact;  // Stores artefact information from the database
     List<TrailInfo> trails; // List of trails
-    ButtonCreator btncreate;
+    private ButtonCreator btncreate;
     QRFragment qrFragment = new QRFragment();
 
 
@@ -81,9 +81,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
         infoWebView = new InformationWebView();
-        btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView, ExplorerTrailFragments);
-        btncreate.populateTopButtons();
-        btncreate.populateBottomButtons();
+        setBtncreate(new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView, ExplorerTrailFragments));
+        getBtncreate().populateTopButtons();
+        getBtncreate().populateBottomButtons();
         //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
 
@@ -233,7 +233,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
                 System.out.println("Browsed Artefact = " + artefact.artefactID + " " + artefact.name);
 
-                btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
+                getBtncreate().lightUpButtons(TRAIL_AND_EXPLORER);
                 // Get the TrailManager to pre-load any associated trails information
                 trailManager.getArtefactTrails(artefact.artefactID);
 
@@ -384,5 +384,13 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else {
             Log.d("RiskyBusinessMuseumApp", "HomePageActivity, callQuestionManager(): No Trails found for Trail ID " + trailID);
         }
+    }
+
+    public ButtonCreator getBtncreate() {
+        return btncreate;
+    }
+
+    private void setBtncreate(ButtonCreator btncreate) {
+        this.btncreate = btncreate;
     }
 }
