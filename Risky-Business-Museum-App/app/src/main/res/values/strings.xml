@@ -83,6 +83,26 @@
 
     <string name="NoTrails">"Trails not available in Prototype"</string>
 
+    <string name="Congratulations">Congratulations!</string>
+    <string name="WellDone">Well done!</string>
+
+    <string name="YourRankIs">Your rank is:</string>
+    <string name="Dora">Dora</string>
+    <string name="Spelunker">Spelunker</string>
+    <string name="IndianaJones">Indiana Jones</string>
+    <string name="LaraCroft">Lara Croft</string>
+    <string name="NathanDrake">Nathan Drake</string>
+    <string name="BenGates">Ben Gates</string>
+
+    <string-array name="ExplorerRanking">
+        <item>@string/Dora</item>
+        <item>@string/Spelunker</item>
+        <item>@string/BenGates</item>
+        <item>@string/NathanDrake</item>
+        <item>@string/LaraCroft</item>
+        <item>@string/IndianaJones</item>
+    </string-array>
+
     <string-array name="Hints">
         <item>@string/DefaultHint</item>
         <item>@string/Hint1</item>

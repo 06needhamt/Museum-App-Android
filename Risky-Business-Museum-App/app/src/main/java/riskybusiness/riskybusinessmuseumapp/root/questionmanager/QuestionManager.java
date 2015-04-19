@@ -55,6 +55,7 @@ public class QuestionManager implements AppConstants {
         // According to the question type, display the required intent passing it the question details
 
         if (isTrailEnded()) { // Trail has already ended - ensure we don't outrun the array
+
             //DEBUG: trying out trail result screen
             if(getQuestionNum() == getSteps().size()) {
                 hm.callTrailResultActivity();

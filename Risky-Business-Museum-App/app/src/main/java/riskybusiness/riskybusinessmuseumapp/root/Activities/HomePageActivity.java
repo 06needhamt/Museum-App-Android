@@ -199,6 +199,20 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         boolean exit = false;
 
         if(from.equals("MultiChoiceActivity")) {
+            if(resultCode == RESULT_OK){
+                Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
+                exit = b.getBoolean("EXIT", false);
+                if(exit){
+                    currentTrailScore = 0;
+                    qm.setTrailEnded(true);
+                    qm.nextQuestion();
+                    return;
+                }
+                currentTrailScore += b.getInt("Score", -1);
+                qm.nextQuestion();
+            }
+        } else if(from.equals("PictureMultiChoiceActivity")) {
 
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
@@ -276,8 +290,29 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
                 }
                 qm.nextQuestion();
             }
+        }
+        else if(from.equals("PictureQRQuestionActivity")) {
+            if(resultCode == RESULT_OK){
+                Bundle b = data.getExtras();
+                appendQuestionScores(b.getInt("Score", -1));
+                currentTrailScore += b.getInt("Score", -1);
+                exit = b.getBoolean("EXIT", false);
+                if(exit){
+                    currentTrailScore = 0;
+                    qm.setTrailEnded(true);
+                    qm.nextQuestion();
+                    return;
+                }
+                qm.nextQuestion();
+            }
+        }
 
-    //            qm.nextQuestion();
+        else if(from.equals("TrailResultActivity")){
+            if(resultCode == RESULT_OK){
+                //resetting trail values
+                currentTrailScore = 0;
+                questionScores.clear();
+            }
         }
 //        else if(data.getClass().getSimpleName().equals(SingleAnswerActivity.class)) {
 //            if(resultCode == RESULT_OK){
@@ -359,9 +394,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         bundle.putString("TRAILNAME", trailManager.currentTrail.name);
         i.putExtras(bundle);
         setIntent(i);
-        currentTrailScore = 0; //reset trail score
-        questionScores.clear(); //reset question scores
-        startActivity(i);
+        startActivityForResult(i, 0, null);
     }
 
     public void callSingleAnswerActivity(String question, String answer){
