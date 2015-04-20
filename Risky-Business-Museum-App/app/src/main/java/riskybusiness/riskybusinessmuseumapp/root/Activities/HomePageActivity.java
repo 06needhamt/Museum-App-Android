@@ -63,7 +63,7 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
     QuestionManager qm;
     ArtefactInfo artefact;  // Stores artefact information from the database
     List<TrailInfo> trails; // List of trails
-    ButtonCreator btncreate;
+    private ButtonCreator btncreate;
     QRFragment qrFragment = new QRFragment();
 
 
@@ -82,8 +82,8 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         Log.e("R id", String.valueOf(R.drawable.blue___icon_museuminfo));
         infoWebView = new InformationWebView();
         btncreate = new ButtonCreator(this,toptable,bottomtable,R.drawable.class.getFields(),fragments, Mapfragments, BottomFragments,infoWebView, ExplorerTrailFragments);
-        btncreate.populateTopButtons();
-        btncreate.populateBottomButtons();
+        getBtncreate().populateTopButtons();
+        getBtncreate().populateBottomButtons();
         //btncreate.populateMapButtons();
         //setContentView(R.layout.fragment_bugs);
 
@@ -230,11 +230,11 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else if(from.equals(FROM_QR_SCANNER)) { // Browsing QR codes
             if (resultCode == RESULT_OK) {
                 int qrCode;
-//                if(!data.hasExtra("B"))
-//                {
-//                    Toast.makeText(getBaseContext(),"Error scanning QR Code",Toast.LENGTH_LONG).show();
-//                    return;
-//                }
+                int trailCount = 0;
+                int explorerCount = 0;
+
+                List<TrailInfo> trailList;  // List of trails associated with the artefact
+
                 Bundle b = data.getExtras();
 
                 Content = b.getString(CONTENT_TAG, "No Value");
@@ -259,9 +259,25 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
                 System.out.println("Browsed Artefact = " + artefact.artefactID + " " + artefact.name);
 
-                btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
+                // btncreate.lightUpButtons(TRAIL_AND_EXPLORER);
                 // Get the TrailManager to pre-load any associated trails information
-                trailManager.getArtefactTrails(artefact.artefactID);
+                trailList = trailManager.getArtefactTrails(artefact.artefactID, TRAIL_AND_EXPLORER);
+
+                if(trailList != null) { // Are there any trails associated with the artefact?
+                    for (TrailInfo t : trailList) { // find trail types
+                        if (t.trailType == PURPLE_TRAIL)
+                            trailCount = 1;
+                        else if (t.trailType == PURPLE_EXPLORER)
+                            explorerCount = 1;
+                    }
+
+                    if(trailCount > 0) // If ordinary trail light trail button
+                        getBtncreate().lightUpButtons(TRAIL);
+
+                    if(explorerCount > 0) // If explorer trail light up explorer trail button
+                        getBtncreate().lightUpButtons(EXPLORER);
+                }
+
 
                 // TODO: Display the artefact information on screen
                 qrFragment.updateTitle(artefact.name);
@@ -447,4 +463,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
             Log.d("RiskyBusinessMuseumApp", "HomePageActivity, callQuestionManager(): No Trails found for Trail ID " + trailID);
         }
     }
+
+    public ButtonCreator getBtncreate() {
+        return btncreate;
+    }
+
 }

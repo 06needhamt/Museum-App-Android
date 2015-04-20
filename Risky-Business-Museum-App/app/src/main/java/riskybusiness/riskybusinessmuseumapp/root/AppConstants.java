@@ -64,4 +64,10 @@ public interface AppConstants {
     public static final String FROM_PICTURE_QR_QUESTION = "PictureQRQuestionActivity";
     public static final String FROM_QR_SCANNER = "QRScannerActivity";
     public static final String FROM_TRAIL_RESULT_SCREEN = "TrailResultActivity";
+
+    // Purple button trail codes
+    public static final int PURPLE_NO_TRAIL = -1;
+    public static final int PURPLE_TRAIL = 0;
+    public static final int PURPLE_EXPLORER = 1;
+    public static final int PURPLE_TRAIL_AND_EXPLORER = 2;
 }
