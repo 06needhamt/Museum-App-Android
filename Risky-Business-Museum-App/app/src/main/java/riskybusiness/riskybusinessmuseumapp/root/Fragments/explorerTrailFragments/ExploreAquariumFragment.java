@@ -81,8 +81,9 @@ public class ExploreAquariumFragment extends Fragment implements AppConstants{
         else {
             TrailManager tm = TrailManager.getTrailManagerInstance(getActivity());
 
-            // TODO: set correct trail
-            trails = tm.getExhibitTrails(2, EXPLORER); // Search for 2 == Ancient World
+            // TODO: set correct trail NO AQUARIUM TRAIL SET UP
+            // trails = tm.getExhibitTrails(2, TRAIL); // Search for 2 == Ancient World
+            trails = null;
 
             if(trails != null) { // Trail names to polpulate spinner
                 TextView[] texts = new TextView[trails.size() + 1];
