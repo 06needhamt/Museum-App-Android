@@ -70,7 +70,7 @@ public class QRFragment extends Fragment {
         //TESTING IMAGE - please try different images, all should be fitted into the fragment without overlapping onto any text.
         //updateImage(R.drawable.royal_blue_ipad_wallpaper);
 
-        updateImage("46_rocks");
+        //updateImage("46_rocks");
         //TESTING END
 
 
