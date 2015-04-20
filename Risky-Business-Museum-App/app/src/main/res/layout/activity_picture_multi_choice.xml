@@ -10,11 +10,95 @@
     <TextView
         android:id="@+id/PicMCTrailPosition"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Question 1 of n"
+        android:textColor="@color/White"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal|left"  />
 
     <TextView
         android:id="@+id/PicMCScore"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Score:"
+        android:textColor="@color/White"
+        android:layout_alignParentRight="true"
+        android:gravity="center_horizontal|right"/>
+
+    <ImageView
+        android:id="@+id/PicMCImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/royal_blue_ipad_wallpaper"
+        android:adjustViewBounds="true"
+
+        android:layout_below="@id/PicMCTrailPosition"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/PicMCQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Question"
+        android:scrollbars="vertical"
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:layout_below="@id/PicMCImage"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <Button
+        android:id="@+id/PicMCNextOrSkipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Skip"
+        android:textColor="@color/White"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:id="@+id/PicMCButtonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/PicMCNextOrSkipButton">
+
+        <Button
+            android:id="@+id/PicMCButtonA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:layout_alignParentTop="true"/>
+
+        <Button
+            android:id="@+id/PicMCButtonB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:layout_below="@id/PicMCButtonA"
+            android:layout_marginTop="2dp"/>
+
+        <Button
+            android:id="@+id/PicMCButtonC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:layout_below="@id/PicMCButtonB"
+            android:layout_marginTop="2dp"/>
+
+        <Button
+            android:id="@+id/PicMCButtonD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:layout_below="@id/PicMCButtonC"
+            android:layout_marginTop="2dp"/>
+
+        </RelativeLayout>
+
 
 </RelativeLayout>

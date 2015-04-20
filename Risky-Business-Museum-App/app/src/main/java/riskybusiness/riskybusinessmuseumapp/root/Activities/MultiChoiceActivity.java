@@ -23,18 +23,19 @@ import java.util.List;
 import java.util.Random;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 
 
-public class MultiChoiceActivity extends FragmentActivity implements IConfirmDialogCompliant {
+public class MultiChoiceActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants {
     private int screenHeight;
     private int screenWidth;
     private Button btnMcA, btnMcB, btnMcC, btnMcD, btnSkipOrNext;
     private Button[] answerButtons = { btnMcA, btnMcB, btnMcC, btnMcD};
     private TextView multiChoiceQuestion, ScoreField, TrailPositionField;
-    private final int MAX_SCORE = 100;
+    private final int MAX_SCORE = MAX_SCORE_FOR_ONE_QUESTION;
     private boolean endtrail = false; //set this to true for the trail to end after this question and false for it not to end after this question
     private int scoreForThisQuestion;
     private int totalScore;
@@ -70,13 +71,13 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void unpackBundle(Bundle bundle){ //unpacking bundle and assigning all relevant data
-        question = bundle.getString("QUESTION");
-        String temp = bundle.getString("ANSWER");
-        totalScore = bundle.getInt("SCORE", 0); //getting total score with error handling for 0
+        question = bundle.getString(QUESTION_TAG);
+        String temp = bundle.getString(ANSWER_TAG);
+        totalScore = bundle.getInt(SCORE_TAG, 0); //getting total score with error handling for 0
         applyAnswers(temp);
         correctAnswer = answers.get(0);
-        currentPosition = bundle.getInt("TRAIL_POSITION", -1);
-        trailLength = bundle.getInt("TRAIL_LENGTH", -1);
+        currentPosition = bundle.getInt(TRAIL_POSITION_TAG, -1);
+        trailLength = bundle.getInt(TRAIL_LENGTH_TAG, -1);
     }
 
     /**
@@ -125,7 +126,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pr = btnMcA.getTotalPaddingRight();
         pb = btnMcA.getTotalPaddingBottom();
         for (Button b : btns) {
-            b.setTextColor(getResources().getColor(R.color.RoyalBlue)); //setting text colour to white
+        //    b.setTextColor(getResources().getColor(R.color.RoyalBlue)); //setting text colour to white
             b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15); //setting text size to 15sp (scaled pixels)
             b.setPadding(pl, pt, pr, pb);
         }
@@ -134,7 +135,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
         pt = btnSkipOrNext.getPaddingTop();
         pr = btnSkipOrNext.getPaddingRight();
         pb = btnSkipOrNext.getPaddingBottom();
-        btnSkipOrNext.setTextColor(getResources().getColor(R.color.Black));
+        //btnSkipOrNext.setTextColor(getResources().getColor(R.color.Black));
         btnSkipOrNext.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         btnSkipOrNext.setPadding(pl, pt, pr, pb);
     }
@@ -349,7 +350,7 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     }
 
     private void numGuesses(Button btn) { // Check the guesses state and adjust score
-        scoreForThisQuestion -= 25; // Reduce the score
+        scoreForThisQuestion -= MAX_SCORE / 4; // Reduce the score
         if(scoreForThisQuestion <= 0) { // Check if any guesses left
             // no guesses exit activity returning data
         }
@@ -473,10 +474,10 @@ public class MultiChoiceActivity extends FragmentActivity implements IConfirmDia
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putInt("Score", scoreForThisQuestion);
-        bundle.putString("FROM", "MultiChoiceActivity");
-        bundle.putBoolean("EXIT", endtrail);
-        bundle.putBoolean("SKIPPED", hasBeenSkipped);
+        bundle.putInt(SCORE_TAG, scoreForThisQuestion);
+        bundle.putString(FROM_TAG, FROM_MULTI_CHOICE);
+        bundle.putBoolean(EXIT_TAG, endtrail);
+        bundle.putBoolean(SKIPPED_TAG, hasBeenSkipped);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);

@@ -1,9 +1,11 @@
 package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,33 +15,37 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 
 
 /**
  * @author Alex created on 09/04/15
  */
-public class TrailResultActivity extends FragmentActivity {
+public class TrailResultActivity extends FragmentActivity implements AppConstants{
 
-    TextView TrailName, Score, Statistics;
+    TextView TrailName, Score, Statistics, Rank;
     Button OkayButton;
     String[] testStringArray = {"Question 1: 50/100", "2. Question: 0/100"};
     ArrayList<String> formattedScores;
     ArrayList<Integer> questionScores;
     int totalScore;
     String trailName;
-    final int MAX_SCORE = 100;
+    final int MAX_SCORE = MAX_SCORE_FOR_ONE_QUESTION;
+    String[] ranks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trail_result);
         setResources();
+        formatTextViews();
         setButtonListener();
         Bundle bundle = getIntent().getExtras();
         unpackBundle(bundle);
         setFormattedScores();
         updateTrailName();
         updateTotalScore();
+        updateRank(); //DO THIS AFTER TOTAL SCORE IS CALCULATED!
         displayFormattedStatistics();
     }
 
@@ -48,9 +54,12 @@ public class TrailResultActivity extends FragmentActivity {
      * @param b Bundle containing relevant data
      */
     private void unpackBundle(Bundle b){
-        questionScores =  b.getIntegerArrayList("QSCORES");
-        totalScore = b.getInt("SCORE");
-        trailName = b.getString("TRAILNAME");
+        questionScores =  b.getIntegerArrayList(QUESTION_SCORES_TAG);
+        totalScore = b.getInt(SCORE_TAG);
+        trailName = b.getString(TRAIL_NAME_TAG);
+
+        //not to do with bundle but getting rank names from Strings.xml
+        ranks = getResources().getStringArray(R.array.ExplorerRanking);
     }
 
     /**
@@ -58,9 +67,18 @@ public class TrailResultActivity extends FragmentActivity {
      */
     private void setResources(){
         TrailName = (TextView) findViewById(R.id.ResultTrailName);
+        Rank = (TextView) findViewById(R.id.ResultRank);
         Score = (TextView) findViewById(R.id.ResultScore);
         Statistics = (TextView) findViewById(R.id.ResultStatistics);
         OkayButton = (Button) findViewById(R.id.ResultOkButton);
+    }
+
+    /**
+     * Formatting the given textviews to facilitate scrolling
+     */
+    private void formatTextViews(){
+        Statistics.setMovementMethod(new ScrollingMovementMethod());
+        Statistics.setMaxLines(11);
     }
 
     /**
@@ -70,7 +88,7 @@ public class TrailResultActivity extends FragmentActivity {
         OkayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); //close activity
+                passData(); //close activity
             }
         });
     }
@@ -105,10 +123,18 @@ public class TrailResultActivity extends FragmentActivity {
     }
 
     /**
-     * Show the trail name on the activity
+     * update the rank of the user
+     */
+    private void updateRank(){
+        Rank.setText(getResources().getString(R.string.YourRankIs) + " " + determineRank());
+    }
+
+    /**
+     * Show the trail name on the activity with trailname and the phrase completed, e.g.
+     * Discover the World of Bugs completed!
      */
     private void updateTrailName(){
-        TrailName.setText(getString(R.string.TrailName) + " " + "Default Trail Name"); //TODO add the current trail name
+        TrailName.setText(trailName + " " + getResources().getString(R.string.completed) + "!");
     }
 
     /**
@@ -116,6 +142,52 @@ public class TrailResultActivity extends FragmentActivity {
      */
     private void updateTotalScore(){
         Score.setText(getString(R.string.YourTotalScore) + " " + totalScore + "/" + MAX_SCORE * questionScores.size());
+    }
+
+    private String determineRank(){
+        double percentage = (double) (totalScore) / ((double) (MAX_SCORE) * (double) (questionScores.size())); //getting the percentage of "correctness"
+        String rank = getResources().getString(R.string.Dora); //default value
+//DEBUGGING
+//        System.out.println("percentage = " + percentage);
+//        System.out.println("totalScore = " + totalScore);
+//        System.out.println("MAX TOTAL SCORE = " + (MAX_SCORE * questionScores.size()));
+
+        if(percentage == 1.0){ //100% correctness
+            rank = ranks[ranks.length - 1]; //last item in the list
+        } else if (percentage >= 0.8){ //80% correctness
+            try {
+                rank = ranks[ranks.length - 2];
+            }
+            catch(IndexOutOfBoundsException E){
+                E.printStackTrace();
+                System.out.println("Explorer ranks does not have enough items in it");
+            }
+        } else if(percentage >= 0.6){
+            try {
+                rank = ranks[ranks.length - 3];
+            }
+            catch(IndexOutOfBoundsException E){
+                E.printStackTrace();
+                System.out.println("Explorer ranks does not have enough items in it");
+            }
+        } else if(percentage >= 0.4){
+            try {
+                rank = ranks[ranks.length - 4];
+            }
+            catch(IndexOutOfBoundsException E){
+                E.printStackTrace();
+                System.out.println("Explorer ranks does not have enough items in it");
+            }
+        } else if(percentage >= 0.2){
+            try {
+                rank = ranks[ranks.length - 5];
+            }
+            catch(IndexOutOfBoundsException E){
+                E.printStackTrace();
+                System.out.println("Explorer ranks does not have enough items in it");
+            }
+        }
+        return rank;
     }
 
     @Override
@@ -138,5 +210,21 @@ public class TrailResultActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Create a bundle containing all the relevant information for the activity which as started
+     * this activity for a result.
+     * @return Bundle with all relevant data from this activity, including tags "FROM", "Score", "EXIT" and "SKIPPED"
+     */
+    private Bundle passData(){
+        Bundle bundle = new Bundle();
+        Intent it = getIntent();
+        bundle.putString(FROM_TAG, FROM_TRAIL_RESULT_SCREEN);
+        it.putExtras(bundle);
+        setIntent(it);
+        setResult(RESULT_OK, it);
+        finish();
+        return bundle;
     }
 }
