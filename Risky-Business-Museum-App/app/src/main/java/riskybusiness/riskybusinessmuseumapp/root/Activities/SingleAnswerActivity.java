@@ -18,13 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
-public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant{
+public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants{
 
     private final int MAX_SCORE = 100;
     private int scoreForThisQuestion;
@@ -94,11 +95,11 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     }
 
     private void unpackBundle(Bundle bundle){
-        SingleAnswerQuestion.setText(bundle.getString("QUESTION"));
-        CorrectAnswer = bundle.getString("ANSWER");
-        totalScore = bundle.getInt("SCORE");
+        SingleAnswerQuestion.setText(bundle.getString(QUESTION_TAG));
+        CorrectAnswer = bundle.getString(ANSWER_TAG);
+        totalScore = bundle.getInt(SCORE_TAG);
         updateScore(totalScore);
-        updateTrailPosition(bundle.getInt("TRAIL_POSITION"), bundle.getInt("TRAIL_LENGTH"));
+        updateTrailPosition(bundle.getInt(TRAIL_POSITION_TAG), bundle.getInt(TRAIL_LENGTH_TAG));
     }
 
     private void updateScore(int score){
@@ -192,13 +193,13 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         Bundle tempBundle = data.getExtras();
-        String from = tempBundle.getString("FROM", "");
+        String from = tempBundle.getString(FROM_TAG, "");
         int artefactID;
 
-        if(from.equals("QRScannerActivity")) {
+        if(from.equals(FROM_QR_SCANNER)) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
-                QRResultHandler qrrh = new QRResultHandler(b.getString("Content", "No Value"));
+                QRResultHandler qrrh = new QRResultHandler(b.getString(CONTENT_TAG, "No Value"));
                 ValidatedContent = qrrh.getResult();
 
                 if(ValidatedContent.equals("No Content"))
@@ -285,11 +286,11 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private Bundle passData(){
         Bundle bundle = new Bundle();
         Intent it = getIntent();
-        bundle.putInt("Score", scoreForThisQuestion);
-        bundle.putString("FROM", "SingleAnswerActivity");
-        bundle.putString("QRANSWER", ValidatedContent);
-        bundle.putBoolean("EXIT",endtrail);
-        bundle.putBoolean("SKIPPED", hasBeenSkipped);
+        bundle.putInt(SCORE_TAG, scoreForThisQuestion);
+        bundle.putString(FROM_TAG, FROM_SINGLE_ANSWER);
+        bundle.putString(QR_ANSWER_TAG, ValidatedContent);
+        bundle.putBoolean(EXIT_TAG,endtrail);
+        bundle.putBoolean(SKIPPED_TAG, hasBeenSkipped);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);

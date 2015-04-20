@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/ResultTitle"
-        android:text="@string/Results"
+        android:text="@string/Congratulations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40sp"
@@ -21,41 +21,51 @@
     <TextView
         android:id="@+id/ResultTrailName"
         android:text="@string/TrailName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:layout_alignParentRight="false"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ResultTitle"
+        android:layout_below="@id/ResultTitle"
         android:layout_marginTop="5dp" />
 
     <TextView
+        android:id="@+id/ResultRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:text="@string/YourRankIs"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/ResultTrailName"/>
+    <TextView
         android:id="@+id/ResultScore"
         android:text="@string/Score"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:layout_alignParentRight="false"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ResultTrailName"
+        android:layout_below="@id/ResultRank"
         android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/ResultStatistics"
         android:text="@string/Statistics"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:layout_alignParentRight="false"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ResultScore"
-        android:layout_marginTop="15dp"  />
+        android:layout_below="@id/ResultScore"
+        android:layout_marginTop="15dp"
+        android:scrollbars="vertical"/>
 
     <Button
         android:id="@+id/ResultOkButton"

@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="riskybusiness.riskybusinessmuseumapp.root.Fragments.ArtefactTrailSelectorFragment"
+    android:background="@drawable/royal_blue_ipad_wallpaper">
+
+    <TextView
+        android:id="@+id/ArtefactTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/QRFragmentTitle"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal|top" />
+
+    <TextView
+        android:id="@+id/ArtefactSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:text="@string/QRFragmentTitle"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal|top" />
+
+    <ImageView
+        android:id="@+id/ArtefactImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/ArtefactDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:textColor="@color/White"
+        android:textSize="22sp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ArtefactTrailGoButton"
+        android:layout_gravity="center_horizontal|top"
+        android:clickable="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ArtefactTrailSpinner"
+        android:layout_gravity="left|top"
+        android:clickable="true"
+        android:gravity="left"
+        android:focusable="false" />
+
+</FrameLayout>

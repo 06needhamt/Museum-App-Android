@@ -115,6 +115,7 @@ public class MainActivity extends FragmentActivity implements IChoiceDialogCompl
         //Intent i = new Intent(getBaseContext(), MultiTouchActivity.class);
         //Intent i = new Intent(getBaseContext(), TrailResultActivity.class);
         //Intent i = new Intent(getBaseContext(),PictureQRQuestionActivity.class);
+        //Intent i = new Intent(getBaseContext(), PictureMultiChoiceActivity.class);
 
 
 

@@ -70,7 +70,7 @@ public class QRFragment extends Fragment {
         //TESTING IMAGE - please try different images, all should be fitted into the fragment without overlapping onto any text.
         //updateImage(R.drawable.royal_blue_ipad_wallpaper);
 
-        updateImage("49_telescopes");
+        updateImage("46_rocks");
         //TESTING END
 
 
@@ -149,6 +149,7 @@ public class QRFragment extends Fragment {
         Title.setText(R.string.QRFragmentTitle);
         Title.setTextColor(getResources().getColor(R.color.White)); //White font
         Hint.setText(R.string.DefaultHint);
+        Hint.setGravity(Gravity.CENTER_HORIZONTAL);
         Hint.setTextColor(getResources().getColor(R.color.White)); //White font
 
         QRButton.setBackgroundResource(R.drawable.transparent__icon_qr);
@@ -173,6 +174,7 @@ public class QRFragment extends Fragment {
         //ItemImage.setMaxWidth((int) (height * (1/3)));
 
         Description.setText(R.string.LoremIpsum);
+        Description.setGravity(Gravity.LEFT);
 
         Description.setMovementMethod(new ScrollingMovementMethod()); //taken from http://stackoverflow.com/questions/1748977/making-textview-scrollable-in-android
         Description.setMaxLines(6);
