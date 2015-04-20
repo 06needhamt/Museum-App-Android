@@ -39,7 +39,7 @@ public interface AppConstants {
 
     //Score data
     public static final int MAX_SCORE_FOR_ONE_QUESTION = 100;
-    public static final String QR_RESULT_IDENTIFIER = "http://r06246.wix.com/risky-business";
+    public static final String QR_RESULT_IDENTIFIER = "http://r06246.wix.com/risky-business/";
 
     //Bundle identifiers
     public static final String FROM_TAG = "FROM";
