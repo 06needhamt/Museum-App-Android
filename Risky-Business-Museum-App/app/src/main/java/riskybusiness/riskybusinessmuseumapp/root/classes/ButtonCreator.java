@@ -385,7 +385,7 @@ public class ButtonCreator implements AppConstants{
                 infoWebView.loadPage(APP_INFO_PAGE);
                 break;
             case 1:
-                //@TODO add museum information page
+                infoWebView.loadPage(MUSEUM_INFO_PAGE);
                 break;
             case 2:
                 infoWebView.loadPage(PLANETARIUM_PAGE);

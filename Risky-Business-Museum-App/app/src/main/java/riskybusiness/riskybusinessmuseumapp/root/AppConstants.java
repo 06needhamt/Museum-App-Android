@@ -31,7 +31,7 @@ public interface AppConstants {
     //HTML page names
     public static final String DEFAULT_PAGE = "file:///android_asset/webpages/index.html";
     public static final String APP_INFO_PAGE = "file:///android_asset/webpages/AppInfo-4.html";
-    public static final String MUSEUM_INFO_PAGE = "file:///android_asset/webpages/ THIS IS MISSING"; //TODO
+    public static final String MUSEUM_INFO_PAGE = "file:///android_asset/webpages/MuseumInformation.html";
     public static final String CAFE_AND_SHOP_PAGE = "file:///android_asset/webpages/Cafe and shop-2.html";
     public static final String FACILITIES_PAGE = "file:///android_asset/webpages/Facilites-1.html";
     public static final String INFO_DESK_PAGE = "file:///android_asset/webpages/InfoDesk-3.html";
@@ -39,7 +39,7 @@ public interface AppConstants {
 
     //Score data
     public static final int MAX_SCORE_FOR_ONE_QUESTION = 100;
-    public static final String QR_RESULT_IDENTIFIER = "http://r06246.wix.com/risky-business";
+    public static final String QR_RESULT_IDENTIFIER = "http://r06246.wix.com/risky-business/";
 
     //Bundle identifiers
     public static final String FROM_TAG = "FROM";
