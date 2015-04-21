@@ -173,7 +173,7 @@ public class QRFragment extends Fragment {
         ItemImage.setMaxHeight((int) (height * 0.37)); //setting maximum height of the picture to a third of the screen
         //ItemImage.setMaxWidth((int) (height * (1/3)));
 
-        Description.setText(R.string.LoremIpsum);
+        //Description.setText(R.string.LoremIpsum);
         Description.setGravity(Gravity.LEFT);
 
         Description.setMovementMethod(new ScrollingMovementMethod()); //taken from http://stackoverflow.com/questions/1748977/making-textview-scrollable-in-android

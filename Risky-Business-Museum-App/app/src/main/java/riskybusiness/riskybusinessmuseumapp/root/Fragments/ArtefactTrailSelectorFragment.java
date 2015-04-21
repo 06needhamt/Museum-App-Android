@@ -82,6 +82,9 @@ public class ArtefactTrailSelectorFragment extends Fragment implements AppConsta
         //Toast.makeText(getActivity().getBaseContext(), (CharSequence) String.valueOf(height),Toast.LENGTH_SHORT).show();
         allocateViews(view);
 
+        artefactImage.setAdjustViewBounds(true);
+        artefactImage.setMaxHeight((int) (height * 0.3));
+
         //setSpinnerContentSylte();
         createLayoutParams(height, width, view);
 
@@ -178,6 +181,7 @@ public class ArtefactTrailSelectorFragment extends Fragment implements AppConsta
         artefactImage = (ImageView) view.findViewById(R.id.ArtefactImage);
 //        artefactImage.setImageDrawable(new ArtefactImage(getActivity(), artefact.));
 
+
         artefactDescription = (TextView) view.findViewById(R.id.ArtefactDescription);
         artefactDescription.setGravity(Gravity.CENTER);
 
@@ -259,7 +263,7 @@ public class ArtefactTrailSelectorFragment extends Fragment implements AppConsta
         descHeight = FrameLayout.LayoutParams.WRAP_CONTENT;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(descWidth, descHeight);
         params.gravity = Gravity.CENTER_HORIZONTAL;
-        params.topMargin = (int) (screenHeight * 0.40); //!!!
+        params.topMargin = (int) (screenHeight * 0.50); //!!!
         return params;
     }
 
