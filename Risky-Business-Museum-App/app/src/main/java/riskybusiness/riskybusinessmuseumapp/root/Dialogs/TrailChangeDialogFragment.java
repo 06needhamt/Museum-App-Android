@@ -12,11 +12,12 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import riskybusiness.riskybusinessmuseumapp.R;
+import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 
 /**
  * Created by Tom on 03/04/2015.
  */
-public class TrailChangeDialogFragment extends DialogFragment {
+public class TrailChangeDialogFragment extends DialogFragment implements AppConstants {
     private String Message;
     private IChoiceDialogCompliant Caller;
     private int resID = 0;
@@ -55,6 +56,7 @@ public class TrailChangeDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        selected = STAY_ON_TRAIL;
         if (resID == 0) {
             builder.setTitle(Message);
         }
@@ -66,10 +68,10 @@ public class TrailChangeDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 selected = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-                Log.e("Position", String.valueOf(selected));
+                Log.e("Position", String.valueOf(selected)); //selcted is based on Index of the selected option, make sure these relate to the values in AppConstants
             }
         });
-        selected = 0;
+
         builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
 
             @Override

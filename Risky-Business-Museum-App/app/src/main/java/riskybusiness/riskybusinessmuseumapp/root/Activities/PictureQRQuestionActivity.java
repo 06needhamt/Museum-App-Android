@@ -2,9 +2,7 @@ package riskybusiness.riskybusinessmuseumapp.root.Activities;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.hardware.display.DisplayManager;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
@@ -18,15 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.Scanner;
-
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IChoiceDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.TrailChangeDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.ArtefactImage;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
@@ -34,7 +30,7 @@ import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 /**
  * @author Alex 16/04/2015
  */
-public class PictureQRQuestionActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants{
+public class PictureQRQuestionActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants, IChoiceDialogCompliant{
     TextView Question, TrailPosition, Score;
     ImageButton ScannerButton;
     ImageView Image;
@@ -50,6 +46,8 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
     private Drawable imageDrawable;
     private String imageName;
     private int screenheight, screenwidth;
+    private int trailDecision = STAY_ON_TRAIL;
+    private int scannedArtefact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +57,11 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
         setupDisplaymetrics(); //setting up display metrics and getting devices screen resolution
         setupButtonListeners(); //this has to be done after setting up the resources!
         formatQuestionField(); //formatting text area that displays the question on the activity
-        formatImageField(); //formatting image area (setting max height)
+
         //formatScannerButton();
         Bundle b = getIntent().getExtras();
-        unpackAndApplyBundle(b); //unpacking bundle and setting data
+        unpackAndApplyBundle(b); //unpacking bundle and setting dat
+        formatImageField(); //formatting image area (setting max height)
     }
 
     /**
@@ -140,7 +139,10 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
      * This makes sure that the image does not overlap with any of text or buttons on the activity.
      */
     private void formatImageField(){
-        Image.setMaxHeight((int) (screenheight * 0.5));
+        int maxHeight = (int) (screenheight * 0.5);
+        Image.setMaxHeight(maxHeight);
+        int actualHeight = Image.getDrawable().getIntrinsicHeight();
+        Image.setPadding(0, (maxHeight - actualHeight) / 2, 0 ,0);
     }
 
     /**
@@ -236,8 +238,21 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
         if(from.equals(FROM_QR_SCANNER)) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
+
                 QRResultHandler qrrh = new QRResultHandler(b.getString(CONTENT_TAG, "No Value"));
                 ValidatedContent = qrrh.getResult();
+                try { //Check if this item is on the trail / exhibit you are currently visiting
+                    scannedArtefact = qrrh.getCode();
+                    if(!trailManager.isArtefactInExhibit(scannedArtefact)){
+                        TrailChangeDialogFragment tcdf = new TrailChangeDialogFragment(this);
+                        tcdf.show(getFragmentManager(), null);
+                    }
+                }
+                catch (NullPointerException E){
+                    E.printStackTrace();
+                }
+
+
 
                 if(ValidatedContent.equals("No Content"))
                 {
@@ -313,6 +328,8 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
         bundle.putString(QR_ANSWER_TAG, ValidatedContent);
         bundle.putBoolean(EXIT_TAG, endtrail);
         bundle.putBoolean(SKIPPED_TAG, hasBeenSkipped);
+        bundle.putInt(TRAIL_DECISION_TAG, trailDecision);
+        bundle.putInt(SCANNED_ARTEFACT_TAG, scannedArtefact);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
@@ -358,5 +375,37 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
     @Override
     public void doNoConfirmClick(final int from) {
         //Do nothing
+    }
+
+    @Override
+    public void doYesConfirmClick(int from, int selected) {
+        //Trail decision
+        switch(selected){
+            case STAY_ON_TRAIL:
+                trailDecision = STAY_ON_TRAIL;
+                Toast.makeText(getBaseContext(), getString(R.string.StayOnTrailWarning), Toast.LENGTH_LONG).show();
+                break;
+
+            case MOVE_TO_ARTEFACT_TRAIL:
+                trailDecision = MOVE_TO_ARTEFACT_TRAIL;
+                passData();
+                break;
+
+            case QUIT_TRAIL:
+                trailDecision = QUIT_TRAIL;
+                passData();
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    @Override
+    public void doNoConfirmClick(int from, int selected) {
+        //Trail decision
+        //DO NOTHING
+        //Assume we stay on the trail
     }
 }

@@ -134,7 +134,7 @@ public class WorldCulturesFragment extends Fragment implements AppConstants{
         SubTitle.setGravity(Gravity.CENTER);
 
         Map = (ImageView) view.findViewById(R.id.Map);
-        Map.setImageResource(R.drawable.floor_2);
+        Map.setImageResource(R.drawable.floor_3);
 
         //spinnerIstruction = (TextView) view.findViewById(R.id.spinnerInstruction);
         //spinnerIstruction.setText(getActivity().getResources().getString(R.string.SpinnerInstruction));

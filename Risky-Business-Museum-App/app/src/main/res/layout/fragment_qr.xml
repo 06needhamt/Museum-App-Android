@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         android:textColor="@color/White"
-        android:textSize="12sp"/>
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/QRFragmentHint"

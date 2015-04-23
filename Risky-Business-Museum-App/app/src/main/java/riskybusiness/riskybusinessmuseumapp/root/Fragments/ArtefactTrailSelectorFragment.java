@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -102,8 +103,8 @@ public class ArtefactTrailSelectorFragment extends Fragment implements AppConsta
     }
 
     public void getBundle(Bundle bundle) {
-        artefactNumber = bundle.getInt("ARTEFACT_NUMBER", -1);
-        trailType = bundle.getInt("TRAIL_TYPE", -1);
+        artefactNumber = bundle.getInt(ARTEFACT_NUMBER_TAG, -1);
+        trailType = bundle.getInt(TRAIL_TYPE_TAG, -1);
     }
 
     public void populateFragment(Context context) {
@@ -121,6 +122,8 @@ public class ArtefactTrailSelectorFragment extends Fragment implements AppConsta
         artefactSubTitle.setText(currentArtefact.name);
         artefactImage.setImageDrawable(new ArtefactImage(getActivity(), currentArtefact.imageName).getImage());
         artefactDescription.setText(currentArtefact.description);
+        artefactDescription.setMovementMethod(new ScrollingMovementMethod());
+        artefactDescription.setMaxLines(3);
     }
 
 

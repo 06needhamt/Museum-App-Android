@@ -16,6 +16,7 @@ import java.util.List;
 
 import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
+import riskybusiness.riskybusinessmuseumapp.root.Fragments.ArtefactTrailSelectorFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreAncientWorldFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreAquariumFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Fragments.explorerTrailFragments.ExploreBugsFragment;
@@ -97,9 +98,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     private Fragment[] CreateFragments() {
         Fragment[] fragments = new Fragment[6];
-        fragments[0] = new AncientWorldFragment();
-        fragments[1] = new AquariumFragment();
-        fragments[2] = new BugsFragment();
+        fragments[0] = new AquariumFragment();
+        fragments[1] = new BugsFragment();
+        fragments[2] = new AncientWorldFragment();
         fragments[3] = new WorldCulturesFragment();
         fragments[4] = new DinosaursFragment();
         fragments[5] = new SpaceAndTimeFragment();
@@ -143,9 +144,9 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
 
     private Fragment[] CreateExplorerTrailFragments() {
         Fragment[] fragments = new Fragment[6];
-        fragments[0] = new ExploreAncientWorldFragment();
-        fragments[1] = new ExploreAquariumFragment();
-        fragments[2] = new ExploreBugsFragment();
+        fragments[0] = new ExploreAquariumFragment();
+        fragments[1] = new ExploreBugsFragment();
+        fragments[2] = new ExploreAncientWorldFragment();
         fragments[3] = new ExploreWorldCulturesFragment();
         fragments[4] = new ExploreDinosaursFragment();
         fragments[5] = new ExploreSpaceAndTimeFragment();
@@ -303,6 +304,35 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else if(from.equals(FROM_SINGLE_ANSWER)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+
+                int decision = b.getInt(TRAIL_DECISION_TAG, STAY_ON_TRAIL);
+                int scannedArtefact = -1;
+                switch(decision){
+                    case STAY_ON_TRAIL:
+                        break;
+                    case MOVE_TO_ARTEFACT_TRAIL:
+                        currentTrailScore = 0;
+                        questionScores.clear();
+
+                        scannedArtefact = b.getInt(SCANNED_ARTEFACT_TAG);
+                        ArtefactTrailSelectorFragment arty = new ArtefactTrailSelectorFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.frame, arty).commit();
+                        Bundle artyBundle = new Bundle();
+                        artyBundle.putInt(TRAIL_TYPE_TAG, TRAIL_AND_EXPLORER);
+                        artyBundle.putInt(ARTEFACT_NUMBER_TAG, scannedArtefact);
+                        arty.getBundle(artyBundle);
+
+                        qm.setTrailEnded(true);
+                        qm.nextQuestion();
+                        return;
+                    case QUIT_TRAIL:
+                        currentTrailScore = 0;
+                        questionScores.clear();
+                        qm.setTrailEnded(true);
+                        qm.nextQuestion();
+                        return;
+                }
+
                 appendQuestionScores(b.getInt(SCORE_TAG, -1));
                 currentTrailScore += b.getInt(SCORE_TAG, -1);
                 exit = b.getBoolean(EXIT_TAG, false);
@@ -319,6 +349,32 @@ public class HomePageActivity extends FragmentActivity implements AppConstants {
         else if(from.equals(FROM_PICTURE_QR_QUESTION)) {
             if(resultCode == RESULT_OK){
                 Bundle b = data.getExtras();
+                int decision = b.getInt(TRAIL_DECISION_TAG, STAY_ON_TRAIL);
+                int scannedArtefact = -1;
+                switch(decision){
+                    case STAY_ON_TRAIL:
+                        break;
+                    case MOVE_TO_ARTEFACT_TRAIL:
+                        currentTrailScore = 0;
+                        questionScores.clear();
+                        scannedArtefact = b.getInt(SCANNED_ARTEFACT_TAG);
+                        ArtefactTrailSelectorFragment arty = new ArtefactTrailSelectorFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.frame, arty).commit();
+                        Bundle artyBundle = new Bundle();
+                        artyBundle.putInt(TRAIL_TYPE_TAG, TRAIL_AND_EXPLORER);
+                        artyBundle.putInt(ARTEFACT_NUMBER_TAG, scannedArtefact);
+                        arty.getBundle(artyBundle);
+
+                        qm.setTrailEnded(true);
+                        qm.nextQuestion();
+                        return;
+                    case QUIT_TRAIL:
+                        currentTrailScore = 0;
+                        questionScores.clear();
+                        qm.setTrailEnded(true);
+                        qm.nextQuestion();
+                        return;
+                }
                 appendQuestionScores(b.getInt(SCORE_TAG, -1));
                 currentTrailScore += b.getInt(SCORE_TAG, -1);
                 exit = b.getBoolean(EXIT_TAG, false);

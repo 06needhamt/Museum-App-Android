@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class QRFragment extends Fragment {
     int width;
     TrailManager trailManager;
 
+    private boolean attached = false;
     Method[] method;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,13 @@ public class QRFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.e(this.getClass().getName(), "In onAttach");
+        attached = true;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -177,7 +186,7 @@ public class QRFragment extends Fragment {
         Description.setGravity(Gravity.LEFT);
 
         Description.setMovementMethod(new ScrollingMovementMethod()); //taken from http://stackoverflow.com/questions/1748977/making-textview-scrollable-in-android
-        Description.setMaxLines(6);
+        Description.setMaxLines(3);
         Description.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
@@ -199,7 +208,8 @@ public class QRFragment extends Fragment {
      * Populate the scanned artefact details within the fragment
      * @param artefactInfo Scanned artefact
      */
-    private void populateArtefactViews(ArtefactInfo artefactInfo) {
+    public void populateArtefactViews(ArtefactInfo artefactInfo) {
+        setIDs();
         Title.setText((CharSequence)artefactInfo.name);
         Description.setText((CharSequence) artefactInfo.description);
         ItemImage.setImageDrawable(new ArtefactImage(getActivity(), artefactInfo.imageName));

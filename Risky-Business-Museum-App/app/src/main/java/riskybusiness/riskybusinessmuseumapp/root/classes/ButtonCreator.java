@@ -34,7 +34,7 @@ public class ButtonCreator implements AppConstants{
     Field[] fields;
     Fragment[] Trailfragments;
     Fragment[] Mapfragments;
-    Fragment[] BottomFragments;
+    private Fragment[] BottomFragments;
     Fragment[] InfoFragments;
     Fragment[] ExplorerTrailFragments;
     TableRow tableRowTop;
@@ -54,8 +54,8 @@ public class ButtonCreator implements AppConstants{
     //ArrayList<IconInfo> drawableList = new ArrayList<>(); // Array list of type IconInfo for drawables
 
     IconList drawableList = new IconList(act); // Array list of type IconInfo for drawables
-    final String[] iconUnderNamesTop = {"blue___icon_ancientworld","blue___icon_aquarium", "blue___icon_bugs", "blue___icon_worldcultures", "blue___icon_dinosaurs", "blue___icon_space"};
-    final String[] iconOverNamesTop = {"green___icon_ancientworld","green___icon_aquarium", "green___icon_bugs", "green___icon_worldcultures", "green___icon_dinosaurs", "green___icon_space"};
+    final String[] iconUnderNamesTop = {"blue___icon_aquarium", "blue___icon_bugs", "blue___icon_ancientworld", "blue___icon_worldcultures", "blue___icon_dinosaurs", "blue___icon_space"};
+    final String[] iconOverNamesTop = {"green___icon_aquarium", "green___icon_bugs", "green___icon_ancientworld","green___icon_worldcultures", "green___icon_dinosaurs", "green___icon_space"};
     final String[] iconUnderNamesBottom = {"blue___icon_question", "blue___icon_explorer", "blue___icon_qr", "blue___icon_map", "blue___icon_information"};
     final String[] iconOverNamesBottom = {"green___icon_question", "green___icon_explorer", "green___icon_qr", "green___icon_map", "green___icon_information"};
     final String[] iconUnderNamesMap = {"blue___icon_floorg","blue___icon_floor1", "blue___icon_floor2", "blue___icon_floor3", "blue___icon_floor4", "blue___icon_floor5"};
@@ -201,8 +201,8 @@ public class ButtonCreator implements AppConstants{
         ArtefactTrailSelectorFragment artefactTrailSelectorFragment = new ArtefactTrailSelectorFragment();
         Bundle b = new Bundle();
 
-        b.putInt("ARTEFACT_NUMBER", trailManager.currentArtefact.artefactID); // Get the artefact number
-        b.putInt("TRAIL_TYPE", TRAIL); // Required trail type
+        b.putInt(ARTEFACT_NUMBER_TAG, trailManager.currentArtefact.artefactID); // Get the artefact number
+        b.putInt(TRAIL_TYPE_TAG, TRAIL); // Required trail type
 
         act.getFragmentManager().beginTransaction().replace(R.id.frame, artefactTrailSelectorFragment).commit(); // Display the fragment
         artefactTrailSelectorFragment.getBundle(b);
@@ -647,5 +647,9 @@ public class ButtonCreator implements AppConstants{
             b = false;
         }
         BottomButtonState[btn] = true;
+    }
+
+    public Fragment[] getBottomFragments() {
+        return BottomFragments;
     }
 }

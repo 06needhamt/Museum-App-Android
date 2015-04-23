@@ -128,8 +128,10 @@
     <string-array name="TrailChangeChoices">
         <item> Continue on your current trail</item>
         <item> Leave your current trail and start the trail which this artifact belongs to </item>
-        <item> Leave your current trail and enter browser mode </item>
+        <item> Leave the current trail and return to the main menu </item>
     </string-array>
+
+    <string name="StayOnTrailWarning">Please make sure you return to the correct exhibit before continuing!</string>
     <string name="title_activity_trail_result">TrailResultActivity</string>
     <string name="title_activity_browse_qrcodes">BrowseQRCodesActivity</string>
 

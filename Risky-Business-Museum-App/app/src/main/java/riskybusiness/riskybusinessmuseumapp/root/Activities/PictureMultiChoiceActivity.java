@@ -52,14 +52,14 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
         setContentView(R.layout.activity_picture_multi_choice);
         setupDisplayMetrics();
         setupResources();
-        formatImageField();
+
         formatQuestionField();
         setupButtonListeners();
         Bundle bundle = getIntent().getExtras();
         unpackAndApplyBundle(bundle); //unpacking bundle and assigning all relevant data
         setupViewsWithInformation();
         theOldSwitcheroo(); //randomly mixing up the answers on the buttons.
-
+        formatImageField();
     }
 
     /**
@@ -94,15 +94,18 @@ public class PictureMultiChoiceActivity extends FragmentActivity implements ICon
      */
     private void formatImageField(){
         imageField.setAdjustViewBounds(true);
-        imageField.setMaxHeight((int) (screenheight * 0.33)); //setting max height to a percentage of the devices screenheight
-    }
+        int maxHeight = (int) (screenheight * 0.33);
+        imageField.setMaxHeight(maxHeight); //setting max height to a percentage of the devices screenheight
+        int actualHeight = imageField.getDrawable().getIntrinsicHeight();
+        imageField.setPadding(0, (maxHeight - actualHeight) / 2, 0 ,(maxHeight - actualHeight) / 2);
+        }
 
     /**
      * Formatting the {@link #questionField} so that it scrolls.
      */
     private void formatQuestionField(){
         questionField.setMovementMethod(new ScrollingMovementMethod()); //making textView scrollable
-        questionField.setMaxLines(4); //maximum amount of lines before the view starts scrolling
+        questionField.setMaxLines(3); //maximum amount of lines before the view starts scrolling
     }
 
     /**

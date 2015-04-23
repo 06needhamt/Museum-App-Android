@@ -56,6 +56,10 @@ public interface AppConstants {
     public static final String CONTENT_TAG = "CONTENT";
     public static final String FORMAT_TAG = "FORMAT";
     public static final String QR_ANSWER_TAG = "QR_ANSWER";
+    public static final String TRAIL_DECISION_TAG = "TRAIL_DECISION";
+    public static final String ARTEFACT_NUMBER_TAG = "ARTEFACT_NUMBER";
+    public static final String TRAIL_TYPE_TAG = "TRAIL_TYPE";
+    public static final String SCANNED_ARTEFACT_TAG = "SCANNED_ARTEFACT";
 
     //Bundle "FROM" Identifiers
     public static final String FROM_MULTI_CHOICE = "MultiChoiceActivity";
@@ -70,4 +74,9 @@ public interface AppConstants {
     public static final int PURPLE_TRAIL = 0;
     public static final int PURPLE_EXPLORER = 1;
     public static final int PURPLE_TRAIL_AND_EXPLORER = 2;
+
+    //Leaving Trail Decisions
+    public static final int STAY_ON_TRAIL = 0;
+    public static final int MOVE_TO_ARTEFACT_TRAIL = 1;
+    public static final int QUIT_TRAIL = 2;
 }

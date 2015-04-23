@@ -21,11 +21,13 @@ import riskybusiness.riskybusinessmuseumapp.R;
 import riskybusiness.riskybusinessmuseumapp.root.AppConstants;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.AreYouSureToSkipDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.BackToMainMenuDialogFragment;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IChoiceDialogCompliant;
 import riskybusiness.riskybusinessmuseumapp.root.Dialogs.IConfirmDialogCompliant;
+import riskybusiness.riskybusinessmuseumapp.root.Dialogs.TrailChangeDialogFragment;
 import riskybusiness.riskybusinessmuseumapp.root.classes.QRResultHandler;
 import riskybusiness.riskybusinessmuseumapp.root.trailmanager.TrailManager;
 
-public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants{
+public class SingleAnswerActivity extends FragmentActivity implements IConfirmDialogCompliant, AppConstants, IChoiceDialogCompliant{
 
     private final int MAX_SCORE = 100;
     private int scoreForThisQuestion;
@@ -42,6 +44,8 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     private String CorrectAnswer;
 
     private TrailManager trailManager;
+    private int trailDecision = STAY_ON_TRAIL;
+    private int scannedArtefact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +205,16 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 Bundle b = data.getExtras();
                 QRResultHandler qrrh = new QRResultHandler(b.getString(CONTENT_TAG, "No Value"));
                 ValidatedContent = qrrh.getResult();
+                try { //Check if this item is on the trail / exhibit you are currently visiting
+                    scannedArtefact = qrrh.getCode();
+                    if(!trailManager.isArtefactInExhibit(scannedArtefact)){
+                        TrailChangeDialogFragment tcdf = new TrailChangeDialogFragment(this);
+                        tcdf.show(getFragmentManager(), null);
+                    }
+                }
+                catch (NullPointerException E){
+                    E.printStackTrace();
+                }
 
                 if(ValidatedContent.equals("No Content"))
                 {
@@ -289,8 +303,10 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
         bundle.putInt(SCORE_TAG, scoreForThisQuestion);
         bundle.putString(FROM_TAG, FROM_SINGLE_ANSWER);
         bundle.putString(QR_ANSWER_TAG, ValidatedContent);
-        bundle.putBoolean(EXIT_TAG,endtrail);
+        bundle.putBoolean(EXIT_TAG, endtrail);
         bundle.putBoolean(SKIPPED_TAG, hasBeenSkipped);
+        bundle.putInt(TRAIL_DECISION_TAG, trailDecision);
+        bundle.putInt(SCANNED_ARTEFACT_TAG, scannedArtefact);
         it.putExtras(bundle);
         setIntent(it);
         setResult(RESULT_OK, it);
@@ -314,5 +330,36 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
     @Override
     public void doNoConfirmClick(final int from) {
         //Do nothing
+    }
+
+    @Override
+    public void doYesConfirmClick(int from, int selected) {
+        //Trail decision
+        switch(selected) {
+            case STAY_ON_TRAIL:
+                trailDecision = STAY_ON_TRAIL;
+                Toast.makeText(getBaseContext(), getString(R.string.StayOnTrailWarning), Toast.LENGTH_LONG).show();
+                break;
+
+            case MOVE_TO_ARTEFACT_TRAIL:
+                trailDecision = MOVE_TO_ARTEFACT_TRAIL;
+                passData();
+                break;
+
+            case QUIT_TRAIL:
+                trailDecision = QUIT_TRAIL;
+                passData();
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
+    @Override
+    public void doNoConfirmClick(int from, int selected) {
+        //Do nothing
+        //assume the user stays on trail
     }
 }
