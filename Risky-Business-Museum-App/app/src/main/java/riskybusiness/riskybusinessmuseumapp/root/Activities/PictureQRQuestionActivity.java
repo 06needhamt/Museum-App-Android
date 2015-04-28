@@ -139,7 +139,7 @@ public class PictureQRQuestionActivity extends FragmentActivity implements IConf
      * This makes sure that the image does not overlap with any of text or buttons on the activity.
      */
     private void formatImageField(){
-        int maxHeight = (int) (screenheight * 0.5);
+        int maxHeight = (int) (screenheight * 0.45);
         Image.setMaxHeight(maxHeight);
         int actualHeight = Image.getDrawable().getIntrinsicHeight();
         Image.setPadding(0, (maxHeight - actualHeight) / 2, 0 ,0);
