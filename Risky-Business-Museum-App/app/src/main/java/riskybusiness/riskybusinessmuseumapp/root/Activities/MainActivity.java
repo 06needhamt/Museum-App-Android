@@ -55,19 +55,21 @@ public class MainActivity extends FragmentActivity implements IChoiceDialogCompl
         SharedPreferencesHandler prh = new SharedPreferencesHandler(prefs);
 
         System.out.println("Chosen Language = " + prh.getLanguage());
+        Intent i = new Intent(getBaseContext(), LanguageActivity.class);
+        startActivity(i);
 
-        if(prh.getLanguage().equals("Not Chosen"))
-        {
-            Intent i = new Intent(getBaseContext(), LanguageActivity.class);
-            startActivity(i);
-        }
-        else
-        {
-            System.out.println("Chosen Language - in ELSE");
-
-            SetLanguage(prh.getLanguage());
-            LoadMainPage(v);
-        }
+//        if(prh.getLanguage().equals("Not Chosen"))
+//        {
+//            Intent i = new Intent(getBaseContext(), LanguageActivity.class);
+//            startActivity(i);
+//        }
+//        else
+//        {
+//            System.out.println("Chosen Language - in ELSE");
+//
+//            SetLanguage(prh.getLanguage());
+//            LoadMainPage(v);
+//        }
     }
 
     private void SetLanguage(String lang) {

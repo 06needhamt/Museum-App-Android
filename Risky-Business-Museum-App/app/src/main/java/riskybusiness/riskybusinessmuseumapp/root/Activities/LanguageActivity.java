@@ -78,7 +78,7 @@ public class LanguageActivity extends FragmentActivity {
     private void startHomePageActivity() {
         Intent i = new Intent(getBaseContext(),HomePageActivity.class);
         startActivity(i);
-        finish();
+        //finish();
     }
 
     private void setLanguage(String lang) {
