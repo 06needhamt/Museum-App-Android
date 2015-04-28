@@ -229,21 +229,20 @@ public class SingleAnswerActivity extends FragmentActivity implements IConfirmDi
                 // TODO: Need to check if the code scanned is part of this trail, if not the user may have moved on. This also needs to be done anywhere else necessary
                 // Not sure if this is the right place to put the code or not
                 // Use call to TrailManager.checkArtefact(artefact number), to check if the scanned artefact is on the current trail
-                try {
-                    artefactID = Integer.parseInt(ValidatedContent);
 
-                    if (trailManager.checkArtefact(artefactID) == -1) {       // Artefact  not on trail
+                artefactID = Integer.parseInt(ValidatedContent);
 
-                        if (trailManager.isArtefactInExhibit(artefactID)) {// Is the artefact part of the current trails exhibit?
-                            // Artefact is in the exhibit - so wrong QR code scanned (wrong answer)
-                        } else { // Not part of the current exhibit so user has moved on
-                            // display message asking the user if they want to return to the trail,
-                            // join the new trail belonging to the scanned artefact or leave the trail altogether and just browse
-                        }
+                if(trailManager.checkArtefact(artefactID) == -1) {       // Artefact  not on trail
+
+                    if(trailManager.isArtefactInExhibit(artefactID)) {// Is the artefact part of the current trails exhibit?
+                        // Artefact is in the exhibit - so wrong QR code scanned (wrong answer)
                     }
-                } catch (NumberFormatException e){
-                        e.printStackTrace();
+                    else { // Not part of the current exhibit so user has moved on
+                        // display message asking the user if they want to return to the trail,
+                        // join the new trail belonging to the scanned artefact or leave the trail altogether and just browse
+                    }
                 }
+
 
 
                 if(ValidatedContent.equals(CorrectAnswer) || scoreForThisQuestion <= 0){ //this is the correct answer
